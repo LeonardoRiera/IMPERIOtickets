@@ -1,7 +1,7 @@
 //fue actualizado el header en el servidor a la version actual
 import React, { useState } from 'react';
 import '../Header/Header.css'
-import logoFloat from '../../assets/logoblancoSinFondo.png'
+import logoFloat from '../../assets/logoblancoSinFondo1.png'
 import starsFloat from '../../assets/FondoEstrellas.png'
 import planeta from '../../assets/planeta.png'
 import estrellasP from '../../assets/estrellasP.png'
