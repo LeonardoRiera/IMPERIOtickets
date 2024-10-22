@@ -1,6 +1,6 @@
 import React from 'react'
 import '../Footer/Footer.css'
-import logoPalabra from '../../assets/ImperioTicketPalabra.png'
+import logoPalabra from '../../assets/imperioTicketPalabra.png'
 // import logoNegro from '../../assets/logo0.06.png'
 import { Link } from 'react-router-dom'
 import planeta from '../../assets/planeta.png'
