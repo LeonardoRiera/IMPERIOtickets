@@ -1,6 +1,6 @@
 import React from 'react'
 import '../AccesoProd/AccesoProd.css'
-import logoFloat from '../../assets/logoBlancoSinFondo.png'
+import logoFloat from '../../assets/logoblancoSinFondo.png'
 
 
 const AccesoProd = () => {
