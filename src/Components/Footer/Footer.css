@@ -1,0 +1,352 @@
+.footer-container {
+  background-color: rgb(0, 0, 0);
+  margin-top: 3vmax;
+  padding: 5vmax 3vmax 0 3vmax;
+  border-top: 1px solid rgba(255, 217, 0, 0.589); 
+  box-shadow: 0 1px 15px rgba(255, 217, 0, 0.177); 
+}
+
+.contenedorFooterPrincipal {
+  display: flex;
+  flex-direction: row;
+  min-height: 23vmax;
+}
+
+/* primer columna */
+
+.enlacesFooter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: end;
+  gap: 1vmax;
+}
+
+.linkFooter {
+  color: #e6d894;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.2vmax;
+  font-family: "Pragati Narrow", sans-serif;
+}
+
+.linkFooter:hover {
+  color: rgb(238, 118, 63);
+}
+
+
+/* columna central */
+
+.colCentralFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative; /* Para poder manipular las imágenes en relación al contenedor */
+}
+
+.logoPalabraFooter {
+  width: 26vmax;
+  justify-content: center;
+  padding-bottom: 1vmax;
+}
+
+.planetaContenedorFooter {
+  height: 15vmax; /* Muestra solo el 50% del contenedor (ajústalo según la imagen) */
+  overflow: hidden; /* Oculta la parte que sobresale */
+}
+
+.planetaFooter {
+  width: 100%; /* Asegura que la imagen se ajuste al ancho del contenedor */
+  object-fit: cover; /* Asegura que la imagen se recorte adecuadamente */
+  position: relative; /* Opcional: puedes ajustar el posicionamiento si es necesario */
+}
+
+
+/* tercer columna */
+
+.logoFooterResponsive {
+  display: none;
+}
+
+.contactoRedesFooter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  gap: 2vmax;
+}
+
+.contactoFooter h4{
+  padding-bottom: 1vmax;
+  font-size:1.5vmax;
+  color: #e6d894;
+  font-family: "Pragati Narrow", sans-serif;
+}
+
+.contactoFooter a {
+  text-decoration: none;
+  color: #e6d064;
+  font-size: 1.5vmax;
+  font-family: "Pragati Narrow", sans-serif;
+}
+
+.contactoFooter a:hover {
+  text-decoration: none;
+  color: rgb(238, 118, 63);
+}
+
+.social-icons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.8vmax;
+}
+  
+.social-icons a {
+  margin-bottom: 10px;
+  font-size: 2.8vmax;
+  color: #7bc9d3;
+  text-decoration: none;
+}
+  
+.social-icons a:hover {
+  color: rgb(238, 118, 63);
+}
+
+
+
+
+
+
+
+
+
+
+/* ++++++++++++++++++++++++ media query |  pantalla gigante |   ++++++++++++++++++++++++++++++++++/ */
+
+@media screen and (max-width:2220px) {
+
+
+}
+
+
+/* / ++++++++++++++++++++++++ media query | pantalla extra extra lg  |   ++++++++++++++++++++++++++++++++++/ */
+
+
+
+@media screen and (max-width:1400px) {
+
+
+}
+
+
+
+/* / ++++++++++++++++++++++++ media query | pantalla extra lg   |  ++++++++++++++++++++++++++++++++++/ */
+
+
+@media screen and (max-width:1200px) {
+
+
+
+}
+
+
+
+/* / ++++++++++++++++++++++++ media query | pantalla lg  | ++++++++++++++++++++++++++++++++++/ */
+
+
+@media screen and (max-width:992px) {
+
+/* footer */
+
+.contenedorFooterPrincipal {
+  flex-flow: column wrap;
+}
+.enlacesFooter {
+  gap: 2.5vmax;
+  flex-flow: row wrap;
+  align-items: center;
+  padding: 1vmax 6vmax 6vmax 6vmax;
+}
+
+.linkFooter {
+  font-size: 1.8vmax;
+}
+
+
+.logoFooterResponsive {
+  display: block;
+  width: 12vmax;
+  padding: 2vmax 0;
+}
+
+
+.contactoRedesFooter {
+  align-items: center;
+  gap: 2vmax;
+  text-align: center;
+}
+
+.contactoFooter h4 { 
+  font-size: 2.4vmax;
+}
+
+.contactoFooter a { 
+  font-size: 1.8vmax;
+
+}
+
+.social-icons {
+  gap: 2.5vmax;
+  padding-bottom: 2.8vmax;
+}
+
+.social-icons a {
+  font-size: 3.5vmax;
+
+}
+
+.logoPalabraFooter {
+  width: 25vmax;
+  justify-content: center;
+  padding-bottom: 5vmax;
+}
+
+
+.col-lg-3.enlacesFooter {
+  order: 2; /* Coloca la primera columna en el medio */
+}
+
+.col-lg-6.colCentralFooter {
+  order: 3; /* Coloca la columna central al final */
+}
+
+.col-lg-3.contactoRedesFooter {
+  order: 1; /* Coloca la última columna en la cima */
+}
+
+
+
+}
+
+
+
+
+/* / ++++++++++++++++++++++++ media query |  pantalla md   | ++++++++++++++++++++++++++++++++++/ */
+
+
+
+@media screen and (max-width:768px) {
+
+
+
+  .contactoFooter h4 { 
+    font-size: 2.8vmax;
+  }
+
+  
+  .contactoFooter a { 
+    font-size: 2.4vmax;
+
+}
+
+
+.social-icons {
+  gap: 4.2vmax;
+  padding-bottom: 2.2vmax;
+}
+
+
+
+.linkFooter {
+  font-size: 2.2vmax;
+  font-weight: 500;
+}
+
+
+}
+
+
+
+
+/* / ++++++++++++++++++++++++ media query |  pantalla sm   | ++++++++++++++++++++++++++++++++++/ */
+
+@media screen and (max-width:576px) {
+
+  
+  .contactoFooter h4 { 
+    font-size: 3.2vmax;
+  }
+
+
+  .contactoFooter a { 
+    font-size: 2.8vmax;
+
+  }
+
+  .enlacesFooter {
+    gap: 2.5vmax;
+    flex-flow: row wrap;
+    align-items: center;
+    padding: 1vmax 9vmax 6vmax 9vmax;
+  }
+
+  .linkFooter {
+    font-size: 2.4vmax;
+    font-weight: 400;
+
+}
+
+
+.logoPalabraFooter {
+  padding-top: 3vmax;
+}
+
+
+}
+
+/* especial */
+
+@media screen and (max-width:500px) {
+
+
+  .linkFooter {
+    font-size: 2.3vmax;
+    font-weight: 400;
+  
+  }
+
+}
+
+/* medida extra a 400 */
+
+@media screen and (max-width:400px) {
+
+
+    
+  .enlacesFooter {
+    gap: 2.5vmax;
+    flex-direction: column;
+    padding: 1vmax;
+
+  }
+
+
+
+  .contactoFooter h4 { 
+    font-size: 3vmax;
+    padding: 0.5vmax 2vmax;
+  }
+
+
+}
+
+
+/* / ++++++++++++++++++++++++ media query  | pantalla xxsm |   ++++++++++++++++++++++++++++++++++*/ 
+
+@media screen and (max-width:320px) {
+
+
+
+}
+

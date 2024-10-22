@@ -1,0 +1,12 @@
+.contenedorSuccess {
+    width: 60%;
+    margin: 5vmax auto;
+    background-color: rgb(26, 24, 24);
+
+}
+
+.contenedorSuccess p {
+    color: white;
+    font-size: 3vmax;
+    text-align: center;
+}
