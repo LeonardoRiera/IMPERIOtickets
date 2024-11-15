@@ -1,8 +1,8 @@
 .footer-container {
   background-color: rgb(0, 0, 0);
   margin-top: 3vmax;
-  padding: 5vmax 3vmax 0 3vmax;
-  border-top: 1px solid rgba(255, 217, 0, 0.589); 
+  padding: 1vmax 10vmax; /* importante para trabajar responsive */
+  border-top: 1px solid rgba(255, 217, 0, 0.347); 
   box-shadow: 0 1px 15px rgba(255, 217, 0, 0.177); 
 }
 
@@ -12,28 +12,32 @@
   min-height: 23vmax;
 }
 
-/* primer columna */
+/* tercer columna */
 
 .enlacesFooter {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: end;
+  margin-top: 2vmax;
+  align-items: start;
   gap: 1vmax;
 }
 
 .linkFooter {
-  color: #e6d894;
+  color: #ffffff;
   text-decoration: none;
-  font-weight: bold;
   font-size: 1.2vmax;
-  font-family: "Pragati Narrow", sans-serif;
+  font-family: 'Clash Grotesk', sans-serif;
 }
 
 .linkFooter:hover {
   color: rgb(238, 118, 63);
 }
 
+.icons {
+  font-size: 0.5vmax;
+  margin-right: 0.5vmax;
+}
 
 /* columna central */
 
@@ -41,53 +45,65 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   position: relative; /* Para poder manipular las imágenes en relación al contenedor */
 }
 
-.logoPalabraFooter {
-  width: 26vmax;
-  justify-content: center;
-  padding-bottom: 1vmax;
-}
+
 
 .planetaContenedorFooter {
-  height: 15vmax; /* Muestra solo el 50% del contenedor (ajústalo según la imagen) */
-  overflow: hidden; /* Oculta la parte que sobresale */
+  height: 15vmax; 
+ 
 }
 
 .planetaFooter {
-  width: 100%; /* Asegura que la imagen se ajuste al ancho del contenedor */
+  width: 45%; /* Asegura que la imagen se ajuste al ancho del contenedor */
   object-fit: cover; /* Asegura que la imagen se recorte adecuadamente */
   position: relative; /* Opcional: puedes ajustar el posicionamiento si es necesario */
+  animation: rotar 50s linear infinite;
+}
+
+/* Definición de la animación */
+@keyframes rotar {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 
-/* tercer columna */
+/* primer columna */
 
-.logoFooterResponsive {
-  display: none;
-}
 
 .contactoRedesFooter {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: start;
-  gap: 2vmax;
+  gap: 1.5vmax;
 }
+
+.logoPalabraFooter {
+  width: 15vmax;
+  justify-content: center;
+  padding-bottom: 1vmax;
+}
+
 
 .contactoFooter h4{
   padding-bottom: 1vmax;
-  font-size:1.5vmax;
-  color: #e6d894;
-  font-family: "Pragati Narrow", sans-serif;
+  font-size:1vmax;
+  color: #ffffff;
+  font-family: 'Clash Grotesk', sans-serif;
 }
 
 .contactoFooter a {
   text-decoration: none;
-  color: #e6d064;
-  font-size: 1.5vmax;
-  font-family: "Pragati Narrow", sans-serif;
+  color: #ffffff;
+  font-size: 1.3vmax;
+  font-family: 'Clash Grotesk', sans-serif;
 }
 
 .contactoFooter a:hover {
@@ -104,8 +120,8 @@
   
 .social-icons a {
   margin-bottom: 10px;
-  font-size: 2.8vmax;
-  color: #7bc9d3;
+  font-size: 2.3vmax;
+  color: #F9D853;
   text-decoration: none;
 }
   

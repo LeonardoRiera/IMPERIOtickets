@@ -8,37 +8,19 @@ import logoNegrito from '../../assets/logo0.06.png'
 
 export const Footer = () => {
   return (
-      <div className='footer-container container-fuid'>
+      <div className='footer-container container-fluid' id='footer'>
 
         {/* footer */}
         <div className='row contenedorFooterPrincipal '>
 
-          <div className='col-lg-3 col-md-12 enlacesFooter'>
-            <Link className='linkFooter' to='/GuiaCompra'>Guía de Compra</Link>
-            <Link className='linkFooter' to='/GuiaCompra'>Medios de Pago</Link>
-            <Link className='linkFooter' to='/AtencionAlCliente'>Atención al Cliente</Link>
-            <Link className='linkFooter' to='/AtencionAlCliente'>Preguntas Frecuentes</Link>
-            <Link className='linkFooter' to='/GuiaCompra'>Términos y Condiciones</Link>
-          </div>
-
-
-          <div className='col-lg-6 col-md-12 colCentralFooter'>
-            <img className='logoPalabraFooter' src={logoPalabra} alt="logo de imperio ticket" /> 
-            <div className='planetaContenedorFooter'>
-              <img className='planetaFooter' src={planeta} alt="" />  
-            </div>
-          </div>
-
-
+          
           <div className='col-lg-3 col-md-12 contactoRedesFooter'>
-            
-            {/* Este logo solo se verá en pantallas pequeñas */}
-            <img className="logoFooterResponsive" src={logoNegrito} alt="Logo para pantallas pequeñas" />
-            
+
+            <img className='logoPalabraFooter' src={logoPalabra} alt="logo de imperio ticket" />  
             
             <div className='contactoFooter'>
               <h4>Puedes Contactarte con Nosotros <br/> vía e-mail</h4>
-              <a href="mailto:imperioticket@gmail.com">imperioticket@gmail.com</a>
+              <a href="mailto:imperioticket@gmail.com">imperiotickets@gmail.com</a>
             </div>
 
             <div className="social-icons">
@@ -59,6 +41,24 @@ export const Footer = () => {
             </div>
 
           </div>
+
+          <div className='col-lg-6 col-md-12 colCentralFooter'>
+            
+            <img className='planetaFooter' src={planeta} alt="" />  
+            
+          </div>
+
+          <div className='col-lg-3 col-md-12 enlacesFooter'>
+            
+            <Link className='linkFooter' to='/GuiaCompra'><i class="bi bi-diamond-fill icons"></i> Guía de Compra</Link>
+            <Link className='linkFooter' to='/GuiaCompra'><i class="bi bi-diamond-fill icons"></i> Medios de Pago</Link>
+            <Link className='linkFooter' to='/AtencionAlCliente'><i class="bi bi-diamond-fill icons"></i> Atención al Cliente</Link>
+            <Link className='linkFooter' to='/AtencionAlCliente'><i class="bi bi-diamond-fill icons"></i> Preguntas Frecuentes</Link>
+            <Link className='linkFooter' to='/GuiaCompra'><i class="bi bi-diamond-fill icons"></i> Términos y Condiciones</Link>
+          </div>
+
+
+          
 
 
         </div>
