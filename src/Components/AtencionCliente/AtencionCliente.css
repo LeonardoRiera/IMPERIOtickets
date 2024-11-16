@@ -1,24 +1,30 @@
+.backClientes {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .AtencionClienteContainer {
     background-color: #000000;
     text-align: center;
     padding: 2vmax;
-    padding-bottom: 4vmax !important;
+    padding-bottom: 4vmax;
     width: 60%;
-    margin: 5vmax auto 0 auto;
+   
+   
 }
 
 .tituloInformacionAtencion {
     padding: 1.5vmax;
     font-family: 'Clash Grotesk', sans-serif;
     font-size: 2vmax;
-    /* font-weight: bold */;
     color: #e2dc87;
 }
 
 .tituloInformacionAtencion a {
     color: #e2dc87; /* Mismo color que el título */
     text-decoration: none; /* Elimina el subrayado predeterminado */
-    margin: 0 10px; /* Espaciado entre los enlaces */
+    margin: 0 10px; 
     transition: color 0.3s ease;
 }
 
@@ -121,9 +127,7 @@
 
     
     
-    .AtencionClienteContainer {
-        width: 80%;
-    }
+    
     
     /* h2 */
     .tituloInformacionAtencion {

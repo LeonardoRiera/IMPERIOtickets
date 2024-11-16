@@ -9,7 +9,8 @@ const AtencionCliente = () => {
     }, []); // El array vacío indica que se ejecutará solo al montar el componente
 
   return (
-    <div className='AtencionClienteContainer'>
+    <div className='backClientes'>
+      <div className='AtencionClienteContainer'>
 
         <h2 className='tituloInformacionAtencion'>
           <a href="#atencionAlCliente">Atención al Cliente</a>
@@ -37,8 +38,10 @@ const AtencionCliente = () => {
 
         <p className='desarrollo'>- ¿Qué sucede si el evento que compré ha sido cancelado o reprogramado?</p>
         <p className='desarrollo'>Si el evento ha sido cancelado, te informaremos sobre el proceso de reembolso por correo electrónico. Si ha sido reprogramado, 
-          recibirás automáticamente las entradas para la nueva fecha.</p>
-        
+          recibirás automáticamente las entradas para la nueva fecha.
+        </p>
+
+      </div>
     </div>
   )
 }
