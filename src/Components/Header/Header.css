@@ -730,24 +730,6 @@
       z-index: 1;
     }
     
-  
-    /* .logoFloat {
-      width: 14vmax;
-      left: 4vmax;
-      top: -9vmax;
-      
-    }
-  
-    .starsFloat {
-      width: 20vmax;
-      animation: float 6s ease-in infinite; 
-      position: relative;
-      left: 0;
-      top: 9vmax;
-      
-    } */
-
-
 
 
 }
@@ -756,15 +738,9 @@
 
 @media screen and (max-width:480px) {
   .HeaderContainer {
+    height: 40vmax;   
 
-    
-    
-
-    height: 40vmax;
-    
-
-    
-}
+  }
 
 
   .tituloHeader {
@@ -790,13 +766,13 @@
     position: relative;
      width: 26vmax;
      left: -18vmax; 
-     top: 4vmax;
+     top: 8vmax;
    }
    
    .estrellasP {
      position: relative;
      width: 6vmax;
-     top: -17vmax;
+     top: -13vmax;
      left: 7vmax; 
     }
 
@@ -804,7 +780,7 @@
     .logoFloat {
       width: 14vmax;
       left: 2vmax;
-      top: -4vmax;
+      top: 0;
       
     }
   
@@ -813,7 +789,7 @@
       animation: float 6s ease-in infinite; 
       position: relative;
       left: -1vmax;
-      top: 13vmax;
+      top: 17vmax;
       
     }
   
