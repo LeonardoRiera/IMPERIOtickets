@@ -14,9 +14,9 @@ export const GuiaDeCompra = () => {
 
         {/* Enlaces de navegación */}
         <h2 className='tituloInformacionGuia'>
-          <a href="#guiaDeCompra">Guía de Compra</a>  
-          <a href="#metodosDePago">Métodos de Pago</a>
-          <a href="#terminosCondiciones">Términos y Condiciones</a>
+          <a href="#guiaDeCompra"><i class="bi bi-diamond-fill iconGuia"></i>Guía de Compra</a>  
+          <a href="#metodosDePago"><i class="bi bi-diamond-fill iconGuia"></i>Métodos de Pago</a>
+          <a href="#terminosCondiciones"><i class="bi bi-diamond-fill iconGuia"></i>Términos y Condiciones</a>
         </h2>
         <h3 id="guiaDeCompra" className='tituloInformacionAdministrativa'>Guía de compra</h3>
 

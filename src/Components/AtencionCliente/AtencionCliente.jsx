@@ -13,9 +13,9 @@ const AtencionCliente = () => {
       <div className='AtencionClienteContainer'>
 
         <h2 className='tituloInformacionAtencion'>
-          <a href="#atencionAlCliente">Atención al Cliente</a>
+          <a href="#atencionAlCliente"><i class="bi bi-diamond-fill iconsat"></i>Atención al Cliente</a>
 
-          <a href="#preguntasFrecuentes">Preguntas Frecuentes</a>
+          <a href="#preguntasFrecuentes"><i class="bi bi-diamond-fill iconsat"></i>Preguntas Frecuentes</a>
         </h2>
 
         <h3 className='Atencionh3'>Servicio de Atención al Cliente</h3>

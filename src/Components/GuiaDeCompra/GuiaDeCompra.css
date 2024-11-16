@@ -18,7 +18,7 @@
 .tituloInformacionGuia {
     padding: 1.5vmax;
     font-family: 'Clash Grotesk', sans-serif;
-    font-size: 2vmax;
+    font-size: 1.5vmax;
     color: #e2dc87;
 }
 
@@ -58,6 +58,11 @@
     font-size: 1.4vmax;
     text-align: start;
     font-weight: 400;
+}
+
+.iconGuia {
+    font-size: 1vmax;
+    margin-right: 1vmax;
 }
 
 
