@@ -1,19 +1,24 @@
+.backCompra{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 8vmax;
+}
 
 .guiaDeCompraContainer {
     background-color: #000000;
     text-align: center;
-    padding: 2vmax;
-    padding-bottom: 4vmax !important;
+    padding-bottom: 4vmax;
     width: 60%;
-    margin: 5vmax auto 0 auto;
+    
 }
 
 /* h2 */
 .tituloInformacionGuia {
     padding: 1.5vmax;
-    font-family: "Pragati Narrow", sans-serif;
-    font-size: 2.4vmax;
-    font-weight: bold;
+    font-family: 'Clash Grotesk', sans-serif;
+    font-size: 2vmax;
     color: #e2dc87;
 }
 
@@ -35,23 +40,23 @@
 .tituloInformacionAdministrativa {
     padding-top: 2vmax;
     padding-bottom: 1.4vmax;
-    font-family: "Poppins", system-ui;
+    font-family: 'Clash Grotesk', sans-serif;
     font-size: 2vmax;
     font-weight: bold;
     color: rgb(240, 230, 230);
 
     /* subrayado, espaciado y scroll por id */
-    text-decoration:underline 1.6px;
-    text-underline-offset: 4px;
+    /* text-decoration:underline 1.6px;
+    text-underline-offset: 4px; */
     scroll-margin-top: 100px;
 }
 
 
 .guiaDeCompraContainer p {
-    font-family: "Poppins", system-ui;
+    font-family: 'Clash Grotesk', sans-serif;
     color: rgb(240, 230, 230);
     font-size: 1.4vmax;
-    text-align: center;
+    text-align: start;
     font-weight: 400;
 }
 
@@ -71,12 +76,6 @@
 
 @media screen and (max-width:1400px) {
     
-    .tituloInformacionGuia {
-        display: flex;
-        flex-flow: row nowrap;
-        font-size: 2vmax;
-        justify-content: center;
-    }
 }
 
 
@@ -97,10 +96,13 @@
 
 @media screen and (max-width:992px) {
     
-   
+   .backCompra {
+        margin-top: 8vmax;  
+    }    
+
     .guiaDeCompraContainer {
-        margin-top: 8vmax;   
-        width: 70%; 
+            
+        width: 80%; 
     }
 
     
@@ -110,7 +112,7 @@
     }
 
     .tituloInformacionAdministrativa {
-        font-size: 2.2vmax;
+        font-size: 2vmax;
     }
     
 }

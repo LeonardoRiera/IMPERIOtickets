@@ -3,11 +3,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 8vmax;
+   
 }
 .AtencionClienteContainer {
     background-color: #000000;
     text-align: center;
-    padding: 2vmax;
     padding-bottom: 4vmax;
     width: 60%;
    
@@ -38,7 +39,7 @@
     padding-top: 2vmax;
     padding-bottom: 1.4vmax;
     font-family: 'Clash Grotesk', sans-serif;
-    font-size: 2vmax;
+    font-size: 2.2vmax;
     font-weight: bold;
     color: rgb(240, 230, 230);
 
@@ -52,7 +53,7 @@
     font-family: 'Clash Grotesk', sans-serif;
     color: rgb(240, 230, 230);
     font-size: 1.4vmax;
-    text-align: justify;
+    text-align: start;
     font-weight: 400;
 }
 
@@ -93,7 +94,9 @@
 
 @media screen and (max-width:992px) {
     
-   
+    .backClientes {
+        margin-top: 8vmax;  
+    }
     .AtencionClienteContainer {
         margin-top: 8vmax;    
         width: 80%;
