@@ -154,6 +154,10 @@
 /* ++++++++++++++++++++++++ media query |  pantalla sm   | ++++++++++++++++++++++++++++++++++*/
 
 @media screen and (max-width:576px) {
+
+    .backClientes {
+        margin-top: 4vmax;  
+    }
     
     .tituloInformacionAtencion {
         display: flex;

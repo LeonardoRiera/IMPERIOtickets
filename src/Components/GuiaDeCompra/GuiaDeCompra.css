@@ -155,9 +155,10 @@
 /* ++++++++++++++++++++++++ media query |  pantalla sm   | ++++++++++++++++++++++++++++++++++*/
 
 @media screen and (max-width:576px) {
-    
-
-    
+    .backCompra {
+        margin-top: 12vmax;  
+    }
+   
     .guiaDeCompraContainer {
         width: 90%;
     }
