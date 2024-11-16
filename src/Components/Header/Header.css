@@ -711,7 +711,7 @@
       position: relative;
       left: 50%; /* Coloca el centro del elemento al 50% del ancho del contenedor */
       transform: translateX(-50%);
-      font-size: 5vmax;
+      font-size: 3.5vmax;
     }
     
     .show {
