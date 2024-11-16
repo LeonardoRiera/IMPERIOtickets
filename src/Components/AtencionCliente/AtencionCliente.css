@@ -1,23 +1,53 @@
 .AtencionClienteContainer {
     background-color: #000000;
-    padding: 1vmax 15vmax;
     text-align: center;
-    margin-top: 5vmax;
-    
-   
- 
-    
+    padding: 2vmax;
+    padding-bottom: 4vmax !important;
+    width: 60%;
+    margin: 5vmax auto 0 auto;
 }
 
-.AtencionCliente {
-    color: rgb(255, 255, 255);
-  
-    
+.tituloInformacionAtencion {
+    padding: 1.5vmax;
+    font-family: 'Clash Grotesk', sans-serif;
+    font-size: 2vmax;
+    /* font-weight: bold */;
+    color: #e2dc87;
 }
 
-.desarrollo {
-    color: white;
+.tituloInformacionAtencion a {
+    color: #e2dc87; /* Mismo color que el título */
+    text-decoration: none; /* Elimina el subrayado predeterminado */
+    margin: 0 10px; /* Espaciado entre los enlaces */
+    transition: color 0.3s ease;
+}
+
+
+.tituloInformacionAtencion a:hover {
+    color: #FE7247; /* Color al pasar el mouse por encima */
+    text-decoration: underline; /* Añadir subrayado al hacer hover */
+}
+
+.Atencionh3 {
+    padding-top: 2vmax;
+    padding-bottom: 1.4vmax;
+    font-family: 'Clash Grotesk', sans-serif;
+    font-size: 2vmax;
+    font-weight: bold;
+    color: rgb(240, 230, 230);
+
+    /* subrayado, espaciado y scroll por id */
+    /* text-decoration:underline 1.6px; */
+   /*  text-underline-offset: 4px */;
+    scroll-margin-top: 100px;
+}
+
+.AtencionClienteContainer p {
+    font-family: 'Clash Grotesk', sans-serif;
+    color: rgb(240, 230, 230);
     font-size: 1.4vmax;
+    text-align: justify;
+    font-weight: 400;
 }
 
 
@@ -60,7 +90,24 @@
    
     .AtencionClienteContainer {
         margin-top: 8vmax;    
+        width: 70%;
     }
+
+    
+    /* h2 */
+    .tituloInformacionAtencion {
+        font-size: 2.6vmax;
+    }
+
+    .Atencionh3 {
+        font-size: 2.2vmax;
+    }
+
+    
+    .AtencionClienteContainer p {
+        font-size: 2vmax;
+    }
+
 }
 
 
@@ -73,6 +120,24 @@
 @media screen and (max-width:768px) {
 
     
+    
+    .AtencionClienteContainer {
+        width: 80%;
+    }
+    
+    /* h2 */
+    .tituloInformacionAtencion {
+        font-size: 3.6vmax;
+    }
+
+    .Atencionh3 {
+        font-size: 2.4vmax;
+    }
+
+    
+    .AtencionClienteContainer p {
+        font-size: 2.2vmax;
+    }
 
 }
 
@@ -83,12 +148,70 @@
 
 @media screen and (max-width:576px) {
     
+    .tituloInformacionAtencion {
+        display: flex;
+        flex-flow: column wrap;
+    }
+
+    .AtencionClienteContainer {
+        width: 90%;
+    }
+    
+    /* h2 */
+    .tituloInformacionAtencion {
+        font-size: 4vmax;
+    }
+
+    .Atencionh3 {
+        font-size: 2.8vmax;
+    }
+
+    
+    .AtencionClienteContainer p {
+        font-size: 2.6vmax;
+    }
+
+
 
 }
+
+
+
+/* medida especial hasta 380 */
+
+@media screen and (max-width:380px) {
+
+    
+
+    .tituloInformacionAtencion a {
+        padding: 1vmax;
+    }
+    
+    .Atencionh3 {
+        font-size: 2.6vmax;
+    }
+
+    
+    .AtencionClienteContainer p {
+        font-size: 2.2vmax;
+    }
+
+
+}
+
 
 
 /* ++++++++++++++++++++++++ media query  | pantalla xxsm |   ++++++++++++++++++++++++++++++++++*/
 
 @media screen and (max-width:320px) {
    
+    .Atencionh3 {
+        font-size: 2.4vmax;
+    }
+
+    
+    .AtencionClienteContainer p {
+        font-size: 2vmax;
+    }
+
 }

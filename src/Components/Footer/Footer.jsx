@@ -4,7 +4,7 @@ import logoPalabra from '../../assets/imperioTicketPalabra.png'
 // import logoNegro from '../../assets/logo0.06.png'
 import { Link } from 'react-router-dom'
 import planeta from '../../assets/planeta.png'
-import logoNegrito from '../../assets/logo0.06.png'
+
 
 export const Footer = () => {
   return (
