@@ -18,7 +18,7 @@
 .tituloInformacionAtencion {
     padding: 1.5vmax;
     font-family: 'Clash Grotesk', sans-serif;
-    font-size: 1.5vmax;
+    font-size: 2vmax;
     color: #e2dc87;
 }
 
@@ -171,6 +171,7 @@
     .tituloInformacionAtencion {
         display: flex;
         flex-flow: column wrap;
+
     }
 
     .AtencionClienteContainer {
@@ -179,7 +180,7 @@
     
     /* h2 */
     .tituloInformacionAtencion {
-        font-size: 4vmax;
+        font-size: 3.2vmax;
     }
 
     .Atencionh3 {
