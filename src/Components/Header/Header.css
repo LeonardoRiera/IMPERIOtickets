@@ -179,19 +179,20 @@
 @media screen and (max-width:992px) {
     
    
-.planetaContent {
-  /*  position: absolute; */
-   
- }
+  .HeaderContainer {
+    height: 33vmax;
+    
+  }
  
  .planeta {
    width: 27vmax;
    left: -12vmax; 
+   top: 4vmax;
  }
  
  .estrellasP {
    width: 6vmax;
-   top: -22vmax;
+   top: -18vmax;
    left: 14vmax; 
   }
 
@@ -225,7 +226,7 @@
   .logoFloat {
     width: 17vmax;
     left: 8vmax;
-    top: -14vmax;
+    top: -10vmax;
     
   }
 
@@ -234,7 +235,7 @@
     animation: float 6s ease-in infinite; /* Animación de flotación */
     position: relative;
     left: 2vmax;
-    top: 7vmax;
+    top: 11vmax;
     
   }
   
