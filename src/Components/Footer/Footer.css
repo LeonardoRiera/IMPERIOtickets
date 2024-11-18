@@ -60,7 +60,7 @@
   width: 45%; /* Asegura que la imagen se ajuste al ancho del contenedor */
   object-fit: cover; /* Asegura que la imagen se recorte adecuadamente */
   position: relative; /* Opcional: puedes ajustar el posicionamiento si es necesario */
-  animation: rotar 50s linear infinite;
+  animation: rotar 80s linear infinite;
 }
 
 /* Definición de la animación */
@@ -86,7 +86,7 @@
 }
 
 .logoPalabraFooter {
-  width: 15vmax;
+  width: 22vmax;
   justify-content: center;
   padding-bottom: 1vmax;
 }

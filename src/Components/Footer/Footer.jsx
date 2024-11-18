@@ -1,6 +1,6 @@
 import React from 'react'
 import '../Footer/Footer.css'
-import logoPalabra from '../../assets/imperioTicketPalabra.png'
+import logoPalabra from '../../assets/logoBlancoImp.png'
 // import logoNegro from '../../assets/logo0.06.png'
 import { Link } from 'react-router-dom'
 import planeta from '../../assets/planeta.png'
@@ -49,13 +49,43 @@ export const Footer = () => {
         </div>
 
         <div className='col-lg-3 col-md-12 enlacesFooter'>
-          
-          <Link className='linkFooter' to='/GuiaCompra'><i class="bi bi-diamond-fill icons"></i> Guía de Compra</Link>
-          <Link className='linkFooter' to='/GuiaCompra'><i class="bi bi-diamond-fill icons"></i> Medios de Pago</Link>
-          <Link className='linkFooter' to='/AtencionAlCliente'><i class="bi bi-diamond-fill icons"></i> Atención al Cliente</Link>
-          <Link className='linkFooter' to='/AtencionAlCliente'><i class="bi bi-diamond-fill icons"></i> Preguntas Frecuentes</Link>
-          <Link className='linkFooter' to='/GuiaCompra'><i class="bi bi-diamond-fill icons"></i> Términos y Condiciones</Link>
+          <Link
+            className='linkFooter'
+            to='/GuiaCompra'
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
+            <i className='bi bi-diamond-fill icons'></i> Guía de Compra
+          </Link>
+          <Link
+            className='linkFooter'
+            to='/GuiaCompra'
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
+            <i className='bi bi-diamond-fill icons'></i> Medios de Pago
+          </Link>
+          <Link
+            className='linkFooter'
+            to='/AtencionAlCliente'
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
+            <i className='bi bi-diamond-fill icons'></i> Atención al Cliente
+          </Link>
+          <Link
+            className='linkFooter'
+            to='/AtencionAlCliente'
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
+            <i className='bi bi-diamond-fill icons'></i> Preguntas Frecuentes
+          </Link>
+          <Link
+            className='linkFooter'
+            to='/GuiaCompra'
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
+            <i className='bi bi-diamond-fill icons'></i> Términos y Condiciones
+          </Link>
         </div>
+
 
       </div>
 

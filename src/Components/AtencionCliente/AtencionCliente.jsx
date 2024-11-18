@@ -20,7 +20,7 @@ const AtencionCliente = () => {
 
         <h3 className='Atencionh3'>Servicio de Atención al Cliente</h3>
         <p className='desarrollo'>Si tienes alguna consulta técnica o necesitas asistencia con tu compra, estamos aquí para ayudarte. No dudes en contactarnos a través de nuestro correo electrónico 
-          imperioticket@gmail.com y nos pondremos en contacto contigo lo antes posible.</p>
+          imperiotickets@gmail.com y nos pondremos en contacto contigo lo antes posible.</p>
 
 
         <h3 className='Atencionh3'>Preguntas Frecuentes</h3>

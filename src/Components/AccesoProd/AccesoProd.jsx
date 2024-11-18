@@ -22,7 +22,7 @@ const AccesoProd = () => {
 
           
 
-          <h2 className="fw-bold text-center py-3 formulario-titulo">Imperio Ticket - Ingreso Panel Administrativo</h2>
+          <h2 className="fw-bold text-center py-3 formulario-titulo">Imperio Tickets - Ingreso Panel Administrativo</h2>
 
 
 

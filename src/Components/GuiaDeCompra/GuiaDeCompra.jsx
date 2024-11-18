@@ -6,7 +6,7 @@ export const GuiaDeCompra = () => {
    // Este useEffect asegura que la página se desplace hacia arriba al cargar el componente, me encanto!!
    useEffect(() => {
     window.scrollTo(0, 0);
-  }, []); // El array vacío indica que se ejecutará solo al montar el componente
+  }, []); // El array vacío, se ejecutará solo al montar el componente
 
   return (
     <div className='backCompra'>
@@ -20,10 +20,10 @@ export const GuiaDeCompra = () => {
         </h2>
         <h3 id="guiaDeCompra" className='tituloInformacionAdministrativa'>Guía de compra</h3>
 
-        <p className='desarrollo'>Has clic en el botón "Más Información" y una vez en la ficha descriptiva, selecciona la cantidad de entradas que deseas adquirir.</p>
-        <p className='desarrollo'>Has clic en el botón "Ingresar E-mail", y completa tu dirección de e-mail. Por favor, confírmala.</p>
-        <p className='desarrollo'>-A esa dirección de correo electrónico, recibirás las entradas que estás comprando para el evento, tan pronto como ingrese la confirmación del pago.</p>
-        <p className='desarrollo'>Has clic en el botón "Comprar Entradas"</p>
+        <p className='desarrollo'>. Has clic en el botón "Adquirir Entrada" en la ficha descriptiva de cada evento y/o recital.</p>
+        <p className='desarrollo'>. Chequea los datos del evento - lugar, fecha, hora, precio, clasificación, etc -. Debajo selecciona la cantidad de entradas que quieres comprar, controla luego el precio y costos del servicio, en el total se veran reflejado la suma de estos.</p>
+        <p className='desarrollo'>-Ingresa la dirección de correo electrónico donde recibirás las entradas que estás comprando para el evento, tan pronto como ingrese la confirmación del pago. IMPORTANTE: controla bien que no haya errores en el correo y correo de confirmación.</p>
+        <p className='desarrollo'>Has clic en el botón "Comprar Entradas", Tienes allí una última instancia de controlar que todos los datos de tu compra estén correctos</p>
         <p className='desarrollo'>Has clic en el botón de Compra de Mercado Pago para acceder a tu cuenta, y finalizar el pago desde allí.</p>
         <p className='desarrollo'>Tan pronto como terminas la operación, serás redirigido a nuestra página, y recibirás el e-mail con tus entradas.</p>
         <p className='desarrollo'>Las entradas que enviamos a tu e-mail, son generadas exclusivamente para ti. El código que las identifica, es único en cada caso.</p>
@@ -31,7 +31,7 @@ export const GuiaDeCompra = () => {
 
         <h3 id="metodosDePago" className='tituloInformacionAdministrativa'>Métodos de Pago</h3>
 
-        <p className='desarrollo'>Trabajamos conectando con la plataforma de Mercado-Pago.</p>
+        <p className='desarrollo'>Trabajamos conectando con la plataforma de Mercado-Pago. Es allí y solo allí donde realizaras el pago de la entrada/s correspondiente.</p>
 
         <h3 id="terminosCondiciones" className='tituloInformacionAdministrativa'>Términos y Condiciones</h3>
         <p className='desarrollo'>Al adquirir sus entradas a través de nuestra plataforma, cada comprador recibirá en el correo electrónico proporcionado una entrada con un código QR de identificación única. Es responsabilidad exclusiva del cliente garantizar que esta entrada no sea duplicada ni compartida indebidamente. El acceso al evento estará permitido únicamente a la primera persona que presente el código QR emitido, por lo que cualquier intento de 

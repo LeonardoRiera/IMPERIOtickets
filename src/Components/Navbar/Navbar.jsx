@@ -3,7 +3,7 @@ import { useEffect, useRef} from 'react';
 import '../Navbar/Navbar.css';
 import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
-import logo from '../../assets/ImperioticketLogocompleto.png'
+import logo from '../../assets/logoNuevo.png'
 
 const Navbar = () => {
   
