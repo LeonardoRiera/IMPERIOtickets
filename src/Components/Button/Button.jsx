@@ -1,12 +1,12 @@
 import React from 'react';
 import '../Button/Button.css'; 
-const Button = ({ onClick, disabled, className }) => {
+const Button = ({ count, subTotal, title }) => {
 
   return (
     <button 
-      onClick={onClick} 
-      disabled={disabled} 
-      className={className}
+      // onClick={onClick} 
+      // disabled={disabled} 
+      // className={className}
     >
       Comprar
     </button>
