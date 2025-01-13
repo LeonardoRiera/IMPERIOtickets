@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import EntradasCount from '../EntradasCount/EntradasCount'
 import { useLocation, Navigate } from 'react-router-dom';
 import '../CardDetail/CardDetail.css';
-import Button from '../Button/Button'; // Importamos el componente del botón
 /* import { initMercadoPago, Wallet } from "@mercadopago/sdk-react"; */
 /* import axios from "axios"; // Importar axios para hacer solicitudes HTTP */
 import { Link } from 'react-router-dom';

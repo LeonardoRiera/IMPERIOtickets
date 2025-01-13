@@ -10,20 +10,31 @@ import Header from '../Header/Header.jsx';
 
 const CardContainer = () => {
 
-    /* const handleBuyClick = (product) => {
-        console.log(`Compraste el producto: ${product}`);
-    }; */
-    const [productos, setProductos] = useState([]);
-    console.log(productos)
+  /* const handleBuyClick = (product) => {
+      console.log(`Compraste el producto: ${product}`);
+  }; */
+
+
+
+  const [productos, setProductos] = useState([]);
+  console.log(productos)
+
+
   // Función asíncrona que obtiene los productos de Firestore
+
   const fetchProductos = async () => {
+
     try {
       const querySnapshot = await getDocs(collection(db, "ListaBandas"));
       const productosArray = [];
+
       querySnapshot.forEach((doc) => {
+
         productosArray.push({ id: doc.id, ...doc.data() });
       });
+
       setProductos(productosArray);
+      
     } catch (error) {
       console.error("Error fetching productos: ", error);
     }

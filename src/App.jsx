@@ -30,15 +30,10 @@ function App() {
       <BrowserRouter>
 
 
-
-
         <div className='APP container-fluid'>
 
-
           <Navbar />
-
           
-
           <Routes>
 
             <Route path="/" element={<CardContainer/>}/>
@@ -47,8 +42,6 @@ function App() {
             <Route path="/AccesoProductores" element={<AccesoProd />} />
             <Route path='/CardDetail' element={<CardDetail/>} />
             <Route path="/PanelAdminEvento" element={<PanelAdminEvento />} />
-
-
             <Route path="/Success" element={<Success />} />
             <Route path="/Error" element={<Error />} />
             <Route path="/Pending" element={<Pending />} />
@@ -56,9 +49,7 @@ function App() {
             <Route path="/VentaFinal" element={<VentaFinal />} />
 
           </Routes>
-
-      
-        
+             
           <Footer />
         </div>
 
