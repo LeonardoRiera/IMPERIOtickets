@@ -3,40 +3,13 @@
     flex-flow: column nowrap;
     justify-content: space-around;
     align-items: end;
-   /*  border: 1px solid #ccc;
-    border-radius: 8px; */
-   /*  padding: 16px; */
     margin: 16px 16px 35px 16px;
-
     width: 80vmax;
     height: 37vmax;
     text-align: center;
     background-color: #f9f9f900;
-   
-   
-    
     
 }
-
-/* .fotoBanda {
-    width:50%;
-    border-radius: 10px;
-  
-} */
-
-/* .description {
-    color: #000000;
-    font-size: 1.5vmax;
-    font-family: "Bebas Neue", system-ui;
-    
-  
-    
-} */
-
-/* .titulo {
-    margin-bottom: 0.2vmax;
-    color: black;
-} */
 
 .datosContainer {
     margin-right: 2%;
@@ -59,15 +32,8 @@
 }
 
 
-/* .contenedorBoton {
-    background-color: #ff00d4;
-    width: 80vmax;
-    height: 10vmax;
-    
-} */
-
 /* Estilos del botón */
-.buy-button {
+.buyButton {
     background-color: #f01b23;
     color: white;
     border: none;
@@ -85,7 +51,7 @@
     
 }
   
-.buy-button:hover {
+.buyButton:hover {
     background-color: #F0E541;
     color: #f01b23;;
 }
@@ -132,8 +98,6 @@
 @media screen and (max-width:992px) {
     
     .card {
-       
-       
         width: 65vmax;
         height: 30vmax;
        
@@ -146,12 +110,10 @@
 
     .fecha {
         font-size:2.2vmax;
-       /*  text-align: center; */
     }
     
     .lugar {
         font-size: 1.8vmax;
-        /* text-align: center; */
     }
     
     
@@ -159,9 +121,7 @@
 
 @media screen and (max-width:801px) {
     
-    .card {
-       
-       
+    .card {   
         width: 62vmax;
         height: 27vmax;
        
@@ -174,12 +134,12 @@
 
     .fecha {
         font-size:2.2vmax;
-       /*  text-align: center; */
+       
     }
     
     .lugar {
         font-size: 1.8vmax;
-        /* text-align: center; */
+       
     }
     
     
@@ -201,20 +161,16 @@
         justify-content: end;
         align-items:center;
         
-        width: 65vmax; /* 996px traducido a vmax */
-        height: 57vmax; /* 888px traducido a vmax */
+        width: 65vmax; 
+        height: 57vmax; 
     }
 
     .datosContainer {
-        /* margin-right: 2%;
-        margin-top: 4%; */
         display: flex;
         flex-direction:column;
         align-items: center;
         justify-content: center;
-        /* width: 80% */;
         flex-wrap: nowrap;
-       /*  margin-bottom: 1vmax; */
         margin-top: 2vmax;
     }
     
@@ -232,8 +188,7 @@
     .renglon {
         display: flex;
         flex-direction: row;
-        align-items: end;
-        
+        align-items: end;   
         text-align: center;
 
     } 
@@ -247,7 +202,7 @@
     
    
     /* Estilos del botón */
-    .buy-button {
+    .buyButton {
         background-color: #f01b23;
         color: white;
         border: none;
@@ -273,8 +228,8 @@
 
 @media screen and (max-width:600px) {
     .card {
-        width: 58vmax; /* 996px traducido a vmax */
-        height: 51vmax; /* 888px traducido a vmax */
+        width: 58vmax; 
+        height: 51vmax; 
     }
 
     .texto {
@@ -289,7 +244,7 @@
     }
 
     /* Estilos del botón */
-    .buy-button {
+    .buyButton {
         margin-bottom: 4vmax;
         
     }
@@ -300,8 +255,8 @@
 
 @media screen and (max-width:576px) {
     .card {
-        width: 55vmax; /* 996px traducido a vmax */
-        height: 48vmax; /* 888px traducido a vmax */
+        width: 55vmax; 
+        height: 48vmax; 
     }
 
     .texto {
@@ -316,7 +271,7 @@
     }
 
     /* Estilos del botón */
-    .buy-button {
+    .buyButton {
         margin-bottom: 3vmax;
         padding: 8px 12px;
         
@@ -329,8 +284,8 @@
 @media screen and (max-width:500px) {
 
     .card {
-        width: 48vmax; /* 996px traducido a vmax */
-        height: 41vmax; /* 888px traducido a vmax */
+        width: 48vmax; 
+        height: 41vmax; 
     }
 
     .texto {
@@ -345,7 +300,7 @@
     }
 
     /* Estilos del botón */
-    .buy-button {
+    .buyButton {
         margin-bottom: 3vmax;
         width: 48%;
     }
@@ -359,27 +314,21 @@
 @media screen and (max-width:480px) {
 
     .card {
-        width: 45vmax; /* 996px traducido a vmax */
-        height: 38vmax; /* 888px traducido a vmax */
+        width: 45vmax; 
+        height: 38vmax; 
     }
 
     .datosContainer {
-        /* margin-right: 2%;
-        margin-top: 4%; */
         display: flex;
         flex-direction:column;
         align-items: center;
         justify-content: center;
-        /* width: 80% */;
         flex-wrap: nowrap;
-       /*  margin-bottom: 1vmax; */
         margin-top: 2vmax;
     }
 
-    .texto {
-       
-        font-size: 2.2vmax;
-       
+    .texto {    
+        font-size: 2.2vmax;   
     }
 
     .lugar {
@@ -388,7 +337,7 @@
     }
 
     /* Estilos del botón */
-    .buy-button {
+    .buyButton {
         margin-bottom: 2.6vmax;
         padding: 6px 12px;
         font-size: 1.7vmax;
@@ -401,8 +350,8 @@
 
 @media screen and (max-width:469px) {
     .card {
-        width: 48vmax; /* 996px traducido a vmax */
-        height: 41vmax; /* 888px traducido a vmax */
+        width: 48vmax; 
+        height: 41vmax; 
     }
 
     .texto {
@@ -417,7 +366,7 @@
     }
 
     /* Estilos del botón */
-    .buy-button {
+    .buyButton {
         margin-bottom: 2.7vmax;
         
     }
@@ -427,8 +376,8 @@
 
 @media screen and (max-width:431px) {
     .card {
-        width: 42vmax; /* 996px traducido a vmax */
-        height: 36vmax; /* 888px traducido a vmax */
+        width: 42vmax; 
+        height: 36vmax; 
     }
 
     .texto {
@@ -443,7 +392,7 @@
     }
 
     /* Estilos del botón */
-    .buy-button {
+    .buyButton {
         margin-bottom: 2.1vmax;
         padding: 6px 12px;
     }
@@ -453,12 +402,11 @@
 
 @media screen and (max-width:400px) {
     .card {
-        width: 43vmax; /* 996px traducido a vmax */
-        height: 38vmax; /* 888px traducido a vmax */
+        width: 43vmax; 
+        height: 38vmax; 
     }
 
-    .texto {
-       
+    .texto {   
         font-size: 2.1vmax;
        
     }
@@ -469,7 +417,7 @@
     }
 
     /* Estilos del botón */
-    .buy-button {
+    .buyButton {
         margin-bottom: 2.7vmax;
         padding: 6px 12px;
     }
@@ -481,8 +429,8 @@
 @media screen and (max-width:361px) {
 
     .card {
-        width: 41vmax; /* 996px traducido a vmax */
-        height: 34vmax; /* 888px traducido a vmax */
+        width: 41vmax; 
+        height: 34vmax; 
     }
 
     .texto {
@@ -497,7 +445,7 @@
     }
 
     /* Estilos del botón */
-    .buy-button {
+    .buyButton {
         margin-bottom: 1.4vmax;
         padding: 6px 12px;
     }
@@ -507,8 +455,8 @@
 
 @media screen and (max-width:321px) {
     .card {
-        width: 45vmax; /* 996px traducido a vmax */
-        height: 40vmax; /* 888px traducido a vmax */
+        width: 45vmax; 
+        height: 40vmax; 
     }
 
     .texto {
@@ -523,7 +471,7 @@
     }
 
     /* Estilos del botón */
-    .buy-button {
+    .buyButton {
         margin-bottom:2vmax;
         padding: 6px 12px;
     }

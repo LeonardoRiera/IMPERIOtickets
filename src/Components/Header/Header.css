@@ -97,7 +97,7 @@
     transform: translateY(0); /* Posición inicial */
   }
   50% {
-    transform: translateY(-8px); /* Se mueve 10px hacia arriba */
+    transform: translateY(-8px); /* Se mueve 8px hacia arriba */
   }
   100% {
     transform: translateY(0); /* Vuelve a la posición inicial */
@@ -112,7 +112,7 @@
     transform: translateY(0) rotate(15deg); /* Posición inicial */
   }
   50% {
-    transform: translateY(-20px) rotate(15deg); /* Se mueve 10px hacia arriba */
+    transform: translateY(-20px) rotate(15deg); /* Se mueve 20px hacia arriba */
   }
   100% {
     transform: translateY(0) rotate(15deg); /* Vuelve a la posición inicial */
@@ -214,12 +214,12 @@
   
   .show {
     font-size: 6.5vmax;
-    color: rgb(254, 114, 71);
+    
   }
   
   .vida {
     font-size: 6.5vmax;
-    color: rgb(254, 114, 71);
+    
   }
 
 
@@ -293,12 +293,12 @@
     
     .show {
       font-size: 5.5vmax;
-      color: rgb(254, 114, 71);
+      
     }
     
     .vida {
       font-size: 5.5vmax;
-      color: rgb(254, 114, 71);
+      
     }
   
   
@@ -369,12 +369,12 @@
     
     .show {
       font-size: 4.5vmax;
-      color: rgb(254, 114, 71);
+      
     }
     
     .vida {
       font-size: 4.5vmax;
-      color: rgb(254, 114, 71);
+      
     }
   
   
@@ -444,12 +444,12 @@
     
     .show {
       font-size: 4.5vmax;
-      color: rgb(254, 114, 71);
+      
     }
     
     .vida {
       font-size: 4.5vmax;
-      color: rgb(254, 114, 71);
+      
     }
   
   
@@ -483,66 +483,63 @@
     
   }
     
-  .planetaContent {
-    
-     
-   }
+ 
    
-   .planeta {
-     width: 26vmax;
-     left: -18vmax; 
-     top: 2vmax;
-   }
-   
-   .estrellasP {
-     width: 6vmax;
-     top: -20vmax;
-     left: 7vmax; 
-    }
+  .planeta {
+    width: 26vmax;
+    left: -18vmax; 
+    top: 2vmax;
+  }
   
+  .estrellasP {
+    width: 6vmax;
+    top: -20vmax;
+    left: 7vmax; 
+  }
+
+
+  .click {
+    font-size: 8vmax;  
+  }
   
-    .click {
-      font-size: 8vmax;  
-    }
+  .tituloHeader {
+    width: 90%;
+    margin-left: -2vmax;
+  }
+  .titulo1 {
+    font-size: 7vmax;
     
-    .tituloHeader {
-      width: 90%;
-      margin-left: -2vmax;
-    }
-    .titulo1 {
-      font-size: 7vmax;
-      
-    }
-    .titulo2 {
-      font-size: 4vmax;
-    }
+  }
+  .titulo2 {
+    font-size: 4vmax;
+  }
+  
+  .show {
+    font-size: 5vmax;
     
-    .show {
-      font-size: 5vmax;
-      color: rgb(254, 114, 71);
-    }
+  }
+  
+  .vida {
+    font-size: 5vmax;
     
-    .vida {
-      font-size: 5vmax;
-      color: rgb(254, 114, 71);
-    }
-  
-  
-    .logoFloat {
-      width: 14vmax;
-      left: 4vmax;
-      top: -9vmax;
-      
-    }
-  
-    .starsFloat {
-      width: 20vmax;
-      animation: float 6s ease-in infinite; 
-      position: relative;
-      left: 0;
-      top: 9vmax;
-      
-    }
+  }
+
+
+  .logoFloat {
+    width: 14vmax;
+    left: 4vmax;
+    top: -9vmax;
+    
+  }
+
+  .starsFloat {
+    width: 20vmax;
+    animation: float 6s ease-in infinite; 
+    position: relative;
+    left: 0;
+    top: 9vmax;
+    
+  }
 
 
 }
@@ -559,66 +556,62 @@
     
   }
     
-  .planetaContent {
-    
-     
-   }
    
-   .planeta {
-     width: 26vmax;
-     left: -18vmax; 
-     top: 2vmax;
-   }
-   
-   .estrellasP {
-     width: 5.2vmax;
-     top: -20vmax;
-     left: 6.5vmax; 
-    }
+  .planeta {
+    width: 26vmax;
+    left: -18vmax; 
+    top: 2vmax;
+  }
   
+  .estrellasP {
+    width: 5.2vmax;
+    top: -20vmax;
+    left: 6.5vmax; 
+  }
+
+
+  .click {
+    font-size: 7vmax;  
+  }
   
-    .click {
-      font-size: 7vmax;  
-    }
+  .tituloHeader {
+    width: 100%;
+    margin-left: -1vmax;
+  }
+  .titulo1 {
+    font-size: 5.6vmax;
     
-    .tituloHeader {
-      width: 100%;
-      margin-left: -1vmax;
-    }
-    .titulo1 {
-      font-size: 5.6vmax;
-      
-    }
-    .titulo2 {
-      font-size: 4vmax;
-    }
+  }
+  .titulo2 {
+    font-size: 4vmax;
+  }
+  
+  .show {
+    font-size: 5vmax;
     
-    .show {
-      font-size: 5vmax;
-      color: rgb(254, 114, 71);
-    }
+  }
+  
+  .vida {
+    font-size: 5vmax;
     
-    .vida {
-      font-size: 5vmax;
-      color: rgb(254, 114, 71);
-    }
-  
-  
-    .logoFloat {
-      width: 14vmax;
-      left: 4vmax;
-      top: -9vmax;
-      
-    }
-  
-    .starsFloat {
-      width: 20vmax;
-      animation: float 6s ease-in infinite; 
-      position: relative;
-      left: 0;
-      top: 9vmax;
-      
-    }
+  }
+
+
+  .logoFloat {
+    width: 14vmax;
+    left: 4vmax;
+    top: -9vmax;
+    
+  }
+
+  .starsFloat {
+    width: 20vmax;
+    animation: float 6s ease-in infinite; 
+    position: relative;
+    left: 0;
+    top: 9vmax;
+    
+  }
 }
 
 
@@ -626,14 +619,12 @@
 
 @media screen and (max-width:527px) {
 
- /*  HeaderContainer {
-    margin-top: 4vmax;
-    
-  } */
+ 
   .tituloHeader {
-   
     margin-left: -1vmax;
+
   } 
+
   .titulo1 {
     margin-top: 4vmax;
     font-size: 5.8vmax;
@@ -660,76 +651,71 @@
 /* ++++++++++++++++++++++++ media query  | breackpoint celulares |   ++++++++++++++++++++++++++++++++++*/
 
 @media screen and (max-width:500px) {
- /*   
-  HeaderContainer {
-    height: 30vmax;
-    
-  } */
-    
+  
   .planetaContent {
     width: 25%;
     z-index: 1;
      
-   }
+  }
    
-   .planeta {
-     width: 26vmax;
-     left: -18vmax; 
-     top: 2vmax;
-   }
-   
-   .estrellasP {
-     width: 6vmax;
-     top: -20vmax;
-     left: 7vmax; 
-    }
+  .planeta {
+    width: 26vmax;
+    left: -18vmax; 
+    top: 2vmax;
+  }
   
+  .estrellasP {
+    width: 6vmax;
+    top: -20vmax;
+    left: 7vmax; 
+  }
+
+
+  .click {
+    font-size: 8vmax;  
+  }
   
-    .click {
-      font-size: 8vmax;  
-    }
+  .tituloHeader {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.478);
+    width: 70%;
+    overflow: visible;
+    margin-top: 1.5vmax;
+    z-index: 100;
+    margin-left: 0;
+    align-items: flex-start;
     
-    .tituloHeader {
-      position: relative;
-      background-color: rgba(0, 0, 0, 0.478);
-      width: 70%;
-      overflow: visible;
-      margin-top: 1.5vmax;
-      z-index: 100;
-      margin-left: 0;
-      align-items: flex-start;
-     
-    }
-    .titulo1 {
-      position: relative;
-      left: 50%; /* Coloca el centro del elemento al 50% del ancho del contenedor */
-      transform: translateX(-50%);
-      font-size: 7vmax;
-     
-      
-    }
-    .titulo2 {
-      position: relative;
-      left: 50%; /* Coloca el centro del elemento al 50% del ancho del contenedor */
-      transform: translateX(-50%);
-      font-size: 3.5vmax;
-    }
+  }
+  .titulo1 {
+    position: relative;
+    left: 50%; /* Coloca el centro del elemento al 50% del ancho del contenedor */
+    transform: translateX(-50%);
+    font-size: 7vmax;
     
-    .show {
-      font-size: 5vmax;
-      color: rgb(254, 114, 71);
-    }
     
-    .vida {
-      font-size: 5vmax;
-      color: rgb(254, 114, 71);
-    }
+  }
+  .titulo2 {
+    position: relative;
+    left: 50%; /* Coloca el centro del elemento al 50% del ancho del contenedor */
+    transform: translateX(-50%);
+    font-size: 3.5vmax;
+  }
+  
+  .show {
+    font-size: 5vmax;
     
-    .logoEstrellasContent {
-      position: relative;
-      width: 25%;
-      z-index: 1;
-    }
+  }
+  
+  .vida {
+    font-size: 5vmax;
+    
+  }
+  
+  .logoEstrellasContent {
+    position: relative;
+    width: 25%;
+    z-index: 1;
+  }
     
 
 

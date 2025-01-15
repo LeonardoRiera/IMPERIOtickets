@@ -47,7 +47,7 @@ const Card = ({ title, price, image, image2, imageDetail, dia, fecha, hora, luga
         </div>
         <p className='lugar texto'>{lugar}</p>
       </div>
-      <Link to={`/CardDetail`}  state={{ image, image2, imageDetail, title, price, dia, fecha, hora, lugar, description, clasificacion }}  className='buy-button'>Adquirir Entrada</Link>
+      <Link to={`/CardDetail`}  state={{ image, image2, imageDetail, title, price, dia, fecha, hora, lugar, description, clasificacion }}  className='buyButton'>Adquirir Entrada</Link>
  
     </div>
   );

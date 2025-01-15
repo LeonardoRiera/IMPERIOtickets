@@ -12,6 +12,11 @@ const CardContainer = () => {
       console.log(`Compraste el producto: ${product}`);
   }; */
 
+  // Este useEffect asegura que la página se desplace hacia arriba al cargar el componente, me encanto!!
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []); // El array vacío indica que se ejecutará solo al montar el componente
+
   const [productos, setProductos] = useState([]);
   console.log(productos)
 
