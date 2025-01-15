@@ -6,15 +6,11 @@ import { db } from "../../services/firebaseConfing.js";
 import Header from '../Header/Header.jsx';
 
 
-
-
 const CardContainer = () => {
 
   /* const handleBuyClick = (product) => {
       console.log(`Compraste el producto: ${product}`);
   }; */
-
-
 
   const [productos, setProductos] = useState([]);
   console.log(productos)
@@ -50,6 +46,7 @@ const CardContainer = () => {
 
   return (
     <div className='CardContainer'>
+      
       <Header />
 
       <ItemCards productos={productos}/>

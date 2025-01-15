@@ -38,7 +38,7 @@ const VentaFinal = () => {
       <p className='dataFinal'>Cantidad de Entradas: .................... {count}</p>
       <p className='dataFinal'>Precio por Entrada: ............................ ${price}</p>
       <p className='dataFinal'>Cargos por Servicio (12%): ................... ${price * 0.12 } </p>
-      <p className='dataFinalTotal'>Total a pagar: ${total.toFixed(2)}</p>
+      <p className='dataFinalTotal'>Total a pagar: ${total.toFixed(2)}</p>   {/* ojo! "toFixed"" redondea decimales pero devuelve un string! */}
       <p className='dataFinalInfo'>AL FINALIZAR LA COMPRA ENVIAREMOS TUS ENTRADAS EN FORMATO PDF CON UN CÓDIGO QR ÚNICO A TU MAIL.</p>
       <p className='dataFinalInfo'>Cualquier duda, podes consultar GUIA DE COMPRA.  </p>
       

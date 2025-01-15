@@ -4,7 +4,7 @@ import GuiaDeCompra from './Components/GuiaDeCompra/GuiaDeCompra';
 import AccesoProd from './Components/AccesoProd/AccesoProd';
 import CardContainer from './Components/CardContainer/CardContainer';
 import CardDetail from './Components/CardDetail/CardDetail';
-import { PanelAdminEvento } from './Components/PanelAdminEvento/PanelAdminEvento';
+import PanelAdminEvento from './Components/PanelAdminEvento/PanelAdminEvento';
 import AtencionCliente from './Components/AtencionCliente/AtencionCliente';
 import Footer from './Components/Footer/Footer';
 import Navbar from './Components/Navbar/Navbar';
@@ -15,22 +15,14 @@ import Notifications from './Components/Notifications/Notifications';
 import VentaFinal from './Components/VentaFinal/VentaFinal';
 
 
-
-
-
-
 function App() {
-  
-
-
 
   return (
 
     
       <BrowserRouter>
 
-
-        <div className='APP container-fluid'>
+        <div className='APP'>
 
           <Navbar />
           
@@ -51,12 +43,13 @@ function App() {
           </Routes>
              
           <Footer />
-        </div>
 
+        </div>
 
       </BrowserRouter>
    
   )
+
 }
 
 export default App

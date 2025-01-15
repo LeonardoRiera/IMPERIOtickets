@@ -8,8 +8,6 @@ import { Link } from 'react-router-dom';
 /* import MercadoPagoHandler from '../MercadoPagoHandler/MercadoPagoHandler'; */
 
 
-
-
 const CardDetail = () => {
 
   // Este useEffect asegura que la página se desplace hacia arriba al cargar el componente, me encanto!!
@@ -28,13 +26,9 @@ const CardDetail = () => {
   const { image, image2, imageDetail, title, price, dia, fecha, hora, lugar, description, clasificacion } = location.state;
   console.log({ image, image2, imageDetail, title, price, dia, fecha, hora, lugar, description, clasificacion })
 
-  /* const [backgroundImage, setBackgroundImage] = useState(image); */ // Imagen por defecto
-
-
   /* contador */
   const [count, setCount] = useState(1); // Contador de entradas
-  const [total, setTotal] = useState(0); // Estado para el total
-  const [subTotal, setSubTotal] = useState(0); // Estado para el subtotal
+  const [total, setTotal] = useState(0); // Estado para el total  
 
   const increment = () => {
       if(count > 0) {
@@ -55,14 +49,6 @@ const CardDetail = () => {
     setTotal(newTotal); // Actualizamos el total
   }, [price, count]);
 
-  // Cálculo del total cada vez que cambian price o count
-  useEffect(() => {
-    const serviceCharge = price * 0.12 ;
-    const newSubTotal = (price + serviceCharge) * count ;
-    setSubTotal(newSubTotal); // Actualizamos el total
-  }, [price, count]);
-
-  
 
 
   // Definimos los estados para manejar los correos electrónicos
@@ -95,13 +81,6 @@ const CardDetail = () => {
     }
   };
 
-    
-
-
-
-
-
-
 
   const handleFeedback = async () => {
     try {
@@ -116,23 +95,14 @@ const CardDetail = () => {
   };
 
 
-
-
-  
-
-
-
-
-
-
-
-
   return (
     <div className='DetailContainer'>
       <div className='bannercito'>
+
         <div className='fotoContainer'>
-          
-           <img src={imageDetail} alt="" className='imageBannercito' />
+
+          <img src={imageDetail} alt="" className='imageBannercito' />
+
         </div>
        
         <div className='infoDetail'>
@@ -236,16 +206,10 @@ const CardDetail = () => {
 
           <p className='importante2'>Una vez confirmado el email se activará el botón de pagar.</p>    
 
-        
-
-
-
         </form>
+        
       </div>
-
-
-
-      
+ 
     </div>
     
   )

@@ -5,8 +5,6 @@ import '../EntradasCount/EntradasCount.css'
 
 const EntradasCount = ({ count, increment, decrement }) => {
 
-
-
   return (
     <div className="Controls">
 
@@ -16,6 +14,7 @@ const EntradasCount = ({ count, increment, decrement }) => {
     </div>
 
   )
+  
 }
 
 export default EntradasCount
