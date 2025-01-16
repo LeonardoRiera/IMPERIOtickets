@@ -1,4 +1,6 @@
 // Config
+const apiUrl = import.meta.env.VITE_API_URL_SERVER;
+
 export default async function mercadoPagoService (body) {
 
   const requestOptions = {
@@ -11,7 +13,7 @@ export default async function mercadoPagoService (body) {
   }
 
   // Default response
-  const response = await fetch('http://localhost:5000/create_preference', requestOptions)
+const response = await fetch(`${apiUrl}create_preference`, requestOptions)
   const json = await response.json()
 
   return json
