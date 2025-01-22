@@ -1,7 +1,7 @@
 import { MercadoPagoConfig, Preference } from 'mercadopago';
 
 const client = new MercadoPagoConfig({
-  accessToken: 'APP_USR-7761394088745425-010814-cb1b8f6f85abe80efcc53e46091a219c-2151711431',
+  accessToken: 'APP_USR-4052270790686663-010814-b889c19a7a26bef961368d4c998a24c3-40387779',
 });
 
 export default async function handler(req, res) {
