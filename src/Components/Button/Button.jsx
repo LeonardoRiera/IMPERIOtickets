@@ -10,7 +10,7 @@ const Button = ({ count, subTotal, title }) => {
 
   React.useEffect(() => {
 
-    initMercadoPago('TEST-e8f24b1e-414c-4f58-bea8-aef8fd99b336', {locale:'es-AR'});
+    initMercadoPago('APP_USR-c02273b8-2e33-4e7b-9d57-deb0c7040974', {locale:'es-AR'});
 
   }, [])
 
