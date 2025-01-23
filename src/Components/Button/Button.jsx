@@ -8,7 +8,7 @@ const Button = ({ count, subTotal, title }) => {
 
   const [preference, setPreference] = React.useState(null)
 
-  const publicKey = import.meta.env.PUBLIC_KEY
+  const publicKey = 'APP_USR-b18a6e16-2c43-4069-aeab-2dcb60c3a7e2'
 
   React.useEffect(() => {
 
