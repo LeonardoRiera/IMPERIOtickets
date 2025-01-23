@@ -8,9 +8,13 @@ const Button = ({ count, subTotal, title }) => {
 
   const [preference, setPreference] = React.useState(null)
 
+  const publicKey = import.meta.env.PUBLIC_KEY
+
   React.useEffect(() => {
 
-    initMercadoPago('APP_USR-b18a6e16-2c43-4069-aeab-2dcb60c3a7e2', {locale:'es-AR'});
+    initMercadoPago(publicKey, {locale:'es-AR'});
+
+    payment()
 
   }, [])
 
@@ -35,13 +39,6 @@ const Button = ({ count, subTotal, title }) => {
   return (
     <>
 
-    <button 
-      onClick={payment} 
-      // disabled={disabled} 
-      // className={className}
-    >
-      Comprarrr
-    </button>
     {
       preference && 
         
