@@ -1,6 +1,6 @@
 import { MercadoPagoConfig, Preference } from 'mercadopago';
 
-const token = import.meta.env.ACCESS_TOKEN
+const token = 'APP_USR-4052270790686663-010814-b889c19a7a26bef961368d4c998a24c3-40387779'
 
 const client = new MercadoPagoConfig({
   accessToken: token,
