@@ -14,18 +14,17 @@ import Pending from './Components/Pending/Pending';
 import Notifications from './Components/Notifications/Notifications';
 import VentaFinal from './Components/VentaFinal/VentaFinal';
 
-
 function App() {
-
+  
   return (
 
     
       <BrowserRouter>
 
-        <div className='APP'>
+        <div className='APP container-fluid'>
 
           <Navbar />
-          
+
           <Routes>
 
             <Route path="/" element={<CardContainer/>}/>

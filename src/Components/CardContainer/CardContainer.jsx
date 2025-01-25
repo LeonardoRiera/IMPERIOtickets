@@ -18,8 +18,6 @@ const CardContainer = () => {
   }, []); // El array vacío indica que se ejecutará solo al montar el componente
 
   const [productos, setProductos] = useState([]);
-  console.log(productos)
-
 
   // Función asíncrona que obtiene los productos de Firestore
 
