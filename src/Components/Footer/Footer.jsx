@@ -1,4 +1,3 @@
-import React from 'react'
 import '../Footer/Footer.css'
 import logoPalabra from '../../assets/logoBlancoImp.png'
 import { Link } from 'react-router-dom'

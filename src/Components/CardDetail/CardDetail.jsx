@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import EntradasCount from '../EntradasCount/EntradasCount'
 import { useLocation, Navigate } from 'react-router-dom';
 import '../CardDetail/CardDetail.css';

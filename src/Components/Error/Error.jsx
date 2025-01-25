@@ -1,7 +1,7 @@
-import React from 'react'
 import '../Error/Error.css'
+ 
 
-export const Error = () => {
+const Error = () => {
   return (
     <div className='contenedorError'>
         <p>Error</p>

@@ -1,6 +1,6 @@
 import ItemCards from '../ItemCards/ItemCards.jsx';
 import '../CardContainer/CardContainer.css'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getDocs, collection } from "firebase/firestore"; 
 import { db } from "../../services/firebaseConfing.js";
 import Header from '../Header/Header.jsx';
