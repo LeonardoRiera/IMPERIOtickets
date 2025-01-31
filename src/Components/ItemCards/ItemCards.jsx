@@ -1,5 +1,5 @@
 import './ItemCards.css';
-import Card from '../Card/Card.jsx'
+import Card from '../Card/Card.jsx';
 
 
 const ItemCards = ({ productos }) => {

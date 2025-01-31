@@ -1,20 +1,12 @@
-//migrado a cliente 0.6
-import { useEffect, useRef} from 'react';
+/* global bootstrap */
+import { useEffect } from 'react';
 import '../Navbar/Navbar.css';
 import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
-import logo from '../../assets/logoNuevo.png'
+import logo from '../../assets/imagologoTickets.png';
 
 const Navbar = () => {
   
-  //referencia al footer
-  const footerRef = useRef(null);
-
-  // Función para hacer scroll hasta el footer
-  const scrollToFooter = () => {
-    footerRef.current.scrollIntoView({ behavior: 'smooth' });
-  };
-
   useEffect(() => {
     // Selecciona todos los enlaces dentro del navbar
     const navLinks = document.querySelectorAll('.navbar-nav .nav-link');

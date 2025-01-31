@@ -3,19 +3,10 @@ import '../CardContainer/CardContainer.css'
 import { useEffect, useState } from 'react'
 import { getDocs, collection } from "firebase/firestore"; 
 import { db } from "../../services/firebaseConfing.js";
-import Header from '../Header/Header.jsx';
+import Header2 from '../Header2/Header2.jsx';
 
 
 const CardContainer = () => {
-
-  /* const handleBuyClick = (product) => {
-      console.log(`Compraste el producto: ${product}`);
-  }; */
-
-  // Este useEffect asegura que la página se desplace hacia arriba al cargar el componente, me encanto!!
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []); // El array vacío indica que se ejecutará solo al montar el componente
 
   const [productos, setProductos] = useState([]);
 
@@ -39,8 +30,10 @@ const CardContainer = () => {
     }
   };
 
-  // useEffect para cargar los productos cuando el componente se monte
+  // useEffect scrollear al inicio y cargar los productos cuando el componente se monte
   useEffect(() => {
+
+    window.scrollTo(0, 0);
     fetchProductos(); // Llamamos a la función async dentro de useEffect
     
   }, []);
@@ -50,7 +43,7 @@ const CardContainer = () => {
   return (
     <div className='CardContainer'>
       
-      <Header />
+      <Header2 />
 
       <ItemCards productos={productos}/>
 

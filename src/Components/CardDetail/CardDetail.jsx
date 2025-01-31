@@ -2,10 +2,7 @@ import { useState, useEffect } from 'react';
 import EntradasCount from '../EntradasCount/EntradasCount'
 import { useLocation, Navigate } from 'react-router-dom';
 import '../CardDetail/CardDetail.css';
-/* import { initMercadoPago, Wallet } from "@mercadopago/sdk-react"; */
-/* import axios from "axios"; // Importar axios para hacer solicitudes HTTP */
 import { Link } from 'react-router-dom';
-/* import MercadoPagoHandler from '../MercadoPagoHandler/MercadoPagoHandler'; */
 
 
 const CardDetail = () => {
@@ -174,18 +171,7 @@ const CardDetail = () => {
           {/* Mensaje de error si los correos no coinciden */}
           {errorMessage && <p className='errorMessage' style={{ color: 'red' }}>{errorMessage}</p>}
 
-         
-
-           
-          
-          {/* <MercadoPagoHandler 
-            count={count} 
-            subTotal={subTotal} 
-            image={imageDetail} 
-            title={title} 
-            
-          />   */}
-
+        
             {/* Link habilitado o deshabilitado según la validación de los correos */}
               {isButtonDisabled ? (
                 // Si los correos no coinciden, mostramos un mensaje o botón inactivo

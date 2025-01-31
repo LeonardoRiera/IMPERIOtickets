@@ -1,5 +1,5 @@
 import '../Footer/Footer.css'
-import logoPalabra from '../../assets/logoBlancoImp.png'
+import logoPalabra from '../../assets/nombreCalidad.png'
 import { Link } from 'react-router-dom'
 import planeta from '../../assets/planeta.png'
 

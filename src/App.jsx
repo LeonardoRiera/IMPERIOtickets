@@ -14,6 +14,7 @@ import Pending from './Components/Pending/Pending';
 import Notifications from './Components/Notifications/Notifications';
 import VentaFinal from './Components/VentaFinal/VentaFinal';
 
+
 function App() {
   
   return (
@@ -34,7 +35,7 @@ function App() {
             <Route path='/CardDetail' element={<CardDetail/>} />
             <Route path="/PanelAdminEvento" element={<PanelAdminEvento />} />
             <Route path="/Success" element={<Success />} />
-            <Route path="/Error" element={<Error />} />
+            <Route path="*" element={<Error />} />
             <Route path="/Pending" element={<Pending />} />
             <Route path="/Notifications" element={<Notifications />} />
             <Route path="/VentaFinal" element={<VentaFinal />} />

@@ -1,0 +1,47 @@
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+
+/* seccion imagen */
+
+.image {
+    display: flex;
+    justify-content: end;
+}
+
+.personaja {
+    width: 35vmax;
+    margin: 8vmax 2vmax 4vmax 0;
+}
+
+
+/* seccion textos */
+
+.textos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+   align-items: start;
+   margin-top: 8vmax;
+   
+}
+
+.principal {
+    font-size: 4vmax;
+    font-family: "Bebas Neue", system-ui;
+}
+
+.tickets {
+    color: #FE7247;
+    font-size: 6vmax;
+}
+
+.subtitle {
+    color: #F0E541;
+    font-family: "Bebas Neue", system-ui;
+    font-size: 2.5vmax;
+}
+
