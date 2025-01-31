@@ -8,7 +8,8 @@ const Button = ({ count, subTotal, title }) => {
 
   const [preference, setPreference] = React.useState(null)
 
-  const publicKey = 'APP_USR-b18a6e16-2c43-4069-aeab-2dcb60c3a7e2'
+  const publicKey = 'APP_USR-c4167a16-3c8f-41b4-8391-0d4aefb8f04c' // test always
+  // const publicKey = 'APP_USR-b18a6e16-2c43-4069-aeab-2dcb60c3a7e2'
 
   React.useEffect(() => {
 
@@ -21,7 +22,7 @@ const Button = ({ count, subTotal, title }) => {
   const payment = async () => {
 
     const body = {
-      title: {title},
+      title: title,
       quantity: count,
       price: subTotal
 
@@ -42,7 +43,7 @@ const Button = ({ count, subTotal, title }) => {
     {
       preference && 
         
-      <Wallet initialization={{ preferenceId: preference }} customization={{ texts:{ valueProp: 'smart_option'}}} />
+      <Wallet initialization={{ preferenceId: preference }} />
     }
 
 

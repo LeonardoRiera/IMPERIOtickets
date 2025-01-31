@@ -2,10 +2,10 @@ import express from "express";
 import cors from "cors";
 import { MercadoPagoConfig, Preference } from 'mercadopago';
 
-const client =new MercadoPagoConfig({accessToken: 'APP_USR-4052270790686663-010814-b889c19a7a26bef961368d4c998a24c3-40387779'})
+const client = new MercadoPagoConfig({accessToken: 'APP_USR-5516265853191842-012814-5ae6a1ffe3e4b74a0c6c76eb7617e61e-2201378979'})
 
 const app = express()
-const port = 5000
+const port = 5100
 
 app.use(cors())
 app.use(express.json())
@@ -31,7 +31,8 @@ app.post("/create_preference", async (req, res) => {
 					failure:"https://www.youtube.com/watch?v=vEXwN9-tKcs&t=180s&ab_channel=onthecode",
 					pending: "https://www.youtube.com/watch?v=vEXwN9-tKcs&t=180s&ab_channel=onthecode"
 				},
-				auto_return:"approved"
+				auto_return:"approved",
+				notification_url:'https://19ff-201-235-103-19.ngrok-free.app/webhook'
 			}
 
 			const preference = new Preference(client)
@@ -47,6 +48,11 @@ app.post("/create_preference", async (req, res) => {
 				error: "Error al crear la preferencia"
 			})
     }
+})
+
+app.post("/webhook", async (req, res) => {
+	const payment = req.query
+	console.log({payment})
 })
 app.listen(port, () => {
     console.log(`el servidor esta corriendo en el puerto ${port}`)

@@ -1,6 +1,6 @@
 import { MercadoPagoConfig, Preference } from 'mercadopago';
 
-const token = 'APP_USR-4052270790686663-010814-b889c19a7a26bef961368d4c998a24c3-40387779'
+const token = 'APP_USR-5516265853191842-012814-5ae6a1ffe3e4b74a0c6c76eb7617e61e-2201378979'
 
 const client = new MercadoPagoConfig({
   accessToken: token,
@@ -24,6 +24,7 @@ export default async function handler(req, res) {
           pending: 'https://www.youtube.com/watch?v=vEXwN9-tKcs&t=180s&ab_channel=onthecode',
         },
         auto_return: 'approved',
+        notification_url:'https://6432-201-235-103-19.ngrok-free.app/webhook'
       };
 
       const preference = new Preference(client);
