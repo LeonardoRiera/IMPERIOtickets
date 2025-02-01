@@ -1,7 +1,7 @@
 import '../Footer/Footer.css'
 import logoPalabra from '../../assets/nombreCalidad.png'
 import { Link } from 'react-router-dom'
-import planeta from '../../assets/planeta.png'
+import logoEstr from '../../assets/isotipoEstrellas.png'
 
 
 export const Footer = () => {
@@ -42,7 +42,7 @@ export const Footer = () => {
 
         <div className='col-lg-6 col-md-12 colCentralFooter'>
           
-          <img className='planetaFooter' src={planeta} alt="" />  
+          <img className='planetaFooter' src={logoEstr} alt="logo con estrellas" />  
           
         </div>
 

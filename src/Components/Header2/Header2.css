@@ -51,3 +51,150 @@
     font-family: "Bebas Neue", system-ui;
     font-size: 2.5vmax;
 }
+
+
+
+/* ++++++++++++++++++++++++ media query |  pantalla gigante |   ++++++++++++++++++++++++++++++++++/ */
+
+@media screen and (max-width:2220px) {
+
+
+}
+
+
+/* / ++++++++++++++++++++++++ media query | pantalla extra extra lg  |   ++++++++++++++++++++++++++++++++++/ */
+
+
+
+@media screen and (max-width:1400px) {
+
+
+}
+
+
+
+/* / ++++++++++++++++++++++++ media query | pantalla extra lg   |  ++++++++++++++++++++++++++++++++++/ */
+
+
+@media screen and (max-width:1200px) {
+
+  
+
+}
+
+
+
+/* / ++++++++++++++++++++++++ media query | pantalla lg  | ++++++++++++++++++++++++++++++++++/ */
+
+
+@media screen and (max-width:992px) {
+
+  
+}
+
+
+/* / ++++++++++++++++++++++++ media query |  pantalla galaxy flod2   | ++++++++++++++++++++++++++++++++++/ */
+
+
+
+@media screen and (max-width:882px) {
+
+  
+  
+}
+
+
+
+
+
+/* / ++++++++++++++++++++++++ media query |  pantalla md   | ++++++++++++++++++++++++++++++++++/ */
+
+
+
+@media screen and (max-width:768px) {
+
+   
+
+}
+
+/* / ++++++++++++++++++++++++ media query | pantalla ipad pro |   ++++++++++++++++++++++++++++++++++/ */
+
+
+
+@media screen and (max-width:581px) {
+    .image img { /* Aplicando estilos a todas las imágenes dentro de .image */
+        padding-left: 1vmax;
+    
+    }
+}
+
+
+
+/* / ++++++++++++++++++++++++ media query |  pantalla sm   | ++++++++++++++++++++++++++++++++++/ */
+
+@media screen and (max-width:576px) {
+
+   /* Sección imagen */
+   .image {
+    justify-content: center; 
+    height: 35vmax;
+
+    }
+
+    .image img { /* Aplicando estilos a todas las imágenes dentro de .image */
+        width: 38vmax;
+        margin: 10vmax 2vmax 4vmax 0;
+        padding-left: 0;
+    
+    }
+
+    /* Sección textos */
+    .textos {
+        justify-content: center;
+        align-items: center;
+        margin-top: 8vmax;
+        text-align: center;
+    }
+
+    .principal {
+        font-size: 4vmax;
+        font-family: "Bebas Neue", system-ui;
+    }
+
+    .tickets {
+        font-size: 6vmax;
+    }
+
+    .subtitle {
+        font-size: 2.5vmax;
+    }
+
+
+}
+
+/* especial */
+
+@media screen and (max-width:500px) {
+
+
+}
+
+/* medida extra a 400 */
+
+@media screen and (max-width:400px) {
+
+
+    
+  
+
+}
+
+
+/* / ++++++++++++++++++++++++ media query  | pantalla xxsm |   ++++++++++++++++++++++++++++++++++*/ 
+
+@media screen and (max-width:320px) {
+
+  
+
+}
+

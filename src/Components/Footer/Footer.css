@@ -57,21 +57,10 @@
 }
 
 .planetaFooter {
-  width: 45%; /* Asegura que la imagen se ajuste al ancho del contenedor */
-  object-fit: cover; /* Asegura que la imagen se recorte adecuadamente */
-  position: relative; /* Opcional: puedes ajustar el posicionamiento si es necesario */
-  animation: rotar 80s linear infinite;
+  width: 28%; /* Asegura que la imagen se ajuste al ancho del contenedor */
+  transform: rotate(35deg);
 }
 
-/* Definición de la animación */
-@keyframes rotar {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 
 
 /* primer columna */
@@ -194,14 +183,6 @@
     font-size: 1.8vmax;
   }
 
-
-  .logoFooterResponsive {
-    display: block;
-    width: 12vmax;
-    padding: 2vmax 0;
-  }
-
-
   .contactoRedesFooter {
     align-items: center;
     gap: 2vmax;
@@ -247,7 +228,7 @@
   }
 
   .planetaFooter {
-    width: 10%; 
+    width: 15%; 
     
   }
 

@@ -17,7 +17,7 @@ const Header2 = () => {
 
   return (
     <div className="row header">
-      <div className="col-6 image">
+      <div className="col-sm-6 col-12 image">
         {images.map((src, index) => (
           <img
             key={index}
@@ -27,7 +27,7 @@ const Header2 = () => {
           />
         ))}
       </div>
-      <div className="col-6 textos">
+      <div className="col-sm-6 col-12 textos">
         <h1 className="principal">
           Comprá tu <br />
           <span className="tickets">Ticket Digital</span>
