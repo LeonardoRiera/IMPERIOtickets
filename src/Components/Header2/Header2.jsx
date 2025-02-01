@@ -10,7 +10,7 @@ const Header2 = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 4000); // Cambia cada 4 segundos
+    }, 5000); // Cambia cada 5 segundos
 
     return () => clearInterval(interval); // Limpieza del intervalo
   }, [images.length]); // Agregamos images.length al array de dependencias

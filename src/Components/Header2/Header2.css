@@ -20,7 +20,7 @@
     object-fit: contain; /* Prueba con contain en vez de cover */
     opacity: 0;
     position: absolute; /* Asegura que todas las imágenes se superpongan */
-    transition: opacity 1.3s ease-in-out;
+    transition: opacity 1.2s ease-in-out;
 }
 
 .image img.active {
