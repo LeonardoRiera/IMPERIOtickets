@@ -4,29 +4,36 @@
     justify-content: center;
 }
 
-
-/* seccion imagen */
-
+/* Sección imagen */
 .image {
     display: flex;
     justify-content: end;
+    position: relative;
+    height: 35vmax;
+
 }
 
-.personaja {
-    width: 35vmax;
-    margin: 8vmax 2vmax 4vmax 0;
+.image img { /* Aplicando estilos a todas las imágenes dentro de .image */
+    width: 33vmax;
+    height: 100%;
+    margin: 4vmax 2vmax 4vmax 0;
+    object-fit: contain; /* Prueba con contain en vez de cover */
+    opacity: 0;
+    position: absolute; /* Asegura que todas las imágenes se superpongan */
+    transition: opacity 1.3s ease-in-out;
 }
 
+.image img.active {
+    opacity: 1;
+}
 
-/* seccion textos */
-
+/* Sección textos */
 .textos {
     display: flex;
     flex-direction: column;
     justify-content: center;
-   align-items: start;
-   margin-top: 8vmax;
-   
+    align-items: start;
+    margin-top: 8vmax;
 }
 
 .principal {
@@ -44,4 +51,3 @@
     font-family: "Bebas Neue", system-ui;
     font-size: 2.5vmax;
 }
-
