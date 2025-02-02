@@ -144,7 +144,7 @@
     }
 
     .image img { 
-        width: 38vmax;
+        width: 35vmax;
         margin: 8vmax 0 4vmax 0;
         padding-left: 0;
     
@@ -154,12 +154,12 @@
     .textos {
         justify-content: center;
         align-items: center;
-        margin-top: 8vmax;
+        margin-top: 5vmax;
         text-align: center;
     }
 
     .principal {
-        font-size: 4vmax;
+        font-size: 3vmax;
         font-family: "Bebas Neue", system-ui;
     }
 
