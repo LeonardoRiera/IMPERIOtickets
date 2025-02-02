@@ -124,7 +124,7 @@
 
 
 @media screen and (max-width:581px) {
-    .image img { /* Aplicando estilos a todas las imágenes dentro de .image */
+    .image img { 
         padding-left: 1vmax;
     
     }
@@ -143,9 +143,9 @@
 
     }
 
-    .image img { /* Aplicando estilos a todas las imágenes dentro de .image */
+    .image img { 
         width: 38vmax;
-        margin: 10vmax 2vmax 4vmax 0;
+        margin: 10vmax 0 4vmax 0;
         padding-left: 0;
     
     }
