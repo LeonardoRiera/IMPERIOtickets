@@ -169,7 +169,7 @@
 
   .contenedorFooterPrincipal {
     flex-flow: column wrap;
-    margin-top: 5vmax;
+    margin-top: 1vmax;
   }
   .enlacesFooter {
     gap: 2.5vmax;
