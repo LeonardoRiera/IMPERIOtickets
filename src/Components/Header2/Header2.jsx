@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import "../Header2/Header2.css";
 import personaja1 from "../../assets/personaja1.webp";
-import personaja2 from "../../assets/personaja3.webp"; // Asegúrate de que la ruta es correcta
+import personaja2 from "../../assets/personaja3.webp"; 
+import personaje3 from "../../assets/personaje2.webp";
 
 const Header2 = () => {
-  const images = [personaja1, personaja2]; // Usando import para cargar imágenes correctamente
+  const images = [personaja1, personaje3, personaja2]; // Usando import para cargar imágenes correctamente
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
