@@ -6,9 +6,10 @@ import mercadoPagoService from '../../services/mercado.pago.service';
 
 const Button = ({ count, subTotal, title }) => {
 
+  // Local states
   const [preference, setPreference] = React.useState(null)
 
-  const publicKey = 'APP_USR-c4167a16-3c8f-41b4-8391-0d4aefb8f04c' // test always
+  const publicKey = 'APP_USR-c02273b8-2e33-4e7b-9d57-deb0c7040974' // test always
   // const publicKey = 'APP_USR-b18a6e16-2c43-4069-aeab-2dcb60c3a7e2'
 
   React.useEffect(() => {
@@ -30,11 +31,9 @@ const Button = ({ count, subTotal, title }) => {
 
     const response = await mercadoPagoService(body)
 
-    console.log(response)
     setPreference(response.id)
 
   }
-
   
 
   return (

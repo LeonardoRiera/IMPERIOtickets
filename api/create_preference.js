@@ -24,7 +24,7 @@ export default async function handler(req, res) {
           pending: 'https://www.youtube.com/watch?v=vEXwN9-tKcs&t=180s&ab_channel=onthecode',
         },
         auto_return: 'approved',
-        notification_url:'https://6432-201-235-103-19.ngrok-free.app/webhook'
+        notification_url:'https://9cbf-201-235-103-19.ngrok-free.app/webhook'
       };
 
       const preference = new Preference(client);

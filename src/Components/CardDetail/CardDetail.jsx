@@ -21,7 +21,6 @@ const CardDetail = () => {
   }
 
   const { image, image2, imageDetail, title, price, dia, fecha, hora, lugar, description, clasificacion } = location.state;
-  console.log({ image, image2, imageDetail, title, price, dia, fecha, hora, lugar, description, clasificacion })
 
   /* contador */
   const [count, setCount] = useState(1); // Contador de entradas
