@@ -11,7 +11,7 @@ import Navbar from './Components/Navbar/Navbar';
 import Success from './Components/Success/Success';
 import Error from './Components/Error/Error';
 import Pending from './Components/Pending/Pending';
-import Notifications from './Components/Notifications/Notifications';
+import Failure from './Components/Failure/Failure';
 import VentaFinal from './Components/VentaFinal/VentaFinal';
 
 
@@ -37,7 +37,7 @@ function App() {
             <Route path="/Success" element={<Success />} />
             <Route path="*" element={<Error />} />
             <Route path="/Pending" element={<Pending />} />
-            <Route path="/Notifications" element={<Notifications />} />
+            <Route path="/Failure" element={<Failure />} />
             <Route path="/VentaFinal" element={<VentaFinal />} />
 
           </Routes>

@@ -40,3 +40,153 @@
     color: #5b382e;
     
 }
+
+
+
+
+
+
+
+
+/* ++++++++++++++++++++++++ media query |  pantalla gigante |   ++++++++++++++++++++++++++++++++++*/
+
+@media screen and (max-width:2220px) {
+    
+    
+}
+
+
+/* ++++++++++++++++++++++++ media query | pantalla extra extra lg  |   ++++++++++++++++++++++++++++++++++*/
+
+
+
+@media screen and (max-width:1400px) {
+    
+    
+}
+
+
+
+/* ++++++++++++++++++++++++ media query | pantalla extra lg   |  ++++++++++++++++++++++++++++++++++*/
+
+
+@media screen and (max-width:1200px) {
+    
+
+    
+}
+
+
+
+/* ++++++++++++++++++++++++ media query | pantalla lg  | ++++++++++++++++++++++++++++++++++*/
+
+
+@media screen and (max-width:992px) {
+    
+    .logoError {
+        width: 20%;
+    }
+
+    .number{
+        font-size: 3vmax;
+        
+    }
+    
+    .tituloError{
+        font-size: 1.8vmax;
+    }
+
+    .volverAInicio {
+        font-size: 1.8vmax; 
+    }
+    
+}
+
+/* ++++++++++++++++++++++++ media query |  pantalla md   | ++++++++++++++++++++++++++++++++++*/
+
+@media screen and (max-width:835px) {
+    
+    .logoError {
+        width: 25%;
+    }
+
+    .number{
+        font-size: 4vmax;
+        
+    }
+    
+    .tituloError{
+        font-size: 2.8vmax;
+    }
+
+    .volverAInicio {
+        font-size: 2.8vmax; 
+    }
+    
+    
+}
+
+
+/* ++++++++++++++++++++++++ media query |  pantalla md   | ++++++++++++++++++++++++++++++++++*/
+
+
+
+@media screen and (max-width:768px) {
+  
+
+}
+/* ++++++++++++++++++++++++ media query |  pantalla ipad pro 11 | ++++++++++++++++++++++++++++++++++*/
+
+@media screen and (max-width:600px) {
+  
+}
+/* ++++++++++++++++++++++++ media query |  pantalla sm   | ++++++++++++++++++++++++++++++++++*/
+
+@media screen and (max-width:576px) {
+   
+
+}
+
+/* ++++++++++++++++++++++++ media query  |fire hd 10 |   ++++++++++++++++++++++++++++++++++*/
+
+@media screen and (max-width:500px) {
+
+   
+}
+
+/* ++++++++++++++++++++++++ media query  | pantalla pixel 6 pro|   ++++++++++++++++++++++++++++++++++*/
+
+@media screen and (max-width:480px) {
+
+    .tituloError{
+        font-size: 2.2vmax;
+    }
+   
+}
+
+/* ++++++++++++++++++++++++ media query  | pantalla fire hd 10 |   ++++++++++++++++++++++++++++++++++*/
+
+@media screen and (max-width:469px) {
+    .tituloError{
+        font-size: 2.5vmax;
+    }
+}
+
+/* ++++++++++++++++++++++++ media query  | pantalla movil varios |   ++++++++++++++++++++++++++++++++++*/
+
+@media screen and (max-width:431px) {
+ 
+    .logoError {
+        width: 40%;
+    }
+}
+
+
+/* ++++++++++++++++++++++++ media query  | pantalla xxsm |   ++++++++++++++++++++++++++++++++++*/
+
+@media screen and (max-width:321px) {
+    .contenedorError {
+        margin: 10vmax auto;
+        
+    }
+}

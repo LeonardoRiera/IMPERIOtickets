@@ -1,0 +1,42 @@
+.failureContainer {
+    width: 100%;
+    margin: 3vmax auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 6vmax 0 2vmax 0;
+}
+
+.number1{
+    color: white;
+    font-size: 2vmax;
+    text-align: center;
+    color: gray;
+    font-family: "Bebas Neue", system-ui;
+}
+
+.tituloError1{
+    color: white;
+    font-size: 1.2vmax;
+    text-align: center;
+    color: gray;
+    font-family: "Bebas Neue", system-ui;
+}
+
+.logoError1 {
+    width: 15%;
+}
+
+.volverAInicio1 {
+    text-decoration: none;
+    font-size: 1.5vmax;
+    text-align: center;
+    color: #FE7247;
+    font-family: "Bebas Neue", system-ui; 
+}
+
+.volverAInicio1:hover {
+    color: #5b382e;
+    
+}
