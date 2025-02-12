@@ -52,6 +52,7 @@ const generatePDFWithQR = (qrBase64) => {
   return pdfBuffer.toString('base64');
 };
 
+// Codigo del server
 app.post("/create_preference", async (req, res) => {
   try {
     const body = {
