@@ -8,13 +8,13 @@ import { jsPDF } from 'jspdf';
 import { Buffer } from 'buffer';
 import mongoose from "mongoose";
 
-const client = new MercadoPagoConfig({ accessToken: 'APP_USR-7761394088745425-010814-cb1b8f6f85abe80efcc53e46091a219c-2151711431' });
+dotenv.config();
+const client = new MercadoPagoConfig({ accessToken: import.meta.env.MERCADOPAGO_TOKEN });
 const app = express();
-const port = 5000;
+const port = 5100;
 
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
-dotenv.config();
 
 let lastPayment = null;
 
