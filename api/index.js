@@ -68,7 +68,7 @@ app.post("/create_preference", async (req, res) => {
         }
       ],
       back_urls: {
-        success: "http://localhost:5173/Success",
+        success: `${process.env.VITE_API_URL}Success`,
         failure: "https://www.youtube.com/watch?v=vEXwN9-tKcs&t=180s&ab_channel=onthecode",
         pending: "https://www.youtube.com/watch?v=vEXwN9-tKcs&t=180s&ab_channel=onthecode"
       },
