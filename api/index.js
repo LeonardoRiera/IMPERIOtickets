@@ -16,7 +16,12 @@ const client = new MercadoPagoConfig({ accessToken: token});
 const app = express();
 const port = 5000;
 
-app.use(cors());
+app.use(cors({
+  origin: "https://imperiotickets.com",
+  methods: "GET,POST,OPTIONS",
+  allowedHeaders: "Content-Type,Authorization"
+}));
+
 app.use(express.json({ limit: '50mb' }));
 
 let lastPayment = null;
