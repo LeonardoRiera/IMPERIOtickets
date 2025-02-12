@@ -7,11 +7,14 @@ import QRCode from 'qrcode';
 import { jsPDF } from 'jspdf';
 import { Buffer } from 'buffer';
 import mongoose from "mongoose";
+import { nanoid } from "nanoid";
+import Entry from './models/Entry.js'
 
 dotenv.config();
-const client = new MercadoPagoConfig({ accessToken: import.meta.env.MERCADOPAGO_TOKEN });
+const token = process.env.MERCADOPAGO_TOKEN
+const client = new MercadoPagoConfig({ accessToken: token});
 const app = express();
-const port = 5100;
+const port = 5000;
 
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
@@ -65,7 +68,7 @@ app.post("/create_preference", async (req, res) => {
         pending: "https://www.youtube.com/watch?v=vEXwN9-tKcs&t=180s&ab_channel=onthecode"
       },
       auto_return: "approved",
-      notification_url:'https://9acf-201-235-103-19.ngrok-free.app/webhook'
+      notification_url: process.env.WEBHOOK_MP
     };
 
     const preference = new Preference(client);
@@ -100,26 +103,41 @@ app.post("/webhook", express.json(), async (req, res) => {
 
     if (response.ok) {
       const data = await response.json()
-      console.log(data)
+
+      const quantity = parseInt(data.additional_info.items[0].quantity)
+      const mailAttachments = []
 
       // Generar QR y PDF, luego enviar el correo
       try {
-        const qrBase64 = await generateQRCodeBase64(paymentId);  // Genera el QR en base64
-        const pdfBase64 = generatePDFWithQR(qrBase64);     // Genera el PDF en base64
+
+        for (let i = 0; i < quantity; i++) {
+
+          const entryId = nanoid()
+          console.log(entryId)
+          const qrBase64 = await generateQRCodeBase64(entryId); // Generar QR
+          const pdfBase64 = generatePDFWithQR(qrBase64); // Generar PDF
+
+          const entry = new Entry({
+            email: 'brunoosella08@gmail.com',
+            entryId: entryId,
+            status: 'pending'  // Se guarda con estado pendiente por defecto
+          });
+          await entry.save();
+
+          mailAttachments.push({
+            filename: `entrada_${paymentId}_${i + 1}.pdf`,
+            content: pdfBase64,
+            encoding: 'base64'
+          });
+        }
 
         // Configura el correo
         const mailOptions = {
           from: 'imperiotickets@gmail.com', 
-          to: 'brunoosella08@gmail.com', // Cambia por el correo del destinatario
+          to: 'brunoosella08@gmail.com',
           subject: 'Entradas adjuntas',
           text: `Tu ID de entrada es: ${paymentId}`,
-          attachments: [
-            {
-              filename: `entrada_${paymentId}.pdf`,
-              content: pdfBase64,
-              encoding: 'base64'
-            }
-          ]
+          attachments: mailAttachments
         };
 
         // Enviar el correo
@@ -133,58 +151,12 @@ app.post("/webhook", express.json(), async (req, res) => {
         res.status(500).send("Error procesando el webhook");
       }
     }
-
-    res.sendStatus(200)
-
     
   } catch (error) {
     console.log(error)
     res.sendStatus(500)
   }
 
-
-  // ESTA ES LA FORMA QUE CONSTRUÍ CON IA Y YO MISMO, LA ANTERIOR ES LA DEL VIDEO EXPLICATIVO, CREO QUE SERÁ MEJOR
-  // console.log("Webhook recibido:", req.query);
-
-  // const { id, topic } = req.query;
-
-  // if (!topic || topic !== "payment" || !id) {
-  //   console.error("Notificación inválida");
-  //   return res.status(400).send("Notificación inválida");
-  // }
-
-  // lastPayment = id;
-
-  // // Generar QR y PDF, luego enviar el correo
-  // try {
-  //   const qrBase64 = await generateQRCodeBase64(id);  // Genera el QR en base64
-  //   const pdfBase64 = generatePDFWithQR(qrBase64);     // Genera el PDF en base64
-
-  //   // Configura el correo
-  //   const mailOptions = {
-  //     from: 'imperiotickets@gmail.com', 
-  //     to: 'brunoosella08@gmail.com', // Cambia por el correo del destinatario
-  //     subject: 'Entradas adjuntas',
-  //     text: `Tu ID de entrada es: ${id}`,
-  //     attachments: [
-  //       {
-  //         filename: `entrada_${id}.pdf`,
-  //         content: pdfBase64,
-  //         encoding: 'base64'
-  //       }
-  //     ]
-  //   };
-
-  //   // Enviar el correo
-  //   await transporter.sendMail(mailOptions);
-  //   console.log("Correo enviado exitosamente");
-
-  //   res.status(200).send("Webhook procesado y correo enviado");
-
-  // } catch (error) {
-  //   console.error('Error procesando el webhook:', error);
-  //   res.status(500).send("Error procesando el webhook");
-  // }
 });
 
 app.get("/last_payment", (req, res) => {
@@ -195,11 +167,9 @@ app.get("/last_payment", (req, res) => {
   }
 });
 
-
-
 const bootstrap = async () => {
 
-  await mongoose.connect('mongodb+srv://imperiotickets:imperio123@imperiotickets.tgwtz.mongodb.net/?retryWrites=true&w=majority&appName=ImperioTickets')
+  await mongoose.connect(process.env.API_URL_MONGODB)
 
   app.listen(port, () => {
     console.log(`El servidor está corriendo en el puerto ${port}`);
