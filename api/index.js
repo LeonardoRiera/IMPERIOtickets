@@ -1,15 +1,15 @@
 import express from "express";
 import cors from "cors";
-// import fs from "fs"
+import fs from "fs"
 import dotenv from "dotenv";
 import { MercadoPagoConfig, Preference } from 'mercadopago';
-// import nodemailer from 'nodemailer';
-// import QRCode from 'qrcode';
-// import { jsPDF } from 'jspdf';
-// import { Buffer } from 'buffer';
+import nodemailer from 'nodemailer';
+import QRCode from 'qrcode';
+import { jsPDF } from 'jspdf';
+import { Buffer } from 'buffer';
 import mongoose from "mongoose";
-// import { nanoid } from "nanoid";
-// import Entry from './models/Entry.js'
+import { nanoid } from "nanoid";
+import Entry from './models/Entry.js'
 
 import webhookRouter from "./webhook.js";
 
@@ -26,58 +26,58 @@ app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 
 // Configuración de Nodemailer con contraseña de aplicación
-// const transporter = nodemailer.createTransport({
-//   service: 'Gmail', 
-//   auth: {
-//     user: 'imperiotickets@gmail.com', 
-//     pass: 'kpui dbjk dubd ljuj' 
-//   }
-// });
+const transporter = nodemailer.createTransport({
+  service: 'Gmail', 
+  auth: {
+    user: 'imperiotickets@gmail.com', 
+    pass: 'kpui dbjk dubd ljuj' 
+  }
+});
 
-// const toBase64 = (filePath) => {
-//   const image = fs.readFileSync(filePath);
-//   return `data:image/png;base64,${image.toString("base64")}`;
-// };
+const toBase64 = (filePath) => {
+  const image = fs.readFileSync(filePath);
+  return `data:image/png;base64,${image.toString("base64")}`;
+};
 
-// // Función para generar el QR en base64
-// const generateQRCodeBase64 = async (id) => {
-//   try {
-//     const qrBase64 = await QRCode.toDataURL(id, { scale: 5 });
-//     return qrBase64;
-//   } catch (error) {
-//     console.error('Error generando QR:', error);
-//     throw error;
-//   }
-// };
+// Función para generar el QR en base64
+const generateQRCodeBase64 = async (id) => {
+  try {
+    const qrBase64 = await QRCode.toDataURL(id, { scale: 5 });
+    return qrBase64;
+  } catch (error) {
+    console.error('Error generando QR:', error);
+    throw error;
+  }
+};
 
-// // Función para generar el PDF con el QR
-// const generatePDFWithQR = (qrBase64) => {
-//   const pdf = new jsPDF({
-//     orientation:'portait',
-//     unit: 'mm',
-//     format:[100, 150]
-//   });
+// Función para generar el PDF con el QR
+const generatePDFWithQR = (qrBase64) => {
+  const pdf = new jsPDF({
+    orientation:'portait',
+    unit: 'mm',
+    format:[100, 150]
+  });
 
-//   const logoUrl = toBase64('../IMPERIOtickets/src/assets/imagologoTickets.png')
-//   // const logoUrl = toBase64('https://imperiotickets.com/assets/imagologoTickets-D6SFtBSe.png')
-//   pdf.addImage(logoUrl, "PNG", 35, 10, 30, 30);
+  const logoUrl = toBase64('../IMPERIOtickets/src/assets/imagologoTickets.png')
+  // const logoUrl = toBase64('https://imperiotickets.com/assets/imagologoTickets-D6SFtBSe.png')
+  pdf.addImage(logoUrl, "PNG", 35, 10, 30, 30);
 
-//   // Título del ticket
-//   pdf.setFont("helvetica", "bold");
-//   pdf.setFontSize(16);
-//   pdf.text("¡Tu entrada para el evento!", 50, 50, { align: "center" });
+  // Título del ticket
+  pdf.setFont("helvetica", "bold");
+  pdf.setFontSize(16);
+  pdf.text("¡Tu entrada para el evento!", 50, 50, { align: "center" });
 
-//   // Información del evento
-//   pdf.setFontSize(12);
-//   pdf.text("Fecha: 15 de Febrero 2025", 10, 70);
-//   pdf.text("Hora: 20:00", 10, 80);
-//   pdf.text("Ubicación: Teatro Central", 10, 90);
+  // Información del evento
+  pdf.setFontSize(12);
+  pdf.text("Fecha: 15 de Febrero 2025", 10, 70);
+  pdf.text("Hora: 20:00", 10, 80);
+  pdf.text("Ubicación: Teatro Central", 10, 90);
 
-//   pdf.addImage(qrBase64, "PNG", 30, 100, 40, 40);
+  pdf.addImage(qrBase64, "PNG", 30, 100, 40, 40);
   
-//   const pdfBuffer = Buffer.from(pdf.output('arraybuffer'));
-//   return pdfBuffer.toString('base64');
-// };
+  const pdfBuffer = Buffer.from(pdf.output('arraybuffer'));
+  return pdfBuffer.toString('base64');
+};
 
 // Codigo del server
 app.post("/create_preference", async (req, res) => {
@@ -115,84 +115,84 @@ app.post("/create_preference", async (req, res) => {
   }
 });
 
-// app.post("/webhook", express.json(), async (req, res) => {
+app.post("/webhook", express.json(), async (req, res) => {
 
-//   const paymentId = req.query.id
+  const paymentId = req.query.id
 
-//   try {
+  try {
     
-//     const response = await fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, 
-//       {
-//         method: 'GET',
-//         headers: {
-//           'Authorization': `Bearer ${client.accessToken}`
-//         }
-//       }
-//     )
+    const response = await fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, 
+      {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${client.accessToken}`
+        }
+      }
+    )
 
-//     if (response.ok) {
-//       const data = await response.json()
+    if (response.ok) {
+      const data = await response.json()
 
-//       const quantity = parseInt(data.additional_info.items[0].quantity)
-//       const mailAttachments = []
+      const quantity = parseInt(data.additional_info.items[0].quantity)
+      const mailAttachments = []
 
-//       // Generar ID, QR y PDF, luego enviar el correo
-//       try {
+      // Generar ID, QR y PDF, luego enviar el correo
+      try {
 
-//         for (let i = 0; i < quantity; i++) {
+        for (let i = 0; i < quantity; i++) {
 
-//           // Generar un id
-//           const entryId = nanoid()
+          // Generar un id
+          const entryId = nanoid()
 
-//           // QR
-//           const qrBase64 = await generateQRCodeBase64(entryId);
+          // QR
+          const qrBase64 = await generateQRCodeBase64(entryId);
 
-//           // PDF
-//           const pdfBase64 = generatePDFWithQR(qrBase64);
+          // PDF
+          const pdfBase64 = generatePDFWithQR(qrBase64);
 
-//           // Posteo en base de mongodb
-//           const entry = new Entry({
-//             email: 'brunoosella08@gmail.com',
-//             entryId: entryId,
-//             status: 'pending'
-//           });
-//           await entry.save();
+          // Posteo en base de mongodb
+          const entry = new Entry({
+            email: 'brunoosella08@gmail.com',
+            entryId: entryId,
+            status: 'pending'
+          });
+          await entry.save();
 
-//           // Generación de cantidad de entradas
-//           mailAttachments.push({
-//             filename: `entrada_${paymentId}_${i + 1}.pdf`,
-//             content: pdfBase64,
-//             encoding: 'base64'
-//           });
-//         }
+          // Generación de cantidad de entradas
+          mailAttachments.push({
+            filename: `entrada_${paymentId}_${i + 1}.pdf`,
+            content: pdfBase64,
+            encoding: 'base64'
+          });
+        }
 
-//         // Configura el correo
-//         const mailOptions = {
-//           from: 'imperiotickets@gmail.com', 
-//           to: 'brunoosella08@gmail.com',
-//           subject: 'Entradas adjuntas',
-//           text: 'ESTÁN LISTAS TUS ENTADAS',
-//           attachments: mailAttachments
-//         };
+        // Configura el correo
+        const mailOptions = {
+          from: 'imperiotickets@gmail.com', 
+          to: 'brunoosella08@gmail.com',
+          subject: 'Entradas adjuntas',
+          text: 'ESTÁN LISTAS TUS ENTADAS',
+          attachments: mailAttachments
+        };
 
-//         // Enviar el correo
-//         await transporter.sendMail(mailOptions);
-//         console.log("Correo enviado exitosamente");
+        // Enviar el correo
+        await transporter.sendMail(mailOptions);
+        console.log("Correo enviado exitosamente");
 
-//         res.status(200).send("Webhook procesado y correo enviado");
+        res.status(200).send("Webhook procesado y correo enviado");
 
-//       } catch (error) {
-//         console.error('Error procesando el webhook:', error);
-//         res.status(500).send("Error procesando el webhook");
-//       }
-//     }
+      } catch (error) {
+        console.error('Error procesando el webhook:', error);
+        res.status(500).send("Error procesando el webhook");
+      }
+    }
     
-//   } catch (error) {
-//     console.log(error)
-//     res.sendStatus(500)
-//   }
+  } catch (error) {
+    console.log(error)
+    res.sendStatus(500)
+  }
 
-// });
+});
 
 const bootstrap = async () => {
 
