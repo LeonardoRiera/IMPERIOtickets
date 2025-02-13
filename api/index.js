@@ -12,7 +12,6 @@ import mongoose from "mongoose";
 // import Entry from './models/Entry.js'
 
 import webhookRouter from "./webhook.js";
-app.use("/webhook", webhookRouter);
 
 
 
@@ -205,3 +204,4 @@ const bootstrap = async () => {
 }
 
 bootstrap()
+app.use("/webhook", webhookRouter);
