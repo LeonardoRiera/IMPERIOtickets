@@ -10,7 +10,7 @@ const SuccessAnimation = () => {
       return Array.from({ length: 5 }, (_, i) => ({
         id: i,
         left: Math.random() * 100 + "%",
-        animationDuration: Math.random() * 3 + 2 + "s",
+        animationDuration: Math.random() * 1 + 0.5 + "s",
       }));
     };
     setStars(generateStars());
