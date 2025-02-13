@@ -1,46 +1,20 @@
-import express from "express";
 import { MercadoPagoConfig } from 'mercadopago';
-import { nanoid } from "nanoid";
 import Entry from './models/Entry.js';
 import nodemailer from 'nodemailer';
 import QRCode from 'qrcode';
 import { jsPDF } from 'jspdf';
 import { Buffer } from 'buffer';
-
-const router = express.Router();
+// import mongoose from "mongoose";
+import { nanoid } from "nanoid";
 
 const token = process.env.MERCADOPAGO_TOKEN;
 const client = new MercadoPagoConfig({ accessToken: token });
 
-// Configuración de Nodemailer
-const transporter = nodemailer.createTransport({
-  service: 'Gmail', 
-  auth: {
-    user: 'imperiotickets@gmail.com', 
-    pass: 'kpui dbjk dubd ljuj' 
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Método no permitido' });
   }
-});
 
-// Generar código QR
-const generateQRCodeBase64 = async (id) => {
-  try {
-    return await QRCode.toDataURL(id, { scale: 5 });
-  } catch (error) {
-    console.error('Error generando QR:', error);
-    throw error;
-  }
-};
-
-// Generar PDF con QR
-const generatePDFWithQR = (qrBase64) => {
-  const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: [100, 150] });
-
-  pdf.addImage(qrBase64, "PNG", 30, 100, 40, 40);
-  return Buffer.from(pdf.output('arraybuffer')).toString('base64');
-};
-
-// Ruta del Webhook
-router.post("/", express.json(), async (req, res) => {
   const paymentId = req.query.id;
 
   try {
@@ -49,37 +23,49 @@ router.post("/", express.json(), async (req, res) => {
       headers: { 'Authorization': `Bearer ${client.accessToken}` }
     });
 
-    if (!response.ok) throw new Error("Error obteniendo datos de pago");
+    if (!response.ok) {
+      return res.status(400).json({ error: 'Error al obtener el pago' });
+    }
+
     const data = await response.json();
     const quantity = parseInt(data.additional_info.items[0].quantity);
     const mailAttachments = [];
 
     for (let i = 0; i < quantity; i++) {
       const entryId = nanoid();
-      const qrBase64 = await generateQRCodeBase64(entryId);
-      const pdfBase64 = generatePDFWithQR(qrBase64);
+      const qrBase64 = await QRCode.toDataURL(entryId, { scale: 5 });
+
+      const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: [100, 150] });
+      pdf.addImage(qrBase64, "PNG", 30, 100, 40, 40);
+      const pdfBase64 = Buffer.from(pdf.output('arraybuffer')).toString('base64');
 
       const entry = new Entry({ email: 'brunoosella08@gmail.com', entryId, status: 'pending' });
       await entry.save();
 
-      mailAttachments.push({ filename: `entrada_${paymentId}_${i + 1}.pdf`, content: pdfBase64, encoding: 'base64' });
+      mailAttachments.push({
+        filename: `entrada_${paymentId}_${i + 1}.pdf`,
+        content: pdfBase64,
+        encoding: 'base64'
+      });
     }
+
+    const transporter = nodemailer.createTransport({
+      service: 'Gmail',
+      auth: { user: 'imperiotickets@gmail.com', pass:'kpui dbjk dubd ljuj'}
+    });
 
     await transporter.sendMail({
       from: 'imperiotickets@gmail.com',
       to: 'brunoosella08@gmail.com',
       subject: 'Entradas adjuntas',
-      text: 'ESTÁN LISTAS TUS ENTADAS',
+      text: 'ESTÁN LISTAS TUS ENTRADAS',
       attachments: mailAttachments
     });
 
-    console.log("Correo enviado exitosamente");
-    res.status(200).send("Webhook procesado y correo enviado");
+    return res.status(200).json({ message: 'Webhook procesado y correo enviado' });
 
   } catch (error) {
     console.error('Error procesando el webhook:', error);
-    res.status(500).send("Error procesando el webhook");
+    return res.status(500).json({ error: 'Error interno' });
   }
-});
-
-export default router;
+}
