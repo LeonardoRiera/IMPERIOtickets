@@ -1,10 +1,6 @@
 import AnimationSuccess from  '../AnimationSuccess/AnimationSuccess.jsx'
 import '../Success/Success.css'
 
-<<<<<<< HEAD
-
-
-
 const Success = () => {
   return (
     <div className='contenedorSuccess'>
