@@ -36,7 +36,98 @@
     font-family: "Bebas Neue", system-ui; 
 }
 
-.volverAInicio1:hover {
+.volverAInicio:hover {
     color: #5b382e;
     
+}
+
+
+
+
+
+/* ++++++++++++++++++++++++ media query | pantalla lg  | ++++++++++++++++++++++++++++++++++*/
+
+
+@media screen and (max-width:992px) {
+    
+    .logoError1 {
+        width: 20%;
+    }
+
+    .number1{
+        font-size: 3vmax;
+        
+    }
+    
+    .tituloError1{
+        font-size: 1.8vmax;
+        padding: 0 5vmax;
+    }
+
+    .volverAInicio1 {
+        font-size: 1.8vmax; 
+    }
+    
+}
+
+/* ++++++++++++++++++++++++ media query |  pantalla md   | ++++++++++++++++++++++++++++++++++*/
+
+@media screen and (max-width:835px) {
+    
+    .logoError1 {
+        width: 25%;
+    }
+
+    .number1{
+        font-size: 4vmax;
+        
+    }
+    
+    .tituloError1{
+        font-size: 2.8vmax;
+    }
+
+    .volverAInicio1 {
+        font-size: 2.8vmax; 
+    }
+    
+    
+}
+
+
+/* ++++++++++++++++++++++++ media query  | pantalla pixel 6 pro|   ++++++++++++++++++++++++++++++++++*/
+
+@media screen and (max-width:480px) {
+
+    .tituloError1{
+        font-size: 2.2vmax;
+    }
+   
+}
+
+/* ++++++++++++++++++++++++ media query  | pantalla fire hd 10 |   ++++++++++++++++++++++++++++++++++*/
+
+@media screen and (max-width:469px) {
+    .tituloError1{
+        font-size: 2.5vmax;
+    }
+}
+
+/* ++++++++++++++++++++++++ media query  | pantalla movil varios |   ++++++++++++++++++++++++++++++++++*/
+
+@media screen and (max-width:431px) {
+ 
+    .logoError1 {
+        width: 40%;
+    }
+}
+
+
+/* ++++++++++++++++++++++++ media query  | pantalla xxsm |   ++++++++++++++++++++++++++++++++++*/
+
+@media screen and (max-width:321px) {
+    .contenedorError1 {
+        margin: 10vmax auto;
+        
+    }
 }

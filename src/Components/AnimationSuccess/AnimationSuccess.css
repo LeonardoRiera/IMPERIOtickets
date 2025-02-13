@@ -1,0 +1,61 @@
+.animation-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+/*  Animación inicial */
+.circle-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgb(17, 18, 18);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s ease-out;
+}
+
+.character {
+  width: 160px;
+  height: 160px;
+  background: url('../../assets/logoblancoSinFondo1.png') no-repeat center;
+  background-size: contain;
+  position: absolute;
+  transform: rotate(-20deg);
+}
+
+/*  Animación de desaparición */
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Nueva animación con check */
+.success-circle {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+/* 🔹 Animación de aparición */
+.fade-in {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.checkmark {
+  width: 200px;
+  height: 200px;
+  background: url('../../assets/check.webp') no-repeat center;
+  background-size: contain;
+}
