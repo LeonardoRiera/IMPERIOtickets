@@ -1,5 +1,4 @@
 import { MercadoPagoConfig } from 'mercadopago';
-import Entry from './models/Entry.js';
 import nodemailer from 'nodemailer';
 import QRCode from 'qrcode';
 import { jsPDF } from 'jspdf';
@@ -17,54 +16,70 @@ export default async function handler(req, res) {
   const paymentId = req.query.id;
 
   try {
+    // Responder rápido a Vercel
+    res.status(200).json({ message: 'Webhook recibido, procesando en background' });
+
+    // Procesar en segundo plano
+    processPayment(paymentId);
+
+  } catch (error) {
+    console.error('Error procesando el webhook:', error);
+  }
+}
+
+async function processPayment(paymentId) {
+  try {
     const response = await fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
       method: 'GET',
-      headers: { 'Authorization': `Bearer ${client.accessToken}` }
+      headers: { Authorization: `Bearer ${client.accessToken}` },
     });
 
     if (!response.ok) {
-      return res.status(400).json({ error: 'Error al obtener el pago' });
+      console.error('Error al obtener el pago');
+      return;
     }
 
     const data = await response.json();
     const quantity = parseInt(data.additional_info.items[0].quantity);
-    
-    const attachmentPromises = Array.from({ length: quantity }, async (_, i) => {
-      const entryId = nanoid();
-      const qrBase64 = await QRCode.toDataURL(entryId, { scale: 5 });
-      
-      const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: [100, 150] });
-      pdf.addImage(qrBase64, 'PNG', 30, 100, 40, 40);
-      const pdfBase64 = Buffer.from(pdf.output('arraybuffer')).toString('base64');
+    const mailAttachments = [];
 
-      const entry = new Entry({ email: 'brunoosella08@gmail.com', entryId, status: 'pending' });
-      await entry.save();
+    // Generar QR y PDF en paralelo
+    const attachments = await Promise.all(
+      Array.from({ length: quantity }, async (_, i) => {
+        const entryId = nanoid();
+        const qrBase64 = await QRCode.toDataURL(entryId, { scale: 5 });
 
-      return {
-        filename: `entrada_${paymentId}_${i + 1}.pdf`,
-        content: pdfBase64,
-        encoding: 'base64'
-      };
-    });
+        const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: [100, 150] });
+        pdf.addImage(qrBase64, 'PNG', 30, 100, 40, 40);
+        const pdfBase64 = Buffer.from(pdf.output('arraybuffer')).toString('base64');
 
-    const mailAttachments = await Promise.all(attachmentPromises);
+        return {
+          filename: `entrada_${paymentId}_${i + 1}.pdf`,
+          content: pdfBase64,
+          encoding: 'base64',
+        };
+      })
+    );
 
+    mailAttachments.push(...attachments);
+
+    // Enviar correo
     const transporter = nodemailer.createTransport({
       service: 'Gmail',
-      auth: { user: 'imperiotickets@gmail.com', pass: 'kpui dbjk dubd ljuj' }
+      auth: { user: 'imperiotickets@gmail.com', pass: 'kpui dbjk dubd ljuj' },
     });
 
-    transporter.sendMail({
+    await transporter.sendMail({
       from: 'imperiotickets@gmail.com',
       to: 'brunoosella08@gmail.com',
       subject: 'Entradas adjuntas',
       text: 'ESTÁN LISTAS TUS ENTRADAS',
-      attachments: mailAttachments
-    }).catch(err => console.error('Error enviando email:', err));
+      attachments: mailAttachments,
+    });
 
-    return res.status(200).json({ message: 'Webhook procesado y correo en proceso de envío' });
+    console.log('Correo enviado con éxito');
+
   } catch (error) {
-    console.error('Error procesando el webhook:', error);
-    return res.status(500).json({ error: 'Error interno' });
+    console.error('Error en processPayment:', error);
   }
 }
