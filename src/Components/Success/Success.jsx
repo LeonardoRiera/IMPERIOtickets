@@ -1,6 +1,7 @@
 import AnimationSuccess from  '../AnimationSuccess/AnimationSuccess.jsx'
 import '../Success/Success.css'
 
+<<<<<<< HEAD
 
 
 
@@ -18,9 +19,9 @@ const Success = () => {
       <p className='textoSuccess'>Si no ves el correo en tu bandeja de entrada, revisa la carpeta de spam o correo no deseado.</p>
       <p className='textoSuccess'>Si tienes dudas, contácta nuestro soporte técnico escribiendo a imperiotickets@gmail.com</p>
 
+
     </div>
   )
 }
 
-
-export default Success;
+export default Success
