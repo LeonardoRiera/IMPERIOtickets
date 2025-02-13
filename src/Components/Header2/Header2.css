@@ -18,9 +18,9 @@
     width: 33vmax;
     height: 100%;
     margin: 4vmax 2vmax 4vmax 0;
-    object-fit: contain; /* Prueba con contain en vez de cover */
+    object-fit: contain; 
     opacity: 0;
-    position: absolute; /* Asegura que todas las imágenes se superpongan */
+    position: absolute; 
     transition: opacity 1.2s ease-in-out;
 }
 
