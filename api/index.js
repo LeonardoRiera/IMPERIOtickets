@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import fs from "fs"
 import dotenv from "dotenv";
 import { MercadoPagoConfig, Preference } from 'mercadopago';
 import nodemailer from 'nodemailer';
@@ -9,6 +10,7 @@ import { Buffer } from 'buffer';
 import mongoose from "mongoose";
 import { nanoid } from "nanoid";
 import Entry from './models/Entry.js'
+
 
 dotenv.config();
 const token = process.env.MERCADOPAGO_TOKEN
@@ -20,8 +22,6 @@ app.use(cors());
 
 app.use(express.json({ limit: '50mb' }));
 
-let lastPayment = null;
-
 // Configuración de Nodemailer con contraseña de aplicación
 const transporter = nodemailer.createTransport({
   service: 'Gmail', 
@@ -30,6 +30,11 @@ const transporter = nodemailer.createTransport({
     pass: 'kpui dbjk dubd ljuj' 
   }
 });
+
+const toBase64 = (filePath) => {
+  const image = fs.readFileSync(filePath);
+  return `data:image/png;base64,${image.toString("base64")}`;
+};
 
 // Función para generar el QR en base64
 const generateQRCodeBase64 = async (id) => {
@@ -44,9 +49,28 @@ const generateQRCodeBase64 = async (id) => {
 
 // Función para generar el PDF con el QR
 const generatePDFWithQR = (qrBase64) => {
-  const pdf = new jsPDF();
-  pdf.text("Tu entrada para el evento!", 10, 20);
-  pdf.addImage(qrBase64, 'PNG', 10, 15, 15, 15);
+  const pdf = new jsPDF({
+    orientation:'portait',
+    unit: 'mm',
+    format:[100, 150]
+  });
+
+  const logoUrl = toBase64('../IMPERIOtickets/src/assets/imagologoTickets.png')
+  // const logoUrl = toBase64('https://imperiotickets.com/assets/imagologoTickets-D6SFtBSe.png')
+  pdf.addImage(logoUrl, "PNG", 35, 10, 30, 30);
+
+  // Título del ticket
+  pdf.setFont("helvetica", "bold");
+  pdf.setFontSize(16);
+  pdf.text("¡Tu entrada para el evento!", 50, 50, { align: "center" });
+
+  // Información del evento
+  pdf.setFontSize(12);
+  pdf.text("Fecha: 15 de Febrero 2025", 10, 70);
+  pdf.text("Hora: 20:00", 10, 80);
+  pdf.text("Ubicación: Teatro Central", 10, 90);
+
+  pdf.addImage(qrBase64, "PNG", 30, 100, 40, 40);
   
   const pdfBuffer = Buffer.from(pdf.output('arraybuffer'));
   return pdfBuffer.toString('base64');
@@ -109,23 +133,29 @@ app.post("/webhook", express.json(), async (req, res) => {
       const quantity = parseInt(data.additional_info.items[0].quantity)
       const mailAttachments = []
 
-      // Generar QR y PDF, luego enviar el correo
+      // Generar ID, QR y PDF, luego enviar el correo
       try {
 
         for (let i = 0; i < quantity; i++) {
 
+          // Generar un id
           const entryId = nanoid()
-          console.log(entryId)
-          const qrBase64 = await generateQRCodeBase64(entryId); // Generar QR
-          const pdfBase64 = generatePDFWithQR(qrBase64); // Generar PDF
 
+          // QR
+          const qrBase64 = await generateQRCodeBase64(entryId);
+
+          // PDF
+          const pdfBase64 = generatePDFWithQR(qrBase64);
+
+          // Posteo en base de mongodb
           const entry = new Entry({
             email: 'brunoosella08@gmail.com',
             entryId: entryId,
-            status: 'pending'  // Se guarda con estado pendiente por defecto
+            status: 'pending'
           });
           await entry.save();
 
+          // Generación de cantidad de entradas
           mailAttachments.push({
             filename: `entrada_${paymentId}_${i + 1}.pdf`,
             content: pdfBase64,
@@ -138,7 +168,7 @@ app.post("/webhook", express.json(), async (req, res) => {
           from: 'imperiotickets@gmail.com', 
           to: 'brunoosella08@gmail.com',
           subject: 'Entradas adjuntas',
-          text: `Tu ID de entrada es: ${paymentId}`,
+          text: 'ESTÁN LISTAS TUS ENTADAS',
           attachments: mailAttachments
         };
 
@@ -159,14 +189,6 @@ app.post("/webhook", express.json(), async (req, res) => {
     res.sendStatus(500)
   }
 
-});
-
-app.get("/last_payment", (req, res) => {
-  if (lastPayment) {
-    res.json(lastPayment);
-  } else {
-    res.status(404).json({ error: "No hay pagos registrados aún." });
-  }
 });
 
 const bootstrap = async () => {

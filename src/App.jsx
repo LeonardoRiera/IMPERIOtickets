@@ -13,7 +13,7 @@ import Error from './Components/Error/Error';
 import Pending from './Components/Pending/Pending';
 import Failure from './Components/Failure/Failure';
 import VentaFinal from './Components/VentaFinal/VentaFinal';
-
+import Scanner from './Components/Scanner/Scanner'
 
 function App() {
   
@@ -39,7 +39,8 @@ function App() {
             <Route path="/Pending" element={<Pending />} />
             <Route path="/Failure" element={<Failure />} />
             <Route path="/VentaFinal" element={<VentaFinal />} />
-
+            <Route path="/Scanner" element={<Scanner />} />
+            
           </Routes>
              
           <Footer />
