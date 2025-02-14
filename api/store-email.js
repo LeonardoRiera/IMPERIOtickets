@@ -1,7 +1,4 @@
-import fs from "fs";
-import path from "path";
 import { put } from "@vercel/blob";
-
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -16,14 +13,13 @@ export default async function handler(req, res) {
   console.log(email)
   try {
     const jsonData = JSON.stringify({ email });
-
-    // Guarda el email en Vercel Blob
-    const blob = await put("emails.json", jsonData, {
-      access: "public", // Puede ser "private" si no querés que sea visible
-      contentType: "application/json",
+    
+    // Guardamos en Vercel Blob
+    const { url } = await put("emails.json", jsonData, {
+      access: "public", // Si querés que sea privado, poné "private"
     });
 
-    res.json({ success: true, message: "Email almacenado correctamente", url: blob.url });
+    res.json({ success: true, message: "Email almacenado correctamente", url });
   } catch (error) {
     res.status(500).json({ error: "Error al guardar el email" });
   }

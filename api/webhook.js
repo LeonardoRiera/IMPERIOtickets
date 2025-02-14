@@ -7,8 +7,7 @@ import { jsPDF } from 'jspdf';
 import QRCode from 'qrcode';
 import fs from "fs"
 import path from "path";
-import { get } from "@vercel/blob";
-
+import { getDownloadUrl } from "@vercel/blob";
 
 const app = express();
 app.use(express.json());
@@ -81,7 +80,7 @@ export default async function handler(req, res) {
     let email = "";
 
     try {
-      const blob = await get("emails.json");
+      const blob = getDownloadUrl("emails.json");
       const data = await blob.text();
       email = JSON.parse(data).email;
       console.log('te lei el mail con exito rey', email)
