@@ -9,9 +9,9 @@ import { jsPDF } from 'jspdf';
 import { Buffer } from 'buffer';
 import mongoose from "mongoose";
 import { nanoid } from "nanoid";
-import Entry from './models/Entry.js'
+import { getEmail, clearEmail, saveEmail } from "./store-email.js";
+// import Entry from './models/Entry.js'
 // import webhookRouter from "./webhook.js";
-
 
 
 dotenv.config();
@@ -57,22 +57,25 @@ const generatePDFWithQR = (qrBase64) => {
     format:[100, 150]
   });
 
-  const logoUrl = toBase64('../IMPERIOtickets/src/assets/imagologoTickets.png')
+  const logoUrl = toBase64("dist/assets/imagotipoLetraNegra.png")
   // const logoUrl = toBase64('https://imperiotickets.com/assets/imagologoTickets-D6SFtBSe.png')
-  pdf.addImage(logoUrl, "PNG", 35, 10, 30, 30);
+  pdf.addImage(logoUrl, "PNG", 10, 10, 80, 30);
 
   // Título del ticket
   pdf.setFont("helvetica", "bold");
   pdf.setFontSize(16);
   pdf.text("¡Tu entrada para el evento!", 50, 50, { align: "center" });
 
-  // Información del evento
-  pdf.setFontSize(12);
-  pdf.text("Fecha: 15 de Febrero 2025", 10, 70);
-  pdf.text("Hora: 20:00", 10, 80);
-  pdf.text("Ubicación: Teatro Central", 10, 90);
+    // Información del evento
+    const now = new Date();
+    const horaActual = now.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" });
 
-  pdf.addImage(qrBase64, "PNG", 30, 100, 40, 40);
+    pdf.setFontSize(12);
+    pdf.text("Fecha: 15 de Febrero 2025", 10, 70);
+    pdf.text(`Hora: ${horaActual}`, 10, 80);
+    pdf.text("Ubicación: Teatro Central", 10, 90);
+    pdf.text(`Tu Id de entrada es: sdasdasdsda`)
+    pdf.addImage(qrBase64, "PNG", 30, 100, 40, 40);
   
   const pdfBuffer = Buffer.from(pdf.output('arraybuffer'));
   return pdfBuffer.toString('base64');
@@ -114,9 +117,22 @@ app.post("/create_preference", async (req, res) => {
   }
 });
 
+app.post("/store-email", (req, res) => {
+  const { email } = req.body;
+
+  if (!email) {
+    return res.status(400).json({ error: "Email es requerido" });
+  }
+
+  saveEmail(email);
+  console.log("Email guardado:", email);
+  res.json({ success: true, message: "Email almacenado correctamente" });
+});
+
 app.post("/webhook", express.json(), async (req, res) => {
 
   const paymentId = req.query.id
+  const recipientEmail = getEmail()
 
   try {
     
@@ -168,7 +184,7 @@ app.post("/webhook", express.json(), async (req, res) => {
         // Configura el correo
         const mailOptions = {
           from: 'imperiotickets@gmail.com', 
-          to: 'brunoosella08@gmail.com',
+          to: recipientEmail,
           subject: 'Entradas adjuntas',
           text: 'ESTÁN LISTAS TUS ENTADAS',
           attachments: mailAttachments
@@ -179,8 +195,9 @@ app.post("/webhook", express.json(), async (req, res) => {
         console.log("Correo enviado exitosamente");
 
         res.status(200).send("Webhook procesado y correo enviado");
-
+        clearEmail()
       } catch (error) {
+        clearEmail()
         console.error('Error procesando el webhook:', error);
         res.status(500).send("Error procesando el webhook");
       }
@@ -189,9 +206,11 @@ app.post("/webhook", express.json(), async (req, res) => {
   } catch (error) {
     console.log(error)
     res.sendStatus(500)
+    clearEmail()
   }
 
 });
+
 
 const bootstrap = async () => {
 

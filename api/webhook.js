@@ -5,11 +5,17 @@ import nodemailer from 'nodemailer';
 import { Buffer } from 'buffer';
 import { jsPDF } from 'jspdf';
 import QRCode from 'qrcode';
+import fs from "fs"
+import { getEmail, clearEmail } from "./store-email.js";
 
 const app = express();
 app.use(express.json());
 
 export default async function handler(req, res) {
+
+  // Obtener email
+  const email = getEmail()
+
   // Configuración de Nodemailer
   const transporter = nodemailer.createTransport({
     service: 'Gmail', 
@@ -18,6 +24,11 @@ export default async function handler(req, res) {
       pass: 'kpui dbjk dubd ljuj' 
     }
   });
+
+  const toBase64 = (filePath) => {
+    const image = fs.readFileSync(filePath);
+    return `data:image/png;base64,${image.toString("base64")}`;
+  };
 
   // Función para generar el QR en base64
   const generateQRCodeBase64 = async (id) => {
@@ -38,16 +49,25 @@ export default async function handler(req, res) {
       format: [100, 150]
     });
 
+    // Logo
+    const logoUrl = toBase64("dist/assets/imagotipoLetraNegra.png")
+    // const logoUrl = toBase64('https://imperiotickets.com/assets/imagologoTickets-D6SFtBSe.png')
+    pdf.addImage(logoUrl, "PNG", 10, 10, 80, 30);
+
     // Título del ticket
     pdf.setFont("helvetica", "bold");
     pdf.setFontSize(16);
     pdf.text("¡Tu entrada para el evento!", 50, 50, { align: "center" });
 
     // Información del evento
+    const now = new Date();
+    const horaActual = now.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" });
+
     pdf.setFontSize(12);
     pdf.text("Fecha: 15 de Febrero 2025", 10, 70);
-    pdf.text("Hora: 20:00", 10, 80);
+    pdf.text(`Hora: ${horaActual}`, 10, 80);
     pdf.text("Ubicación: Teatro Central", 10, 90);
+    pdf.text(`Tu Id de entrada es: ${req.query.id}`)
 
     pdf.addImage(qrBase64, "PNG", 30, 100, 40, 40);
     
@@ -86,7 +106,7 @@ export default async function handler(req, res) {
 
           const mailOptions = {
             from: "imperiotickets@gmail.com",
-            to: "brunoosella08@gmail.com",
+            to: email,
             subject: "Entradas adjuntas",
             text: "ESTÁN LISTAS TUS ENTRADAS",
             attachments: mailAttachments,
@@ -94,20 +114,24 @@ export default async function handler(req, res) {
 
           await transporter.sendMail(mailOptions);
           console.log("Correo enviado exitosamente");
-
+          clearEmail()
           res.status(200).send("Webhook procesado y correo enviado");
         } catch (error) {
           console.error("Error procesando el webhook:", error);
+          clearEmail()
           res.status(500).send("Error procesando el webhook");
         }
       } else {
+        clearEmail()
         res.status(500).send("Error al obtener información del pago");
       }
     } catch (error) {
       console.error(error);
+      clearEmail()
       res.sendStatus(500);
     }
   } else {
+    clearEmail()
     res.status(405).json({ error: "Método no permitido" });
   }
 }
