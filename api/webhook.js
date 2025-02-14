@@ -22,10 +22,14 @@ export default async function handler(req, res) {
       headers: { Authorization: `Bearer ${process.env.MERCADOPAGO_TOKEN}` },
     });
 
-    if(response.ok && response.external_reference) {
+    if (!response.ok) {
+      return res.status(500).send("Error al obtener información del pago");
+    }
+
+    if(response.ok) {
 
       const data = await response.json();
-      console.log('la data externa es',  data.external_reference)
+      console.log(data.external_reference)
       const emailUser = data.external_reference
       const quantity = parseInt(data.additional_info.items[0].quantity);
       const mailAttachments = [];
