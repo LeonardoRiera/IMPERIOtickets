@@ -4,7 +4,7 @@ import { useLocation, Navigate } from 'react-router-dom';
 import '../CardDetail/CardDetail.css';
 import { Link } from 'react-router-dom';
 import emailService from '../../services/email.service';
-
+import { v4 as uuidv4 } from "uuid";
 
 const CardDetail = () => {
 
@@ -61,9 +61,11 @@ const CardDetail = () => {
   };
 
   const submit = async () => {
+    const idEmail = uuidv4();
 
     const body = {
-      email: email
+      email: email,
+      id: idEmail
     }
 
     const response = await emailService(body)

@@ -6,14 +6,14 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Método no permitido" });
   }
 
-  const { email } = req.body;
+  const { id, email } = req.body;
 
-  if (!email) {
-    return res.status(400).json({ error: "Falta el email" });
+  if (!id || !email) {
+    return res.status(400).json({ error: "Faltan datos" });
   }
 
   try {
-    await setDoc(doc(db, "config", "store-email"), { email });
+    await setDoc(doc(db, "emails", id), { email });
 
     res.json({ success: true });
   } catch (error) {
