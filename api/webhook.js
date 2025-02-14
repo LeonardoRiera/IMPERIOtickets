@@ -7,6 +7,8 @@ import { jsPDF } from 'jspdf';
 import QRCode from 'qrcode';
 import fs from "fs"
 import path from "path";
+import { get } from "@vercel/blob";
+
 
 const app = express();
 app.use(express.json());
@@ -76,17 +78,15 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     const paymentId = req.query.id;
 
-    const filePath = path.join(process.cwd(), "emails.json");
     let email = "";
-    console.log('filePath', filePath)
-  
-    if (fs.existsSync(filePath)) {
-      const data = fs.readFileSync(filePath, "utf8");
-      console.log('data', data)
+
+    try {
+      const blob = await get("emails.json");
+      const data = await blob.text();
       email = JSON.parse(data).email;
-    }
-  
-    if (!email) {
+      console.log('te lei el mail con exito rey', email)
+    } catch (error) {
+      console.error("Error leyendo el email:", error);
       return res.status(400).json({ error: "No se encontró un email" });
     }
 
