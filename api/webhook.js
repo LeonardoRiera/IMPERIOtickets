@@ -50,7 +50,7 @@ export default async function handler(req, res) {
     // const horaActual = now.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" });
 
     pdf.setFontSize(12);
-    pdf.text("Fecha: 15 de Febrero 2025", 10, 70);
+    pdf.text("Fecha: 1 de Marzo de 2025", 10, 70);
     pdf.text("Hora: 21hs.", 10, 80);
     pdf.text("Ubicación: Galpón Blanco - El Andino", 10, 90);
     pdf.text("Tu Id de entrada es: ", 10, 100);
