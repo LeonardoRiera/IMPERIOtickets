@@ -1,6 +1,4 @@
-// webhook.js
 import express from "express";
-import cookie from "cookie";
 import { nanoid } from "nanoid";
 import fetch from "node-fetch";
 import nodemailer from 'nodemailer';
@@ -8,6 +6,8 @@ import { Buffer } from 'buffer';
 import { jsPDF } from 'jspdf';
 import QRCode from 'qrcode';
 import fs from "fs";
+import { db } from "../src/services/firebaseConfing";
+import { doc, getDoc } from "firebase/firestore";
 
 const app = express();
 app.use(express.json());
@@ -56,14 +56,18 @@ export default async function handler(req, res) {
     let email = "";
 
     try {
-      const cookies = cookie.parse(req.headers.cookie || '');
-      email = cookies.storedEmail;
-      if (!email) {
+      // LEO EL EMAIL DESDE FIRESTORE EN LUGAR DE LA COOKIE
+      const docRef = doc(db, "config", "store-email");
+      const docSnap = await getDoc(docRef);
+
+      if (!docSnap.exists()) {
         throw new Error("No se encontró un email almacenado");
       }
+
+      email = docSnap.data().email;
       console.log('Email leído con éxito:', email);
     } catch (error) {
-      console.error("Error leyendo el email:", error);
+      console.error("Error obteniendo el email:", error);
       return res.status(400).json({ error: "No se encontró un email" });
     }
 
