@@ -32,13 +32,13 @@ export default async function handler(req, res) {
       format:[100, 150]
     });
 
-    const fetchImageAsBase64 = async (url) => {
-      const response = await fetch(url);
-      if (!response.ok) throw new Error(`Error al obtener la imagen: ${response.statusText}`);
-      
-      const buffer = await response.arrayBuffer();
-      return Buffer.from(buffer).toString('base64');
-    };
+  const fetchImageAsBase64 = async (url) => {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`Error al obtener la imagen: ${response.statusText}`);
+
+    const buffer = await response.arrayBuffer();
+    return `data:image/png;base64,${Buffer.from(buffer).toString("base64")}`; // Prefijo importante
+  };
 
     const logoUrl = fetchImageAsBase64("https://imperiotickets.com/assets/imagotipoLetraNegra.png")
     // const logoUrl = toBase64('https://imperiotickets.com/assets/imagologoTickets-D6SFtBSe.png')
