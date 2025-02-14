@@ -13,27 +13,6 @@ app.use(express.json());
 
 export default async function handler(req, res) {
 
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Método no permitido" });
-  }
-
-  const filePath = path.resolve("/tmp/emails.json");
-  let email = "";
-
-  try {
-    if (fs.existsSync(filePath)) {
-      const data = fs.readFileSync(filePath, "utf8");
-      email = JSON.parse(data).email;
-    }
-  } catch (error) {
-    console.error("Error al leer el email:", error);
-  }
-
-  if (!email) {
-    return res.status(400).json({ error: "No se encontró un email" });
-  }
-
-
   // Configuración de Nodemailer
   const transporter = nodemailer.createTransport({
     service: 'Gmail', 
@@ -93,8 +72,25 @@ export default async function handler(req, res) {
     return pdfBuffer.toString('base64');
   };
 
+
   if (req.method === "POST") {
     const paymentId = req.query.id;
+
+    const filePath = path.resolve("/tmp/emails.json");
+    let email = "";
+  
+    try {
+      if (fs.existsSync(filePath)) {
+        const data = fs.readFileSync(filePath, "utf8");
+        email = JSON.parse(data).email;
+      }
+    } catch (error) {
+      console.error("Error al leer el email:", error);
+    }
+  
+    if (!email) {
+      return res.status(400).json({ error: "No se encontró un email" });
+    }
 
     try {
       const response = await fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
@@ -132,24 +128,19 @@ export default async function handler(req, res) {
 
           await transporter.sendMail(mailOptions);
           console.log("Correo enviado exitosamente");
-          clearEmail()
           res.status(200).send("Webhook procesado y correo enviado");
         } catch (error) {
           console.error("Error procesando el webhook:", error);
-          clearEmail()
           res.status(500).send("Error procesando el webhook");
         }
       } else {
-        clearEmail()
         res.status(500).send("Error al obtener información del pago");
       }
     } catch (error) {
       console.error(error);
-      clearEmail()
       res.sendStatus(500);
     }
   } else {
-    clearEmail()
     res.status(405).json({ error: "Método no permitido" });
   }
 }
