@@ -37,7 +37,7 @@ export default async function handler(req, res) {
 
   const generatePDFWithQR = (qrBase64) => {
     const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: [100, 150] });
-    const logoUrl = toBase64("dist/assets/imagotipoLetraNegra.png");
+    const logoUrl = toBase64("public/assets/imagotipoLetraNegra.png");
     pdf.addImage(logoUrl, "PNG", 10, 10, 80, 30);
     pdf.setFont("helvetica", "bold");
     pdf.setFontSize(16);
