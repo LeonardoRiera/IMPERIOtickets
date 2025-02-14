@@ -1,4 +1,5 @@
-import { put } from "@vercel/blob";
+// store-email.js
+import { setEmail } from './storage';
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -10,22 +11,15 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: "Email es requerido" });
   }
 
-  console.log(email)
+  console.log('Email recibido:', email);
+
   try {
-    const jsonData = JSON.stringify({ email });
+    setEmail(email); // Guardamos el email en memoria
+    console.log('Email almacenado en memoria:', email);
 
-    console.log('email es ',email)
-    console.log('jsonData', jsonData)
-    
-    // Guardamos en Vercel Blob
-    const { url } = await put("emails.json", jsonData, {
-      access: "public", // Si querés que sea privado, poné "private"
-    });
-
-    console.log('url de vercel blob', url)
-
-    res.json({ success: true, message: "Email almacenado correctamente", url });
+    res.json({ success: true, message: "Email almacenado correctamente" });
   } catch (error) {
-    res.status(500).json({ error: "Error al guardar el email" });
+    console.error('Error en store-email:', error);
+    res.status(500).json({ error: "Error al guardar el email", details: error.message });
   }
 }

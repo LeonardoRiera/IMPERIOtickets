@@ -1,3 +1,4 @@
+// webhook.js
 import express from "express";
 import { nanoid } from "nanoid";
 import fetch from "node-fetch";
@@ -5,20 +6,19 @@ import nodemailer from 'nodemailer';
 import { Buffer } from 'buffer';
 import { jsPDF } from 'jspdf';
 import QRCode from 'qrcode';
-import fs from "fs"
-import { get } from "@vercel/blob"; // Cambiamos getDownloadUrl por get
+import fs from "fs";
+import { getEmail } from './storage'; // Importamos la función para obtener el email
 
 const app = express();
 app.use(express.json());
 
 export default async function handler(req, res) {
-
   // Configuración de Nodemailer
   const transporter = nodemailer.createTransport({
-    service: 'Gmail', 
+    service: 'Gmail',
     auth: {
-      user: 'imperiotickets@gmail.com', 
-      pass: 'kpui dbjk dubd ljuj' 
+      user: 'imperiotickets@gmail.com',
+      pass: 'kpui dbjk dubd ljuj'
     }
   });
 
@@ -47,8 +47,7 @@ export default async function handler(req, res) {
     });
 
     // Logo
-    const logoUrl = toBase64("dist/assets/imagotipoLetraNegra.png")
-    // const logoUrl = toBase64('https://imperiotickets.com/assets/imagologoTickets-D6SFtBSe.png')
+    const logoUrl = toBase64("dist/assets/imagotipoLetraNegra.png");
     pdf.addImage(logoUrl, "PNG", 10, 10, 80, 30);
 
     // Título del ticket
@@ -64,14 +63,13 @@ export default async function handler(req, res) {
     pdf.text("Fecha: 15 de Febrero 2025", 10, 70);
     pdf.text(`Hora: ${horaActual}`, 10, 80);
     pdf.text("Ubicación: Teatro Central", 10, 90);
-    pdf.text(`Tu Id de entrada es: ${req.query.id}`)
+    pdf.text(`Tu Id de entrada es: ${req.query.id}`);
 
     pdf.addImage(qrBase64, "PNG", 30, 100, 40, 40);
-    
+
     const pdfBuffer = Buffer.from(pdf.output('arraybuffer'));
     return pdfBuffer.toString('base64');
   };
-
 
   if (req.method === "POST") {
     const paymentId = req.query.id;
@@ -79,17 +77,19 @@ export default async function handler(req, res) {
     let email = "";
 
     try {
-      const { url } = await get("emails.json");
-      const response = await fetch(url);
-      const data = await response.text();
-      email = JSON.parse(data).email;
-      console.log('te lei el mail con exito rey', email)
+      // Obtenemos el email almacenado en memoria
+      email = getEmail();
+      if (!email) {
+        throw new Error("No se encontró un email almacenado");
+      }
+
+      console.log('Email leído con éxito:', email);
     } catch (error) {
       console.error("Error leyendo el email:", error);
       return res.status(400).json({ error: "No se encontró un email" });
     }
 
-    console.log('el email es',email)
+    console.log('El email es:', email);
 
     try {
       const response = await fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
