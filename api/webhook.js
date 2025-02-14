@@ -5,14 +5,14 @@ import QRCode from "qrcode";
 import { jsPDF } from "jspdf";
 import { Buffer } from "buffer";
 import fs from 'fs'
+import path from 'path';
+
 
 export default async function handler(req, res) {
 
   const toBase64 = (filePath) => {
-    const image = fs.readFileSync(filePath);
-    return `data:image/png;base64,${image.toString("base64")}`;
+    return fs.readFileSync(filePath, { encoding: 'base64' });
   };
-
   // Función para generar el QR en base64
   const generateQRCodeBase64 = async (id) => {
     try {
@@ -32,17 +32,11 @@ export default async function handler(req, res) {
       format:[100, 150]
     });
 
-  const fetchImageAsBase64 = async (url) => {
-    const response = await fetch(url);
-    if (!response.ok) throw new Error(`Error al obtener la imagen: ${response.statusText}`);
+    const imagePath = path.resolve(__dirname, '../public/assets/imagotipoLetraNegra.png');
 
-    const buffer = await response.arrayBuffer();
-    return `data:image/png;base64,${Buffer.from(buffer).toString("base64")}`; // Prefijo importante
-  };
-
-    const logoUrl = fetchImageAsBase64("https://imperiotickets.com/assets/imagotipoLetraNegra.png")
+    // const logoUrl = toBase64("public/assets/imagotipoLetraNegra.png")
     // const logoUrl = toBase64('https://imperiotickets.com/assets/imagologoTickets-D6SFtBSe.png')
-    pdf.addImage(logoUrl, "PNG", 10, 10, 80, 30);
+    pdf.addImage(imagePath, "PNG", 10, 10, 80, 30);
 
     // Título del ticket
     pdf.setFont("helvetica", "bold");
