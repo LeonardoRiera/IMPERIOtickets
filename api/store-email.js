@@ -1,5 +1,4 @@
-// store-email.js
-import { setEmail } from './storage';
+import cookie from 'cookie';
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -14,9 +13,15 @@ export default async function handler(req, res) {
   console.log('Email recibido:', email);
 
   try {
-    setEmail(email); // Guardamos el email en memoria
-    console.log('Email almacenado en memoria:', email);
+    res.setHeader('Set-Cookie', cookie.serialize('storedEmail', email, {
+      httpOnly: true,
+      secure: req.headers.host && req.headers.host.includes("https://imperiotickets.com"),
+      sameSite: 'Lax',
+      path: '/',
+      maxAge: 86400 // 1 día
+    }));
 
+    console.log('Email almacenado en cookie:', email);
     res.json({ success: true, message: "Email almacenado correctamente" });
   } catch (error) {
     console.error('Error en store-email:', error);
