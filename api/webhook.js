@@ -79,13 +79,10 @@ export default async function handler(req, res) {
     const filePath = path.resolve("/tmp/emails.json");
     let email = "";
   
-    try {
-      if (fs.existsSync(filePath)) {
-        const data = fs.readFileSync(filePath, "utf8");
-        email = JSON.parse(data).email;
-      }
-    } catch (error) {
-      console.error("Error al leer el email:", error);
+
+    if (fs.existsSync(filePath)) {
+      const data = fs.readFileSync(filePath, "utf8");
+      email = JSON.parse(data).email;
     }
   
     if (!email) {
