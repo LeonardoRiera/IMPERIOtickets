@@ -37,8 +37,8 @@ export default async function handler(req, res) {
 
   const generatePDFWithQR = (qrBase64) => {
     const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: [100, 150] });
-    const logoUrl = toBase64("public/assets/imagotipoLetraNegra.png");
-    pdf.addImage(logoUrl, "PNG", 10, 10, 80, 30);
+    // const logoUrl = toBase64("public/assets/imagotipoLetraNegra.png");
+    // pdf.addImage(logoUrl, "PNG", 10, 10, 80, 30);
     pdf.setFont("helvetica", "bold");
     pdf.setFontSize(16);
     pdf.text("¡Tu entrada para el evento!", 50, 50, { align: "center" });
@@ -105,7 +105,7 @@ export default async function handler(req, res) {
       }
     } catch (error) {
       console.error(error);
-      res.sendStatus(500);
+      res.status(500);
     }
   } else {
     res.status(405).json({ error: "Método no permitido" });
