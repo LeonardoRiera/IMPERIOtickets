@@ -5,6 +5,7 @@ import nodemailer from 'nodemailer';
 import { Buffer } from 'buffer';
 import { jsPDF } from 'jspdf';
 import QRCode from 'qrcode';
+import fs from "fs";
 import { db } from "../src/services/firebaseConfing.js";
 import { doc, getDoc } from "firebase/firestore";
 
@@ -20,6 +21,11 @@ export default async function handler(req, res) {
     }
   });
 
+  const toBase64 = (filePath) => {
+    const image = fs.readFileSync(filePath);
+    return `data:image/png;base64,${image.toString("base64")}`;
+  };
+
   const generateQRCodeBase64 = async (id) => {
     try {
       return await QRCode.toDataURL(id, { scale: 5 });
@@ -31,37 +37,37 @@ export default async function handler(req, res) {
 
   const generatePDFWithQR = (qrBase64) => {
     const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: [100, 150] });
+    // const logoUrl = toBase64("public/assets/imagotipoLetraNegra.png");
+    // pdf.addImage(logoUrl, "PNG", 10, 10, 80, 30);
     pdf.setFont("helvetica", "bold");
     pdf.setFontSize(16);
     pdf.text("¡Tu entrada para el evento!", 50, 50, { align: "center" });
+    const now = new Date();
     pdf.setFontSize(12);
     pdf.text("Fecha: 15 de Febrero 2025", 10, 70);
+    pdf.text(`Hora: ${now.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" })}`, 10, 80);
+    pdf.text("Ubicación: Teatro Central", 10, 90);
     pdf.addImage(qrBase64, "PNG", 30, 100, 40, 40);
     return Buffer.from(pdf.output('arraybuffer')).toString('base64');
   };
 
   if (req.method === "POST") {
-    const { id, paymentId } = req.body;
-
-    if (!id || !paymentId) {
-      return res.status(400).json({ error: "Faltan datos" });
-    }
-
+    const paymentId = req.query.id;
     let email = "";
+
     try {
-      // Obtener email desde Firestore con idEmail
-      const docRef = doc(db, "emails", id);
+      const docRef = doc(db, "config", "store-email");
       const docSnap = await getDoc(docRef);
 
       if (!docSnap.exists()) {
-        throw new Error("No se encontró el email en Firestore");
+        throw new Error("No se encontró un email almacenado");
       }
 
       email = docSnap.data().email;
       console.log('Email leído con éxito:', email);
     } catch (error) {
       console.error("Error obteniendo el email:", error);
-      return res.status(400).json({ error: "No se encontró el email" });
+      return res.status(400).json({ error: "No se encontró un email" });
     }
 
     try {
