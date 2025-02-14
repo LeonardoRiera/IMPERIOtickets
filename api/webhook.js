@@ -46,14 +46,14 @@ export default async function handler(req, res) {
     pdf.text("¡Tu entrada para el evento!", 50, 50, { align: "center" });
 
     // Información del evento
-    const now = new Date();
-    const horaActual = now.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" });
+    // const now = new Date();
+    // const horaActual = now.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" });
 
     pdf.setFontSize(12);
     pdf.text("Fecha: 15 de Febrero 2025", 10, 70);
-    pdf.text(`Hora: ${horaActual}`, 10, 80);
-    pdf.text("Ubicación: Teatro Central", 10, 90);
-    pdf.text("Tu Id de entrada es: sdasdasdsda", 10, 100);
+    pdf.text("Hora: 21hs.", 10, 80);
+    pdf.text("Ubicación: Galpón Blanco - El Andino", 10, 90);
+    pdf.text("Tu Id de entrada es: ", 10, 100);
     pdf.addImage(qrBase64, "PNG", 30, 110, 40, 40);
 
     const pdfBuffer = Buffer.from(pdf.output("arraybuffer"));
