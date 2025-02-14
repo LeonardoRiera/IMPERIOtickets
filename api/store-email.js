@@ -13,11 +13,16 @@ export default async function handler(req, res) {
   console.log(email)
   try {
     const jsonData = JSON.stringify({ email });
+
+    console.log('email es ',email)
+    console.log('jsonData', jsonData)
     
     // Guardamos en Vercel Blob
     const { url } = await put("emails.json", jsonData, {
       access: "public", // Si querés que sea privado, poné "private"
     });
+
+    console.log('url de vercel blob', url)
 
     res.json({ success: true, message: "Email almacenado correctamente", url });
   } catch (error) {
