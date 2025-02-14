@@ -225,13 +225,13 @@ app.post("/webhook", express.json(), async (req, res) => {
 });
 
 
-const bootstrap = async () => {
+// const bootstrap = async () => {
 
-  // await mongoose.connect(process.env.API_URL_MONGODB)
+//   await mongoose.connect(process.env.API_URL_MONGODB)
 
-  app.listen(port, () => {
-    console.log(`El servidor está corriendo en el puerto ${port}`);
-  });
-}
+//   app.listen(port, () => {
+//     console.log(`El servidor está corriendo en el puerto ${port}`);
+//   });
+// }
 
-bootstrap()
+// bootstrap()
