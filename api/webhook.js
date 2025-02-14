@@ -30,7 +30,7 @@ export default async function handler(req, res) {
 
       const data = await response.json();
       console.log(data.external_reference)
-      const emailUser = data.external_reference
+      const emailUser = await data.external_reference
       const quantity = parseInt(data.additional_info.items[0].quantity);
       const mailAttachments = [];
   
