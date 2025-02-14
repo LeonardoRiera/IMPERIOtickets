@@ -13,9 +13,9 @@ const AtencionCliente = () => {
       <div className='AtencionClienteContainer'>
 
         <h2 className='tituloInformacionAtencion'>
-          <a href="#atencionAlCliente"><i class="bi bi-diamond-fill iconsat"></i>Atención al Cliente</a>
+          <a href="#atencionAlCliente"><i className="bi bi-diamond-fill iconsat"></i>Atención al Cliente</a>
 
-          <a href="#preguntasFrecuentes"><i class="bi bi-diamond-fill iconsat"></i>Preguntas Frecuentes</a>
+          <a href="#preguntasFrecuentes"><i className="bi bi-diamond-fill iconsat"></i>Preguntas Frecuentes</a>
         </h2>
 
         <h3 className='Atencionh3'>Servicio de Atención al Cliente</h3>
@@ -25,7 +25,7 @@ const AtencionCliente = () => {
 
         <h3 className='Atencionh3'>Preguntas Frecuentes</h3>
         <p className='desarrollo'>- ¿Qué hago si no he recibido mis entradas después de la compra?</p>
-        <p className='desarrollo'> Si no has recibido tus entradas, revisa primero tu bandeja de spam o correo no deseado. Si no están allí, comunícate con nosotros a través de imperioticket@gmail.com para que 
+        <p className='desarrollo'> Si no has recibido tus entradas, revisa primero tu bandeja de spam o correo no deseado. Si no están allí, comunícate con nosotros a través de imperiotickets@gmail.com para que 
           podamos reenviar las entradas o solucionar cualquier problema técnico.</p>
 
         <p className='desarrollo'>-  ¿Puedo cambiar la fecha o el evento de mis entradas después de la compra?</p>
@@ -33,7 +33,7 @@ const AtencionCliente = () => {
           recibirás información específica por correo. </p>
 
         <p className='desarrollo'>- ¿Qué hago si me equivoqué en la cantidad de entradas compradas?</p>
-        <p className='desarrollo'>Si compraste más entradas de las que necesitas o cometiste un error al seleccionar la cantidad, comunícate con nuestro equipo de atención al cliente lo antes posible a través de [email]. Haremos lo posible por ayudarte, 
+        <p className='desarrollo'>Si compraste más entradas de las que necesitas o cometiste un error al seleccionar la cantidad, comunícate con nuestro equipo de atención al cliente lo antes posible a través de imperiotickets@gmail.com. Haremos lo posible por ayudarte, 
           aunque las políticas de reembolso pueden variar según el evento. </p>
 
         <p className='desarrollo'>- ¿Qué sucede si el evento que compré ha sido cancelado o reprogramado?</p>

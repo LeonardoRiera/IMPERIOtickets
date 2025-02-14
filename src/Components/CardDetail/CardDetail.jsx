@@ -40,8 +40,9 @@ const CardDetail = () => {
 
   // Cálculo del total cada vez que cambian price o count
   useEffect(() => {
-    const serviceCharge = price * 0.12;
-    const newTotal = (price + serviceCharge) * count;
+    /* const serviceCharge = price * 0.12; */
+    /* const newTotal = (price + serviceCharge) * count; */
+    const newTotal = price * count;
     setTotal(newTotal); // Actualizamos el total
   }, [price, count]);
 
@@ -109,7 +110,7 @@ const CardDetail = () => {
           <p className='detailTexto'><span className="material-symbols-outlined icon">alarm_on</span> Hora: {hora}</p>
           <p className='detailTexto'><span className="material-symbols-outlined icon">verified_user</span> Clasificación: {clasificacion}</p>
           <p className='detailTexto'><span className="material-symbols-outlined icon">local_atm</span> Precio: ${price}</p>
-          <p className='importante'>Importante: al precio de tu entrada se le agregará el costo por servicio de venta digital.</p>
+          {/* <p className='importante'>Importante: al precio de tu entrada se le agregará el costo por servicio de venta digital.</p> */}
           
         </div>
 
@@ -126,7 +127,7 @@ const CardDetail = () => {
 
             <EntradasCount count={count} increment={increment} decrement={decrement} />
             <p className='detallesCount'>Precio por Entrada: .................................. ${price}</p>
-            <p className='detallesCount'>Cargos por Servicio (12%): ......................... ${price * 0.12 } </p>
+            {/* <p className='detallesCount'>Cargos por Servicio (12%): ......................... ${price * 0.12 } </p> */}
             
           </div>
 

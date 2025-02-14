@@ -4,21 +4,23 @@
     justify-content: space-around;
     align-items: end;
     margin: 16px 16px 35px 16px;
-    width: 80vmax;
-    height: 37vmax;
+    width: 88vmax;
+    height: 43vmax;
     text-align: center;
     background-color: #f9f9f900;
+    /* border-radius: 1vmax; */
+    overflow: hidden;
     
 }
 
 .datosContainer {
-    margin-right: 2%;
-    margin-top: 4%;
+    margin-right: 4%;
+    margin-top: 6%;
 }
 
 .texto {
     color: #000000;
-    font-size: 2vmax;
+    font-size: 2.8vmax;
     font-family: "Bebas Neue", system-ui; 
     font-weight: bold;
 }

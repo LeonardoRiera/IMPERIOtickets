@@ -38,7 +38,7 @@ const AccesoProd = () => {
             </div>
 
             <div className="d-grid">
-                <button type="submit" className="btn btn-primary">Iniciar Sesión</button>
+                <button type="submit" className="btn btn-dark">Iniciar Sesión</button>
             </div>
 
           </form>

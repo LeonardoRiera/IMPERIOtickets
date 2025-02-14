@@ -23,13 +23,13 @@ export const Footer = () => {
 
           <div className="social-icons">
             {/* Enlace a Instagram */}
-            <a href="https://www.instagram.com/tu_usuario" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.instagram.com/imperiotickets" target="_blank" rel="noopener noreferrer">
               <i className="bi bi-instagram"></i>
             </a>
 
             {/* Enlace a X (Twitter) */}
             <a href="https://twitter.com/tu_usuario" target="_blank" rel="noopener noreferrer">
-              <i className="bi bi-twitter"></i> {/* X usa el ícono de Twitter */}
+             <i className="bi bi-twitter-x"></i> 
             </a>
 
             {/* Enlace a Discord */}
