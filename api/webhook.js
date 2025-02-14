@@ -76,7 +76,7 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     const paymentId = req.query.id;
 
-    const filePath = path.resolve("/tmp/emails.json");
+    const filePath = path.join(process.cwd(), "emails.json");
     let email = "";
   
 
