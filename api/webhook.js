@@ -6,15 +6,33 @@ import { Buffer } from 'buffer';
 import { jsPDF } from 'jspdf';
 import QRCode from 'qrcode';
 import fs from "fs"
-import { getEmail, clearEmail } from "./store-email.js";
+import path from "path";
 
 const app = express();
 app.use(express.json());
 
 export default async function handler(req, res) {
 
-  // Obtener email
-  const email = getEmail()
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Método no permitido" });
+  }
+
+  const filePath = path.resolve("/tmp/emails.json");
+  let email = "";
+
+  try {
+    if (fs.existsSync(filePath)) {
+      const data = fs.readFileSync(filePath, "utf8");
+      email = JSON.parse(data).email;
+    }
+  } catch (error) {
+    console.error("Error al leer el email:", error);
+  }
+
+  if (!email) {
+    return res.status(400).json({ error: "No se encontró un email" });
+  }
+
 
   // Configuración de Nodemailer
   const transporter = nodemailer.createTransport({

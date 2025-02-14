@@ -1,12 +1,22 @@
-// storeEmail.js
-let storedEmail = null;
+import fs from "fs";
+import path from "path";
 
-export const saveEmail = (email) => {
-  storedEmail = email;
-};
+export default async function handler(req, res) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Método no permitido" });
+  }
 
-export const getEmail = () => storedEmail;
+  const { email } = req.body;
+  if (!email) {
+    return res.status(400).json({ error: "Email es requerido" });
+  }
 
-export const clearEmail = () => {
-  storedEmail = null;
-};
+  try {
+    const filePath = path.resolve("/tmp/emails.json");
+    fs.writeFileSync(filePath, JSON.stringify({ email }));
+
+    res.json({ success: true, message: "Email almacenado correctamente" });
+  } catch (error) {
+    res.status(500).json({ error: "Error al guardar el email" });
+  }
+}

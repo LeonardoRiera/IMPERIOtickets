@@ -9,7 +9,7 @@ import { jsPDF } from 'jspdf';
 import { Buffer } from 'buffer';
 import mongoose from "mongoose";
 import { nanoid } from "nanoid";
-import { getEmail, clearEmail, saveEmail } from "./store-email.js";
+// import { getEmail, clearEmail, saveEmail } from "./store-email.js";
 // import Entry from './models/Entry.js'
 // import webhookRouter from "./webhook.js";
 
@@ -18,7 +18,7 @@ dotenv.config();
 const token = process.env.MERCADOPAGO_TOKEN
 const client = new MercadoPagoConfig({ accessToken: token});
 const app = express();
-const port = 5000;
+const port = 5100;
 
 app.use(cors());
 
@@ -32,6 +32,19 @@ const transporter = nodemailer.createTransport({
     pass: 'kpui dbjk dubd ljuj' 
   }
 });
+
+  // storeEmail.js
+  let storedEmail = null;
+
+  const saveEmail = (email) => {
+    storedEmail = email;
+  };
+  
+  const getEmail = () => storedEmail;
+  
+  const clearEmail = () => {
+    storedEmail = null;
+  };
 
 const toBase64 = (filePath) => {
   const image = fs.readFileSync(filePath);
@@ -74,8 +87,8 @@ const generatePDFWithQR = (qrBase64) => {
     pdf.text("Fecha: 15 de Febrero 2025", 10, 70);
     pdf.text(`Hora: ${horaActual}`, 10, 80);
     pdf.text("Ubicación: Teatro Central", 10, 90);
-    pdf.text(`Tu Id de entrada es: sdasdasdsda`)
-    pdf.addImage(qrBase64, "PNG", 30, 100, 40, 40);
+    pdf.text('Tu Id de entrada es: sdasdasdsda', 10, 100)
+    pdf.addImage(qrBase64, "PNG", 30, 110, 40, 40);
   
   const pdfBuffer = Buffer.from(pdf.output('arraybuffer'));
   return pdfBuffer.toString('base64');
@@ -214,7 +227,7 @@ app.post("/webhook", express.json(), async (req, res) => {
 
 const bootstrap = async () => {
 
-  await mongoose.connect(process.env.API_URL_MONGODB)
+  // await mongoose.connect(process.env.API_URL_MONGODB)
 
   app.listen(port, () => {
     console.log(`El servidor está corriendo en el puerto ${port}`);
