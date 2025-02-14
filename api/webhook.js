@@ -32,7 +32,7 @@ export default async function handler(req, res) {
       format:[100, 150]
     });
 
-    const logoUrl = toBase64("public/assets/imagotipoLetraNegra.png")
+    const logoUrl = toBase64("https://imperiotickets.com/assets/imagotipoLetraNegra.png")
     // const logoUrl = toBase64('https://imperiotickets.com/assets/imagologoTickets-D6SFtBSe.png')
     pdf.addImage(logoUrl, "PNG", 10, 10, 80, 30);
 
