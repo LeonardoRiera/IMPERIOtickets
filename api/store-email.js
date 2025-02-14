@@ -13,6 +13,7 @@ export default async function handler(req, res) {
   }
 
   try {
+    // Guardamos cada email con su ID único de pago
     await setDoc(doc(db, "emails", id), { email });
 
     res.json({ success: true });
