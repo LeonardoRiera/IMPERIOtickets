@@ -150,12 +150,12 @@ app.post("/webhook", express.json(), async (req, res) => {
           const pdfBase64 = generatePDFWithQR(qrBase64);
 
           // Posteo en base de mongodb
-          const entry = new Entry({
-            email: 'brunoosella08@gmail.com',
-            entryId: entryId,
-            status: 'pending'
-          });
-          await entry.save();
+          // const entry = new Entry({
+          //   email: 'brunoosella08@gmail.com',
+          //   entryId: entryId,
+          //   status: 'pending'
+          // });
+          // await entry.save();
 
           // Generación de cantidad de entradas
           mailAttachments.push({
