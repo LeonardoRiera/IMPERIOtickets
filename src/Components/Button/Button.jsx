@@ -3,7 +3,7 @@ import '../Button/Button.css';
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 import mercadoPagoService from '../../services/mercado.pago.service';
 
-const Button = ({ count, subTotal, title, email }) => {
+const Button = ({ count, subTotal, title, email, price }) => {
 
   // Local states
   const [preference, setPreference] = React.useState(null)
@@ -23,7 +23,7 @@ const Button = ({ count, subTotal, title, email }) => {
     const body = {
       title: title,
       quantity: count,
-      price: subTotal,
+      price: price,
       external_reference: email
     }
 

@@ -44,7 +44,7 @@ const VentaFinal = () => {
       
       {/* Componente de MercadoPagoHandler */}
       {/* <MercadoPagoHandler count={count} subTotal={total} image={imageDetail} title={title} className='botonComprarEntrada2' /> */}
-      <Button count={count} subTotal={total} image={imageDetail} title={title} className='botonComprarEntrada2' email={email} />
+      <Button count={count} subTotal={total} image={imageDetail} title={title} className='botonComprarEntrada2' email={email} price={price}/>
     </div>
   );
 };
