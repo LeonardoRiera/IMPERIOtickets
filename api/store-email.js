@@ -1,4 +1,4 @@
-import { db } from "../src/services/firebaseConfing";
+import { db } from "../src/services/firebaseConfing.js";
 import { doc, setDoc } from "firebase/firestore";
 
 export default async function handler(req, res) {

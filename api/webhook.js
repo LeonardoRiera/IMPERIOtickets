@@ -6,7 +6,7 @@ import { Buffer } from 'buffer';
 import { jsPDF } from 'jspdf';
 import QRCode from 'qrcode';
 import fs from "fs";
-import { db } from "../src/services/firebaseConfing";
+import { db } from "../src/services/firebaseConfing.js";
 import { doc, getDoc } from "firebase/firestore";
 
 const app = express();
