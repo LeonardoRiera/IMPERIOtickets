@@ -78,9 +78,11 @@ export default async function handler(req, res) {
 
     const filePath = path.join(process.cwd(), "emails.json");
     let email = "";
+    console.log('filePath', filePath)
   
     if (fs.existsSync(filePath)) {
       const data = fs.readFileSync(filePath, "utf8");
+      console.log('data', data)
       email = JSON.parse(data).email;
     }
   
