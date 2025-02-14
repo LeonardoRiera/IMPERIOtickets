@@ -89,6 +89,8 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "No se encontró un email" });
     }
 
+    console.log('el email es',email)
+
     try {
       const response = await fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
         method: "GET",
