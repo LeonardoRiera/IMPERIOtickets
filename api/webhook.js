@@ -1,5 +1,3 @@
-import { db } from "../src/services/firebaseConfing.js";
-import { doc, getDoc } from "firebase/firestore";
 import nodemailer from "nodemailer";
 import { nanoid } from "nanoid";
 import fetch from "node-fetch";
@@ -18,28 +16,21 @@ export default async function handler(req, res) {
   }
 
   try {
-    // **1. Obtener el email correcto de Firestore**
-    const docRef = doc(db, "emails", paymentId);
-    const docSnap = await getDoc(docRef);
 
-    if (!docSnap.exists()) {
-      throw new Error("No se encontró un email para este paymentId");
-    }
-
-    const email = docSnap.data().email;
-    console.log("Email encontrado:", email);
-
-    // **2. Obtener la información del pago en MercadoPago**
     const response = await fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${process.env.MERCADOPAGO_TOKEN}` },
     });
+
+    console.log(response)
 
     if (!response.ok) {
       return res.status(500).send("Error al obtener información del pago");
     }
 
     const data = await response.json();
+    console.log(data.external_reference)
+    const emailUser = data.external_reference
     const quantity = parseInt(data.additional_info.items[0].quantity);
     const mailAttachments = [];
 
@@ -59,7 +50,6 @@ export default async function handler(req, res) {
       });
     }
 
-    // **3. Enviar el correo**
     const transporter = nodemailer.createTransport({
       service: "Gmail",
       auth: {
@@ -70,7 +60,7 @@ export default async function handler(req, res) {
 
     const mailOptions = {
       from: "imperiotickets@gmail.com",
-      to: email,
+      to: emailUser,
       subject: "Entradas adjuntas",
       text: "Aquí están tus entradas.",
       attachments: mailAttachments,

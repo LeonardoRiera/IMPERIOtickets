@@ -18,7 +18,7 @@ dotenv.config();
 const token = process.env.MERCADOPAGO_TOKEN
 const client = new MercadoPagoConfig({ accessToken: token});
 const app = express();
-const port = 5100;
+const port = 5000;
 
 app.use(cors());
 
@@ -34,17 +34,17 @@ const transporter = nodemailer.createTransport({
 });
 
   // storeEmail.js
-  let storedEmail = null;
+  // let storedEmail = null;
 
-  const saveEmail = (email) => {
-    storedEmail = email;
-  };
+  // const saveEmail = (email) => {
+  //   storedEmail = email;
+  // };
   
-  const getEmail = () => storedEmail;
+  // const getEmail = () => storedEmail;
   
-  const clearEmail = () => {
-    storedEmail = null;
-  };
+  // const clearEmail = () => {
+  //   storedEmail = null;
+  // };
 
 const toBase64 = (filePath) => {
   const image = fs.readFileSync(filePath);
@@ -96,6 +96,9 @@ const generatePDFWithQR = (qrBase64) => {
 
 // Codigo del server
 app.post("/create_preference", async (req, res) => {
+
+  console.log(req.body)
+
   try {
     const body = {
       items: [
@@ -103,8 +106,7 @@ app.post("/create_preference", async (req, res) => {
           title: req.body.title,
           quantity: Number(req.body.quantity),
           unit_price: Number(req.body.price),
-          currency_id: "ARS"
-        }
+          currency_id: "ARS"        }
       ],
       back_urls: {
         success: `${process.env.VITE_API_URL}Success`,
@@ -112,7 +114,8 @@ app.post("/create_preference", async (req, res) => {
         pending: "https://www.youtube.com/watch?v=vEXwN9-tKcs&t=180s&ab_channel=onthecode"
       },
       auto_return: "approved",
-      notification_url: process.env.WEBHOOK_MP
+      notification_url: process.env.WEBHOOK_MP,
+      external_reference: req.body.external_reference
     };
 
     const preference = new Preference(client);
@@ -137,7 +140,7 @@ app.post("/store-email", (req, res) => {
     return res.status(400).json({ error: "Email es requerido" });
   }
 
-  saveEmail(email);
+  // saveEmail(email);
   console.log("Email guardado:", email);
   res.json({ success: true, message: "Email almacenado correctamente" });
 });
@@ -145,7 +148,7 @@ app.post("/store-email", (req, res) => {
 app.post("/webhook", express.json(), async (req, res) => {
 
   const paymentId = req.query.id
-  const recipientEmail = getEmail()
+  console.log(req.body)
 
   try {
     
@@ -160,7 +163,7 @@ app.post("/webhook", express.json(), async (req, res) => {
 
     if (response.ok) {
       const data = await response.json()
-
+      const emailUser = data.external_reference
       const quantity = parseInt(data.additional_info.items[0].quantity)
       const mailAttachments = []
 
@@ -197,7 +200,7 @@ app.post("/webhook", express.json(), async (req, res) => {
         // Configura el correo
         const mailOptions = {
           from: 'imperiotickets@gmail.com', 
-          to: recipientEmail,
+          to: emailUser,
           subject: 'Entradas adjuntas',
           text: 'ESTÁN LISTAS TUS ENTADAS',
           attachments: mailAttachments
@@ -208,9 +211,7 @@ app.post("/webhook", express.json(), async (req, res) => {
         console.log("Correo enviado exitosamente");
 
         res.status(200).send("Webhook procesado y correo enviado");
-        clearEmail()
       } catch (error) {
-        clearEmail()
         console.error('Error procesando el webhook:', error);
         res.status(500).send("Error procesando el webhook");
       }
@@ -219,19 +220,18 @@ app.post("/webhook", express.json(), async (req, res) => {
   } catch (error) {
     console.log(error)
     res.sendStatus(500)
-    clearEmail()
   }
 
 });
 
 
-// const bootstrap = async () => {
+const bootstrap = async () => {
 
-//   await mongoose.connect(process.env.API_URL_MONGODB)
+  await mongoose.connect(process.env.API_URL_MONGODB)
 
-//   app.listen(port, () => {
-//     console.log(`El servidor está corriendo en el puerto ${port}`);
-//   });
-// }
+  app.listen(port, () => {
+    console.log(`El servidor está corriendo en el puerto ${port}`);
+  });
+}
 
-// bootstrap()
+bootstrap()

@@ -60,19 +60,18 @@ const CardDetail = () => {
     validarCorreos(e.target.value, confirmEmail);
   };
 
-  const submit = async () => {
-    const idEmail = uuidv4();
+  // const submit = async () => {
+  //   const idEmail = uuidv4();
 
-    const body = {
-      email: email,
-      id: idEmail
-    }
+  //   const body = {
+  //     email: email
+  //   }
 
-    const response = await emailService(body)
+  //   const response = await emailService(body)
 
-    console.log(response)
+  //   console.log(response)
 
-  };
+  // };
 
   const handleConfirmEmailChange = (e) => {
     setConfirmEmail(e.target.value);
@@ -198,7 +197,6 @@ const CardDetail = () => {
                   to={`/VentaFinal`}  
                   state={{ imageDetail, title, price, count, total, email }}  
                   className='botonComprarEntrada'
-                  onClick={submit}
                   >
                   Comprar Entrada
                 </Link>
