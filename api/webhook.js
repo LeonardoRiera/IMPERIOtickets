@@ -4,8 +4,61 @@ import fetch from "node-fetch";
 import QRCode from "qrcode";
 import { jsPDF } from "jspdf";
 import { Buffer } from "buffer";
+import fs from 'fs'
 
 export default async function handler(req, res) {
+
+  const toBase64 = (filePath) => {
+    const image = fs.readFileSync(filePath);
+    return `data:image/png;base64,${image.toString("base64")}`;
+  };
+
+  // Función para generar el QR en base64
+  const generateQRCodeBase64 = async (id) => {
+    try {
+      const qrBase64 = await QRCode.toDataURL(id, { scale: 5 });
+      return qrBase64;
+    } catch (error) {
+      console.error('Error generando QR:', error);
+      throw error;
+    }
+  };
+
+  // Función para generar el PDF con el QR
+  const generatePDFWithQR = (qrBase64) => {
+    const pdf = new jsPDF({
+      orientation:'portait',
+      unit: 'mm',
+      format:[100, 150]
+    });
+
+    const logoUrl = toBase64("public/assets/imagotipoLetraNegra.png")
+    // const logoUrl = toBase64('https://imperiotickets.com/assets/imagologoTickets-D6SFtBSe.png')
+    pdf.addImage(logoUrl, "PNG", 10, 10, 80, 30);
+
+    // Título del ticket
+    pdf.setFont("helvetica", "bold");
+    pdf.setFontSize(16);
+    pdf.text("¡Tu entrada para el evento!", 50, 50, { align: "center" });
+
+      // Información del evento
+      const now = new Date();
+      const horaActual = now.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" });
+
+      pdf.setFontSize(12);
+      pdf.text("Fecha: 15 de Febrero 2025", 10, 70);
+      pdf.text(`Hora: ${horaActual}`, 10, 80);
+      pdf.text("Ubicación: Teatro Central", 10, 90);
+      pdf.text('Tu Id de entrada es: sdasdasdsda', 10, 100)
+      pdf.addImage(qrBase64, "PNG", 30, 110, 40, 40);
+    
+    const pdfBuffer = Buffer.from(pdf.output('arraybuffer'));
+    return pdfBuffer.toString('base64');
+  };
+
+
+
+
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Método no permitido" });
   }
@@ -36,12 +89,8 @@ export default async function handler(req, res) {
   
       for (let i = 0; i < quantity; i++) {
         const entryId = nanoid();
-        const qrBase64 = await QRCode.toDataURL(entryId, { scale: 5 });
-  
-        const pdf = new jsPDF();
-        pdf.text("Tu entrada", 10, 10);
-        pdf.addImage(qrBase64, "PNG", 50, 20, 40, 40);
-        const pdfBase64 = Buffer.from(pdf.output("arraybuffer")).toString("base64");
+        const qrBase64 = await generateQRCodeBase64(entryId);
+        const pdfBase64 = generatePDFWithQR(qrBase64);
   
         mailAttachments.push({
           filename: `entrada_${paymentId}_${i + 1}.pdf`,

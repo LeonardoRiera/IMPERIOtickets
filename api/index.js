@@ -148,7 +148,6 @@ app.post("/store-email", (req, res) => {
 app.post("/webhook", express.json(), async (req, res) => {
 
   const paymentId = req.query.id
-  console.log(req.body)
 
   try {
     
