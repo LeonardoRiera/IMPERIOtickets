@@ -3,7 +3,8 @@ import EntradasCount from '../EntradasCount/EntradasCount'
 import { useLocation, Navigate } from 'react-router-dom';
 import '../CardDetail/CardDetail.css';
 import { Link } from 'react-router-dom';
-
+import emailService from '../../services/email.service';
+import { v4 as uuidv4 } from "uuid";
 
 const CardDetail = () => {
 
@@ -60,10 +61,23 @@ const CardDetail = () => {
     validarCorreos(e.target.value, confirmEmail);
   };
 
+  // const submit = async () => {
+  //   const idEmail = uuidv4();
+
+  //   const body = {
+  //     email: email
+  //   }
+
+  //   const response = await emailService(body)
+
+  //   console.log(response)
+
+  // };
+
   const handleConfirmEmailChange = (e) => {
     setConfirmEmail(e.target.value);
     validarCorreos(email, e.target.value);
-  };
+   };
 
   // Función para validar si los correos son iguales y habilitar/deshabilitar el botón
   const validarCorreos = (email1, email2) => {
@@ -150,7 +164,7 @@ const CardDetail = () => {
               type="email" 
               value={email} 
               onChange={handleEmailChange} 
-              placeholder="Ingresa tu correo electrónico" 
+              placeholder="Ingresa tu correo electrónico"
               required 
             />
           </div>

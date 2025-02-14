@@ -31,7 +31,8 @@ export default async function handler(req, res) {
         pending: "https://www.youtube.com/watch?v=vEXwN9-tKcs&t=180s&ab_channel=onthecode"
       },
       auto_return: "approved",
-      notification_url: process.env.WEBHOOK_MP
+      notification_url: process.env.WEBHOOK_MP,
+      external_reference: req.body.external_reference
     };
 
     const preference = new Preference(client);
