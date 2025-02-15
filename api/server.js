@@ -13,7 +13,7 @@ const port = 5000;
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 
-// Cargar automáticamente todos los archivos en /api/
+// Cargar automáticamente todos los archivos en / api /
 import path from "path";
 import { fileURLToPath } from "url";
 
