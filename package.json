@@ -6,9 +6,9 @@
   "scripts": {
     "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
     "dev:client": "vite",
-    "dev:server": "nodemon api/index.js",
+    "dev:server": "nodemon api/server.js",
     "build": "vite build",
-    "start": "node api/index.js",
+    "start": "node api/server.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },
