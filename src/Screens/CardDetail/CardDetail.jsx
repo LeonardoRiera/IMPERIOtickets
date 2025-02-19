@@ -4,8 +4,6 @@ import EntradasCount from '../EntradasCount/EntradasCount'
 import { useLocation, Navigate } from 'react-router-dom';
 import '../CardDetail/CardDetail.css';
 import { Link } from 'react-router-dom';
-import emailService from '../../services/email.service';
-import { v4 as uuidv4 } from "uuid";
 
 const CardDetail = () => {
 

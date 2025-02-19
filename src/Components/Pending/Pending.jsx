@@ -1,9 +1,10 @@
+import React from 'react'
 import '../Pending/Pending.css'
 
 export const Pending = () => {
   return (
     <div className='contenedorPending'>
-        <p>Pending......</p>
+      <p>Pending......</p>
     </div>
   )
 }

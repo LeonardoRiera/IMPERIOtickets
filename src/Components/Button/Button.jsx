@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Button/Button.css'; 
+import '../Button/Button.css';
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 import mercadoPagoService from '../../services/mercado.pago.service';
 
@@ -32,16 +32,17 @@ const Button = ({ count, subTotal, title, email, price }) => {
     setPreference(response.id)
 
   }
-  
+
 
   return (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
 
-    {
-      preference && 
-        
+      {
+        preference &&
+
       <Wallet initialization={{ preferenceId: preference }} />
-    }
+      }
 
 
     </>

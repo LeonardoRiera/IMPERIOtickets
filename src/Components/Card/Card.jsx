@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react';
+import React from 'react';
 import '../Card/Card.css';
 import { Link } from 'react-router-dom';
 
 
 const Card = ({ title, price, image, image2, imageDetail, dia, fecha, hora, lugar, description, clasificacion }) => {
 
-  const [backgroundImage, setBackgroundImage] = useState(image); // Imagen por defecto
+  const [backgroundImage, setBackgroundImage] = React.useState(image); // Imagen por defecto
 
-  useEffect(() => {
+  React.useEffect(() => {
     const handleResize = () => {
       // Cambia la imagen si el ancho de la pantalla es menor o igual a 768px
       if (window.innerWidth <= 768) {
@@ -31,24 +31,28 @@ const Card = ({ title, price, image, image2, imageDetail, dia, fecha, hora, luga
 
   return (
     <div className="card"
-    style={{
-      backgroundImage: `url(${backgroundImage})`,
-      backgroundSize: 'cover', // La imagen cubrirá todo el contenedor
-      backgroundPosition: 'center', // Centramos la imagen
-      backgroundRepeat: 'no-repeat', // Evitamos que la imagen se repita
-    }}
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: 'cover', // La imagen cubrirá todo el contenedor
+        backgroundPosition: 'center', // Centramos la imagen
+        backgroundRepeat: 'no-repeat', // Evitamos que la imagen se repita
+      }}
     >
 
       <div className='datosContainer'>
         <div className='renglon'>
           <p className='dia texto'>{dia}</p>
+
           <p className='fecha texto'>{fecha}</p>
+
           <p className='hora texto'>{hora}</p>
         </div>
+
         <p className='lugar texto'>{lugar}</p>
       </div>
+
       <Link to={`/CardDetail`}  state={{ image, image2, imageDetail, title, price, dia, fecha, hora, lugar, description, clasificacion }}  className='buyButton'>Adquirir Entrada</Link>
- 
+
     </div>
   );
 };

@@ -1,11 +1,12 @@
-import  { useEffect, useState } from "react";
+import React from "react";
 import "./AnimationSuccess.css";
 
 const SuccessAnimation = () => {
-  const [stars, setStars] = useState([]);
-  const [showSuccess, setShowSuccess] = useState(false);
+  const [stars, setStars] = React.useState([]);
 
-  useEffect(() => {
+  const [showSuccess, setShowSuccess] = React.useState(false);
+
+  React.useEffect(() => {
     const generateStars = () => {
       return Array.from({ length: 5 }, (_, i) => ({
         id: i,
@@ -13,6 +14,7 @@ const SuccessAnimation = () => {
         animationDuration: Math.random() * 1 + 0.5 + "s",
       }));
     };
+
     setStars(generateStars());
 
     const timer = setTimeout(() => {
@@ -26,6 +28,7 @@ const SuccessAnimation = () => {
     <div className="animation-container">
       <div className={`circle-container ${showSuccess ? "fade-out" : ""}`}>
         <div className="character"></div>
+
         {stars.map((star) => (
           <div
             key={star.id}
