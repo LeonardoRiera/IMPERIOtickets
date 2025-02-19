@@ -11,6 +11,7 @@ export default [
   pluginReact.configs.flat.recommended,
   {
     rules:{
+      "react/prop-types": "off",
       "indent":["error", 2],
       "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1 }],
       "react/jsx-no-useless-fragment": ["error"],
