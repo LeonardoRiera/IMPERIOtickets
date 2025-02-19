@@ -1,4 +1,5 @@
 import './App.css';
+import React from 'react';
 import { BrowserRouter as BrowserRouter, Routes, Route } from 'react-router-dom';
 import GuiaDeCompra from './Components/GuiaDeCompra/GuiaDeCompra';
 import AccesoProd from './Components/AccesoProd/AccesoProd';
@@ -16,39 +17,49 @@ import VentaFinal from './Components/VentaFinal/VentaFinal';
 import Scanner from './Components/Scanner/Scanner'
 
 function App() {
-  
+
   return (
 
-    
-      <BrowserRouter>
+    <BrowserRouter>
 
-        <div className='APP container-fluid'>
+      <div className='APP container-fluid'>
 
-          <Navbar />
+        <Navbar />
 
-          <Routes>
+        <Routes>
 
-            <Route path="/" element={<CardContainer/>}/>
-            <Route path="/GuiaCompra" element={<GuiaDeCompra />} />
-            <Route path="/AtencionAlCliente" element={<AtencionCliente />} />
-            <Route path="/AccesoProductores" element={<AccesoProd />} />
-            <Route path='/CardDetail' element={<CardDetail/>} />
-            <Route path="/PanelAdminEvento" element={<PanelAdminEvento />} />
-            <Route path="/Success" element={<Success />} />
-            <Route path="*" element={<Error />} />
-            <Route path="/Pending" element={<Pending />} />
-            <Route path="/Failure" element={<Failure />} />
-            <Route path="/VentaFinal" element={<VentaFinal />} />
-            <Route path="/Scanner" element={<Scanner />} />
-            
-          </Routes>
-             
-          <Footer />
+          <Route path="/" element={<CardContainer/>}/>
 
-        </div>
+          <Route path="/GuiaCompra" element={<GuiaDeCompra />} />
 
-      </BrowserRouter>
-   
+          <Route path="/AtencionAlCliente" element={<AtencionCliente />} />
+
+          <Route path="/AccesoProductores" element={<AccesoProd />} />
+
+          <Route path='/CardDetail' element={<CardDetail/>} />
+
+          <Route path="/PanelAdminEvento" element={<PanelAdminEvento />} />
+
+          <Route path="/Success" element={<Success />} />
+
+          <Route path="*" element={<Error />} />
+
+          <Route path="/Pending" element={<Pending />} />
+
+          <Route path="/Failure" element={<Failure />} />
+
+          <Route path="/VentaFinal" element={<VentaFinal />} />
+
+          <Route path="/Scanner" element={<Scanner />} />
+
+        </Routes>
+
+        <Footer />
+
+      </div>
+
+    </BrowserRouter>
+
   )
 
 }

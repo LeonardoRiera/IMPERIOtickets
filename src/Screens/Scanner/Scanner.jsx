@@ -1,7 +1,8 @@
 import React from "react";
-/* import BarcodeScannerComponent from "react-qr-barcode-scanner"; */
+import BarcodeScannerComponent from "react-qr-barcode-scanner";
 
 function Scanner() {
+
   const [data, setData] = React.useState("Not Found");
 
   const onScan = (err, result) => {
@@ -15,12 +16,14 @@ function Scanner() {
 
   return (
     <>
-    <h1>Escaneáte el QR Papu</h1>
+      <h1>Escaneáte el QR Papu</h1>
+
       <BarcodeScannerComponent
         width={500}
         height={500}
         onUpdate={onScan}
       />
+
       {data}
     </>
   );

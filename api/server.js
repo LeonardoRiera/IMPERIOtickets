@@ -3,6 +3,9 @@ import cors from "cors";
 import fs from "fs";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+// Cargar automáticamente todos los archivos en / api /
+import path from "path";
+import { fileURLToPath } from "url";
 
 // Cargar configuración
 dotenv.config();
@@ -12,10 +15,6 @@ const port = 5000;
 
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
-
-// Cargar automáticamente todos los archivos en / api /
-import path from "path";
-import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const apiDir = path.join(__dirname);

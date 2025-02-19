@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
 import EntradasCount from '../EntradasCount/EntradasCount'
 import { useLocation, Navigate } from 'react-router-dom';
@@ -15,6 +16,7 @@ const CardDetail = () => {
 
 
   const location = useLocation();
+
   // Verificación para evitar errores
   if (!location.state) {
     // Puedes redirigir o mostrar un mensaje de error
@@ -25,18 +27,19 @@ const CardDetail = () => {
 
   /* contador */
   const [count, setCount] = useState(1); // Contador de entradas
-  const [total, setTotal] = useState(0); // Estado para el total  
+
+  const [total, setTotal] = useState(0); // Estado para el total
 
   const increment = () => {
-      if(count > 0) {
-          setCount(count+1)
-      }
+    if(count > 0) {
+      setCount(count+1)
+    }
   }
 
   const decrement = () => {
-      if(count > 1) {
-          setCount(count-1)
-      }
+    if(count > 1) {
+      setCount(count-1)
+    }
   }
 
   // Cálculo del total cada vez que cambian price o count
@@ -44,15 +47,18 @@ const CardDetail = () => {
     /* const serviceCharge = price * 0.12; */
     /* const newTotal = (price + serviceCharge) * count; */
     const newTotal = price * count;
+
     setTotal(newTotal); // Actualizamos el total
   }, [price, count]);
 
 
-
   // Definimos los estados para manejar los correos electrónicos
   const [email, setEmail] = useState(''); // Almacena el primer correo
+
   const [confirmEmail, setConfirmEmail] = useState(''); // Almacena la confirmación del correo
+
   const [isButtonDisabled, setIsButtonDisabled] = useState(true); // Controla si el botón "Comprar Entrada" está habilitado o no
+
   const [errorMessage, setErrorMessage] = useState(''); // Mensaje de error si los correos no coinciden
 
   // Función para validar si los correos coinciden
@@ -77,7 +83,7 @@ const CardDetail = () => {
   const handleConfirmEmailChange = (e) => {
     setConfirmEmail(e.target.value);
     validarCorreos(email, e.target.value);
-   };
+  };
 
   // Función para validar si los correos son iguales y habilitar/deshabilitar el botón
   const validarCorreos = (email1, email2) => {
@@ -97,6 +103,7 @@ const CardDetail = () => {
     try {
       // Realizar la solicitud GET al servidor (suponiendo que está en localhost:3000)
       const response = await axios.get('http://147.79.107.178:3000/feedback');
+
       console.log('Respuesta del servidor:', response.data); // Manejar la respuesta
       alert('¡Solicitud exitosa! Respuesta del servidor: ' + response.data.message);
     } catch (error) {
@@ -115,17 +122,24 @@ const CardDetail = () => {
           <img src={imageDetail} alt="" className='imageBannercito' />
 
         </div>
-       
+
         <div className='infoDetail'>
           <p className='introDetail'>Detalles del Evento</p>
+
           <h2 className='tituloDetail'>{title}</h2>
+
           <p className='detailTexto'><span className="material-symbols-outlined icon">calendar_month</span> Fecha:  {dia} {fecha}</p>
+
           <p className='detailTexto'> <span className="material-symbols-outlined icon">where_to_vote</span> Lugar: {lugar}</p>
+
           <p className='detailTexto'><span className="material-symbols-outlined icon">alarm_on</span> Hora: {hora}</p>
+
           <p className='detailTexto'><span className="material-symbols-outlined icon">verified_user</span> Clasificación: {clasificacion}</p>
+
           <p className='detailTexto'><span className="material-symbols-outlined icon">local_atm</span> Precio: ${price}</p>
+
           {/* <p className='importante'>Importante: al precio de tu entrada se le agregará el costo por servicio de venta digital.</p> */}
-          
+
         </div>
 
       </div>
@@ -133,16 +147,18 @@ const CardDetail = () => {
       <div className='rowDetail'>
 
         <div className='descripcionContainer'>
-         
-          
-          <h3 className='subtitleDetail'>Cuantas Entradas Querés?</h3> 
+
+
+          <h3 className='subtitleDetail'>Cuantas Entradas Querés?</h3>
 
           <div className='precioCountDiv'>
 
             <EntradasCount count={count} increment={increment} decrement={decrement} />
+
             <p className='detallesCount'>Precio por Entrada: .................................. ${price}</p>
+
             {/* <p className='detallesCount'>Cargos por Servicio (12%): ......................... ${price * 0.12 } </p> */}
-            
+
           </div>
 
           {/* <p className='detallesCountTotal'>Total: ${total}</p> */}
@@ -155,63 +171,66 @@ const CardDetail = () => {
       {/* Sección de formulario para ingresar y confirmar el correo */}
       <div className='emailFormContainer'>
         <h3 className='correoTitulo'>Ingresa el Correo Electrónico <br />donde quieres recibir tus entradas:</h3>
+
         <form className='formContainer'>
           {/* Campo para el primer correo */}
           <div className='formGroup'>
             <label >Ingresa tu Email:</label>
-            <input 
-              className='imput' 
-              type="email" 
-              value={email} 
-              onChange={handleEmailChange} 
+
+            <input
+              className='imput'
+              type="email"
+              value={email}
+              onChange={handleEmailChange}
               placeholder="Ingresa tu correo electrónico"
-              required 
+              required
             />
           </div>
 
           {/* Campo para la confirmación del correo */}
           <div className='formGroup'>
             <label>Confirma tu Email:</label>
+
             <input
-              className='imput' 
-              type="email" 
-              value={confirmEmail} 
-              onChange={handleConfirmEmailChange} 
-              placeholder="Confirma tu correo electrónico" 
-              required 
+              className='imput'
+              type="email"
+              value={confirmEmail}
+              onChange={handleConfirmEmailChange}
+              placeholder="Confirma tu correo electrónico"
+              required
             />
           </div>
 
           {/* Mensaje de error si los correos no coinciden */}
           {errorMessage && <p className='errorMessage' style={{ color: 'red' }}>{errorMessage}</p>}
 
-        
-            {/* Link habilitado o deshabilitado según la validación de los correos */}
-              {isButtonDisabled ? (
-                // Si los correos no coinciden, mostramos un mensaje o botón inactivo
-                <button disabled className='buttonDisabled'>
+
+          {/* Link habilitado o deshabilitado según la validación de los correos */}
+          {isButtonDisabled ? (
+          // Si los correos no coinciden, mostramos un mensaje o botón inactivo
+            <button disabled className='buttonDisabled'>
                   Comprar Entrada
-                </button>
-              ) : (
-                // Si los correos coinciden, mostramos el link activo
-                <Link 
-                  to={`/VentaFinal`}  
-                  state={{ imageDetail, title, price, count, total, email }}  
-                  className='botonComprarEntrada'
-                  >
+            </button>
+          ) : (
+          // Si los correos coinciden, mostramos el link activo
+            <Link
+              to={`/VentaFinal`}
+              state={{ imageDetail, title, price, count, total, email }}
+              className='botonComprarEntrada'
+            >
                   Comprar Entrada
-                </Link>
-              )}
+            </Link>
+          )}
 
 
-          <p className='importante2'>Una vez confirmado el email se activará el botón de pagar.</p>    
+          <p className='importante2'>Una vez confirmado el email se activará el botón de pagar.</p>
 
         </form>
-        
+
       </div>
- 
+
     </div>
-    
+
   )
 }
 
