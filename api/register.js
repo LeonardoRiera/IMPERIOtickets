@@ -1,7 +1,10 @@
-import Register from "./models/Register.js"; // Asegúrate de que la ruta sea correcta
+import Register from "./models/Register.js";
 import bcrypt from "bcryptjs";
 
 export default async function handler(req, res) {
+
+  console.log(req)
+
   if (req.method === "POST") {
     try {
       const { email, password, repeat_password, first_name, last_name } = req.body;

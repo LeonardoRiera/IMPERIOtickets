@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import registerService from "../../services/register.service";
+import './Register.less'
 
 export default function RegisterForm() {
 
@@ -14,14 +15,18 @@ export default function RegisterForm() {
   const submit = async (data) => {
 
     const body = {
-      first_name: data.firstName
+      first_name: data.firstName,
+      last_name: data.lastName,
+      email: data.email,
+      password: data.password,
+      repeat_password:data.repeatPassword,
+      status: 1
     }
 
     const response = await registerService(body)
 
     console.log(response)
 
-    console.log(data);
   };
 
   const password = watch("password");
