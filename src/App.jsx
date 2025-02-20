@@ -14,7 +14,8 @@ import Error from './Screens/Error/Error';
 import Pending from './Screens/Pending/Pending';
 import Failure from './Screens/Failure/Failure';
 import VentaFinal from './Screens/VentaFinal/VentaFinal';
-import Scanner from './Screens/Scanner/Scanner'
+import Scanner from './Screens/Scanner/Scanner';
+import Register from './Screens/Register/Register';
 
 function App() {
 
@@ -51,6 +52,8 @@ function App() {
           <Route path="/VentaFinal" element={<VentaFinal />} />
 
           <Route path="/Scanner" element={<Scanner />} />
+
+          <Route path="/Register" element={<Register />} />
 
         </Routes>
 
