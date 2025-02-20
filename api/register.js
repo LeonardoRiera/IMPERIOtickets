@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 
 export default async function handler(req, res) {
 
-  console.log(req)
+  console.log("la request es", req)
 
   if (req.method === "POST") {
     try {
