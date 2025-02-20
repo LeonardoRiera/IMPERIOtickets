@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import registerService from "../../services/register.service";
 
 export default function RegisterForm() {
 
@@ -10,14 +11,23 @@ export default function RegisterForm() {
     formState: { errors },
   } = useForm();
 
-  const submit = (data) => {
+  const submit = async (data) => {
+
+    const body = {
+      first_name: data.firstName
+    }
+
+    const response = await registerService(body)
+
+    console.log(response)
+
     console.log(data);
   };
 
   const password = watch("password");
 
   return (
-    <form onSubmit={handleSubmit(submit)} id="register-form">
+    <form onSubmit={handleSubmit((data) => submit(data))} id="register-form">
       <input
         {...register("email", {
           required: "El email es obligatorio",

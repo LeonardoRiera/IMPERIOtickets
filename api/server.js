@@ -43,7 +43,6 @@ fs.readdirSync(apiDir).forEach(async (file) => {
   }
 });
 
-
 // Conexión a la DB y levantar servidor
 const bootstrap = async () => {
   // eslint-disable-next-line no-undef

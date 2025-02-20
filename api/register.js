@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
-      const { email, password, repeat_password, first_name, last_name, entryId } = req.body;
+      const { email, password, repeat_password, first_name, last_name } = req.body;
 
       // 🔴 Validar que las contraseñas coincidan
       if (password !== repeat_password) {
@@ -20,7 +20,6 @@ export default async function handler(req, res) {
         password: hashedPassword,
         first_name,
         last_name,
-        entryId,
       });
 
       // Guardar en la base de datos

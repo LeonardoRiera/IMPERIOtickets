@@ -15,7 +15,6 @@ const registerSchema = new mongoose.Schema({
   },
   first_name: { type: String, required: true },
   last_name: { type: String, required: true },
-  entryId: { type: String, required: true, unique: true },
   status: { type: String, default: 'pending' }
 }, { collection: 'Usuarios' });
 
