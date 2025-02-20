@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import EntradasCount from '../EntradasCount/EntradasCount'
+import EntradasCount from '../../Components/EntradasCount/EntradasCount'
 import { useLocation, Navigate } from 'react-router-dom';
 import '../CardDetail/CardDetail.css';
 import { Link } from 'react-router-dom';

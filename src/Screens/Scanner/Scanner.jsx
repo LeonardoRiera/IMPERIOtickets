@@ -1,5 +1,5 @@
 import React from "react";
-import BarcodeScannerComponent from "react-qr-barcode-scanner";
+// import BarcodeScannerComponent from "react-qr-barcode-scanner";
 
 function Scanner() {
 

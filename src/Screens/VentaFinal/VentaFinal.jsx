@@ -1,7 +1,7 @@
 import React from 'react';
 import '../VentaFinal/VentaFinal.css'
 import { useLocation, Navigate } from 'react-router-dom';
-import Button from '../Button/Button';
+import Button from '../../Components/Button/Button';
 
 
 const VentaFinal = () => {
