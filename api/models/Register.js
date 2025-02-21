@@ -5,16 +5,6 @@ const registerSchema = new mongoose.Schema({
   first_name: { type: String, required: true },
   last_name: { type: String, required: true },
   password: { type: String, required: true },
-  repeat_password: {
-    type: String,
-    required: true,
-    validate: {
-      validator: function(value) {
-        return value === this.password;
-      },
-      message: 'Las contraseñas no coinciden'
-    }
-  },
   status: { type: Number, default: 0 }
 }, { collection: 'Usuarios' });
 

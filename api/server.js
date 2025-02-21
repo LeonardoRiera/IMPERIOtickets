@@ -14,6 +14,12 @@ const app = express();
 
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ extended: true }));
+const PORT = 5000;
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
+});
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -46,7 +52,7 @@ fs.readdirSync(apiDir).forEach(async (file) => {
 // Conexión a la DB y levantar servidor
 const bootstrap = async () => {
   // eslint-disable-next-line no-undef
-  await mongoose.connect(process.env.API_URL_MONGODB);
+  await mongoose.connect(process.env.API_URL_MONGODB)
 };
 
 bootstrap();

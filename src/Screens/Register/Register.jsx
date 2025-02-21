@@ -19,7 +19,7 @@ export default function RegisterForm() {
       last_name: data.lastName,
       email: data.email,
       password: data.password,
-      repeat_password:data.repeatPassword,
+      repeat_password: data.repeatPassword,
       status: 1
     }
 

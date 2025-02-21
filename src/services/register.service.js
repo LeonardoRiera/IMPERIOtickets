@@ -12,10 +12,9 @@ export default async function registerService (body) {
     body: JSON.stringify(body)
   }
 
+  console.log(body)
   // Default response
   const response = await fetch(`${apiUrl}register`, requestOptions)
-  console.log('la response es', response)
-
   const json = await response.json()
 
   return json

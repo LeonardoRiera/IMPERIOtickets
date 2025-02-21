@@ -1,5 +1,11 @@
 import Register from "./models/Register.js";
 import bcrypt from "bcryptjs";
+import express from "express";
+import cors from "cors";
+
+const app = express()
+
+app.use(cors())
 
 export default async function handler(req, res) {
 
