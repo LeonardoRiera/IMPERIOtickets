@@ -4,8 +4,7 @@ import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 import mercadoPagoService from '../../services/mercado.pago.service';
 
 
-const Button = ({ count, total, title, email }) => {
-
+const Button = ({ count, price, title, email }) => {
 
 
   // Local states
@@ -27,8 +26,7 @@ const Button = ({ count, total, title, email }) => {
       title: title,
       quantity: count,
 
-
-      price: total,
+      price: price,
       external_reference: email
 
     }

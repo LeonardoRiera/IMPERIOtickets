@@ -146,7 +146,7 @@ const CardDetail = () => {
           </div>
 
           {/* <p className='detallesCountTotal'>Total: ${total}</p> */}
-          <p className='detallesCountTotal'>Total: ${total.toFixed(2)}</p>
+          <p className='detallesCountTotal'>Total: ${total}</p>
 
         </div>
 
