@@ -1,28 +1,44 @@
 import React from "react";
-// import BarcodeScannerComponent from "react-qr-barcode-scanner";
+import BarcodeScannerComponent from "react-qr-barcode-scanner";
+import './Scanner.less'
+// To use Html5Qrcode (more info below)
+import {Html5QrcodeScanner} from "html5-qrcode"
+
 
 function Scanner() {
 
-  const [data, setData] = React.useState("Not Found");
+  React.useEffect(() => {
 
-  const onScan = (err, result) => {
+    const scanner = new Html5QrcodeScanner('reader', {
+      qrbox:{
+        width: 250,
+        height: 250
+      },
+      fps: 5
+    })
 
-    if (result) {
-      console.log(result)
-      window.reload()
+    scanner.render(onScan)
+
+
+    function onScan (err, result) {
+
+      scanner.clear()
+
+      if (result) {
+        window.reload()
+        setData(result)
+      }
+
     }
+  }, [])
+  const [data, setData] = React.useState("Escanea tu entrada");
 
-  }
 
   return (
     <>
       <h1>Escaneáte el QR Papu</h1>
 
-      <BarcodeScannerComponent
-        width={500}
-        height={500}
-        onUpdate={onScan}
-      />
+      <div id='reader'></div>
 
       {data}
     </>
