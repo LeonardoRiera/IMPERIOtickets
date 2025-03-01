@@ -11,6 +11,7 @@ export default async function handler(req, res) {
   // Función para convertir una imagen a base64
   const toBase64 = (filePath) => {
     const image = fs.readFileSync(filePath);
+
     return `data:image/png;base64,${image.toString("base64")}`;
   };
 
@@ -18,6 +19,7 @@ export default async function handler(req, res) {
   const generateQRCodeBase64 = async (id) => {
     try {
       const qrBase64 = await QRCode.toDataURL(id, { scale: 5 });
+
       return qrBase64;
     } catch (error) {
       console.error("Error generando QR:", error);
@@ -35,6 +37,7 @@ export default async function handler(req, res) {
 
     // Obtener la ruta absoluta de la imagen
     const imagePath = path.join(process.cwd(), "public", "assets", "imagotipoLetraNegra.png");
+
     const logoUrl = toBase64(imagePath);
 
     // Agregar la imagen al PDF
@@ -57,6 +60,7 @@ export default async function handler(req, res) {
     pdf.addImage(qrBase64, "PNG", 30, 110, 40, 40);
 
     const pdfBuffer = Buffer.from(pdf.output("arraybuffer"));
+
     return pdfBuffer.toString("base64");
   };
 
@@ -65,6 +69,7 @@ export default async function handler(req, res) {
   }
 
   const paymentId = req.query.id;
+
   if (!paymentId) {
     return res.status(400).json({ error: "Falta el paymentId" });
   }
@@ -80,14 +85,19 @@ export default async function handler(req, res) {
     }
 
     const data = await response.json();
+
     console.log(data.external_reference);
     const emailUser = data.external_reference;
+
     const quantity = parseInt(data.additional_info.items[0].quantity);
+
     const mailAttachments = [];
 
     for (let i = 0; i < quantity; i++) {
       const entryId = nanoid();
+
       const qrBase64 = await generateQRCodeBase64(entryId);
+
       const pdfBase64 = generatePDFWithQR(qrBase64);
 
       mailAttachments.push({

@@ -1,3 +1,4 @@
+import React from 'react'
 import '../Footer/Footer.css'
 import logoPalabra from '../../assets/nombreCalidad.png'
 import { Link } from 'react-router-dom'
@@ -11,13 +12,14 @@ export const Footer = () => {
       {/* footer */}
       <div className='row contenedorFooterPrincipal '>
 
-        
+
         <div className='col-lg-3 col-md-12 contactoRedesFooter'>
 
-          <img className='logoPalabraFooter' src={logoPalabra} alt="logo de imperio ticket" />  
-          
+          <img className='logoPalabraFooter' src={logoPalabra} alt="logo de imperio ticket" />
+
           <div className='contactoFooter'>
             <h4>Puedes Contactarte con Nosotros <br/> vía e-mail</h4>
+
             <a href="mailto:imperioticket@gmail.com">imperiotickets@gmail.com</a>
           </div>
 
@@ -29,7 +31,7 @@ export const Footer = () => {
 
             {/* Enlace a X (Twitter) */}
             <a href="https://twitter.com/tu_usuario" target="_blank" rel="noopener noreferrer">
-             <i className="bi bi-twitter-x"></i> 
+              <i className="bi bi-twitter-x"></i>
             </a>
 
             {/* Enlace a Discord */}
@@ -41,9 +43,9 @@ export const Footer = () => {
         </div>
 
         <div className='col-lg-6 col-md-12 colCentralFooter'>
-          
-          <img className='planetaFooter' src={logoEstr} alt="logo con estrellas" />  
-          
+
+          <img className='planetaFooter' src={logoEstr} alt="logo con estrellas" />
+
         </div>
 
         <div className='col-lg-3 col-md-12 enlacesFooter'>
@@ -54,6 +56,7 @@ export const Footer = () => {
           >
             <i className='bi bi-diamond-fill icons'></i> Guía de Compra
           </Link>
+
           <Link
             className='linkFooter'
             to='/GuiaCompra'
@@ -61,6 +64,7 @@ export const Footer = () => {
           >
             <i className='bi bi-diamond-fill icons'></i> Medios de Pago
           </Link>
+
           <Link
             className='linkFooter'
             to='/AtencionAlCliente'
@@ -68,6 +72,7 @@ export const Footer = () => {
           >
             <i className='bi bi-diamond-fill icons'></i> Atención al Cliente
           </Link>
+
           <Link
             className='linkFooter'
             to='/AtencionAlCliente'
@@ -75,6 +80,7 @@ export const Footer = () => {
           >
             <i className='bi bi-diamond-fill icons'></i> Preguntas Frecuentes
           </Link>
+
           <Link
             className='linkFooter'
             to='/GuiaCompra'

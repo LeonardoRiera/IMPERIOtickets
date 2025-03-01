@@ -1,14 +1,15 @@
-import { useState, useEffect } from "react";
+import React from "react";
 import "../Header2/Header2.css";
 import personaja1 from "../../assets/personaja1.webp";
-import personaja2 from "../../assets/personaja3.webp"; 
+import personaja2 from "../../assets/personaja3.webp";
 import personaje3 from "../../assets/personaje2.webp";
 
 const Header2 = () => {
   const images = [personaja1, personaje3, personaja2]; // Usando import para cargar imágenes correctamente
-  const [currentIndex, setCurrentIndex] = useState(0);
 
-  useEffect(() => {
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+
+  React.useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
     }, 5000); // Cambia cada 5 segundos
@@ -28,11 +29,14 @@ const Header2 = () => {
           />
         ))}
       </div>
+
       <div className="col-sm-6 col-12 textos">
         <h1 className="principal">
           Comprá tu <br />
+
           <span className="tickets">Ticket Digital</span>
         </h1>
+
         <h2 className="subtitle">Fácil y Seguro.</h2>
       </div>
     </div>

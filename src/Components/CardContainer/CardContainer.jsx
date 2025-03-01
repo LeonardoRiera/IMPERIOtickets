@@ -1,7 +1,8 @@
+import React from 'react';
 import ItemCards from '../ItemCards/ItemCards.jsx';
 import '../CardContainer/CardContainer.css'
 import { useEffect, useState } from 'react'
-import { getDocs, collection } from "firebase/firestore"; 
+import { getDocs, collection } from "firebase/firestore";
 import { db } from "../../services/firebaseConfing.js";
 import Header2 from '../Header2/Header2.jsx';
 
@@ -16,6 +17,7 @@ const CardContainer = () => {
 
     try {
       const querySnapshot = await getDocs(collection(db, "ListaBandas"));
+
       const productosArray = [];
 
       querySnapshot.forEach((doc) => {
@@ -24,7 +26,7 @@ const CardContainer = () => {
       });
 
       setProductos(productosArray);
-      
+
     } catch (error) {
       console.error("Error fetching productos: ", error);
     }
@@ -35,14 +37,13 @@ const CardContainer = () => {
 
     window.scrollTo(0, 0);
     fetchProductos(); // Llamamos a la función async dentro de useEffect
-    
-  }, []);
 
+  }, []);
 
 
   return (
     <div className='CardContainer'>
-      
+
       <Header2 />
 
       <ItemCards productos={productos}/>
@@ -50,5 +51,5 @@ const CardContainer = () => {
     </div>
   )
 }
- 
+
 export default CardContainer
