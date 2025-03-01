@@ -96,21 +96,6 @@ const CardDetail = () => {
     }
   };
 
-
-  const handleFeedback = async () => {
-    try {
-      // Realizar la solicitud GET al servidor (suponiendo que está en localhost:3000)
-      const response = await axios.get('http://147.79.107.178:3000/feedback');
-
-      console.log('Respuesta del servidor:', response.data); // Manejar la respuesta
-      alert('¡Solicitud exitosa! Respuesta del servidor: ' + response.data.message);
-    } catch (error) {
-      console.error('Error al hacer la solicitud:', error);
-      alert('Hubo un error al hacer la solicitud');
-    }
-  };
-
-
   return (
     <div className='DetailContainer'>
       <div className='bannercito'>

@@ -33,6 +33,7 @@ export default function RegisterForm() {
 
   return (
     <form onSubmit={handleSubmit((data) => submit(data))} id="register-form">
+      <h4 className="registerTitle">Ingresa Tus <span className="registerColor">Datos</span> Para Crear Tu <span className="registerColor">Usuario</span></h4>
       <input
         {...register("email", {
           required: "El email es obligatorio",
@@ -42,26 +43,29 @@ export default function RegisterForm() {
           },
         })}
         placeholder="Email"
+        className="registerInput"
       />
 
-      {errors.email && <p>{errors.email.message}</p>}
+      {errors.email && <p className="errorMessage">{errors.email.message}</p>}
 
-      <input {...register("firstName")} placeholder="Nombre" />
+      <input {...register("firstName")} placeholder="Nombre" className="registerInput" />
 
       <input
         {...register("lastName", { required: "El apellido es obligatorio" })}
         placeholder="Apellido"
+        className="registerInput"
       />
 
-      {errors.lastName && <p>{errors.lastName.message}</p>}
+      {errors.lastName && <p className="errorMessage">{errors.lastName.message}</p>}
 
       <input
         type="password"
         {...register("password", { required: "La contraseña es obligatoria" })}
         placeholder="Contraseña"
+        className="registerInput"
       />
 
-      {errors.password && <p>{errors.password.message}</p>}
+      {errors.password && <p className="errorMessage">{errors.password.message}</p>}
 
       <input
         type="password"
@@ -71,11 +75,12 @@ export default function RegisterForm() {
             value === password || "Las contraseñas no coinciden",
         })}
         placeholder="Repite la contraseña"
+        className="registerInput"
       />
 
-      {errors.repeatPassword && <p>{errors.repeatPassword.message}</p>}
+      {errors.repeatPassword && <p className="errorMessage">{errors.repeatPassword.message}</p>}
 
-      <input type="submit" value="Registrarse" />
+      <input type="submit" value="Registrarse" className="registerButton" />
     </form>
   );
 }
