@@ -1,4 +1,4 @@
-import nodemailer from "nodemailer";
+/* import nodemailer from "nodemailer";
 import { nanoid } from "nanoid";
 import fetch from "node-fetch";
 import QRCode from "qrcode";
@@ -131,4 +131,4 @@ export default async function handler(req, res) {
     console.error("Error en el webhook:", error);
     res.status(500).json({ error: "Error interno del servidor" });
   }
-}
+} */

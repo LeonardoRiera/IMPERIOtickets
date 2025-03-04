@@ -1,4 +1,4 @@
-import { MercadoPagoConfig, Preference } from 'mercadopago';
+/* import { MercadoPagoConfig, Preference } from 'mercadopago';
 import express from "express";
 import cors from "cors";
 
@@ -53,3 +53,4 @@ export default async function handler(req, res) {
     res.status(405).json({ error: 'Método no permitido' });
   }
 }
+ */
