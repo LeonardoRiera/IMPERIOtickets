@@ -1,0 +1,15 @@
+/* Estilos del botón */
+.buy-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 30%;
+  }
+  
+  .buy-button:hover {
+    background-color: #218838;
+  }

@@ -1,0 +1,238 @@
+.backClientes {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 8vmax;
+   
+}
+.AtencionClienteContainer {
+    background-color: #000000;
+    text-align: center;
+    padding-bottom: 4vmax;
+    width: 60%;
+   
+   
+}
+
+.tituloInformacionAtencion {
+    padding: 1.5vmax;
+    font-family: 'Clash Grotesk', sans-serif;
+    font-size: 2vmax;
+    color: #e2dc87;
+}
+
+.tituloInformacionAtencion a {
+    color: #e2dc87; /* Mismo color que el título */
+    text-decoration: none; /* Elimina el subrayado predeterminado */
+    margin: 0 10px; 
+    transition: color 0.3s ease;
+}
+
+
+.tituloInformacionAtencion a:hover {
+    color: #FE7247; /* Color al pasar el mouse por encima */
+    text-decoration: underline; /* Añadir subrayado al hacer hover */
+}
+
+.Atencionh3 {
+    padding-top: 2vmax;
+    padding-bottom: 1.4vmax;
+    font-family: 'Clash Grotesk', sans-serif;
+    font-size: 2.2vmax;
+    font-weight: bold;
+    color: rgb(240, 230, 230);
+
+    /* subrayado, espaciado y scroll por id */
+    /* text-decoration:underline 1.6px; */
+   /*  text-underline-offset: 4px */;
+    scroll-margin-top: 100px;
+}
+
+.AtencionClienteContainer p {
+    font-family: 'Clash Grotesk', sans-serif;
+    color: rgb(240, 230, 230);
+    font-size: 1.4vmax;
+    text-align: start;
+    font-weight: 400;
+}
+
+.iconsat {
+    font-size: 1vmax;
+    margin-right: 1vmax;
+}
+
+
+
+/* ++++++++++++++++++++++++ media query |  pantalla gigante |   ++++++++++++++++++++++++++++++++++*/
+
+@media screen and (max-width:2220px) {
+    
+    
+}
+
+
+/* ++++++++++++++++++++++++ media query | pantalla extra extra lg  |   ++++++++++++++++++++++++++++++++++*/
+
+
+
+@media screen and (max-width:1400px) {
+    
+    .AtencionClienteContainer p {
+        font-size: 2.3vmax;
+       
+    }
+    
+}
+
+
+
+/* ++++++++++++++++++++++++ media query | pantalla extra lg   |  ++++++++++++++++++++++++++++++++++*/
+
+
+@media screen and (max-width:1200px) {
+    
+
+    
+}
+
+
+
+/* ++++++++++++++++++++++++ media query | pantalla lg  | ++++++++++++++++++++++++++++++++++*/
+
+
+@media screen and (max-width:992px) {
+    
+    .backClientes {
+        margin-top: 8vmax;  
+    }
+    .AtencionClienteContainer {
+        margin-top: 8vmax;    
+        width: 80%;
+    }
+
+    
+    /* h2 */
+    .tituloInformacionAtencion {
+        font-size: 2.6vmax;
+    }
+
+    .Atencionh3 {
+        font-size: 2.2vmax;
+    }
+
+    
+    .AtencionClienteContainer p {
+        font-size: 2vmax;
+    }
+
+}
+
+
+
+
+/* ++++++++++++++++++++++++ media query |  pantalla md   | ++++++++++++++++++++++++++++++++++*/
+
+
+
+@media screen and (max-width:768px) {
+
+    
+    
+    
+    
+    /* h2 */
+    .tituloInformacionAtencion {
+        font-size: 3.6vmax;
+    }
+
+    .Atencionh3 {
+        font-size: 2.4vmax;
+    }
+
+    
+    .AtencionClienteContainer p {
+        font-size: 2.2vmax;
+    }
+
+}
+
+
+
+
+/* ++++++++++++++++++++++++ media query |  pantalla sm   | ++++++++++++++++++++++++++++++++++*/
+
+@media screen and (max-width:576px) {
+
+    .backClientes {
+        margin-top: 4vmax;  
+    }
+    
+    .tituloInformacionAtencion {
+        display: flex;
+        flex-flow: column wrap;
+
+    }
+
+    .AtencionClienteContainer {
+        width: 90%;
+    }
+    
+    /* h2 */
+    .tituloInformacionAtencion {
+        font-size: 3.2vmax;
+    }
+
+    .Atencionh3 {
+        font-size: 2.8vmax;
+    }
+
+    
+    .AtencionClienteContainer p {
+        font-size: 2.6vmax;
+    }
+
+
+
+}
+
+
+
+/* medida especial hasta 380 */
+
+@media screen and (max-width:380px) {
+
+    
+
+    .tituloInformacionAtencion a {
+        padding: 1vmax;
+    }
+    
+    .Atencionh3 {
+        font-size: 2.6vmax;
+    }
+
+    
+    .AtencionClienteContainer p {
+        font-size: 2.2vmax;
+    }
+
+
+}
+
+
+
+/* ++++++++++++++++++++++++ media query  | pantalla xxsm |   ++++++++++++++++++++++++++++++++++*/
+
+@media screen and (max-width:320px) {
+   
+    .Atencionh3 {
+        font-size: 2.4vmax;
+    }
+
+    
+    .AtencionClienteContainer p {
+        font-size: 2vmax;
+    }
+
+}

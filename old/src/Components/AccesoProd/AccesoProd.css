@@ -1,0 +1,120 @@
+.accesoProdContainer {
+    margin-top: 10vmax;
+}
+
+
+.formulario-titulo {
+    color: black;
+}
+
+form {
+    color: black;
+}
+
+.formRow {
+    background-color: #000000 ; 
+    
+}
+
+.rounded {
+    background-color: #000000;
+    /* border-bottom: 1px solid rgba(255, 217, 0, 0.589);  */
+    box-shadow: 0 1px 15px rgba(255, 217, 0, 0.177);
+    border-radius: 20px 0 0 20px !important;
+}
+.logoform {
+    background-image: url('../../assets/fondostars.jpg'); /* Reemplaza con la ruta correcta */
+    background-size: cover; /* Asegura que la imagen cubra todo el contenedor */
+    background-position: top; /* Centra la imagen de fondo */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    overflow: hidden; /* Oculta cualquier contenido que se desborde */
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px 0 0 10px !important;
+    /* border-bottom: 1px solid rgba(255, 217, 0, 0.589);  */
+    box-shadow: 0 1px 15px rgba(255, 217, 0, 0.177); 
+}
+
+.logoblanco2 {
+    width: 18vmax;
+    animation: float 3s ease-in-out infinite; /* Animación de flotación */
+    
+}
+
+
+
+
+/* ++++++++++++++++++++++++ media query |  pantalla gigante |   ++++++++++++++++++++++++++++++++++*/
+
+@media screen and (max-width:2220px) {
+    
+    
+}
+
+
+/* ++++++++++++++++++++++++ media query | pantalla extra extra lg  |   ++++++++++++++++++++++++++++++++++*/
+
+
+
+@media screen and (max-width:1400px) {
+    
+    
+}
+
+
+
+/* ++++++++++++++++++++++++ media query | pantalla extra lg   |  ++++++++++++++++++++++++++++++++++*/
+
+
+@media screen and (max-width:1200px) {
+    
+
+    
+}
+
+
+
+/* ++++++++++++++++++++++++ media query | pantalla lg  | ++++++++++++++++++++++++++++++++++*/
+
+
+@media screen and (max-width:992px) {
+    
+   
+    
+}
+
+
+
+
+/* ++++++++++++++++++++++++ media query |  pantalla md   | ++++++++++++++++++++++++++++++++++*/
+
+
+
+@media screen and (max-width:768px) {
+
+    
+
+}
+
+
+
+
+/* ++++++++++++++++++++++++ media query |  pantalla sm   | ++++++++++++++++++++++++++++++++++*/
+
+@media screen and (max-width:600px) {
+    .formRow {
+        flex-direction: column;
+        
+    }
+
+   
+
+}
+
+
+/* ++++++++++++++++++++++++ media query  | pantalla xxsm |   ++++++++++++++++++++++++++++++++++*/
+
+@media screen and (max-width:320px) {
+   
+}

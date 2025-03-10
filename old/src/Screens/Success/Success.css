@@ -1,0 +1,181 @@
+.contenedorSuccess {
+    width: 65%;
+    margin: 10vmax auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   
+
+}
+
+.textoSuccessPrincipal {
+    color: white;
+    font-family: "Bebas Neue", system-ui;
+    font-size: 3vmax;
+    text-align: center;
+}
+
+.exito {
+    color: #FE7247;
+    font-size: 3.8vmax;
+}
+
+.textoSuccess {
+    color: white;
+    font-family: 'Clash Grotesk';
+    font-size: 1.4vmax;
+    text-align: center;
+}
+
+.diamont {
+    font-size: 0.8vmax;
+    margin-right: 0.5vmax;
+    color: #F0E541;
+}
+
+
+/* ++++++++++++++++++++++++ media query |  pantalla gigante |   ++++++++++++++++++++++++++++++++++/ */
+
+@media screen and (max-width:2220px) {
+
+
+}
+
+
+/* / ++++++++++++++++++++++++ media query | pantalla extra extra lg  |   ++++++++++++++++++++++++++++++++++/ */
+
+
+
+@media screen and (max-width:1400px) {
+
+    .textoSuccess {
+        font-size: 1.8vmax;
+       
+    }
+    
+}
+
+
+
+/* / ++++++++++++++++++++++++ media query | pantalla extra lg   |  ++++++++++++++++++++++++++++++++++/ */
+
+
+@media screen and (max-width:1200px) {
+
+  
+
+}
+
+
+
+/* / ++++++++++++++++++++++++ media query | pantalla lg  | ++++++++++++++++++++++++++++++++++/ */
+
+
+@media screen and (max-width:992px) {
+
+    .contenedorSuccess {
+        margin: 12vmax auto;
+    }
+    
+
+    .textoSuccessPrincipal {
+        font-size: 4vmax;
+        
+    }
+    
+    .exito {
+        font-size: 4.8vmax;
+    }
+
+    .textoSuccess {
+        font-size: 2.1vmax;
+       
+    }
+    
+}
+
+
+/* / ++++++++++++++++++++++++ media query |  pantalla galaxy flod2   | ++++++++++++++++++++++++++++++++++/ */
+
+
+
+@media screen and (max-width:882px) {
+
+    .textoSuccess {
+        font-size: 2.3vmax;
+       
+    }
+  
+}
+
+
+
+
+
+/* / ++++++++++++++++++++++++ media query |  pantalla md   | ++++++++++++++++++++++++++++++++++/ */
+
+
+
+@media screen and (max-width:768px) {
+
+    .textoSuccess {
+        font-size: 2.5vmax;
+       
+    }
+
+}
+
+/* / ++++++++++++++++++++++++ media query | pantalla ipad pro |   ++++++++++++++++++++++++++++++++++/ */
+
+
+
+@media screen and (max-width:581px) {
+
+    .contenedorSuccess {
+        width: 75%;
+       
+       
+    
+    }
+  
+}
+
+
+
+/* / ++++++++++++++++++++++++ media query |  pantalla sm   | ++++++++++++++++++++++++++++++++++/ */
+
+@media screen and (max-width:576px) {
+
+ 
+
+
+}
+
+/* especial */
+
+@media screen and (max-width:500px) {
+
+
+}
+
+/* medida extra a 400 */
+
+@media screen and (max-width:400px) {
+
+
+    
+  
+
+}
+
+
+/* / ++++++++++++++++++++++++ media query  | pantalla xxsm |   ++++++++++++++++++++++++++++++++++*/ 
+
+@media screen and (max-width:320px) {
+
+  
+
+}
+
+
+
