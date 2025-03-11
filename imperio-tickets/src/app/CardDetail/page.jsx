@@ -2,27 +2,50 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import EntradasCount from '../../Components/EntradasCount/EntradasCount';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import './CardDetail.css';
 import Link from 'next/link';
 
 const CardDetail = () => {
 
   const router = useRouter();
-  console.log(router)
+  const searchParams = useSearchParams()
 
-  // Verificación para evitar errores
-  if (!router) {
-    // Puedes redirigir o mostrar un mensaje de error
-    return router.back() // Redirige a la página principal
-  }
+  React.useEffect(() => {
+    // Verificación para evitar errores
+    if (!router) {
+      // Puedes redirigir o mostrar un mensaje de error
+      return router.back() // Redirige a la página principal
+    }
 
-  const { image, image2, imageDetail, title, price, dia, fecha, hora, lugar, description, clasificacion } = location.state;
+  },[])
 
   /* contador */
   const [count, setCount] = useState(1); // Contador de entradas
-
   const [total, setTotal] = useState(0); // Estado para el total
+  const [imageDetail, setImageDetail] = React.useState(null)
+  const [title, setTitle] = React.useState('')
+  const [price, setPrice] = React.useState(0)
+  const [dia, setDia] = React.useState('')
+  const [fecha, setFecha] = React.useState(0)
+  const [hora, setHora] = React.useState(0)
+  const [lugar, setLugar]= React.useState('')
+  const [description, setDescription] = React.useState('')
+  const [clasificacion, setClasificacion] = React.useState('')
+
+  React.useEffect(() => {
+
+    setImageDetail(searchParams.get('imageDetail'))
+    setTitle(searchParams.get('title'))
+    setPrice(searchParams.get('price'))
+    setDia(searchParams.get('dia'))
+    setFecha(searchParams.get('fecha'))
+    setHora(searchParams.get('hora'))
+    setLugar(searchParams.get('lugar'))
+    setDescription(searchParams.get('description'))
+    setClasificacion(searchParams.get('clasificacion'))
+
+  }, [])
 
   const increment = () => {
     if(count > 0) {
@@ -181,13 +204,11 @@ const CardDetail = () => {
             </button>
           ) : (
           // Si los correos coinciden, mostramos el link activo
-            <Link
-              to={`/VentaFinal`}
-              state={{ imageDetail, title, price, count, total, email }}
-              className='botonComprarEntrada'
-            >
-                  Comprar Entrada
-            </Link>
+          <Link href={{
+              pathname:'/VentaFinal', 
+              query:{imageDetail, title, price, email, count, total}
+            }} 
+              className='botonComprarEntrada'>Comprar Entrada</Link>
           )}
 
 

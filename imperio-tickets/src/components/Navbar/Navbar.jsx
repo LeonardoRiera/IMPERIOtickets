@@ -1,5 +1,6 @@
 /* global bootstrap */
 'use client';
+import React from 'react';
 import { useEffect } from 'react';
 import './Navbar.css';
 import Link from 'next/link';
@@ -7,6 +8,8 @@ import Image from 'next/image';
 import logo from '../../assets/imagologoTickets.png';
 
 const Navbar = () => {
+
+  const [showButton, setShowButton] = React.useState(false)
   
   useEffect(() => {
     // Selecciona todos los enlaces dentro del navbar
@@ -43,6 +46,8 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="container-fluid xpander">
+        <button onClick={() => setShowButton(!showButton)}>BOTON DE ABRIR Y CERRAR</button>
+
         <Link className="navbar-brand" href='/'><Image src={logo} alt="logo completo" className="logoCompleto" /></Link>
 
         <button className="navbar-toggler iconoNavbar" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,28 +56,31 @@ const Navbar = () => {
           </span>
         </button>
 
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ms-auto">
-            <li className="nav-item">
-              {/* Navegación con hash scroll suave */}
-              <Link className="nav-link" href="#shows" scroll={true}>
-                Shows
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" href='/GuiaDeCompra'>Guía de Compra</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" href='/AtencionAlCliente'>Atención al Cliente</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" href="/AccesoProductores">Acceso Productores</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" href="#footer">Contacto</Link>
-            </li>
-          </ul>
-        </div>
+
+        <div className={`menu ${showButton ? 'show' : 'hide'}`} id="navbarNav">
+        <ul className="navbar-nav ms-auto">
+          <li className="nav-item">
+            {/* Navegación con hash scroll suave */}
+            <Link className="nav-link" href="#shows" scroll={true}>
+              Shows
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" href='/GuiaDeCompra'>Guía de Compra</Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" href='/AtencionAlCliente'>Atención al Cliente</Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" href="/AccesoProductores">Acceso Productores</Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" href="#footer">Contacto</Link>
+          </li>
+        </ul>
+      </div>
+
+
       </div>
     </nav>
   );
