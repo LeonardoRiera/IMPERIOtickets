@@ -1,4 +1,18 @@
+.menu{
+display: flex;
+}
 
+.hide {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.5s ease-in-out;
+}
+
+.show {
+    height: 200px;
+    transition: height 0.5s ease-in-out;
+
+}
 
 .navbar {
     padding: 0.5vmax;
@@ -186,22 +200,7 @@
 }
 
 
-/* ++++++++++++++++++++++++ media query |  pantalla ipat pro 11   | ++++++++++++++++++++++++++++++++++*/
-
-
-
-@media screen and (max-width:840px) {
-
-   
-}
-
-
-
-
-
 /* ++++++++++++++++++++++++ media query |  pantalla md   | ++++++++++++++++++++++++++++++++++*/
-
-
 
 @media screen and (max-width:768px) {
 

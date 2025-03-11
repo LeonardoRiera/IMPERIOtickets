@@ -8,6 +8,7 @@ const Card = ({ title, price, image, image2, imageDetail, dia, fecha, hora, luga
   const [backgroundImage, setBackgroundImage] = React.useState(image); // Imagen por defecto
 
   React.useEffect(() => {
+
     const handleResize = () => {
       // Cambia la imagen si el ancho de la pantalla es menor o igual a 768px
       if (window.innerWidth <= 768) {
@@ -27,7 +28,7 @@ const Card = ({ title, price, image, image2, imageDetail, dia, fecha, hora, luga
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [image, image2]); // Se re-ejecuta si cambian las imágenes
+  }, [image, image2]);
 
   return (
     <div className="card"
@@ -51,7 +52,7 @@ const Card = ({ title, price, image, image2, imageDetail, dia, fecha, hora, luga
         <p className='lugar texto'>{lugar}</p>
       </div>
 
-      <Link href={`/CardDetail`}  state={{ image, image2, imageDetail, title, price, dia, fecha, hora, lugar, description, clasificacion }}  className='buyButton'>Adquirir Entrada</Link>
+      <Link href={{pathname:'/CardDetail', query:{image, image2, imageDetail, title, price, dia, fecha, hora, lugar, description, clasificacion}}} className='buyButton'>Adquirir Entrada</Link>
 
     </div>
   );

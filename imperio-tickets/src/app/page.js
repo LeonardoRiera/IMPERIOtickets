@@ -12,7 +12,7 @@ export default function Home() {
       <Navbar />
 
       <main className={styles.main}>
-        <CardContainer />
+      <CardContainer />
 
       </main>
       <footer className={styles.footer}>
