@@ -1,6 +1,7 @@
 .header {
     width: 100%;
     display: flex;
+    flex-direction: row;
     justify-content: center;
     margin-bottom: 2vmax;
 }
@@ -11,6 +12,7 @@
     justify-content: end;
     position: relative;
     height: 35vmax;
+    width: 33vmax;
 
 }
 
@@ -91,7 +93,43 @@
 
 @media screen and (max-width:992px) {
 
-  
+    .header {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+        
+    }
+
+
+    /* Sección imagen */
+    .image {
+        height: 40vmax;
+        width: 38vmax;
+
+    }
+
+    .image img { /* Aplicando estilos a todas las imágenes dentro de .image */
+        width: 38vmax;
+        margin: 4vmax 2vmax 4vmax 0;
+       
+    }
+
+
+    .textos {
+        
+        flex-direction: column;
+        
+        align-items: center;
+        margin-top: 2vmax;
+    }
+
+    .principal { 
+        line-height: 1;
+        text-align: center;
+        margin-bottom: 2vmax;
+    }
 }
 
 

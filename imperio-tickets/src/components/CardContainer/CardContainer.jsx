@@ -44,7 +44,7 @@ const CardContainer = () => {
   return (
     <div className='CardContainer'>
 
-      <Header2 />
+      {/* <Header2 /> */}
 
       <ItemCards productos={productos}/>
 
