@@ -21,7 +21,7 @@ app.listen(PORT, "0.0.0.0", () => {
   console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
 });
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const __dirname = path.dirname(fileURLToPath(process.url));
 
 const apiDir = path.join(__dirname);
 

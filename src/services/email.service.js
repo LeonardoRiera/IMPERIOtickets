@@ -1,7 +1,7 @@
 // Config
-const apiUrl = import.meta.env.VITE_API_URL_SERVER;
+const apiUrl = process.env.NEXT_PUBLIC_API_URL_SERVER;
 
-export default async function mercadoPagoService (body) {
+export default async function emailService (body) {
 
   const requestOptions = {
     method: 'POST',
@@ -13,7 +13,7 @@ export default async function mercadoPagoService (body) {
   }
 
   // Default response
-  const response = await fetch(`${apiUrl}create_preference`, requestOptions)
+  const response = await fetch(`${apiUrl}store-email`, requestOptions)
   const json = await response.json()
 
   return json

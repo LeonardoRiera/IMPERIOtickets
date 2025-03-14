@@ -1,5 +1,5 @@
 import React from 'react'
-import AnimationSuccess from  '../../Components/AnimationSuccess/AnimationSuccess.jsx'
+import AnimationSuccess from  '../../Components/AnimationSuccess/AnimationSuccess.js'
 import './Success.css'
 
 

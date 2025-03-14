@@ -26,8 +26,8 @@ export default async function handler(req, res) {
           }
         ],
         back_urls: {
-          success: `${process.env.VITE_API_URL}Success`,
-          failure: `${process.env.VITE_API_URL}Failure`,
+          success: `${process.env.NEXT_PUBLIC_API_URL}Success`,
+          failure: `${process.env.NEXT_PUBLIC_API_URL}Failure`,
           pending: "https://www.youtube.com/watch?v=vEXwN9-tKcs&t=180s&ab_channel=onthecode"
         },
         auto_return: "approved",

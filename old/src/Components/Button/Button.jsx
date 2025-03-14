@@ -8,7 +8,7 @@ const Button = ({ count, subTotal, title, email, price }) => {
   // Local states
   const [preference, setPreference] = React.useState(null)
 
-  const publicKey = import.meta.env.VITE_PUBLIC_KEY_MERCADOPAGO
+  const publicKey = process.env.NEXT_PUBLIC_KEY_MERCADOPAGO
 
   React.useEffect(() => {
 

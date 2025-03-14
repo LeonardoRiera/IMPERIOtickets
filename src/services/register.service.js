@@ -1,5 +1,5 @@
 // Config
-const apiUrl = import.meta.env.VITE_API_URL_SERVER;
+const apiUrl = process.env.NEXT_PUBLIC_API_URL_SERVER;
 
 export default async function registerService (body) {
 
