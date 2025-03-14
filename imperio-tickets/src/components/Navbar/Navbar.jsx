@@ -1,89 +1,74 @@
-/* global bootstrap */
+
 'use client';
 import React from 'react';
-import { useEffect } from 'react';
-import './Navbar.css';
+import { useState } from 'react';
+import styles from './Navbar.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
 import logo from '../../assets/imagologoTickets.png';
 
+
 const Navbar = () => {
 
-  const [showButton, setShowButton] = React.useState(false)
-  
-  useEffect(() => {
-    // Selecciona todos los enlaces dentro del navbar
-    const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+  const [menuEstado, setMenuEstado] = useState(false);
 
-    // Añade un evento de clic a cada enlace
-    navLinks.forEach(link => {
-      link.addEventListener('click', function () {
+  const toggleMenu = () => {
+    setMenuEstado(!menuEstado);
+  };
 
-        // Selecciona el menú colapsable
-        const navbarCollapse = document.getElementById('navbarNav');
-
-        // Cierra el menú colapsable
-        const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
-            toggle: false // Evita que se abra de nuevo automáticamente
-        });
-
-        bsCollapse.hide(); // Cierra el menú
-
-      });
-    });
-
-    // Limpia el evento al desmontar el componente
-    return () => {
-
-      navLinks.forEach(link => {
-        link.removeEventListener('click', function () {});
-      });
-
-    };
-
-  }, []);
+  const cerrarMenu = () => {
+    setMenuEstado(false);
+  }
 
   return (
-    <nav className="navbar navbar-expand-lg">
-      <div className="container-fluid xpander">
-        <button onClick={() => setShowButton(!showButton)}>BOTON DE ABRIR Y CERRAR</button>
 
-        <Link className="navbar-brand" href='/'><Image src={logo} alt="logo completo" className="logoCompleto" /></Link>
+    <nav className={styles.navbar}>
 
-        <button className="navbar-toggler iconoNavbar" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="material-symbols-outlined iconColor">
-            menu
-          </span>
-        </button>
+      <div className={styles.navbarContainer}>
 
+        <Link href="/" className={styles.linkLogo}>
 
-        <div className={`menu ${showButton ? 'show' : 'hide'}`} id="navbarNav">
-        <ul className="navbar-nav ms-auto">
-          <li className="nav-item">
-            {/* Navegación con hash scroll suave */}
-            <Link className="nav-link" href="#shows" scroll={true}>
-              Shows
-            </Link>
+          <Image src={logo} alt="Logo Navbar" className={styles.logoCompleto}/>
+        
+        </Link>
+
+        <div className={styles.menuIcono} onClick={toggleMenu}>
+          <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+          <span className="material-icons " style={{ fontSize: "5vmax" }}>menu</span>
+        </div>
+
+        <ul className={`${styles.navlinks} ${menuEstado ? styles.activo : styles.saliendo}`}>
+
+          <li >
+            <Link  href="/" className={styles.linksMenu} onClick={cerrarMenu} >Shows</Link> 
           </li>
-          <li className="nav-item">
-            <Link className="nav-link" href='/GuiaDeCompra'>Guía de Compra</Link>
+
+          <li >
+            <Link  href='/GuiaDeCompra' className={styles.linksMenu} onClick={cerrarMenu}>Guía de Compra</Link>
           </li>
-          <li className="nav-item">
-            <Link className="nav-link" href='/AtencionAlCliente'>Atención al Cliente</Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" href="/AccesoProductores">Acceso Productores</Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" href="#footer">Contacto</Link>
-          </li>
+
+          <li >
+            <Link  href='/AtencionAlCliente' className={styles.linksMenu} onClick={cerrarMenu}>Atención al Cliente</Link>
+          </li>  
+
+          <li >
+            <Link  href="/AccesoProductores" className={styles.linksMenu} onClick={cerrarMenu}>Acceso Productores</Link>
+          </li>  
+
+          <li >
+            <Link  href="#footer" className={styles.linksMenu} onClick={cerrarMenu}>Contacto</Link>
+          </li>  
+
         </ul>
-      </div>
 
 
       </div>
+
     </nav>
-  );
-};
+
+
+  )
+
+}
 
 export default Navbar;

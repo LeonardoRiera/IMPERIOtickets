@@ -19,6 +19,8 @@ Este proyecto está creado con React y Vite. Plataforma de venta de entradas onl
 3. npm install react-router-dom
 4. npm install react-router-hash-link
 5. npm install firebase (para acceder a la base de datos de firebase además será necesario que te agregue como autorizado!!!)
+6. npm install react-hook-form
+
 
 
 
