@@ -44,15 +44,15 @@ const Navbar = () => {
           </li>
 
           <li >
-            <Link  href='/GuiaDeCompra' className={styles.linksMenu} onClick={cerrarMenu}>Guía de Compra</Link>
+            <Link  href='/pages/guia-de-compra' className={styles.linksMenu} onClick={cerrarMenu}>Guía de Compra</Link>
           </li>
 
           <li >
-            <Link  href='/AtencionAlCliente' className={styles.linksMenu} onClick={cerrarMenu}>Atención al Cliente</Link>
+            <Link  href='/pages/atencion-al-cliente' className={styles.linksMenu} onClick={cerrarMenu}>Atención al Cliente</Link>
           </li>  
 
           <li >
-            <Link  href="/AccesoProductores" className={styles.linksMenu} onClick={cerrarMenu}>Acceso Productores</Link>
+            <Link  href="/pages/acceso-productores" className={styles.linksMenu} onClick={cerrarMenu}>Acceso Productores</Link>
           </li>  
 
           <li >

@@ -52,7 +52,7 @@ const Card = ({ title, price, image, image2, imageDetail, dia, fecha, hora, luga
         <p className='lugar texto'>{lugar}</p>
       </div>
 
-      <Link href={{pathname:'/CardDetail', query:{image, image2, imageDetail, title, price, dia, fecha, hora, lugar, description, clasificacion}}} className='buyButton'>Adquirir Entrada</Link>
+      <Link href={{pathname:'/pages/card-detail', query:{image, image2, imageDetail, title, price, dia, fecha, hora, lugar, description, clasificacion}}} className='buyButton'>Adquirir Entrada</Link>
 
     </div>
   );

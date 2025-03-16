@@ -111,15 +111,15 @@ const CardDetail = () => {
 
           <h2 className='tituloDetail'>{title}</h2>
 
-          <p className='detailTexto'><span className="material-symbols-outlined icon">calendar_month</span> Fecha:  {dia} {fecha}</p>
+          <p className='detailTexto'>Fecha:  {dia} {fecha}</p>
 
-          <p className='detailTexto'> <span className="material-symbols-outlined icon">where_to_vote</span> Lugar: {lugar}</p>
+          <p className='detailTexto'>Lugar: {lugar}</p>
 
-          <p className='detailTexto'><span className="material-symbols-outlined icon">alarm_on</span> Hora: {hora}</p>
+          <p className='detailTexto'>Hora: {hora}</p>
 
-          <p className='detailTexto'><span className="material-symbols-outlined icon">verified_user</span> Clasificación: {clasificacion}</p>
+          <p className='detailTexto'>Clasificación: {clasificacion}</p>
 
-          <p className='detailTexto'><span className="material-symbols-outlined icon">local_atm</span> Precio: ${price}</p>
+          <p className='detailTexto'>Precio: ${price}</p>
 
           {/* <p className='importante'>Importante: al precio de tu entrada se le agregará el costo por servicio de venta digital.</p> */}
 

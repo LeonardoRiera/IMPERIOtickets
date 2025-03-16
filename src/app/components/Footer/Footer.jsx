@@ -51,35 +51,35 @@ export const Footer = () => {
         <div className='col-lg-3 col-md-12 enlacesFooter'>
           <Link
             className='linkFooter'
-            href='/GuiaCompra'
+            href='/pages/guia-de-compra'
           >
             <i className='bi bi-diamond-fill icons'></i> Guía de Compra
           </Link>
 
           <Link
             className='linkFooter'
-            href='/GuiaCompra'
+            href='/pages/guia-de-compra'
           >
             <i className='bi bi-diamond-fill icons'></i> Medios de Pago
           </Link>
 
           <Link
             className='linkFooter'
-            href='/AtencionAlCliente'
+            href='/pages/atencion-al-cliente'
           >
             <i className='bi bi-diamond-fill icons'></i> Atención al Cliente
           </Link>
 
           <Link
             className='linkFooter'
-            href='/AtencionAlCliente'
+            href='/pages/atencion-al-cliente'
           >
             <i className='bi bi-diamond-fill icons'></i> Preguntas Frecuentes
           </Link>
 
           <Link
             className='linkFooter'
-            href='/GuiaCompra'
+            href='/pages/guia-de-compra'
           >
             <i className='bi bi-diamond-fill icons'></i> Términos y Condiciones
           </Link>
