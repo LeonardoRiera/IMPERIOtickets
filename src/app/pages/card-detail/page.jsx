@@ -1,6 +1,6 @@
 'use client'
 import React, { Suspense, useState, useEffect } from 'react';
-import EntradasCount from '../../Components/EntradasCount/EntradasCount';
+import EntradasCount from '../../components/EntradasCount/EntradasCount';
 import { useRouter, useSearchParams } from 'next/navigation';
 import './CardDetail.css';
 import Link from 'next/link';
@@ -86,7 +86,119 @@ const CardDetailContent = () => {
 
   return (
     <div className='DetailContainer'>
-      {/* ... (resto del código del componente) ... */}
+      <div className='bannercito'>
+
+        <div className='fotoContainer'>
+
+          <img src={imageDetail} alt="" className='imageBannercito' />
+
+        </div>
+
+        <div className='infoDetail'>
+          <p className='introDetail'>Detalles del Evento</p>
+
+          <h2 className='tituloDetail'>{title}</h2>
+
+          <p className='detailTexto'>Fecha:  {dia} {fecha}</p>
+
+          <p className='detailTexto'>Lugar: {lugar}</p>
+
+          <p className='detailTexto'>Hora: {hora}</p>
+
+          <p className='detailTexto'>Clasificación: {clasificacion}</p>
+
+          <p className='detailTexto'>Precio: ${price}</p>
+
+          {/* <p className='importante'>Importante: al precio de tu entrada se le agregará el costo por servicio de venta digital.</p> */}
+
+        </div>
+
+      </div>
+
+      <div className='rowDetail'>
+
+      <div className='descripcionContainer'>
+
+
+        <h3 className='subtitleDetail'>Cuantas Entradas Querés?</h3>
+
+        <div className='precioCountDiv'>
+
+          <EntradasCount count={count} increment={increment} decrement={decrement} />
+
+          <p className='detallesCount'>Precio por Entrada: .................................. ${price}</p>
+
+          {/* <p className='detallesCount'>Cargos por Servicio (12%): ......................... ${price * 0.12 } </p> */}
+
+        </div>
+
+        {/* <p className='detallesCountTotal'>Total: ${total}</p> */}
+        <p className='detallesCountTotal'>Total: ${total.toFixed(2)}</p>
+
+      </div>
+
+      </div>
+
+      {/* Sección de formulario para ingresar y confirmar el correo */}
+      <div className='emailFormContainer'>
+        <h3 className='correoTitulo'>Ingresa el Correo Electrónico <br />donde quieres recibir tus entradas:</h3>
+
+        <form className='formContainer'>
+          {/* Campo para el primer correo */}
+          <div className='formGroup'>
+            <label >Ingresa tu Email:</label>
+
+            <input
+              className='imput'
+              type="email"
+              value={email}
+              onChange={handleEmailChange}
+              placeholder="Ingresa tu correo electrónico"
+              required
+            />
+          </div>
+
+          {/* Campo para la confirmación del correo */}
+          <div className='formGroup'>
+            <label>Confirma tu Email:</label>
+
+            <input
+              className='imput'
+              type="email"
+              value={confirmEmail}
+              onChange={handleConfirmEmailChange}
+              placeholder="Confirma tu correo electrónico"
+              required
+            />
+          </div>
+
+          {/* Mensaje de error si los correos no coinciden */}
+          {errorMessage && <p className='errorMessage' style={{ color: 'red' }}>{errorMessage}</p>}
+
+
+          {/* Link habilitado o deshabilitado según la validación de los correos */}
+          {isButtonDisabled ? (
+          // Si los correos no coinciden, mostramos un mensaje o botón inactivo
+            <button disabled className='buttonDisabled'>
+                  Comprar Entrada
+            </button>
+          ) : (
+          // Si los correos coinciden, mostramos el link activo
+            <Link
+              to={`/VentaFinal`}
+              state={{ imageDetail, title, price, count, total, email }}
+              className='botonComprarEntrada'
+            >
+                  Comprar Entrada
+            </Link>
+          )}
+
+
+          <p className='importante2'>Una vez confirmado el email se activará el botón de pagar.</p>
+
+        </form>
+
+      </div>    
     </div>
   );
 };
