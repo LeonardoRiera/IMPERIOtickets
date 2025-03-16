@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import registerService from "../../services/register.service";
-import './Register.less'
+import './Register.scss'
 
 export default function RegisterForm() {
 

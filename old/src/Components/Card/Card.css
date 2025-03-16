@@ -166,7 +166,7 @@
     .card {
 
         flex-flow: column nowrap;
-        justify-content: end;
+        justify-content: flex-end;
         align-items:center;
         
         width: 65vmax; 

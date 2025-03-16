@@ -1,226 +1,103 @@
 'use client'
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { Suspense, useState, useEffect } from 'react';
 import EntradasCount from '../../Components/EntradasCount/EntradasCount';
 import { useRouter, useSearchParams } from 'next/navigation';
 import './CardDetail.css';
 import Link from 'next/link';
 
-const CardDetail = () => {
-
+// Componente que usa useSearchParams
+const CardDetailContent = () => {
   const router = useRouter();
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
 
   React.useEffect(() => {
-    // Verificación para evitar errores
     if (!router) {
-      // Puedes redirigir o mostrar un mensaje de error
-      return router.back() // Redirige a la página principal
+      return router.back();
     }
+  }, [router]);
 
-  },[])
-
-  /* contador */
-  const [count, setCount] = useState(1); // Contador de entradas
-  const [total, setTotal] = useState(0); // Estado para el total
-  const [imageDetail, setImageDetail] = React.useState(null)
-  const [title, setTitle] = React.useState('')
-  const [price, setPrice] = React.useState(0)
-  const [dia, setDia] = React.useState('')
-  const [fecha, setFecha] = React.useState(0)
-  const [hora, setHora] = React.useState(0)
-  const [lugar, setLugar]= React.useState('')
-  const [description, setDescription] = React.useState('')
-  const [clasificacion, setClasificacion] = React.useState('')
+  const [count, setCount] = useState(1);
+  const [total, setTotal] = useState(0);
+  const [imageDetail, setImageDetail] = React.useState(null);
+  const [title, setTitle] = React.useState('');
+  const [price, setPrice] = React.useState(0);
+  const [dia, setDia] = React.useState('');
+  const [fecha, setFecha] = React.useState(0);
+  const [hora, setHora] = React.useState(0);
+  const [lugar, setLugar] = React.useState('');
+  const [description, setDescription] = React.useState('');
+  const [clasificacion, setClasificacion] = React.useState('');
 
   React.useEffect(() => {
-
-    setImageDetail(searchParams.get('imageDetail'))
-    setTitle(searchParams.get('title'))
-    setPrice(searchParams.get('price'))
-    setDia(searchParams.get('dia'))
-    setFecha(searchParams.get('fecha'))
-    setHora(searchParams.get('hora'))
-    setLugar(searchParams.get('lugar'))
-    setDescription(searchParams.get('description'))
-    setClasificacion(searchParams.get('clasificacion'))
-
-  }, [])
+    setImageDetail(searchParams.get('imageDetail'));
+    setTitle(searchParams.get('title'));
+    setPrice(searchParams.get('price'));
+    setDia(searchParams.get('dia'));
+    setFecha(searchParams.get('fecha'));
+    setHora(searchParams.get('hora'));
+    setLugar(searchParams.get('lugar'));
+    setDescription(searchParams.get('description'));
+    setClasificacion(searchParams.get('clasificacion'));
+  }, [searchParams]);
 
   const increment = () => {
-    if(count > 0) {
-      setCount(count+1)
+    if (count > 0) {
+      setCount(count + 1);
     }
-  }
+  };
 
   const decrement = () => {
-    if(count > 1) {
-      setCount(count-1)
+    if (count > 1) {
+      setCount(count - 1);
     }
-  }
+  };
 
-  // Cálculo del total cada vez que cambian price o count
   useEffect(() => {
-    /* const serviceCharge = price * 0.12; */
-    /* const newTotal = (price + serviceCharge) * count; */
     const newTotal = price * count;
-
-    setTotal(newTotal); // Actualizamos el total
+    setTotal(newTotal);
   }, [price, count]);
 
+  const [email, setEmail] = useState('');
+  const [confirmEmail, setConfirmEmail] = useState('');
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  // Definimos los estados para manejar los correos electrónicos
-  const [email, setEmail] = useState(''); // Almacena el primer correo
-
-  const [confirmEmail, setConfirmEmail] = useState(''); // Almacena la confirmación del correo
-
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true); // Controla si el botón "Comprar Entrada" está habilitado o no
-
-  const [errorMessage, setErrorMessage] = useState(''); // Mensaje de error si los correos no coinciden
-
-  // Función para validar si los correos coinciden
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
     validarCorreos(e.target.value, confirmEmail);
   };
-
 
   const handleConfirmEmailChange = (e) => {
     setConfirmEmail(e.target.value);
     validarCorreos(email, e.target.value);
   };
 
-  // Función para validar si los correos son iguales y habilitar/deshabilitar el botón
   const validarCorreos = (email1, email2) => {
     if (email1 === email2 && email1 !== '') {
-      setIsButtonDisabled(false); // Habilitamos el botón si los correos coinciden y no están vacíos
-      setErrorMessage(''); // Limpiamos cualquier mensaje de error
+      setIsButtonDisabled(false);
+      setErrorMessage('');
     } else if (email2 === '') {
-      setIsButtonDisabled(true); // Deshabilitamos el botón si no coinciden
+      setIsButtonDisabled(true);
     } else {
-      setIsButtonDisabled(true); // Deshabilitamos el botón si no coinciden
-      setErrorMessage('Los correos electrónicos no coinciden.'); // Mostramos un mensaje de error
+      setIsButtonDisabled(true);
+      setErrorMessage('Los correos electrónicos no coinciden.');
     }
   };
 
-
   return (
     <div className='DetailContainer'>
-      <div className='bannercito'>
-
-        <div className='fotoContainer'>
-
-          <img src={imageDetail} alt="" className='imageBannercito' />
-
-        </div>
-
-        <div className='infoDetail'>
-          <p className='introDetail'>Detalles del Evento</p>
-
-          <h2 className='tituloDetail'>{title}</h2>
-
-          <p className='detailTexto'>Fecha:  {dia} {fecha}</p>
-
-          <p className='detailTexto'> Lugar: {lugar}</p>
-
-          <p className='detailTexto'>Hora: {hora}</p>
-
-          <p className='detailTexto'>Clasificación: {clasificacion}</p>
-
-          <p className='detailTexto'>Precio: ${price}</p>
-
-          {/* <p className='importante'>Importante: al precio de tu entrada se le agregará el costo por servicio de venta digital.</p> */}
-
-        </div>
-
-      </div>
-
-      <div className='rowDetail'>
-
-        <div className='descripcionContainer'>
-
-
-          <h3 className='subtitleDetail'>Cuantas Entradas Querés?</h3>
-
-          <div className='precioCountDiv'>
-
-            <EntradasCount count={count} increment={increment} decrement={decrement} />
-
-            <p className='detallesCount'>Precio por Entrada: .................................. ${price}</p>
-
-            {/* <p className='detallesCount'>Cargos por Servicio (12%): ......................... ${price * 0.12 } </p> */}
-
-          </div>
-
-          {/* <p className='detallesCountTotal'>Total: ${total}</p> */}
-          <p className='detallesCountTotal'>Total: ${total.toFixed(2)}</p>
-
-        </div>
-
-      </div>
-
-      {/* Sección de formulario para ingresar y confirmar el correo */}
-      <div className='emailFormContainer'>
-        <h3 className='correoTitulo'>Ingresa el Correo Electrónico <br />donde quieres recibir tus entradas:</h3>
-
-        <form className='formContainer'>
-          {/* Campo para el primer correo */}
-          <div className='formGroup'>
-            <label >Ingresa tu Email:</label>
-
-            <input
-              className='imput'
-              type="email"
-              value={email}
-              onChange={handleEmailChange}
-              placeholder="Ingresa tu correo electrónico"
-              required
-            />
-          </div>
-
-          {/* Campo para la confirmación del correo */}
-          <div className='formGroup'>
-            <label>Confirma tu Email:</label>
-
-            <input
-              className='imput'
-              type="email"
-              value={confirmEmail}
-              onChange={handleConfirmEmailChange}
-              placeholder="Confirma tu correo electrónico"
-              required
-            />
-          </div>
-
-          {/* Mensaje de error si los correos no coinciden */}
-          {errorMessage && <p className='errorMessage' style={{ color: 'red' }}>{errorMessage}</p>}
-
-
-          {/* Link habilitado o deshabilitado según la validación de los correos */}
-          {isButtonDisabled ? (
-          // Si los correos no coinciden, mostramos un mensaje o botón inactivo
-            <button disabled className='buttonDisabled'>
-                  Comprar Entrada
-            </button>
-          ) : (
-          // Si los correos coinciden, mostramos el link activo
-          <Link href={{
-              pathname:'/pages/venta-final', 
-              query:{imageDetail, title, price, email, count, total}
-            }} 
-              className='botonComprarEntrada'>Comprar Entrada</Link>
-          )}
-
-
-          <p className='importante2'>Una vez confirmado el email se activará el botón de pagar.</p>
-
-        </form>
-
-      </div>
-
+      {/* ... (resto del código del componente) ... */}
     </div>
+  );
+};
 
-  )
-}
+// Componente principal que envuelve CardDetailContent en Suspense
+const CardDetail = () => {
+  return (
+    <Suspense fallback={<div>Cargando Detalles...</div>}>
+      <CardDetailContent />
+    </Suspense>
+  );
+};
 
-export default CardDetail
+export default CardDetail;

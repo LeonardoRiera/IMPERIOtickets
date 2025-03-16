@@ -1,5 +1,6 @@
+'use client'
 import React from "react";
-import './Scanner.less'
+import './Scanner.scss'
 import {Html5QrcodeScanner} from "html5-qrcode"
 
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import loginService from "../../services/login.service"; // Servicio para enviar los datos de login
-import './Login.less'; 
+import './Login.scss'; 
 
 export default function LoginForm() {
   // useForm para manejar el formulario
