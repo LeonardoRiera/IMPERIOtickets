@@ -1,3 +1,5 @@
+'use client';
+
 import React from "react";
 import { useForm } from "react-hook-form";
 import registerService from "../../services/register.service";

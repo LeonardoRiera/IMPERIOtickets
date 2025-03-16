@@ -1,7 +1,5 @@
 import React from "react";
-import BarcodeScannerComponent from "react-qr-barcode-scanner";
 import './Scanner.less'
-// To use Html5Qrcode (more info below)
 import {Html5QrcodeScanner} from "html5-qrcode"
 
 

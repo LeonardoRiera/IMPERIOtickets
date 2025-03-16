@@ -1,11 +1,20 @@
-// app/api/webhook/route.js
-import nodemailer from "nodemailer";
-import { nanoid } from "nanoid";
-import QRCode from "qrcode";
-import { jsPDF } from "jspdf";
-import { Buffer } from "buffer";
-import fs from "fs";
-import path from "path";
+// import nodemailer from "nodemailer";
+// import { nanoid } from "nanoid";
+// import QRCode from "qrcode";
+// import { jsPDF } from "jspdf";
+// import { Buffer } from "buffer";
+// import fs from "fs";
+// import path from "path";
+
+export const dynamic = 'force-dynamic';
+
+const QRCode = await import("qrcode");
+const { nanoid } = await import("nanoid");
+const { Buffer } = await import("buffer");
+const fs = await import("fs");
+const path = await import("path");
+const nodemailer = await import("nodemailer")
+
 
 export async function POST(req) {
   // Función para convertir una imagen a base64
@@ -26,7 +35,10 @@ export async function POST(req) {
   };
 
   // Función para generar el PDF con el QR
-  const generatePDFWithQR = (qrBase64) => {
+  const generatePDFWithQR = async (qrBase64) => {
+    // Only import jsPDF at runtime when this function is called
+    const { jsPDF } = await import("jspdf");
+    
     const pdf = new jsPDF({
       orientation: "portait",
       unit: "mm",
@@ -56,7 +68,7 @@ export async function POST(req) {
     const pdfBuffer = Buffer.from(pdf.output("arraybuffer"));
     return pdfBuffer.toString("base64");
   };
-  
+
   const body = await req.json(); // Parsea el body de la solicitud
   const paymentId = body.data?.id;
 
@@ -88,7 +100,7 @@ export async function POST(req) {
     for (let i = 0; i < quantity; i++) {
       const entryId = nanoid();
       const qrBase64 = await generateQRCodeBase64(entryId);
-      const pdfBase64 = generatePDFWithQR(qrBase64);
+      const pdfBase64 = await generatePDFWithQR(qrBase64);
       mailAttachments.push({
         filename: `entrada_${paymentId}_${i + 1}.pdf`,
         content: pdfBase64,

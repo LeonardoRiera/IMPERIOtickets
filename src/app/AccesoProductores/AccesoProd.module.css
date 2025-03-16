@@ -1,0 +1,54 @@
+.accesoProdContainer {
+    margin-top: 10vmax;
+}
+
+.formularioTitulo {
+    color: black;
+}
+
+.form {
+    color: black;
+}
+
+.formRow {
+    background-color: #000000;
+}
+
+.rounded {
+    background-color: #000000;
+    box-shadow: 0 1px 15px rgba(255, 217, 0, 0.177);
+    border-radius: 20px 0 0 20px !important;
+}
+
+.logoform {
+    position: relative;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px 0 0 10px !important;
+    box-shadow: 0 1px 15px rgba(255, 217, 0, 0.177);
+    overflow: hidden;
+}
+
+.backgroundImageWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.logoblanco2 {
+    width: 18vmax;
+    animation: float 3s ease-in-out infinite;
+    position: relative;
+    z-index: 1;
+}
+
+@media screen and (max-width:600px) {
+    .formRow {
+        flex-direction: column;
+    }
+}
+

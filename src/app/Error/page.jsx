@@ -1,7 +1,7 @@
 import React from 'react';
 import './Error.css';
 import logoError from "../../assets/error.png";
-import { Link } from "react-router-dom";
+import Link from 'next/link';
 
 const Error = () => {
   return (
@@ -13,7 +13,7 @@ const Error = () => {
 
       <p className='tituloError'>Lo lamentamos, ha surgido un ERROR de conexión.</p>
 
-      <Link className="volverAInicio" to='/'>Volver a Inicio</Link>
+      <Link className="volverAInicio" href='/'>Volver a Inicio</Link>
 
     </div>
   )
