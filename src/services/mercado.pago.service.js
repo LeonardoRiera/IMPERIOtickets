@@ -13,9 +13,17 @@ export default async function mercadoPagoService (body) {
   }
 
   // Default response
-  const response = await fetch(`${apiUrl}create_preference`, requestOptions)
-  const json = await response.json()
+  try {
 
-  return json
+    const response = await fetch(`${apiUrl}create_preference`, requestOptions)
+    const data = await response.json()
+
+    return data
+    
+  } catch (error) {
+    console.log(error)
+    throw error
+  }
+
 
 }

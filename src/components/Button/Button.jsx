@@ -14,7 +14,9 @@ const Button = ({ count, subTotal, title, email, price }) => {
 
     initMercadoPago(publicKey, {locale:'es-AR'});
 
-    payment()
+    if(!preference) {
+      payment()
+    }
 
   }, [])
 

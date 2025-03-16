@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
 import ItemCards from '../ItemCards/ItemCards.jsx';
-import './CardContainer.css'
+// import './CardContainer.css'
 import { useEffect, useState } from 'react'
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../../services/firebaseConfing.js";

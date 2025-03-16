@@ -1,5 +1,4 @@
 import { MercadoPagoConfig, Preference } from 'mercadopago';
-import { NextResponse } from 'next/server';
 
 const token = process.env.MERCADOPAGO_TOKEN;
 
@@ -8,6 +7,7 @@ const client = new MercadoPagoConfig({
 });
 
 export async function POST(req) {
+
   try {
     const bodyData = await req.json(); // Obtener el JSON del request
 
@@ -33,10 +33,10 @@ export async function POST(req) {
     const preference = new Preference(client);
     const result = await preference.create({ body });
 
-    return NextResponse.json({ id: result.id });
+    return Response.json({ id: result.id }, {status: 200, headers:{"Content-Type": "application/json"}});
   } catch (error) {
     console.error(error);
-    return new NextResponse(JSON.stringify({ error: "Error al crear la preferencia" }), {
+    return new Response(JSON.stringify({ error: "Error al crear la preferencia" }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
     });
