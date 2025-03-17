@@ -170,24 +170,16 @@ const CardDetailContent = () => {
             {errors.email && <p>{errors.email.message}</p>}
           </div>
 
-          {/* Link habilitado o deshabilitado según la validación de los correos */}
-          {isButtonDisabled ? (
-          // Si los correos no coinciden, mostramos un mensaje o botón inactivo
-            <button disabled className='buttonDisabled'>
-              Comprar Entrada
-            </button>
-          ) : (
-          // Si los correos coinciden, mostramos el link activo
-            <Link
-              href={{
-                pathname:'/pages/venta-final',
-                query:{ imageDetail, title, price, count, total, email }}
-              }
-              className='botonComprarEntrada'
-            >
-                  Comprar Entrada
-            </Link>
-          )}
+          <Link
+            href={{
+              pathname:'/pages/venta-final',
+              query:{ imageDetail, title, price, count, total, email }}
+            }
+            className={`${isButtonDisabled ? 'disabled' : ''  } botonComprarEntrada`}
+            aria-disabled={isButtonDisabled}
+          >
+                Comprar Entrada
+          </Link>
 
 
           <p className='importante2'>Una vez confirmado el email se activará el botón de pagar.</p>

@@ -285,6 +285,13 @@ input::placeholder {
     width:18vmax;
 }
 
+.disabled {
+    cursor: not-allowed!important;
+    pointer-events: none;
+    opacity: .6;
+    background-color: #888;
+}
+
 
 
 
