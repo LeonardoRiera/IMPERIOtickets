@@ -1,7 +1,7 @@
 'use client'
 import React, { Suspense, useState } from 'react';
 import EntradasCount from '../../components/EntradasCount/EntradasCount';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import './CardDetail.css';
 import Link from 'next/link';
@@ -21,7 +21,6 @@ const CardDetailContent = () => {
   const [clasificacion, setClasificacion] = React.useState('');
 
   // Hooks
-  const router = useRouter();
   const searchParams = useSearchParams();
   const {
     register,
@@ -37,11 +36,6 @@ const CardDetailContent = () => {
   
   
   // Effects
-  React.useEffect(() => {
-    if (!router) {
-      return router.back();
-    }
-  }, [router]);
 
   React.useEffect(() => {
     setImageDetail(searchParams.get('imageDetail'));
