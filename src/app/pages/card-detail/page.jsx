@@ -2,20 +2,14 @@
 import React, { Suspense, useState, useEffect } from 'react';
 import EntradasCount from '../../components/EntradasCount/EntradasCount';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { useForm } from 'react-hook-form';
 import './CardDetail.css';
 import Link from 'next/link';
 
 // Componente que usa useSearchParams
 const CardDetailContent = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
-  React.useEffect(() => {
-    if (!router) {
-      return router.back();
-    }
-  }, [router]);
-
+  
+  // Local state
   const [count, setCount] = useState(1);
   const [total, setTotal] = useState(0);
   const [imageDetail, setImageDetail] = React.useState(null);
@@ -25,8 +19,31 @@ const CardDetailContent = () => {
   const [fecha, setFecha] = React.useState(0);
   const [hora, setHora] = React.useState(0);
   const [lugar, setLugar] = React.useState('');
-  const [description, setDescription] = React.useState('');
   const [clasificacion, setClasificacion] = React.useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  // Hooks
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const {
+    register,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  // Constants
+  const email = watch("email");
+  const repeatEmail = watch("repeatEmail");
+
+  const isButtonDisabled = email !== repeatEmail || !email || !repeatEmail;
+  
+  
+  // Effects
+  React.useEffect(() => {
+    if (!router) {
+      return router.back();
+    }
+  }, [router]);
 
   React.useEffect(() => {
     setImageDetail(searchParams.get('imageDetail'));
@@ -36,10 +53,15 @@ const CardDetailContent = () => {
     setFecha(searchParams.get('fecha'));
     setHora(searchParams.get('hora'));
     setLugar(searchParams.get('lugar'));
-    setDescription(searchParams.get('description'));
     setClasificacion(searchParams.get('clasificacion'));
   }, []);
 
+  React.useEffect(() => {
+    const newTotal = price * count;
+    setTotal(newTotal);
+  }, [price, count]);
+
+  // Methods
   const increment = () => {
     if (count > 0) {
       setCount(count + 1);
@@ -49,38 +71,6 @@ const CardDetailContent = () => {
   const decrement = () => {
     if (count > 1) {
       setCount(count - 1);
-    }
-  };
-
-  useEffect(() => {
-    const newTotal = price * count;
-    setTotal(newTotal);
-  }, [price, count]);
-
-  const [email, setEmail] = useState('');
-  const [confirmEmail, setConfirmEmail] = useState('');
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const [errorMessage, setErrorMessage] = useState('');
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-    validarCorreos(e.target.value, confirmEmail);
-  };
-
-  const handleConfirmEmailChange = (e) => {
-    setConfirmEmail(e.target.value);
-    validarCorreos(email, e.target.value);
-  };
-
-  const validarCorreos = (email1, email2) => {
-    if (email1 === email2 && email1 !== '') {
-      setIsButtonDisabled(false);
-      setErrorMessage('');
-    } else if (email2 === '') {
-      setIsButtonDisabled(true);
-    } else {
-      setIsButtonDisabled(true);
-      setErrorMessage('Los correos electrónicos no coinciden.');
     }
   };
 
@@ -149,13 +139,19 @@ const CardDetailContent = () => {
             <label >Ingresa tu Email:</label>
 
             <input
+              {...register("email", {
+                required: "El email es obligatorio",
+                pattern: {
+                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,5}$/,
+                  message: "Email inválido",
+                },
+              })}
               className='imput'
               type="email"
-              value={email}
-              onChange={handleEmailChange}
               placeholder="Ingresa tu correo electrónico"
               required
             />
+            {errors.email && <p>{errors.email.message}</p>}
           </div>
 
           {/* Campo para la confirmación del correo */}
@@ -163,13 +159,17 @@ const CardDetailContent = () => {
             <label>Confirma tu Email:</label>
 
             <input
+              {...register("repeatEmail", {
+                required: "El email debe coincidir",
+                validate: (value) =>
+                  value === email || 'Los emails no coinciden'
+              })}
               className='imput'
               type="email"
-              value={confirmEmail}
-              onChange={handleConfirmEmailChange}
               placeholder="Confirma tu correo electrónico"
               required
             />
+            {errors.email && <p>{errors.email.message}</p>}
           </div>
 
           {/* Mensaje de error si los correos no coinciden */}
@@ -180,7 +180,7 @@ const CardDetailContent = () => {
           {isButtonDisabled ? (
           // Si los correos no coinciden, mostramos un mensaje o botón inactivo
             <button disabled className='buttonDisabled'>
-                  Comprar Entrada
+              Comprar Entrada
             </button>
           ) : (
           // Si los correos coinciden, mostramos el link activo
