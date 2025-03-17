@@ -7,11 +7,11 @@ import Button from '../../components/Button/Button';
 const ParamsComponent = () => {
   const searchParams = useSearchParams();
   const params = {
-    imageDetail: searchParams.get('imageDetail') || '',
-    title: searchParams.get('title') || '',
-    price: searchParams.get('price') || '',
-    count: searchParams.get('count') || '',
-    email: searchParams.get('email') || ''
+    imageDetail: searchParams.get('imageDetail'),
+    title: searchParams.get('title'),
+    price: searchParams.get('price'),
+    count: searchParams.get('count'),
+    email: searchParams.get('email')
   };
 
   return (

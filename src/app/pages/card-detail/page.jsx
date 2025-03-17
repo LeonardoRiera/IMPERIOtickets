@@ -38,7 +38,7 @@ const CardDetailContent = () => {
     setLugar(searchParams.get('lugar'));
     setDescription(searchParams.get('description'));
     setClasificacion(searchParams.get('clasificacion'));
-  }, [searchParams]);
+  }, []);
 
   const increment = () => {
     if (count > 0) {
@@ -185,8 +185,10 @@ const CardDetailContent = () => {
           ) : (
           // Si los correos coinciden, mostramos el link activo
             <Link
-              to={`/VentaFinal`}
-              state={{ imageDetail, title, price, count, total, email }}
+              href={{
+                pathname:'/pages/venta-final',
+                query:{ imageDetail, title, price, count, total, email }}
+              }
               className='botonComprarEntrada'
             >
                   Comprar Entrada
