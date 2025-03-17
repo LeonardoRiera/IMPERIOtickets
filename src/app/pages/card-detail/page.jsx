@@ -1,12 +1,11 @@
 'use client'
-import React, { Suspense, useState, useEffect } from 'react';
+import React, { Suspense, useState } from 'react';
 import EntradasCount from '../../components/EntradasCount/EntradasCount';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import './CardDetail.css';
 import Link from 'next/link';
 
-// Componente que usa useSearchParams
 const CardDetailContent = () => {
   
   // Local state
@@ -20,7 +19,6 @@ const CardDetailContent = () => {
   const [hora, setHora] = React.useState(0);
   const [lugar, setLugar] = React.useState('');
   const [clasificacion, setClasificacion] = React.useState('');
-  const [errorMessage, setErrorMessage] = useState('');
 
   // Hooks
   const router = useRouter();
@@ -171,10 +169,6 @@ const CardDetailContent = () => {
             />
             {errors.email && <p>{errors.email.message}</p>}
           </div>
-
-          {/* Mensaje de error si los correos no coinciden */}
-          {errorMessage && <p className='errorMessage' style={{ color: 'red' }}>{errorMessage}</p>}
-
 
           {/* Link habilitado o deshabilitado según la validación de los correos */}
           {isButtonDisabled ? (
