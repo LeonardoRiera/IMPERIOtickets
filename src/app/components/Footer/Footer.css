@@ -57,7 +57,7 @@
 }
 
 .planetaFooter {
-  width: 28%; /* Asegura que la imagen se ajuste al ancho del contenedor */
+  width: 100%; /* Asegura que la imagen se ajuste al ancho del contenedor */
   transform: rotate(35deg);
 }
 

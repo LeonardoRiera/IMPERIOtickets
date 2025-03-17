@@ -2,6 +2,7 @@ import React from 'react'
 import './Footer.css'
 import logoPalabra from '../../assets/nombreCalidad.png'
 import Link from 'next/link'
+import Image from 'next/image'
 import logoEstr from '../../assets/isotipoEstrellas.png'
 
 
@@ -15,7 +16,7 @@ export const Footer = () => {
 
         <div className='col-lg-3 col-md-12 contactoRedesFooter'>
 
-          <img className='logoPalabraFooter' src={logoPalabra} alt="logo de imperio ticket" />
+          <Image className='logoPalabraFooter' src={logoPalabra} width={'100%'} height={'auto'} alt="logo de imperio ticket" />
 
           <div className='contactoFooter'>
             <h4>Puedes Contactarte con Nosotros <br/> vía e-mail</h4>
@@ -42,13 +43,13 @@ export const Footer = () => {
 
         </div>
 
-        <div className='col-lg-6 col-md-12 colCentralFooter'>
+        <div className='colCentralFooter'>
 
-          <img className='planetaFooter' src={logoEstr} alt="logo con estrellas" />
+          <Image className='planetaFooter' src={logoEstr} width={'28%'} alt="logo con estrellas" />
 
         </div>
 
-        <div className='col-lg-3 col-md-12 enlacesFooter'>
+        <div className='enlacesFooter'>
           <Link
             className='linkFooter'
             href='/pages/guia-de-compra'
