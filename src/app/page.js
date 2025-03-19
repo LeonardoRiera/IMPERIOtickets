@@ -1,5 +1,4 @@
 import styles from "./page.module.css";
-import Header2 from './components/Header2/Header2.jsx';
 
 // Internal Modules
 import CardContainer from "./components/CardContainer/CardContainer";

@@ -8,7 +8,7 @@ import logoEstr from '../../assets/isotipoEstrellas.png'
 
 export const Footer = () => {
   return (
-    <div className='footer-container container-fluid' id='footer'>
+    <footer className='footer-container container-fluid' id='footer'>
 
       {/* footer */}
       <div className='row contenedorFooterPrincipal '>
@@ -89,7 +89,7 @@ export const Footer = () => {
 
       </div>
 
-    </div>
+    </footer>
 
   )
 }
