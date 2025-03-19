@@ -167,7 +167,7 @@ const CardDetailContent = () => {
           <Link
             href={{
               pathname:'/pages/venta-final',
-              query:{ imageDetail: imageDetail, title: title, price:price, count:count, total:total, email:email }}
+              query:{ imageDetail: imageDetail, title: title, price:price, count:count, email:email }}
             }
             className={`${isButtonDisabled ? 'disabled' : ''  } botonComprarEntrada`}
             aria-disabled={isButtonDisabled}
