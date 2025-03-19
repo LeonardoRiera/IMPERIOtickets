@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import './CardDetail.css';
 import Link from 'next/link';
 
-export default function CardDetailContent () {
+const CardDetailContent = () => {
   
   // Local state
   const [count, setCount] = useState(1);
@@ -46,7 +46,7 @@ export default function CardDetailContent () {
     setHora(searchParams.get('hora'));
     setLugar(searchParams.get('lugar'));
     setClasificacion(searchParams.get('clasificacion'));
-  }, [searchParams]);
+  }, []);
 
   React.useEffect(() => {
     const newTotal = price * count;
@@ -67,8 +67,6 @@ export default function CardDetailContent () {
   };
 
   return (
-    <Suspense fallback={<div>Cargando Detalles...</div>}>
-
     <div className='DetailContainer'>
       <div className='bannercito'>
 
@@ -169,7 +167,7 @@ export default function CardDetailContent () {
           <Link
             href={{
               pathname:'/pages/venta-final',
-              query:{ imageDetail, title, price, count, total, email }}
+              query:{ imageDetail: imageDetail, title: title, price:price, count:count, total:total, email:email }}
             }
             className={`${isButtonDisabled ? 'disabled' : ''  } botonComprarEntrada`}
             aria-disabled={isButtonDisabled}
@@ -184,7 +182,16 @@ export default function CardDetailContent () {
 
       </div>    
     </div>
-    </Suspense>
-
   );
 };
+
+// Componente principal que envuelve CardDetailContent en Suspense
+const CardDetail = () => {
+  return (
+    <Suspense fallback={<div>Cargando Detalles...</div>}>
+      <CardDetailContent />
+    </Suspense>
+  );
+};
+
+export default CardDetail;
