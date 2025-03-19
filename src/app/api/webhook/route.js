@@ -1,11 +1,3 @@
-// import nodemailer from "nodemailer";
-// import { nanoid } from "nanoid";
-// import QRCode from "qrcode";
-// import { jsPDF } from "jspdf";
-// import { Buffer } from "buffer";
-// import fs from "fs";
-// import path from "path";
-
 export const dynamic = 'force-dynamic';
 
 const QRCode = await import("qrcode");
@@ -14,6 +6,8 @@ const { Buffer } = await import("buffer");
 const fs = await import("fs");
 const path = await import("path");
 const nodemailer = await import("nodemailer")
+
+import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 
 
 export async function POST(req) {
@@ -36,37 +30,80 @@ export async function POST(req) {
 
   // Función para generar el PDF con el QR
   const generatePDFWithQR = async (qrBase64) => {
-    // Only import jsPDF at runtime when this function is called
-    const { jsPDF } = await import("jspdf");
-    
-    const pdf = new jsPDF({
-      orientation: "portait",
-      unit: "mm",
-      format: [100, 150],
-    });
-
-    // Obtener la ruta absoluta de la imagen
+    // Crear un nuevo documento PDF
+    const pdfDoc = await PDFDocument.create();
+    const page = pdfDoc.addPage([60, 150]); // Tamaño personalizado
+  
+    // Cargar una fuente estándar
+    const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+  
+    // Convertir la imagen base64 a un objeto de imagen
+    const qrImage = await pdfDoc.embedPng(qrBase64);
+  
+    // Agregar el logo (si es necesario)
     const imagePath = path.join(process.cwd(), "public", "assets", "imagotipoLetraNegra.png");
-    const logoUrl = toBase64(imagePath);
-
-    // Agregar la imagen al PDF
-    pdf.addImage(logoUrl, "PNG", 10, 10, 80, 30);
-
-    // Título del ticket
-    pdf.setFont("helvetica", "bold");
-    pdf.setFontSize(16);
-    pdf.text("¡Tu entrada para el evento!", 50, 50, { align: "center" });
-
-    // Información del evento
-    pdf.setFontSize(12);
-    pdf.text("Fecha: 1 de Marzo de 2025", 10, 70);
-    pdf.text("Hora: 21hs.", 10, 80);
-    pdf.text("Ubicación: Galpón Blanco - El Andino", 10, 90);
-    pdf.text("Tu Id de entrada es: ", 10, 100);
-    pdf.addImage(qrBase64, "PNG", 30, 110, 40, 40);
-
-    const pdfBuffer = Buffer.from(pdf.output("arraybuffer"));
-    return pdfBuffer.toString("base64");
+    const logoImage = await pdfDoc.embedPng(fs.readFileSync(imagePath));
+  
+    // Dibujar el logo en el PDF
+    page.drawImage(logoImage, {
+      x: 10,
+      y: 110,
+      width: 80,
+      height: 30,
+    });
+  
+    // Dibujar el texto en el PDF
+    page.drawText("¡Tu entrada para el evento!", {
+      x: 10,
+      y: 90,
+      size: 5,
+      font,
+      color: rgb(0, 0, 0),
+    });
+  
+    page.drawText("Fecha: 1 de Marzo de 2025", {
+      x: 10,
+      y: 70,
+      size: 3,
+      font,
+      color: rgb(0, 0, 0),
+    });
+  
+    page.drawText("Hora: 21hs.", {
+      x: 10,
+      y: 60,
+      size: 3,
+      font,
+      color: rgb(0, 0, 0),
+    });
+  
+    page.drawText("Ubicación: Galpón Blanco - El Andino", {
+      x: 10,
+      y: 50,
+      size: 3,
+      font,
+      color: rgb(0, 0, 0),
+    });
+  
+    page.drawText("Tu Id de entrada es: ", {
+      x: 10,
+      y: 40,
+      size: 3,
+      font,
+      color: rgb(0, 0, 0),
+    });
+  
+    // Dibujar el QR en el PDF
+    page.drawImage(qrImage, {
+      x: 30,
+      y: 10,
+      width: 60,
+      height: 40,
+    });
+  
+    // Guardar el PDF como base64
+    const pdfBytes = await pdfDoc.save();
+    return Buffer.from(pdfBytes).toString('base64');
   };
 
   const body = await req.json(); // Parsea el body de la solicitud
