@@ -163,7 +163,7 @@ const CardDetailContent = () => {
             />
             {errors.email && <p>{errors.email.message}</p>}
           </div>
-{/* 
+
           <Link
             href={{
               pathname:'/pages/venta-final',
@@ -173,7 +173,7 @@ const CardDetailContent = () => {
             aria-disabled={isButtonDisabled}
           >
                 Comprar Entrada
-          </Link> */}
+          </Link>
 
 
           <p className='importante2'>Una vez confirmado el email se activará el botón de pagar.</p>
