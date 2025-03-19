@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import './CardDetail.css';
 import Link from 'next/link';
 
-const CardDetailContent = () => {
+export default function CardDetailContent () {
   
   // Local state
   const [count, setCount] = useState(1);
@@ -67,6 +67,8 @@ const CardDetailContent = () => {
   };
 
   return (
+    <Suspense fallback={<div>Cargando Detalles...</div>}>
+
     <div className='DetailContainer'>
       <div className='bannercito'>
 
@@ -182,16 +184,7 @@ const CardDetailContent = () => {
 
       </div>    
     </div>
-  );
-};
-
-// Componente principal que envuelve CardDetailContent en Suspense
-const CardDetail = () => {
-  return (
-    <Suspense fallback={<div>Cargando Detalles...</div>}>
-      <CardDetailContent />
     </Suspense>
+
   );
 };
-
-export default CardDetail;
