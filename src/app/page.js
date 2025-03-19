@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <div className={styles.page}>
       
-      <Header2 />
+      {/* <Header2 /> */}
 
       <CardContainer />
       

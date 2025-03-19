@@ -5,14 +5,10 @@ import ItemCards from '../ItemCards/ItemCards.jsx';
 import { useEffect, useState } from 'react'
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../../services/firebaseConfing.js";
-import Header2 from '../Header2/Header2.jsx';
-
 
 const CardContainer = () => {
 
   const [productos, setProductos] = useState([]);
-
-  // Función asíncrona que obtiene los productos de Firestore
 
   const fetchProductos = async () => {
 
@@ -43,8 +39,6 @@ const CardContainer = () => {
 
   return (
     <div className='CardContainer'>
-
-      {/* <Header2 /> */}
 
       <ItemCards productos={productos}/>
 

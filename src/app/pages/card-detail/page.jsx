@@ -46,7 +46,7 @@ const CardDetailContent = () => {
     setHora(searchParams.get('hora'));
     setLugar(searchParams.get('lugar'));
     setClasificacion(searchParams.get('clasificacion'));
-  }, []);
+  }, [searchParams]);
 
   React.useEffect(() => {
     const newTotal = price * count;

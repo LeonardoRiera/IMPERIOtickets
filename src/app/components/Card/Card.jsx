@@ -34,9 +34,9 @@ const Card = ({ title, price, image, image2, imageDetail, dia, fecha, hora, luga
     <div className="card"
       style={{
         backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: 'cover', // La imagen cubrirá todo el contenedor
-        backgroundPosition: 'center', // Centramos la imagen
-        backgroundRepeat: 'no-repeat', // Evitamos que la imagen se repita
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
       }}
     >
 
