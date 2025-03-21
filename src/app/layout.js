@@ -1,6 +1,6 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Bebas_Neue } from "next/font/google";
 import "./styles/globals.css";
-import Navbar from "./components/Navbar/Navbar";
+import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 
 const geistSans = Geist({
@@ -13,6 +13,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const bebasNeue = Bebas_Neue({
+  subsets:['latin'],
+  weight: '400'
+})
+
 
 export const metadata = {
   title: "Imperio Tickets",
@@ -24,9 +29,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <div>
-        <header>
-          <Navbar />
-        </header>
+
+        <Header />
+        
           {children}
 
         <Footer />

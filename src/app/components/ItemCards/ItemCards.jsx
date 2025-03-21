@@ -1,7 +1,5 @@
-import React from 'react';
 import './ItemCards.css';
 import Card from '../Card/Card.jsx';
-
 
 const ItemCards = ({ productos }) => {
 

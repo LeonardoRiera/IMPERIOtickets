@@ -1,5 +1,5 @@
 import React from 'react'
-import './Footer.css'
+import './footer.scss'
 import logoPalabra from '../../assets/nombreCalidad.png'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -10,11 +10,9 @@ export const Footer = () => {
   return (
     <footer className='footer-container container-fluid' id='footer'>
 
-      {/* footer */}
       <div className='row contenedorFooterPrincipal '>
 
-
-        <div className='col-lg-3 col-md-12 contactoRedesFooter'>
+        <div className='contactoRedesFooter'>
 
           <Image className='logoPalabraFooter' src={logoPalabra} width={'100%'} height={'auto'} alt="logo de imperio ticket" />
 
@@ -85,7 +83,6 @@ export const Footer = () => {
             <i className='bi bi-diamond-fill icons'></i> Términos y Condiciones
           </Link>
         </div>
-
 
       </div>
 
