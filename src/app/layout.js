@@ -1,7 +1,18 @@
-import { Geist, Geist_Mono, Bebas_Neue } from "next/font/google";
+// External Modules
+import { Geist, Geist_Mono, Bebas_Neue, Poppins } from "next/font/google";
 import "./styles/globals.css";
+import "@fortawesome/fontawesome-svg-core/styles.css"; 
+import { config } from "@fortawesome/fontawesome-svg-core";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+
+// Internal Modules
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
+
+library.add(fab);
+
+config.autoAddCss = false
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,6 +29,10 @@ const bebasNeue = Bebas_Neue({
   weight: '400'
 })
 
+const poppins = Poppins({
+  subsets:['latin'],
+  weight: '200'
+})
 
 export const metadata = {
   title: "Imperio Tickets",

@@ -1,4 +1,5 @@
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './footer.scss'
 import logoPalabra from '../../assets/nombreCalidad.png'
 import Link from 'next/link'
@@ -8,15 +9,15 @@ import logoEstr from '../../assets/isotipoEstrellas.png'
 
 export const Footer = () => {
   return (
-    <footer className='footer-container container-fluid' id='footer'>
+    <footer className='footer-container' id='footer'>
 
-      <div className='row contenedorFooterPrincipal '>
+      <div className='contenedor-footer-principal'>
 
-        <div className='contactoRedesFooter'>
+        <div className='contacto-redes-footer'>
 
-          <Image className='logoPalabraFooter' src={logoPalabra} width={'100%'} height={'auto'} alt="logo de imperio ticket" />
+          <Image className='logo-palabra-footer' src={logoPalabra} width={'40%'} height={'auto'} alt="logo de imperio ticket" />
 
-          <div className='contactoFooter'>
+          <div className='contacto-footer'>
             <h4>Puedes Contactarte con Nosotros <br/> vía e-mail</h4>
 
             <a href="mailto:imperioticket@gmail.com">imperiotickets@gmail.com</a>
@@ -25,62 +26,62 @@ export const Footer = () => {
           <div className="social-icons">
             {/* Enlace a Instagram */}
             <a href="https://www.instagram.com/imperiotickets" target="_blank" rel="noopener noreferrer">
-              <i className="bi bi-instagram"></i>
+              <FontAwesomeIcon icon="fab fa-instagram" />            
             </a>
 
             {/* Enlace a X (Twitter) */}
             <a href="https://twitter.com/tu_usuario" target="_blank" rel="noopener noreferrer">
-              <i className="bi bi-twitter-x"></i>
+              <FontAwesomeIcon icon="fab fa-x-twitter" />            
             </a>
 
             {/* Enlace a Discord */}
             <a href="https://discord.com/invite/tu_invitacion" target="_blank" rel="noopener noreferrer">
-              <i className="bi bi-discord"></i>
+              <FontAwesomeIcon icon="fab fa-discord" />            
             </a>
           </div>
 
         </div>
 
-        <div className='colCentralFooter'>
+        <div className='col-central-footer'>
 
-          <Image className='planetaFooter' src={logoEstr} width={'28%'} alt="logo con estrellas" />
+          <Image className='planeta-footer' src={logoEstr} width={'28%'} alt="logo con estrellas" />
 
         </div>
 
-        <div className='enlacesFooter'>
+        <div className='enlaces-footer'>
           <Link
-            className='linkFooter'
+            className='link-footer'
             href='/pages/guia-de-compra'
           >
-            <i className='bi bi-diamond-fill icons'></i> Guía de Compra
+            ◆ Guía de Compra
           </Link>
 
           <Link
-            className='linkFooter'
+            className='link-footer'
             href='/pages/guia-de-compra'
           >
-            <i className='bi bi-diamond-fill icons'></i> Medios de Pago
+            ◆ Medios de Pago
           </Link>
 
           <Link
-            className='linkFooter'
+            className='link-footer'
             href='/pages/atencion-al-cliente'
           >
-            <i className='bi bi-diamond-fill icons'></i> Atención al Cliente
+            ◆ Atención al Cliente
           </Link>
 
           <Link
-            className='linkFooter'
+            className='link-footer'
             href='/pages/atencion-al-cliente'
           >
-            <i className='bi bi-diamond-fill icons'></i> Preguntas Frecuentes
+            ◆ Preguntas Frecuentes
           </Link>
 
           <Link
-            className='linkFooter'
+            className='link-footer'
             href='/pages/guia-de-compra'
           >
-            <i className='bi bi-diamond-fill icons'></i> Términos y Condiciones
+            ◆ Términos y Condiciones
           </Link>
         </div>
 
