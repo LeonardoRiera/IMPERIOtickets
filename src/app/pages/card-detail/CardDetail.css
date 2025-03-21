@@ -274,6 +274,10 @@ input::placeholder {
     width:18vmax;
 }
 
+.botonComprarEntrada:active {
+    opacity: .6;
+}
+
 .botonComprarEntrada:hover {
     background-color: #FE7247;
     color: white;
