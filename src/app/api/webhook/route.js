@@ -36,6 +36,8 @@ export async function POST(req) {
 
       const data = await paymentResponse.json();
 
+      console.log('LLEGUÉ A LA DATA')
+
       const emailUser = data.external_reference;
       const quantity = parseInt(data.additional_info.items[0].quantity);
       const mailAttachments = [];
@@ -53,7 +55,7 @@ export async function POST(req) {
 
       const transporter = nodemailer.createTransport({
         service: "Gmail",
-        auth: { user: process.env.EMAIL_PASS, pass: process.env.EMAIL_USER },
+        auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
       });
 
       await transporter.sendMail({
@@ -65,10 +67,6 @@ export async function POST(req) {
       });
 
       console.log("Correo enviado exitosamente");
-      if (data.status === 'approved') return new Response("OK", {
-        status: 200,
-        headers: { 'Content-Type': 'text/plain' },
-      });     
 
     } catch (error) {
       console.error("Error en el webhook:", error);
