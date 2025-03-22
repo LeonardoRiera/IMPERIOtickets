@@ -1,22 +1,27 @@
+import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
+import QRCode from 'qrcode';
+import { nanoid } from 'nanoid';
+import fs from 'fs';
+import path from 'path';
+import nodemailer from 'nodemailer';
+
 export const dynamic = 'force-dynamic';
 
-const QRCode = await import("qrcode");
-const { nanoid } = await import("nanoid");
-const { Buffer } = await import("buffer");
-const fs = await import("fs");
-const path = await import("path");
-const nodemailer = await import("nodemailer");
-
-import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
-
 export async function POST(req) {
-  const body = await req.json();
-  const paymentId = body.data?.id;
+  const url = new URL(req.url);
+  const searchParams = new URLSearchParams(url.search);
 
-  if (!paymentId) {
-    return new Response("Falta el paymentId", {
-      status: 400,
-      headers: { 'Content-Type': 'text/plain' },
+
+  // 1. Obtener parámetros desde la URL
+  const paymentId = searchParams.get('data.id');
+  const topic = searchParams.get('type') || searchParams.get('topic');
+
+
+  // 2. Validar si es una notificación de pago
+  if (topic !== 'payment' || !paymentId) {
+    return new Response("OK", { 
+      status: 200, 
+      headers: { 'Content-Type': 'text/plain' } 
     });
   }
 
@@ -26,8 +31,7 @@ export async function POST(req) {
     headers: { 'Content-Type': 'text/plain' },
   });
 
-  // Procesar la notificación en segundo plano
-  new Promise(async (resolve) => {
+  (async () => {
     try {
       const paymentResponse = await fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
         method: "GET",
@@ -76,9 +80,9 @@ export async function POST(req) {
     } catch (error) {
       console.error("Error en el webhook:", error);
     }
-    resolve();
-  });
+  })();
 
+  console.log('la mandé!');
   return response;
 }
 
