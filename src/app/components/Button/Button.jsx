@@ -1,53 +1,50 @@
+'use client'
 import React from 'react';
 import './Button.css';
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 import mercadoPagoService from '../../services/mercado.pago.service';
 
 const Button = ({ count, subTotal, title, email, price }) => {
+  const [preference, setPreference] = React.useState(null);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const initiated = React.useRef(false);
 
-  // Local states
-  const [preference, setPreference] = React.useState(null)
-
-  const publicKey = process.env.NEXT_PUBLIC_KEY_MERCADOPAGO
+  const publicKey = process.env.NEXT_PUBLIC_KEY_MERCADOPAGO;
 
   React.useEffect(() => {
-
-    initMercadoPago(publicKey, {locale:'es-AR'});
-
-    if(!preference) {
-      payment()
-    }
-
-  }, [])
+    initMercadoPago(publicKey, { locale: 'es-AR' });
+  }, [publicKey]); 
 
   const payment = async () => {
+    if (isLoading || initiated.current) return;
+    setIsLoading(true);
+    initiated.current = true;
 
-    const body = {
-      title: title,
-      quantity: count,
-      price: 1,
-      external_reference: email
+    try {
+      const body = {
+        title: title,
+        quantity: count,
+        price: 1,
+        external_reference: email
+      };
+
+      const response = await mercadoPagoService(body);
+      setPreference(response.id);
+    } catch (error) {
+      console.error("Error al crear preferencia:", error);
+    } finally {
+      setIsLoading(false);
     }
-
-    const response = await mercadoPagoService(body)
-
-    setPreference(response.id)
-
-  }
-
+  };
 
   return (
-    // eslint-disable-next-line react/jsx-no-useless-fragment
-    <>
-
-      {
-        preference &&
-
-        <Wallet initialization={{ preferenceId: preference }} />
-      }
-
-
-    </>
+    <button 
+      onClick={payment} // 👈 Ejecuta payment al hacer click
+      disabled={isLoading}
+    >
+      {isLoading ? 'Procesando...' : 'Pagar con MercadoPago'}
+      {preference && <Wallet initialization={{ preferenceId: preference }} />}
+    </button>
   );
 };
 

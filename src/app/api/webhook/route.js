@@ -11,13 +11,10 @@ export async function POST(req) {
   const url = new URL(req.url);
   const searchParams = new URLSearchParams(url.search);
 
-
-  // 1. Obtener parámetros desde la URL
   const paymentId = searchParams.get('data.id');
   const topic = searchParams.get('type') || searchParams.get('topic');
 
-
-  // 2. Validar si es una notificación de pago
+  // Ignorar notificaciones que no sean de pagos aprobados
   if (topic !== 'payment' || !paymentId) {
     return new Response("OK", { 
       status: 200, 
@@ -25,7 +22,7 @@ export async function POST(req) {
     });
   }
 
-  // Responder inmediatamente con "OK" para evitar reintentos
+  // Respuesta inmediata
   const response = new Response("OK", {
     status: 200,
     headers: { 'Content-Type': 'text/plain' },
@@ -34,18 +31,15 @@ export async function POST(req) {
   (async () => {
     try {
       const paymentResponse = await fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
-        method: "GET",
         headers: { Authorization: `Bearer ${process.env.MERCADOPAGO_TOKEN}` },
       });
 
-      if (!paymentResponse.ok) {
-        console.error("Error al obtener pago");
-        return;
-      }
-
       const data = await paymentResponse.json();
+
+      if (data.status !== 'approved') return; 
+
       const emailUser = data.external_reference;
-      const quantity = parseInt(data.additional_info.items[0].quantity);
+      const quantity = data.additional_info.items[0].quantity;
       const mailAttachments = [];
 
       for (let i = 0; i < quantity; i++) {
@@ -61,28 +55,23 @@ export async function POST(req) {
 
       const transporter = nodemailer.createTransport({
         service: "Gmail",
-        auth: {
-          user: "imperiotickets@gmail.com",
-          pass: "kpui dbjk dubd ljuj",
-        },
+        auth: { user: "imperiotickets@gmail.com", pass: "kpui dbjk dubd ljuj" },
       });
 
-      const mailOptions = {
+      await transporter.sendMail({
         from: "imperiotickets@gmail.com",
         to: emailUser,
         subject: "Entradas adjuntas",
         text: "Aquí están tus entradas.",
         attachments: mailAttachments,
-      };
+      });
 
-      await transporter.sendMail(mailOptions);
       console.log("Correo enviado exitosamente");
     } catch (error) {
       console.error("Error en el webhook:", error);
     }
   })();
 
-  console.log('la mandé!');
   return response;
 }
 
