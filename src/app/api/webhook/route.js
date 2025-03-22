@@ -36,10 +36,8 @@ export async function POST(req) {
 
       const data = await paymentResponse.json();
 
-      if (data.status !== 'approved') return; 
-
       const emailUser = data.external_reference;
-      const quantity = data.additional_info.items[0].quantity;
+      const quantity = parseInt(data.additional_info.items[0].quantity);
       const mailAttachments = [];
 
       for (let i = 0; i < quantity; i++) {
@@ -67,6 +65,11 @@ export async function POST(req) {
       });
 
       console.log("Correo enviado exitosamente");
+      if (data.status === 'approved') return new Response("OK", {
+        status: 200,
+        headers: { 'Content-Type': 'text/plain' },
+      });     
+
     } catch (error) {
       console.error("Error en el webhook:", error);
     }
