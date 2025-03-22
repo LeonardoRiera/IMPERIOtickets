@@ -9,7 +9,7 @@ const client = new MercadoPagoConfig({
 export async function POST(req) {
 
   try {
-    const bodyData = await req.json(); // Obtener el JSON del request
+    const bodyData = await req.json();
 
     const body = {
       items: [
@@ -23,7 +23,7 @@ export async function POST(req) {
       back_urls: {
         success: `${process.env.NEXT_PUBLIC_API_URL}pages/success`,
         failure: `${process.env.NEXT_PUBLIC_API_URL}pages/failure`,
-        pending: "https://www.youtube.com/watch?v=vEXwN9-tKcs&t=180s&ab_channel=onthecode",
+        pending: `${process.env.NEXT_PUBLIC_API_URL}pages/pending`,
       },
       auto_return: "approved",
       notification_url: process.env.WEBHOOK_MP,
