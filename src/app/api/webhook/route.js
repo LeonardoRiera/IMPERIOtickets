@@ -22,13 +22,12 @@ export async function POST(req) {
     });
   }
 
-  // Respuesta inmediata
-  const response = new Response("OK", {
-    status: 200,
-    headers: { 'Content-Type': 'text/plain' },
-  });
+    // Respuesta inmediata
+    const response = new Response("OK", {
+      status: 200,
+      headers: { 'Content-Type': 'text/plain' },
+    });
 
-  (async () => {
     try {
       const paymentResponse = await fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
         headers: { Authorization: `Bearer ${process.env.MERCADOPAGO_TOKEN}` },
@@ -71,7 +70,6 @@ export async function POST(req) {
     } catch (error) {
       console.error("Error en el webhook:", error);
     }
-  })();
 
   return response;
 }
