@@ -1,18 +1,20 @@
 // External Modules
 import { Geist, Geist_Mono, Bebas_Neue, Poppins } from "next/font/google";
 import "./styles/globals.css";
-import "@fortawesome/fontawesome-svg-core/styles.css"; 
-import { config } from "@fortawesome/fontawesome-svg-core";
-import { library } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { config, library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
+import { faBars } from "@fortawesome/free-solid-svg-icons"; // Importar el icono específico
 
 // Internal Modules
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 
-library.add(fab);
+// Añadir iconos a la librería
+library.add(fab, faBars); // Añadir solo el icono "bars" y los iconos de marcas
 
-config.autoAddCss = false
+// Evitar que Font Awesome añada automáticamente su CSS
+config.autoAddCss = false;
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,14 +27,14 @@ const geistMono = Geist_Mono({
 });
 
 const bebasNeue = Bebas_Neue({
-  subsets:['latin'],
+  subsets: ['latin'],
   weight: '400'
-})
+});
 
 const poppins = Poppins({
-  subsets:['latin'],
+  subsets: ['latin'],
   weight: '200'
-})
+});
 
 export const metadata = {
   title: "Imperio Tickets",
@@ -42,15 +44,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} body`}>
+      <body id="body" style={{ overflow: 'hidden' }} className={`${geistSans.variable} ${geistMono.variable}`}>
         <div>
-
-        <Header />
-        
+          <Header />
           {children}
-
-        <Footer />
-
+          <Footer />
         </div>
       </body>
     </html>
