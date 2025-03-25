@@ -1,9 +1,42 @@
+'use client'
 import React from 'react'
 import AnimationSuccess from  '../../components/AnimationSuccess/AnimationSuccess.jsx'
 import './Success.css'
-
+import emailService from '@/app/services/email.service.js'
+import { useSearchParams } from 'next/navigation.js'
 
 const Success = () => {
+
+  const searchParams = useSearchParams()
+
+
+  React.useEffect(() => {
+
+    getUserData()
+
+  },[])
+
+  const getUserData = async () => {
+
+    const data = searchParams.get('external_reference')
+
+    const parsedData = JSON.parse(data)
+
+    const body = {
+      email : parsedData.email,
+      quantity: parseInt(parsedData.count),
+      id: searchParams.get('payment_id')
+    }
+
+    const response = await emailService(body)
+
+    if(response.success) {
+
+    }
+
+  }
+
+
   return (
     <div className='contenedorSuccess'>
 

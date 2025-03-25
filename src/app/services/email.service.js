@@ -13,7 +13,7 @@ export default async function emailService (body) {
   }
 
   // Default response
-  const response = await fetch(`${apiUrl}store-email`, requestOptions)
+  const response = await fetch(`${apiUrl}send-email`, requestOptions)
   const json = await response.json()
 
   return json

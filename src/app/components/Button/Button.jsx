@@ -25,7 +25,7 @@ const Button = ({ count, subTotal, title, email, price }) => {
         title: title,
         quantity: count,
         price: 1,
-        external_reference: email
+        external_reference: {email, count}
       };
 
       const response = await mercadoPagoService(body);
@@ -39,7 +39,7 @@ const Button = ({ count, subTotal, title, email, price }) => {
 
   return (
     <button 
-      onClick={payment} // 👈 Ejecuta payment al hacer click
+      onClick={payment}
       disabled={isLoading}
     >
       {isLoading ? 'Procesando...' : 'Pagar con MercadoPago'}
