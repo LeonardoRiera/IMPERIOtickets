@@ -7,34 +7,34 @@ import { useSearchParams } from 'next/navigation.js'
 
 const Success = () => {
 
-  const searchParams = useSearchParams()
+  // const searchParams = useSearchParams()
 
 
-  React.useEffect(() => {
+  // React.useEffect(() => {
 
-    getUserData()
+  //   getUserData()
 
-  },[])
+  // },[])
 
-  const getUserData = async () => {
+  // const getUserData = async () => {
 
-    const data = searchParams.get('external_reference')
+  //   const data = searchParams.get('external_reference')
 
-    const parsedData = JSON.parse(data)
+  //   const parsedData = JSON.parse(data)
 
-    const body = {
-      email : parsedData.email,
-      quantity: parseInt(parsedData.count),
-      id: searchParams.get('payment_id')
-    }
+  //   const body = {
+  //     email : parsedData.email,
+  //     quantity: parseInt(parsedData.count),
+  //     id: searchParams.get('payment_id')
+  //   }
 
-    const response = await emailService(body)
+  //   const response = await emailService(body)
 
-    if(response.success) {
+  //   if(response.success) {
 
-    }
+  //   }
 
-  }
+  // }
 
 
   return (

@@ -1,4 +1,3 @@
-import { MercadoPagoConfig } from 'mercadopago';
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import QRCode from 'qrcode';
 import { nanoid } from 'nanoid';
@@ -9,88 +8,116 @@ import nodemailer from 'nodemailer';
 import mongoose from 'mongoose';
 import Payment from '../../models/Payment';
 
+import { NextResponse } from "next/server";
+
+const allowedIPs = new Set([
+  "54.88.218.97",
+  "18.215.140.160",
+  "18.213.114.129",
+  "18.206.34.84",
+  "35.236.253.169",
+  "35.245.91.34",
+  "35.245.20.104",
+  "35.186.182.146",
+]);
 
 const connectDB = async () => {
   if (mongoose.connections[0].readyState) return;
   await mongoose.connect(process.env.API_URL_MONGODB);
 }
 
-
 export async function POST(request) {
 
-  const data = await request.json();
+  const ip = request.headers.get("x-forwarded-for") || request.ip;
+
+  if (!allowedIPs.has(ip)) {
+    return NextResponse.json({ message: "Acceso no autorizado" }, { status: 403 });
+  }
+
+  const reqData = await request.json();
 
   await connectDB();
 
-  console.log(data)
-
   try {
 
-    // Extraer datos del pago
-    const { id: payment_id, status, external_reference } = data;
+    if(reqData.type === 'payment') {
 
-    // Parsear external_reference (si es un string JSON)
-    const { email, count } = external_reference;
+      const { data } = reqData
+      const { id } = data
+      const payment_id = id
 
-    // Verificar si el pago ya existe en la base de datos
-    const existingPayment = await Payment.findOne({ payment_id });
-
-    if (existingPayment) {
-      return new Response(
-        JSON.stringify({ success: false, message: 'El pago ya fue procesado' }),
-        {
-          status: 400,
-          headers: { 'Content-Type': 'application/json' },
-        }
-      );
-    }
-
-    // Crear un nuevo pago en la base de datos
-    const newPayment = new Payment({
-      payment_id,
-      email,
-      count: parseInt(count, 10),
-      status,
-    });
-
-    // Guardar el pago en la base de datos
-    await newPayment.save();
-
-    const emailUser = email;
-    const quantity = parseInt(data.additional_info.items[0].quantity);
-    const mailAttachments = [];
-
-    for (let i = 0; i < quantity; i++) {
-      const entryId = nanoid();
-      const qrBase64 = await QRCode.toDataURL(entryId, { scale: 5 });
-      const pdfBase64 = await generatePDFWithQR(qrBase64);
-      mailAttachments.push({
-        filename: `entrada_${existingPayment}_${i + 1}.pdf`,
-        content: pdfBase64,
-        encoding: "base64",
+      const paymentResponse = await fetch(`https://api.mercadopago.com/v1/payments/${payment_id}`, {
+        headers: { Authorization: `Bearer ${process.env.MERCADOPAGO_TOKEN}` }
       });
+
+      const response = await paymentResponse.json()
+
+      if(response.status === 'approved') {
+
+        console.log(response)
+
+        const parsedData = JSON.parse(response.external_reference);
+        const email = parsedData.email;
+        const quantity = parseInt(response.additional_info.items[0].quantity);        
+        const status = 'approved'
+        
+        const existingPayment = await Payment.findOne({ payment_id });
+        
+        if (existingPayment) {
+          return new NextResponse(
+            JSON.stringify({ success: false, message: 'El pago ya fue procesado' }),
+            {
+              status: 200,
+              headers: { 'Content-Type': 'application/json' },
+            }
+          );
+        }
+
+        // Crear un nuevo pago en la base de datos
+        const newPayment = new Payment({
+          payment_id,
+          email,
+          count: parseInt(quantity, 10),
+          status,
+        });
+
+        
+        // Guardar el pago en la base de datos
+        await newPayment.save();
+        
+        const mailAttachments = [];
+
+        for (let i = 0; i < quantity; i++) {
+          const entryId = nanoid();
+          const qrBase64 = await QRCode.toDataURL(entryId, { scale: 5 });
+          const pdfBase64 = await generatePDFWithQR(qrBase64);
+          mailAttachments.push({
+            filename: `entrada_${existingPayment}_${i + 1}.pdf`,
+            content: pdfBase64,
+            encoding: "base64",
+          });
+        }
+
+        const transporter = nodemailer.createTransport({
+          service: "Gmail",
+          auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
+        });
+
+        await transporter.sendMail({
+          from: "imperiotickets@gmail.com",
+          to: email,
+          subject: "Entradas adjuntas",
+          text: "Aquí están tus entradas.",
+          attachments: mailAttachments,
+        });
+
+        console.log("Correo enviado exitosamente");
+
+      }
+
     }
 
-    const transporter = nodemailer.createTransport({
-      service: "Gmail",
-      auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
-    });
-
-    await transporter.sendMail({
-      from: "imperiotickets@gmail.com",
-      to: emailUser,
-      subject: "Entradas adjuntas",
-      text: "Aquí están tus entradas.",
-      attachments: mailAttachments,
-    });
-
-    console.log("Correo enviado exitosamente");
-    
-    return new Response(JSON.stringify({ success: true }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
-    });
-
+    return NextResponse.json({ message: "Notificación recibida correctamente" }, { status: 200 });
 
   } catch (error) {
 
@@ -98,7 +125,6 @@ export async function POST(request) {
     return new Response(JSON.stringify({ success: false, message: error }), {status: 500});
 
   }
-
 }
 
 
