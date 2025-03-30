@@ -40,7 +40,7 @@ export async function POST(request) {
 
   try {
 
-    if(reqData.type === 'payment') {
+    if(reqData.data.id) {
 
       const { data } = reqData
       const { id } = data
@@ -115,9 +115,15 @@ export async function POST(request) {
 
       }
 
+      return NextResponse.json({ message: "Notificación recibida correctamente" }, { status: 200 });
+
+    } else {
+
+      return NextResponse.json({ message: "Notificación recibida correctamente PERO LA PORONGA DE MERCADOPAGO ALGO HIZO MAL" }, { status: 200 });
     }
 
     return NextResponse.json({ message: "Notificación recibida correctamente" }, { status: 200 });
+
 
   } catch (error) {
 
