@@ -19,7 +19,7 @@ export async function POST(request) {
       }
 
       // Enviar los datos al endpoint send-email
-      fetch(`${process.env.NEXT_PUBLIC_API_URL_SERVER}send-email`, {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL_SERVER}send-email`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
