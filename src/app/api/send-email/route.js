@@ -52,7 +52,7 @@ export async function POST(req) {
       const qrBase64 = await QRCode.toDataURL(entryId, { scale: 5 });
       const pdfBase64 = await generatePDFWithQR(qrBase64);
       mailAttachments.push({
-        filename: `entrada_${existingPayment}_${i + 1}.pdf`,
+        filename: `entrada_${entryId}_${i + 1}.pdf`,
         content: pdfBase64,
         encoding: "base64",
       });
