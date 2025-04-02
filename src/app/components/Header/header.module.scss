@@ -43,7 +43,7 @@
       }
 
       svg {
-        display: none;
+        visibility: hidden;
       }
 
       .navlinks {
@@ -83,7 +83,8 @@
         }
   
         svg {
-          display: block!important;
+          visibility: visible;
+          color: #fff;
           font-size: 2rem;
           cursor: pointer;
   

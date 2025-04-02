@@ -1,8 +1,0 @@
-.ListGroup {
-    width: 100%;
-    padding: 2rem;
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    justify-content: space-between;
-}

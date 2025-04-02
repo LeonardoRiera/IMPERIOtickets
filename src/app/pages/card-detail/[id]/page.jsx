@@ -1,27 +1,25 @@
 'use client'
-import React, { Suspense, useState } from 'react';
-import EntradasCount from '../../components/EntradasCount/EntradasCount';
-import { useSearchParams } from 'next/navigation';
+import React, { Suspense, useState, useEffect } from 'react';
+import { useParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
+import { getProductoById } from '../../../services/firebase.service';
 import './CardDetail.css';
 import Link from 'next/link';
+import EntradasCount from '@/app/components/EntradasCount/EntradasCount';
+
 
 const CardDetailContent = () => {
-  
-  // Local state
+
+  // Local State
+  const [producto, setProducto] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [count, setCount] = useState(1);
   const [total, setTotal] = useState(0);
-  const [imageDetail, setImageDetail] = React.useState(null);
-  const [title, setTitle] = React.useState('');
-  const [price, setPrice] = React.useState(0);
-  const [dia, setDia] = React.useState('');
-  const [fecha, setFecha] = React.useState(0);
-  const [hora, setHora] = React.useState(0);
-  const [lugar, setLugar] = React.useState('');
-  const [clasificacion, setClasificacion] = React.useState('');
+
+  const { id } = useParams();
 
   // Hooks
-  const searchParams = useSearchParams();
   const {
     register,
     watch,
@@ -33,25 +31,27 @@ const CardDetailContent = () => {
   const repeatEmail = watch("repeatEmail");
 
   const isButtonDisabled = email !== repeatEmail || !email || !repeatEmail;
-  
-  
-  // Effects
 
-  React.useEffect(() => {
-    setImageDetail(searchParams.get('imageDetail'));
-    setTitle(searchParams.get('title'));
-    setPrice(searchParams.get('price'));
-    setDia(searchParams.get('dia'));
-    setFecha(searchParams.get('fecha'));
-    setHora(searchParams.get('hora'));
-    setLugar(searchParams.get('lugar'));
-    setClasificacion(searchParams.get('clasificacion'));
-  }, []);
+  // Obtener datos del producto
+  useEffect(() => {
+    const fetchProducto = async () => {
+      try {
+        const prodData = await getProductoById(id);
+        setProducto(prodData);
+        setTotal(prodData.price * count);
+      } catch (err) {
+        setError('Error cargando el producto');
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  React.useEffect(() => {
-    const newTotal = price * count;
-    setTotal(newTotal);
-  }, [price, count]);
+    fetchProducto();
+  }, [id]);
+
+  if (loading) return <div>Cargando...</div>;
+  if (error) return <div>{error}</div>;
+  if (!producto) return <div>Producto no encontrado</div>;
 
   // Methods
   const increment = () => {
@@ -69,32 +69,19 @@ const CardDetailContent = () => {
   return (
     <div className='DetailContainer'>
       <div className='bannercito'>
-
         <div className='fotoContainer'>
-
-          <img src={imageDetail} alt="" className='imageBannercito' />
-
+          <img src={producto.imageDetail} alt="" className='imageBannercito' />
         </div>
 
         <div className='infoDetail'>
           <p className='introDetail'>Detalles del Evento</p>
-
-          <h2 className='tituloDetail'>{title}</h2>
-
-          <p className='detailTexto'>Fecha:  {dia} {fecha}</p>
-
-          <p className='detailTexto'>Lugar: {lugar}</p>
-
-          <p className='detailTexto'>Hora: {hora}</p>
-
-          <p className='detailTexto'>Clasificación: {clasificacion}</p>
-
-          <p className='detailTexto'>Precio: ${price}</p>
-
-          {/* <p className='importante'>Importante: al precio de tu entrada se le agregará el costo por servicio de venta digital.</p> */}
-
+          <h2 className='tituloDetail'>{producto.title}</h2>
+          <p className='detailTexto'>Fecha:  {producto.dia} {producto.fecha}</p>
+          <p className='detailTexto'>Lugar: {producto.lugar}</p>
+          <p className='detailTexto'>Hora: {producto.hora}</p>
+          <p className='detailTexto'>Clasificación: {producto.clasificacion}</p>
+          <p className='detailTexto'>Precio: ${producto.price}</p>
         </div>
-
       </div>
 
       <div className='rowDetail'>
@@ -108,20 +95,18 @@ const CardDetailContent = () => {
 
           <EntradasCount count={count} increment={increment} decrement={decrement} />
 
-          <p className='detallesCount'>Precio por Entrada: .................................. ${price}</p>
+          <p className='detallesCount'>Precio por Entrada: .................................. ${producto.price}</p>
 
-          {/* <p className='detallesCount'>Cargos por Servicio (12%): ......................... ${price * 0.12 } </p> */}
 
         </div>
 
-        {/* <p className='detallesCountTotal'>Total: ${total}</p> */}
         <p className='detallesCountTotal'>Total: ${total.toFixed(2)}</p>
 
       </div>
 
       </div>
 
-      {/* Sección de formulario para ingresar y confirmar el correo */}
+      {/* Form Section */}
       <div className='emailFormContainer'>
         <h3 className='correoTitulo'>Ingresa el Correo Electrónico <br />donde quieres recibir tus entradas:</h3>
 
@@ -165,30 +150,35 @@ const CardDetailContent = () => {
           </div>
 
           <Link
-            href={{
-              pathname:'/pages/venta-final',
-              query:{ imageDetail: imageDetail, title: title, price:price, count:count, email:email }}
-            }
-            className={`${isButtonDisabled ? 'disabled' : ''  } botonComprarEntrada`}
-            aria-disabled={isButtonDisabled}
-          >
-                Comprar Entrada
-          </Link>
+              href={{
+                pathname: '/pages/venta-final',
+                query: { 
+                  imageDetail: producto.imageDetail,
+                  title: producto.title,
+                  price: producto.price,
+                  count: count,
+                  email: email
+                }
+              }}
+              className={`${isButtonDisabled ? 'disabled' : ''} botonComprarEntrada`}
+              aria-disabled={isButtonDisabled}
+            >
+              Comprar Entrada
+            </Link>
 
 
           <p className='importante2'>Una vez confirmado el email se activará el botón de pagar.</p>
 
         </form>
 
-      </div>    
+      </div>
     </div>
   );
 };
 
-// Componente principal que envuelve CardDetailContent en Suspense
 const CardDetail = () => {
   return (
-    <Suspense fallback={<div>Cargando Detalles...</div>}>
+    <Suspense fallback={<div className="loading">Cargando Detalles...</div>}>
       <CardDetailContent />
     </Suspense>
   );

@@ -49,7 +49,7 @@ export async function POST(req) {
 
     for (let i = 0; i < quantity; i++) {
       const entryId = nanoid();
-      const qrBase64 = await QRCode.toDataURL(entryId, { scale: 5 });
+      const qrBase64 = await QRCode.toDataURL(entryId, { scale: 3 });
       const pdfBase64 = await generatePDFWithQR(qrBase64);
       mailAttachments.push({
         filename: `entrada_${entryId}_${i + 1}.pdf`,
@@ -85,8 +85,18 @@ export async function POST(req) {
   const generatePDFWithQR = async (qrBase64) => {
     const pdfDoc = await PDFDocument.create();
     const page = pdfDoc.addPage([60, 150]);
+
+    // 1. Primero dibujamos el fondo azul
+    page.drawRectangle({
+      x: 0,
+      y: 0,
+      width: 60,
+      height: 150,
+      color: rgb(138/255, 102/255, 102/255),
+    })
+
   
-    const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    const font = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
     const qrImage = await pdfDoc.embedPng(qrBase64);
   
     const imagePath = path.join(process.cwd(), "public", "assets", "imagotipoLetraNegra.png");
@@ -94,38 +104,38 @@ export async function POST(req) {
   
     page.drawImage(logoImage, {
       x: 10,
-      y: 110,
-      width: 80,
-      height: 30,
+      y: 140,
+      width: 40,
+      height: 8,
     });
   
     page.drawText("¡Tu entrada para el evento!", {
-      x: 10,
-      y: 90,
-      size: 5,
+      x: 5,
+      y: 130,
+      size: 4,
       font,
-      color: rgb(0, 0, 0),
+      color: rgb(0,0,0),
     });
   
     page.drawText("Fecha: 1 de Marzo de 2025", {
-      x: 10,
-      y: 70,
+      x: 5,
+      y: 120,
       size: 3,
       font,
       color: rgb(0, 0, 0),
     });
   
     page.drawText("Hora: 21hs.", {
-      x: 10,
-      y: 60,
+      x: 5,
+      y: 100,
       size: 3,
       font,
       color: rgb(0, 0, 0),
     });
   
     page.drawText("Ubicación: Galpón Blanco - El Andino", {
-      x: 10,
-      y: 50,
+      x: 5,
+      y: 90,
       size: 3,
       font,
       color: rgb(0, 0, 0),
@@ -133,17 +143,17 @@ export async function POST(req) {
   
     page.drawText("Tu Id de entrada es: ", {
       x: 10,
-      y: 40,
+      y: 80,
       size: 3,
       font,
       color: rgb(0, 0, 0),
     });
   
     page.drawImage(qrImage, {
-      x: 30,
-      y: 10,
-      width: 60,
-      height: 40,
+      x: 20,
+      y: 50,
+      width: 20,
+      height: 20,
     });
   
     const pdfBytes = await pdfDoc.save();
