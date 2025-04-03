@@ -1,0 +1,17 @@
+.loader-button {
+  width: 50px;
+  height: 50px;
+  border: 6px solid #37abf8;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+      transform: rotate(0deg);
+  }
+  to {
+      transform: rotate(360deg);
+  }
+}

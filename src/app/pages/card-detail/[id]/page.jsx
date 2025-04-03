@@ -5,17 +5,16 @@ import { useForm } from 'react-hook-form';
 import { getProductoById } from '../../../services/firebase.service';
 import './CardDetail.css';
 import Link from 'next/link';
-import EntradasCount from '@/app/components/EntradasCount/EntradasCount';
+import EntradasCount from '@/app/_components/EntradasCount/EntradasCount';
+import Loader from '@/app/_components/Loader/Loader';
 
-
-const CardDetailContent = () => {
+export default function CardDetail () {
 
   // Local State
   const [producto, setProducto] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [count, setCount] = useState(1);
   const [total, setTotal] = useState(0);
+  const [loading, setLoading] =useState(true)
 
   const { id } = useParams();
 
@@ -26,32 +25,16 @@ const CardDetailContent = () => {
     formState: { errors },
   } = useForm();
 
-  // Constants
-  const email = watch("email");
-  const repeatEmail = watch("repeatEmail");
 
-  const isButtonDisabled = email !== repeatEmail || !email || !repeatEmail;
-
-  // Obtener datos del producto
+  // Effects  
   useEffect(() => {
-    const fetchProducto = async () => {
-      try {
-        const prodData = await getProductoById(id);
-        setProducto(prodData);
-        setTotal(prodData.price * count);
-      } catch (err) {
-        setError('Error cargando el producto');
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchProducto();
   }, [id]);
 
-  if (loading) return <div>Cargando...</div>;
-  if (error) return <div>{error}</div>;
-  if (!producto) return <div>Producto no encontrado</div>;
+  // Constants
+  const email = watch("email");
+  const repeatEmail = watch("repeatEmail");
+  const isButtonDisabled = email !== repeatEmail || !email || !repeatEmail;
 
   // Methods
   const increment = () => {
@@ -66,7 +49,20 @@ const CardDetailContent = () => {
     }
   };
 
+  const fetchProducto = async () => {
+    try {
+      const prodData = await getProductoById(id);
+      setProducto(prodData);
+      setTotal(prodData.price * count);
+    } catch (err) {
+      console.log(err)
+    } finally {
+      setLoading(false)
+    }
+  };
+
   return (
+   (producto && !loading) ?
     <div className='DetailContainer'>
       <div className='bannercito'>
         <div className='fotoContainer'>
@@ -173,15 +169,7 @@ const CardDetailContent = () => {
 
       </div>
     </div>
+    :
+    <Loader />
   );
 };
-
-const CardDetail = () => {
-  return (
-    <Suspense fallback={<div className="loading">Cargando Detalles...</div>}>
-      <CardDetailContent />
-    </Suspense>
-  );
-};
-
-export default CardDetail;

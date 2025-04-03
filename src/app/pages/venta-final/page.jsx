@@ -2,7 +2,7 @@
 import React, { Suspense } from 'react';
 import './VentaFinal.css'
 import { useSearchParams } from 'next/navigation';
-import Button from '../../components/Button/Button';
+import Button from '../../_components/Button/Button';
 
 const ParamsComponent = () => {
   const searchParams = useSearchParams();

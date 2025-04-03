@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import AnimationSuccess from  '../../components/AnimationSuccess/AnimationSuccess.jsx'
+import AnimationSuccess from  '../../_components/AnimationSuccess/AnimationSuccess.jsx'
 import './Success.css'
 import emailService from '@/app/services/email.service.js'
 import { useSearchParams } from 'next/navigation.js'

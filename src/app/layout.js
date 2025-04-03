@@ -7,8 +7,8 @@ import { fab } from "@fortawesome/free-brands-svg-icons";
 import { faBars } from "@fortawesome/free-solid-svg-icons"; // Importar el icono específico
 
 // Internal Modules
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
+import Header from "./_components/Header/Header";
+import Footer from "./_components/Footer/Footer";
 
 // Añadir iconos a la librería
 library.add(fab, faBars); // Añadir solo el icono "bars" y los iconos de marcas
@@ -45,11 +45,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body id="body" style={{ overflow: 'hidden' }} className={`${geistSans.variable} ${geistMono.variable}`}>
-        <div>
+        <main>
           <Header />
           {children}
           <Footer />
-        </div>
+        </main>
       </body>
     </html>
   );

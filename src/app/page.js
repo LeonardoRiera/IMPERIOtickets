@@ -1,9 +1,8 @@
 // Internal Modules
-import React from "react";
 import styles from "./page.module.scss";
 import { fetchProductos } from "./services/firebase.service";
 import Image from "next/image";
-import LayoutBanners from "./components/LayoutBanners/LayoutBanners";
+import LayoutBanners from "./_components/LayoutBanners/LayoutBanners";
 import Link from "next/link";
 // export const dynamic = 'force-dynamic';
 

@@ -1,8 +1,7 @@
-'use client'
-
 import styles from './GuiaDeCompra.module.css'
 
-export default function GuiaDeCompra() {
+export default async function GuiaDeCompra() {
+
   return (
     <div className={styles.backCompra}>
       <div className={styles.guiaDeCompraContainer}>
