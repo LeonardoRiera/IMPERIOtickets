@@ -10,20 +10,23 @@ export async function POST(request) {
 
       const { id } = reqData.data;
       const paymentResponse = await new Payment(client).get({ id });
-      
-      console.log("Payment ID:", id);
 
-      const body = {
-        external_reference: JSON.parse(paymentResponse.external_reference),
-        id: id
+      if (paymentResponse.status === 'approved') {
+        console.log("Payment ID:", id);
+
+        const body = {
+          external_reference: JSON.parse(paymentResponse.external_reference),
+          id: id
+        }
+  
+        // Enviar los datos al endpoint send-email
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL_SERVER}send-email`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        }).catch((error) => console.error("Error al enviar a la info al email:", error));
       }
 
-      // Enviar los datos al endpoint send-email
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL_SERVER}send-email`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      }).catch((error) => console.error("Error al enviar a la info al email:", error));
     }
 
     return new Response(null, { status: 200 });
