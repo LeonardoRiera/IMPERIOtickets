@@ -18,47 +18,48 @@ const Header = () => {
   }
 
   return (
+    <>
+      <header id={styles.header} >
+        <nav className={styles.navbar}>
 
-    <header id={styles.header}>
-      <nav className={styles.navbar}>
+          <div className={styles.navbarContainer}>
 
-        <div className={styles.navbarContainer}>
+            <Link href="/" className={styles.linkLogo}>
 
-          <Link href="/" className={styles.linkLogo}>
+              <Image src={logo} alt="Logo Navbar" className={styles.logoCompleto}/>
+            
+            </Link>
 
-            <Image src={logo} alt="Logo Navbar" className={styles.logoCompleto}/>
-          
-          </Link>
+            <FontAwesomeIcon icon={faBars} id='navbar-icon' onClick={() => setMenuEstado(!menuEstado)}/>
 
-          <FontAwesomeIcon icon={faBars} id='navbar-icon' onClick={() => setMenuEstado(!menuEstado)}/>
+            <ul className={`${menuEstado ? styles.showMenu : ''} ${styles.navlinks}`}>
 
-          <ul className={`${menuEstado ? styles.showMenu : ''} ${styles.navlinks}`}>
+              <li >
+                <Link  href="/" className={`${styles.linksMenu}`} onClick={cerrarMenu} >Shows</Link> 
+              </li>
 
-            <li >
-              <Link  href="/" className={`${styles.linksMenu}`} onClick={cerrarMenu} >Shows</Link> 
-            </li>
+              <li >
+                <Link  href='/pages/guia-de-compra' className={`${styles.linksMenu}`} onClick={cerrarMenu}>Guía de Compra</Link>
+              </li>
 
-            <li >
-              <Link  href='/pages/guia-de-compra' className={`${styles.linksMenu}`} onClick={cerrarMenu}>Guía de Compra</Link>
-            </li>
+              <li >
+                <Link  href='/pages/atencion-al-cliente' className={`${styles.linksMenu}`} onClick={cerrarMenu}>Atención al Cliente</Link>
+              </li>  
 
-            <li >
-              <Link  href='/pages/atencion-al-cliente' className={`${styles.linksMenu}`} onClick={cerrarMenu}>Atención al Cliente</Link>
-            </li>  
+              <li >
+                <Link  href="/pages/acceso-productores" className={`${styles.linksMenu}`} onClick={cerrarMenu}>Acceso Productores</Link>
+              </li>  
 
-            <li >
-              <Link  href="/pages/acceso-productores" className={`${styles.linksMenu}`} onClick={cerrarMenu}>Acceso Productores</Link>
-            </li>  
+              <li >
+                <Link  href="#footer" className={`${styles.linksMenu}`} onClick={cerrarMenu}>Contacto</Link>
+              </li>  
 
-            <li >
-              <Link  href="#footer" className={`${styles.linksMenu}`} onClick={cerrarMenu}>Contacto</Link>
-            </li>  
-
-          </ul>
-        </div>
-      </nav>
-    </header>
-
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <div style={{ height: '91px' }} />
+    </>
   )
 
 }

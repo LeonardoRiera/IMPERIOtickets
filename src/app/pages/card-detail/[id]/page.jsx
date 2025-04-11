@@ -3,8 +3,9 @@ import React, { Suspense, useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { getProductoById } from '../../../services/firebase.service';
-import './CardDetail.css';
+import './CardDetail.scss';
 import Link from 'next/link';
+import Image from 'next/image';
 import EntradasCount from '@/app/_components/EntradasCount/EntradasCount';
 import Loader from '@/app/_components/Loader/Loader';
 
@@ -62,11 +63,18 @@ export default function CardDetail () {
   };
 
   return (
-   (producto && !loading) ?
+   (producto?.imageDetail && !loading) ?
     <div className='DetailContainer'>
       <div className='bannercito'>
         <div className='fotoContainer'>
-          <img src={producto.imageDetail} alt="" className='imageBannercito' />
+          <Image 
+            src={producto.imageDetail} 
+            alt=""  
+            className='imageBannercito'
+            width={700}
+            height={700}
+            style={{objectFit: "contain"}}
+            />
         </div>
 
         <div className='infoDetail'>
@@ -119,7 +127,7 @@ export default function CardDetail () {
                   message: "Email inválido",
                 },
               })}
-              className='imput'
+              className='input'
               type="email"
               placeholder="Ingresa tu correo electrónico"
               required
@@ -137,7 +145,7 @@ export default function CardDetail () {
                 validate: (value) =>
                   value === email || 'Los emails no coinciden'
               })}
-              className='imput'
+              className='input'
               type="email"
               placeholder="Confirma tu correo electrónico"
               required

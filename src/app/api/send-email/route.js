@@ -7,7 +7,7 @@ import fs from 'fs';
 import path from 'path';
 import nodemailer from 'nodemailer';
 
-import PaymentSchema from '../../models/Payment';
+import TicketSchema from '../../models/Ticket';
 
 
 const connectDB = async () => {
@@ -19,62 +19,59 @@ export async function POST(req) {
 
     const response = await req.json()
 
-    console.log(response)
-
-    // await connectDB();
-    
-    // const existingPayment = await PaymentSchema.findOne({ payment_id });
-    
-    // if (existingPayment) {
-    //   console.log('Ya existía el id de pago')
-    //   return new Response(null, {status: 200});
-    // } else {
-
-    // // Crear un nuevo pago en la base de datos
-    // const newPayment = new PaymentSchema({
-    //   payment_id,
-    //   email,
-    //   count: parseInt(quantity, 10),
-    //   status,
-    // });
-
-    // // Guardar el pago en la base de datos
-    // await newPayment.save();
-
     const email = response.external_reference.email;
     const quantity = response.external_reference.count;
-    const id = response.external_reference.id;
+    const id = response.id;
+
+    await connectDB();
     
     const mailAttachments = [];
+    
+    if (id) {
+    
+      for (let i = 0; i < quantity; i++) {
 
-    for (let i = 0; i < quantity; i++) {
-      const entryId = nanoid();
-      const qrBase64 = await QRCode.toDataURL(entryId, { scale: 3 });
-      const pdfBase64 = await generatePDFWithQR(qrBase64);
-      mailAttachments.push({
-        filename: `entrada_${entryId}_${i + 1}.pdf`,
-        content: pdfBase64,
-        encoding: "base64",
+        const entryId = nanoid();
+
+        // Crear una nueva entrada en la base de datos
+        const newEntry = new TicketSchema({
+          payment_id: id,
+          entry_id: entryId,
+          email: email,
+          count: parseInt(quantity, 10),
+          status: 'approved'
+        });
+
+        // Guardar la entrada en la base de datos
+        await newEntry.save();
+
+        // Generar entrada
+        const qrBase64 = await QRCode.toDataURL(entryId, { scale: 3 });
+        const pdfBase64 = await generatePDFWithQR(qrBase64);
+        mailAttachments.push({
+          filename: `entrada_${entryId}_${i + 1}.pdf`,
+          content: pdfBase64,
+          encoding: "base64",
+        });
+      }
+
+      const transporter = nodemailer.createTransport({
+        service: "Gmail",
+        auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
       });
+
+      await transporter.sendMail({
+        from: "imperiotickets@gmail.com",
+        to: email,
+        subject: "Entradas adjuntas",
+        text: "Aquí están tus entradas.",
+        attachments: mailAttachments,
+      });
+
+      console.log("Correo enviado exitosamente");
+      revalidatePath("/");
+
     }
-
-    const transporter = nodemailer.createTransport({
-      service: "Gmail",
-      auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
-    });
-
-    await transporter.sendMail({
-      from: "imperiotickets@gmail.com",
-      to: email,
-      subject: "Entradas adjuntas",
-      text: "Aquí están tus entradas.",
-      attachments: mailAttachments,
-    });
-
-    console.log("Correo enviado exitosamente");
-    revalidatePath("/");
-
-    // }
 
     return new Response(null, {status:200})
 
