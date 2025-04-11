@@ -1,55 +1,75 @@
 'use client'
-import React from "react";
+import React from 'react'
+import BarcodeScannerComponent from "react-qr-barcode-scanner";
 import './Scanner.scss'
-import {Html5QrcodeScanner} from "html5-qrcode"
+import validateEntryService from '@/app/services/scanner.service';
 
-export default function Scanner() {
-  const [scanResult, setScanResult] = React.useState("Escanea tu entrada");
-  const scannerRef = React.useRef(null);
+export default  function Scanner() {
 
-  React.useEffect(() => {
-    const scanner = new Html5QrcodeScanner('reader', {
-      qrbox: {
-        width: 250,
-        height: 250
-      },
-      fps: 160
-    });
+  // Local State
+  const [data, setData]             = React.useState('Escaneá la entrada guachin')
+  const [loading, setLoading]       = React.useState(false)
+  const [stopStream, setStopStream] = React.useState(false)
+  const [success, setSuccess]       = React.useState(false)
+  const [error, setError]           = React.useState(false)
 
-    const onScanSuccess = (result) => {
-      console.log(result)
-      scanner.stop();  // Detener el scanner al detectar QR
-      setScanResult(result);
-    };
+  // Methods
+  const onScan = async (err, result) => {
 
-    const onScanError = (error) => {
+    setLoading(true)
 
-      console.warn("Error al escanear:", error);
-    };
+    if (result) {
+  
+      const data = await validateEntryService({ entryId: result.text });
 
-    scanner.render(onScanSuccess, onScanError);
-    scannerRef.current = scanner;
+      if(data.success) {
 
-    return () => {
-      if (scannerRef.current) {
-        scannerRef.current.clear().catch(error => {
-          console.log("Error al limpiar scanner:", error);
-        });
+        setData('Éxito Total')
+        setSuccess(true)
+        setStopStream(true)
+        setLoading(false)
+
+      } else {
+
+        console.log( err)
+        setLoading(false)
+        setError(true)
+        setStopStream(true)
+
       }
-    };
-  }, []);
+
+    } else {
+      'Escaneá la entrada guachin'
+      setLoading(false)
+    }
+
+  }
+
+  const dismissQrReader = () => {
+    setStopStream(false)
+    window.location.reload()
+  }
 
   return (
-    <div className="scanner-container">
-      <h1>Escaneá el QR</h1>
-      {scanResult === "Escanea tu entrada" ? (
-        <div id="reader"></div>
-      ) : (
-        <div>
-          <p className="resultado">Entrada válida:</p>
-          <p className="resultado-datos">{scanResult}</p>
+    <div id='scanner'>
+      <BarcodeScannerComponent
+        width={500}
+        height={500}
+        onUpdate={(err, result) => onScan(err, result)}
+        stopStream={stopStream}
+      />
+      {
+        loading ? <div className='spin' /> : 
+  
+        <div className='container-data'>
+          <p className={`${success ? 'success' : ''}`}>{data}</p> {success && <div className="checkmark"></div>}
         </div>
-      )}
+
+      }
+
+      {
+        stopStream && <button onClick={() => dismissQrReader()}>Escanear de nuevo</button>
+      }
     </div>
   );
 }

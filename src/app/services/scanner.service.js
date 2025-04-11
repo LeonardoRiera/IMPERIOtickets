@@ -12,7 +12,6 @@ export default async function validateEntryService (body) {
     body: JSON.stringify(body)
   }
 
-  console.log(body)
   // Default response
   const response = await fetch(`${apiUrl}validate-entry`, requestOptions)
   const json = await response.json()
