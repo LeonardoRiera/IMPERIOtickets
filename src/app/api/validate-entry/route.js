@@ -9,31 +9,31 @@ export async function POST(req) {
 
     const {entryId} = body
 
-    console.log('Hola soy el id',entryId)
+    console.log('Hola soy el id', entryId)
 
-    // // Buscar la entrada en la base de datos
-    // const ticket = await TicketSchema.findOne({ entry_id: entryId });
+    // Buscar la entrada en la base de datos
+    const ticket = await TicketSchema.findOne({ payment_id: entryId });
 
-    // if (!ticket) {
-    //   return Response.json(
-    //     { valid: false, message: 'Entrada no encontrada' },
-    //     { status: 404 }
-    //   );
-    // }
+    if (!ticket) {
+      return Response.json(
+        { success: false, message: 'Entrada no encontrada' },
+        { status: 404 }
+      );
+    }
 
-    // if (ticket.status === 'used') {
-    //   return Response.json(
-    //     { valid: false, message: 'Entrada ya utilizada' },
-    //     { status: 409 }
-    //   );
-    // }
+    if (ticket.status === 'used') {
+      return Response.json(
+        { success: false, message: 'Entrada ya utilizada' },
+        { status: 409 }
+      );
+    }
 
-    // // Actualizar el estado a "used"
-    // const updatedTicket = await TicketSchema.findOneAndUpdate(
-    //   { entry_id: entryId },
-    //   { status: 'used' },
-    //   { new: true }
-    // );
+    // Actualizar el estado a "used"
+    await TicketSchema.findOneAndUpdate(
+      { payment_id: entryId },
+      { status: 'used' },
+      { new: true }
+    );
 
     return Response.json({
       success: true,

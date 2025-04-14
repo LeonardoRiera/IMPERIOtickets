@@ -32,6 +32,20 @@
       &.success{
         color: #18f323;
       }
+
+      &.error {
+        color: #ff4444;
+        font-weight: bold;
+      }
+    }
+
+
+  
+    .crossmark {
+      width: 20px;
+      height: 20px;
+      background: url('../../assets/error.png') no-repeat;
+      margin: 0 auto;
     }
 
     .checkmark {

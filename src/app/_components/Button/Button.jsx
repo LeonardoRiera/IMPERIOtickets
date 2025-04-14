@@ -2,8 +2,8 @@
 import React from 'react';
 import './Button.css';
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+import { v4 as uuidv4 } from 'uuid';
 import mercadoPagoService from '../../services/mercado.pago.service';
-import Loader from '../Loader/Loader';
 
 const Button = ({ count, subTotal, title, email, price }) => {
   const [preference, setPreference] = React.useState(null);
@@ -23,11 +23,14 @@ const Button = ({ count, subTotal, title, email, price }) => {
     initiated.current = true;
 
     try {
+
+      const ticketId = uuidv4()
+      console.log(ticketId)
       const body = {
         title: title,
         quantity: count,
         price: 1,
-        external_reference: {email, count}
+        external_reference: {email, count, ticketId}
       };
 
       const response = await mercadoPagoService(body);

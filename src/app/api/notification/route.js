@@ -11,8 +11,7 @@ export async function POST(request) {
       const { id } = reqData.data;
       const paymentResponse = await new Payment(client).get({ id });
 
-      if (paymentResponse.status === 'approved') {
-        console.log("Payment ID:", id);
+      if (paymentResponse.status === 'approved' && id) {
 
         const body = {
           external_reference: JSON.parse(paymentResponse.external_reference),

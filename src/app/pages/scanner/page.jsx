@@ -15,44 +15,46 @@ export default  function Scanner() {
 
   // Methods
   const onScan = async (err, result) => {
-
+    if (!result || loading) return
+    
     setLoading(true)
-
-    if (result) {
-  
-      const data = await validateEntryService({ entryId: result.text });
-
-      if(data.success) {
-
+    
+    try {
+      const data = await validateEntryService({ entryId: result.text })
+      
+      if (data.success) {
         setData('Éxito Total')
         setSuccess(true)
-        setStopStream(true)
-        setLoading(false)
-
       } else {
-
-        console.log( err)
-        setLoading(false)
+        setData(data.message || 'Error de validación')
         setError(true)
-        setStopStream(true)
-
       }
-
-    } else {
-      'Escaneá la entrada guachin'
+      
+      setStopStream(true)
+    } finally {
       setLoading(false)
     }
-
   }
 
   const dismissQrReader = () => {
     setStopStream(false)
+    setSuccess(false)
+    setError(false)    
     window.location.reload()
   }
 
   return (
     <div id='scanner'>
       <BarcodeScannerComponent
+        key={stopStream ? "off" : "on"}
+        constraints={{
+          video: {
+            facingMode: "environment",
+            focusMode: "continuous",
+            width: { ideal: 4096 },
+            height: { ideal: 2160 }
+          }
+        }}        facingMode="environment" 
         width={500}
         height={500}
         onUpdate={(err, result) => onScan(err, result)}
@@ -60,11 +62,13 @@ export default  function Scanner() {
       />
       {
         loading ? <div className='spin' /> : 
-  
         <div className='container-data'>
-          <p className={`${success ? 'success' : ''}`}>{data}</p> {success && <div className="checkmark"></div>}
+          <p className={`${success ? 'success' : ''} ${error ? 'error' : ''}`}>
+            {data}
+          </p>
+          {success && <div className="checkmark"></div>}
+          {error && <div className="crossmark"></div>}
         </div>
-
       }
 
       {

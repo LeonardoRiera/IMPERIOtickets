@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import { revalidatePath } from 'next/cache';
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import QRCode from 'qrcode';
 import { nanoid } from 'nanoid';
@@ -9,74 +8,86 @@ import nodemailer from 'nodemailer';
 
 import TicketSchema from '../../models/Ticket';
 
-
 const connectDB = async () => {
   if (mongoose.connections[0].readyState) return;
   await mongoose.connect(process.env.API_URL_MONGODB);
-}
+};
 
 export async function POST(req) {
+  const response = await req.json();
+  const { email, count: quantity, ticketId: payment_id } = response.external_reference;
 
-    const response = await req.json()
+  await connectDB();
 
-    const email = response.external_reference.email;
-    const quantity = response.external_reference.count;
-    const id = response.id;
+  const session = await mongoose.startSession();
+  session.startTransaction();
 
-    await connectDB();
-    
-    const mailAttachments = [];
-    
-    if (id) {
-    
-      for (let i = 0; i < quantity; i++) {
+  try {
+    // Verificar si la compra ya fue procesada
+    const existingTicket = await TicketSchema.findOne({ 
+      payment_id,
+      status: 'active'
+    }).session(session);
 
-        const entryId = nanoid();
-
-        // Crear una nueva entrada en la base de datos
-        const newEntry = new TicketSchema({
-          payment_id: id,
-          entry_id: entryId,
-          email: email,
-          count: parseInt(quantity, 10),
-          status: 'approved'
-        });
-
-        // Guardar la entrada en la base de datos
-        await newEntry.save();
-
-        // Generar entrada
-        const qrBase64 = await QRCode.toDataURL(entryId, { scale: 3 });
-        const pdfBase64 = await generatePDFWithQR(qrBase64);
-        mailAttachments.push({
-          filename: `entrada_${entryId}_${i + 1}.pdf`,
-          content: pdfBase64,
-          encoding: "base64",
-        });
-      }
-
-      const transporter = nodemailer.createTransport({
-        service: "Gmail",
-        auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
-      });
-
-      await transporter.sendMail({
-        from: "imperiotickets@gmail.com",
-        to: email,
-        subject: "Entradas adjuntas",
-        text: "Aquí están tus entradas.",
-        attachments: mailAttachments,
-      });
-
-      console.log("Correo enviado exitosamente");
-      revalidatePath("/");
-
+    if (existingTicket) {
+      await session.abortTransaction();
+      return new Response(null, { status: 200 });
     }
 
-    return new Response(null, {status:200})
+    // Generar UN SOLO QR con el ticketId (payment_id)
+    const qrBase64 = await QRCode.toDataURL(payment_id, { scale: 3 });
 
+    // Crear PDFs (todos con el mismo QR pero diferentes nombres si querés)
+    const mailAttachments = [];
+    for (let i = 0; i < quantity; i++) {
+      const pdfBase64 = await generatePDFWithQR(qrBase64);
+      mailAttachments.push({
+        filename: `entrada_${payment_id}_${i + 1}.pdf`,
+        content: pdfBase64,
+        encoding: "base64",
+      });
+    }
+
+    // Crear un único documento para la compra
+    const newTicket = new TicketSchema({
+      payment_id,
+      email,
+      count: quantity,
+      status: 'active'
+    });
+
+    await newTicket.save({ session });
+
+    // Enviar email con todas las entradas
+    const transporter = nodemailer.createTransport({
+      service: "Gmail",
+      auth: { 
+        user: process.env.EMAIL_USER, 
+        pass: process.env.EMAIL_PASS 
+      },
+    });
+
+    await transporter.sendMail({
+      from: '"Imperio Tickets" <imperiotickets@gmail.com>',
+      to: email,
+      subject: "Entradas adjuntas",
+      text: "Aquí están tus entradas.",
+      attachments: mailAttachments,
+    });
+
+    await session.commitTransaction();
+    console.log("Entradas generadas y email enviado!");
+    
+  } catch (error) {
+    await session.abortTransaction();
+    console.error("Error:", error);
+    return new Response(null, { status: 500 });
+  } finally {
+    session.endSession();
+  }
+
+  return new Response(null, { status: 200 });
 }
-
 
   // Función para generar el PDF con el QR
   const generatePDFWithQR = async (qrBase64) => {
