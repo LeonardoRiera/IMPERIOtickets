@@ -71,7 +71,37 @@ export async function POST(req) {
       from: '"Imperio Tickets" <imperiotickets@gmail.com>',
       to: email,
       subject: "Entradas adjuntas",
-      text: "Aquí están tus entradas.",
+      text: "Aquí están tus entradas.", // Versión en texto plano para clientes que no soportan HTML
+      html: `<!DOCTYPE html>
+                <html lang="es">
+                <head>
+                  <meta charset="UTF-8">
+                  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                  <title>Tu Entrada</title>
+                  </head>
+                  <body style="margin:0; padding:0; background-color:#ffffff; font-family:Arial, sans-serif; color:#000;">
+                    <div style="max-width:600px; margin:auto; padding:20px; border:1px solid #ddd;">
+                      <div style="text-align:center; margin-bottom:20px;">
+                        <img src="https://i.postimg.cc/C586Cw8g/Portada-Mail.png" alt="Logo de Imperio Tickets" style="max-width:600px; margin:auto">
+                      </div>
+                      <h1 style="color:#ffffff; text-align:center; background-color:#000; padding:10px 0; border-radius:15px;">
+                        ¡Gracias por tu compra!</h1>
+
+                      <p style="margin:20px 0;">Ya podés disfrutar de tu entrada digital para el evento. A continuación, te compartimos los datos importantes:</p>
+
+                      
+                      <p style="margin-bottom:15px;">⚠️ <strong>IMPORTANTE:</strong> TU ENTRADA ES UN QR CON UN ID ÚNICO y te será requerido en el lugar de acceso al evento. El mismo será escaneado para habilitarte el ingreso.</p>
+
+                      <p style="margin-bottom:30px;">Una vez recibido el mail con tu entrada, ES TU RESPONSABILIDAD EVITAR DUPLICADOS ya que sólo se habilitará a la primer persona que ingrese con cada QR.</p>
+
+
+                      <div style="margin-top:30px; font-size:12px; color:#666; text-align:center;">
+                        Si tenés dudas, escribinos a <a href="mailto:imperiotickets@gmail.com">imperiotickets@gmail.com</a><br>
+                        ¡Nos vemos en el evento!
+                      </div>
+                    </div>
+                  </body>
+                  </html>`,
       attachments: mailAttachments,
     });
 
@@ -90,80 +120,83 @@ export async function POST(req) {
 }
 
   // Función para generar el PDF con el QR
+  
   const generatePDFWithQR = async (qrBase64) => {
     const pdfDoc = await PDFDocument.create();
-    const page = pdfDoc.addPage([60, 150]);
-
-    // 1. Primero dibujamos el fondo azul
-    page.drawRectangle({
-      x: 0,
-      y: 0,
-      width: 60,
-      height: 150,
-      color: rgb(138/255, 102/255, 102/255),
-    })
-
+    const page = pdfDoc.addPage([60, 150]); // Tamaño exacto: 60x150 mm
   
     const font = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
     const qrImage = await pdfDoc.embedPng(qrBase64);
   
+    // === Logo (posición exacta como en el PDF) ===
     const imagePath = path.join(process.cwd(), "public", "assets", "imagotipoLetraNegra.png");
     const logoImage = await pdfDoc.embedPng(fs.readFileSync(imagePath));
-  
     page.drawImage(logoImage, {
       x: 10,
-      y: 140,
+      y: 140, // Posición exacta desde abajo
       width: 40,
       height: 8,
     });
   
-    page.drawText("¡Tu entrada para el evento!", {
-      x: 5,
-      y: 130,
-      size: 4,
-      font,
-      color: rgb(0,0,0),
-    });
-  
-    page.drawText("Fecha: 1 de Marzo de 2025", {
-      x: 5,
-      y: 120,
-      size: 3,
+    // === Texto principal (formato exacto) ===
+    page.drawText("LLEGÓ LA ENTRADA PARA TU EVENTO!", { // Texto en una línea
+      x: 6,
+      y: 125, // Posición exacta
+      size: 5,
       font,
       color: rgb(0, 0, 0),
     });
   
-    page.drawText("Hora: 21hs.", {
-      x: 5,
-      y: 100,
-      size: 3,
+    // === Detalles del evento (texto y posiciones exactas) ===
+    page.drawText("FECHA : 3 DE MAYO", { x: 6, y: 113, size: 4, font, color: rgb(0, 0, 0) });
+    page.drawText("HORA : 21 HS", { x: 6, y: 107, size: 4, font, color: rgb(0, 0, 0) });
+    page.drawText("LUGAR : CALPON BLANCO", { x: 6, y: 101, size: 4, font, color: rgb(0, 0, 0) }); // "CALPON" como en el PDF
+  
+    // === Web (posición exacta) ===
+    page.drawText("www.imperiotickets.com", {
+      x: 4,
+      y: 93,
+      size: 3.5,
       font,
       color: rgb(0, 0, 0),
     });
   
-    page.drawText("Ubicación: Galpón Blanco - El Andino", {
-      x: 5,
-      y: 90,
-      size: 3,
-      font,
-      color: rgb(0, 0, 0),
+    // === Bloque "IMPORTANTE" (saltos de línea y orden exactos) ===
+    page.drawText("IMPORTANTE", { x: 14, y: 83, size: 4, font, color: rgb(0, 0, 0) });
+  
+    const importantLines = [
+      "TU ENTRADA ES UN QR CON UN",
+      "ID ÚNICO Y TE SERÁ REQUERIDO",
+      "EN EL LUGAR DE ACCESO DEL",
+      "EVENTO",
+      "", // Espacio exacto
+      "EL MISMO SERÁ ESCANEADO",
+      "PARA HABILITARTE EL INGRESO",
+      "", // Espacio exacto
+      "UNA VEZ RECIBIDO EL MAIL CON",
+      "TU ENTRADA ES TU RESPONSABILIDAD",
+      "EVITAR DUPLICADOS",
+      "", // Espacio exacto
+      "SOLO SE HABILITARÁ A LA",
+      "PRIMERA PERSONA QUE INGRESE",
+      "CON ESTE QR",
+    ];
+  
+    let y = 77; // Posición inicial exacta
+    importantLines.forEach((line) => {
+      page.drawText(line, { x: 4, y, size: 3, font, color: rgb(0, 0, 0) });
+      y -= 4; // Espaciado exacto entre líneas
     });
   
-    page.drawText("Tu Id de entrada es: ", {
-      x: 10,
-      y: 80,
-      size: 3,
-      font,
-      color: rgb(0, 0, 0),
-    });
-  
+    // === QR (posición exacta como en el PDF) ===
     page.drawImage(qrImage, {
       x: 20,
-      y: 50,
+      y: 5,
       width: 20,
       height: 20,
     });
   
     const pdfBytes = await pdfDoc.save();
-    return Buffer.from(pdfBytes).toString('base64');
-  }
+    return Buffer.from(pdfBytes).toString("base64");
+  };
+  
