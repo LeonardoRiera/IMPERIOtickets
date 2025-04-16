@@ -35,7 +35,7 @@ export async function POST(req) {
     }
 
     // Generar UN SOLO QR con el ticketId (payment_id)
-    const qrBase64 = await QRCode.toDataURL(payment_id, { scale: 3 });
+    const qrBase64 = await QRCode.toDataURL(payment_id, { scale: 8 });
 
     // Crear PDFs (todos con el mismo QR pero diferentes nombres si querés)
     const mailAttachments = [];
@@ -123,46 +123,82 @@ export async function POST(req) {
   
   const generatePDFWithQR = async (qrBase64) => {
     const pdfDoc = await PDFDocument.create();
-    const page = pdfDoc.addPage([60, 150]); // Tamaño exacto: 60x150 mm
+    const page = pdfDoc.addPage([60, 150]);
   
     const font = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
     const qrImage = await pdfDoc.embedPng(qrBase64);
   
     // === Logo (posición exacta como en el PDF) ===
-    const imagePath = path.join(process.cwd(), "public", "assets", "imagotipoLetraNegra.png");
+    const imagePath = path.join(process.cwd(), "public", "assets", "imagologoTickets.png");
     const logoImage = await pdfDoc.embedPng(fs.readFileSync(imagePath));
+
+    // Rectangulo
+    page.drawRectangle({
+      x: 0,
+      y: 140,
+      width: 138,
+      height: 10,
+      borderWidth: .5,
+      borderColor: rgb(1,1,1),
+      color: rgb(0, 0, 0),
+    })
+
     page.drawImage(logoImage, {
       x: 10,
-      y: 140, // Posición exacta desde abajo
+      y: 142,
       width: 40,
-      height: 8,
+      height: 6,
     });
   
     // === Texto principal (formato exacto) ===
-    page.drawText("LLEGÓ LA ENTRADA PARA TU EVENTO!", { // Texto en una línea
-      x: 6,
-      y: 125, // Posición exacta
-      size: 5,
+    page.drawText("¡LLEGÓ LA ENTRADA PARA TU EVENTO!", { // Texto en una línea
+      x: 10,
+      y: 135, // Posición exacta
+      size: 2,
       font,
       color: rgb(0, 0, 0),
     });
+
+    // === QR (posición exacta como en el PDF) ===
+    page.drawImage(qrImage, {
+      x: 18,
+      y: 106,
+      width: 22,
+      height: 22,
+    });
+
+    
+    // Rectangulo pero del medio guache
+    page.drawRectangle({
+      x: 0,
+      y: 95,
+      width: 150,
+      height: 8,
+      borderWidth: 5,
+      color: rgb(0, 0, 0),
+    })
+
   
     // === Detalles del evento (texto y posiciones exactas) ===
-    page.drawText("FECHA : 3 DE MAYO", { x: 6, y: 113, size: 4, font, color: rgb(0, 0, 0) });
-    page.drawText("HORA : 21 HS", { x: 6, y: 107, size: 4, font, color: rgb(0, 0, 0) });
-    page.drawText("LUGAR : CALPON BLANCO", { x: 6, y: 101, size: 4, font, color: rgb(0, 0, 0) }); // "CALPON" como en el PDF
+    page.drawText("FECHA : 3 DE MAYO", { x: 20, y: 101, size: 2, font, color: rgb(1, 1, 1) });
+    page.drawText("HORA : 21 HS", { x: 23, y: 98, size: 2, font, color: rgb(1, 1, 1) });
+    page.drawText("LUGAR : GALPÓN BLANCO", { x: 16, y: 95, size: 2, font, color: rgb(1, 1, 1)}); // "CALPON" como en el PDF
   
+      
+    // === Bloque "IMPORTANTE" (saltos de línea y orden exactos) ===
+    page.drawText("IMPORTANTE", { x: 23, y: 89, size: 2, font, color: rgb(0, 0, 0) });
+
+
     // === Web (posición exacta) ===
     page.drawText("www.imperiotickets.com", {
       x: 4,
-      y: 93,
+      y: 3,
       size: 3.5,
       font,
       color: rgb(0, 0, 0),
     });
-  
-    // === Bloque "IMPORTANTE" (saltos de línea y orden exactos) ===
-    page.drawText("IMPORTANTE", { x: 14, y: 83, size: 4, font, color: rgb(0, 0, 0) });
+
+
   
     const importantLines = [
       "TU ENTRADA ES UN QR CON UN",
@@ -184,16 +220,8 @@ export async function POST(req) {
   
     let y = 77; // Posición inicial exacta
     importantLines.forEach((line) => {
-      page.drawText(line, { x: 4, y, size: 3, font, color: rgb(0, 0, 0) });
+      page.drawText(line, { x: 4, y, size: 2, font, color: rgb(0, 0, 0) });
       y -= 4; // Espaciado exacto entre líneas
-    });
-  
-    // === QR (posición exacta como en el PDF) ===
-    page.drawImage(qrImage, {
-      x: 20,
-      y: 5,
-      width: 20,
-      height: 20,
     });
   
     const pdfBytes = await pdfDoc.save();
