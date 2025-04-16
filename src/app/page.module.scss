@@ -1,0 +1,172 @@
+.page{
+  min-height: 100vh;
+}
+
+.CardContainer {
+  width: 100%;
+  height: auto;
+}
+
+.ListGroup {
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card {
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  background-color: #f9f9f900;
+
+  .backgroundImage {
+    top: 0;
+    left: 0;
+  }
+
+  .desktop {
+    display: block;
+  }
+  
+  .mobile {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .desktop {
+      display: none;
+    }
+  
+    .mobile {
+      display: block;
+    }
+  }
+  
+}
+
+.datosContainer {
+  position: relative;
+    
+  .renglon {
+    position: absolute;
+    top: 20%;
+    right: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;   
+    text-align: center;
+    z-index: 3;
+
+    .texto {
+      color: #000000;
+      font-size: 2.8vmax;
+      font-family: "Bebas Neue", system-ui; 
+      font-weight: bold;
+      text-align: center;
+    }
+    
+    .fecha {
+      font-size: 3vmax;
+    }
+    
+    .lugar {
+      font-size: 2.2vmax;
+    }
+    
+  }
+
+  .lugar-responsive {
+    display: none;
+  }
+
+  .renglonResponsive {
+    display: none;
+  }
+
+  /* Estilos del botón */
+  .buyButton {
+    position: absolute;
+    bottom: 20%;
+    right: 3.5%;
+    background-color: #f01b23;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 22%;
+    text-decoration: none;
+    font-family: "Bebas Neue", system-ui;
+    font-size: 1.5vmax;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    z-index: 99999;
+
+    &:hover {
+      background-color: #F0E541;
+      color: #f01b23;
+    }
+    
+    &:active {
+      background-color: #eb830d;
+      color: #f01b23;
+    }
+  }
+
+}
+
+@media all and (max-width:768px) {
+
+  .datosContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+
+    .renglon {
+      display: none;
+    }
+
+    .renglonResponsive {
+      display: block;
+      position: absolute;
+      top: 63%;
+      color: #000000;
+      text-align: center;
+      font-size: 1.5rem;
+      font-family: "Bebas Neue", system-ui; 
+      font-weight: 700;
+
+      @media all and (max-width: 560px) {
+        font-size: 1.3rem;
+      }
+
+      @media all and (max-width: 450px) {
+        font-size: 1rem;
+      }
+    }
+
+    .buyButton {
+      bottom: 7%;
+      right: 25%;
+      width: 50%;
+      padding: .5rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+      font-family: "Bebas Neue", system-ui;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      color: white;
+      border: none;
+      background-color: #f01b23;
+    }
+  }
+}

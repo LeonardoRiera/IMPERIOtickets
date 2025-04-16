@@ -1,0 +1,469 @@
+.DetailContainer {
+  background-color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+
+  .bannercito {
+    background-color: rgb(0, 0, 0);
+    width: 80%;
+    height:35vmax;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 10px;
+
+    .fotoContainer {
+      width: 50%;
+
+      .imageBannercito {
+        width: 85%;
+      }
+    }
+
+    .infoDetail {
+      background-color: #000000;
+      height:26vmax;
+      width:45%;
+
+      .introDetail {
+        color: #FE7247;
+        font-size:2.2vmax;
+        font-family: "Bebas Neue", system-ui; 
+        font-weight: bold;
+        margin-bottom: 0;
+        letter-spacing: 1px;
+      }
+
+      
+      .tituloDetail {
+        color: #F9D853;
+        font-size:4.6vmax;
+        font-family: "Bebas Neue", system-ui; 
+        font-weight: bold;
+        letter-spacing: 2px;
+      }
+
+      .detailTexto {
+        color: #ffffff;
+        font-size: 1.2vmax;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .rowDetail {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 85%;
+    margin: 2vmax auto;
+    border: none;
+    padding: 1vmax;
+    border-radius: 15px;
+    background-color: rgb(0, 0, 0);
+    justify-content: center;
+    text-align: center;
+  }
+
+  .descripcionContainer {
+    display: flex;
+    flex-direction: column;
+
+    .subtitleDetail {
+      color: #F9D853;
+      font-size:3vmax;
+      font-family: "Bebas Neue", system-ui; 
+      font-weight: bold;
+      margin-bottom: 2vmax;
+      letter-spacing: 2px;
+    }
+
+    .precioCountDiv {
+      display: flex;
+      flex-flow:column nowrap;
+      justify-content: center;
+      align-items: center;
+      gap: 1vmax;
+
+      .detallesCount {
+        color: rgb(255, 255, 255);
+        font-size: 1.5vmax;
+      }        
+    }
+
+    .detallesCountTotal {
+      color: rgb(255, 255, 255);
+      background-color: #FE7247;
+      margin-top: 3vmax;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 2.3vmax;
+      font-family: "Bebas Neue", system-ui;
+      letter-spacing: 2px;
+    }    
+  }
+
+  .emailFormContainer {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    align-items: center;
+    gap: 1vmax;
+
+    .correoTitulo {
+      text-align: center;
+    }
+    
+    .formContainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .formGroup {
+        display: flex;
+        flex-direction: column;
+        gap: 1vmax;
+        margin-bottom: 0.5vmax;
+        text-align: center;
+      
+        .input {
+          width:40vmax; 
+          height: 4vmax;
+          border-radius: 5px;
+          border: none;
+          outline: none;
+          padding: 0 15px ;
+          font-size: 17px;
+
+          &::placeholder {
+            color: #888;
+            font-size: 17px;
+            padding-left: 3px;
+          }
+        }
+      }
+
+      .formGroup label {
+        color: white;
+      }
+
+      .botonComprarEntrada {
+        margin-top: 3vmax;
+        background-color: #fc5623;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        cursor: pointer;
+        text-align: center;
+        width:18vmax;
+
+        &:active{
+        opacity: .6;
+        }
+
+        &:hover{
+          background-color: #FE7247;
+          color: white;
+          border: none;
+          padding: 10px 20px;
+          border-radius: 5px;
+          text-align: center;
+          cursor: pointer;
+          width:18vmax;
+        }
+      }
+
+      .disabled {
+          cursor: not-allowed!important;
+          pointer-events: none;
+          opacity: .6;
+          background-color: #888;
+      }
+    }
+  }
+   
+}
+
+
+.importante2 {
+  font-size: 0.8vmax;
+  color: rgb(255, 117, 117);
+  margin-top: 2vmax;
+}
+
+@media screen and (max-width:1200px) {
+    .infoDetail {
+      
+        height:26vmax;
+        width:45%;
+       
+    }
+    
+    .introDetail {
+       
+        font-size:2.2vmax;
+       
+    }
+    
+    .tituloDetail {
+       
+        font-size:4vmax;
+       
+    
+    }
+    .icon {
+        font-size: 1.8vmax;
+       
+        
+      
+    }
+    
+    
+    .detailTexto {
+      
+        font-size: 1.4vmax;
+       
+       
+      
+    }
+    
+    .bannercito {
+        width: 85%;
+        height:35vmax;
+       
+    }
+   
+    .tituloDetail {
+        
+        font-size:4vmax;
+        
+    
+    }
+    
+    .detallesCount {
+        font-size: 1.4vmax;
+    }
+
+    
+}
+
+
+
+/* ++++++++++++++++++++++++ media query | pantalla lg  | ++++++++++++++++++++++++++++++++++*/
+
+
+@media screen and (max-width:992px) {
+    
+    .infoDetail {
+        /* background-color: #ffffff; */
+        height:26vmax;
+        width:45%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
+    }
+    
+    .introDetail {   
+        font-size:2vmax;   
+    }
+    
+   
+    .icon {
+        font-size: 1.8vmax;     
+    }
+    
+    .detailTexto {  
+        font-size: 1.4vmax;  
+    }
+    
+    .bannercito {
+        width: 85%;
+        height:35vmax;   
+    }
+
+    .imageBannercito {
+        width: 90%;    
+    }
+   
+    .tituloDetail {    
+        font-size:4vmax;
+    }
+    
+    
+    
+}
+
+@media screen and (max-width:850px) {
+
+    .bannercito {
+        width: 85%;
+        height:35vmax;   
+    }
+
+    .introDetail {   
+        font-size:1.7vmax;   
+    }
+
+    .tituloDetail {   
+        font-size:3.7vmax;   
+    }
+    
+    .detailTexto {  
+        font-size: 1.1vmax;  
+    }
+
+    .imageBannercito {
+        width: 93%;    
+    }
+
+ 
+    
+
+}
+
+@media screen and (max-width:768px) {
+
+   
+    .tituloDetail {   
+        font-size:3.6vmax;   
+    }
+
+    .detailTexto {  
+        font-size: 1.1vmax;
+        margin-bottom: 1vmax;  
+    }
+
+    
+.botonComprarEntrada {
+    width:26vmax;
+}
+
+.botonComprarEntrada:hover {
+    width:26vmax;
+}
+
+
+
+
+/* boton no habilitado */
+
+.buttonDisabled {
+    margin-top: 3vmax;
+    background-color: gray;
+    color: white;
+    cursor: not-allowed;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    width:24vmax;
+}
+
+}
+
+
+@media screen and (max-width:601px) {
+    .importante2 {
+        font-size: 1.5vmax;
+    }
+    
+}
+
+/* ++++++++++++++++++++++++ media query  | pantalla movile varios |   ++++++++++++++++++++++++++++++++++*/
+
+@media screen and (max-width:500px) {
+
+    .bannercito {
+        background-color: rgb(0, 0, 0);
+       /* border: #ff78ed solid 4px; */
+        width: 150%;
+        height:70vmax;
+       
+        flex-direction:column;
+      
+        gap: 4vmax;
+        text-align: center;
+    }
+
+    .introDetail {   
+        font-size:2vmax;   
+    }
+
+    .tituloDetail {   
+        font-size:4.5vmax;   
+    }
+    
+    .detailTexto {  
+        font-size: 1.8vmax;  
+    }
+
+    .detallesCount {
+        font-size:1.6vmax;  
+    }
+
+    
+    .importante {
+        font-size:1.5vmax;
+       
+    }
+
+    
+    .importante2 {
+        font-size: 1.5vmax;
+      
+    }
+
+
+    .infoDetail {
+        margin-top: 3vmax;
+        height:33vmax;
+    }
+
+
+    
+    .input {
+        width:35vmax; 
+        height: 6vmax;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+        font-size: 2.5vmax;
+        
+
+    }
+
+    .correoTitulo {
+        text-align: center;
+        font-size: 2.6vmax;
+    }
+   
+}
+
+
+@media screen and (max-width:490px) {
+
+    .imageBannercito {
+        height: 200px!important;
+    }
+    .bannercito {
+        background-color: rgb(0, 0, 0);
+       /* border: #ff78ed solid 4px; */
+        width: 150%;
+        height:75vmax;
+       
+        flex-direction:column;
+      
+        gap: 4vmax;
+        text-align: center;
+        margin-top: 3vmax;
+    }
+    
+}
