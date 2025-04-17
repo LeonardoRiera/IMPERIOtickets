@@ -29,7 +29,7 @@ const Button = ({ count, subTotal, title, email, price }) => {
       const body = {
         title: title,
         quantity: count,
-        price: 1,
+        price: price,
         external_reference: {email, count, ticketId}
       };
 
