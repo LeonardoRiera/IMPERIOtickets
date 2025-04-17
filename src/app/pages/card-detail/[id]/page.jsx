@@ -32,6 +32,12 @@ export default function CardDetail () {
     fetchProducto();
   }, [id]);
 
+  useEffect(() => {
+    if (producto) {
+      setTotal(producto.price * count);
+    }
+  }, [producto, count]);
+
   // Constants
   const email = watch("email");
   const repeatEmail = watch("repeatEmail");
@@ -161,7 +167,8 @@ export default function CardDetail () {
                   title: producto.title,
                   price: producto.price,
                   count: count,
-                  email: email
+                  email: email,
+                  total: total
                 }
               }}
               className={`${isButtonDisabled ? 'disabled' : ''} botonComprarEntrada`}
