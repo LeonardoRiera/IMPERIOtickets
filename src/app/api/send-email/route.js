@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import QRCode from 'qrcode';
+import fs from 'fs';
+import path from 'path';
 import nodemailer from 'nodemailer';
 import { nanoid } from 'nanoid';
 
@@ -136,7 +138,7 @@ const generatePDFWithQR = async (qrBase64) => {
   const qrImage = await pdfDoc.embedPng(qrBase64)
 
   // === Imágenes (banners y logo) ===
-  const bannerTop = path.join(process.cwd(), "public", "assets", "entradaSuperior.png" )
+  const bannerTop = path. path.join(process.cwd(), "public", "assets", "entradaSuperior.png" )
   const bannerBottom = path.join(process.cwd(), "public", "assets", "entradaInferior.png" )
 
 
