@@ -27,7 +27,7 @@ export async function POST(req) {
   let shouldSendEmail = false;
 
   try {
-    // withTransaction hace start/commit/abort+retries por ti
+
     await session.withTransaction(async () => {
       // 1) Evitar duplicados
       const existing = await TicketSchema
@@ -90,7 +90,7 @@ export async function POST(req) {
           <body style="margin:0; padding:0; background-color:#ffffff; font-family:Arial, sans-serif; color:#000;">
             <div style="max-width:600px; margin:auto; padding:20px; border:1px solid #ddd;">
               <div style="text-align:center; margin-bottom:20px;">
-                <img src="https://i.postimg.cc/C586Cw8g/Portada-Mail.png" alt="Logo de Imperio Tickets" style="max-width:600px; margin:auto">
+                <img src="https://imperiotickets.com/assets/entradaSuperior.png" alt="Logo de Imperio Tickets" style="max-width:600px; margin:auto">
               </div>
               <h1 style="color:#ffffff; text-align:center; background-color:#000; padding:10px 0; border-radius:15px;">
                 ¡Gracias por tu compra!</h1>
