@@ -90,7 +90,8 @@ export default function CardDetail () {
           <p className='detailTexto'>Lugar: {producto.lugar}</p>
           <p className='detailTexto'>Hora: {producto.hora}</p>
           <p className='detailTexto'>Clasificación: {producto.clasificacion}</p>
-          <p className='detailTexto'>Precio: ${producto.price}</p>
+          <p className='detailTexto'>Precio: $6000</p>
+          <p className='detailTexto'>Cargo de servicio (12%): $720</p>
         </div>
       </div>
 
@@ -105,8 +106,8 @@ export default function CardDetail () {
 
           <EntradasCount count={count} increment={increment} decrement={decrement} />
 
-          <p className='detallesCount'>Precio por Entrada: .................................. ${producto.price}</p>
-
+          <p className='detallesCount'>Precio por Entrada: .................................. $6000</p>
+          <p className='detallesCount'>Cargo del servicio: .................................. $720</p>
 
         </div>
 
