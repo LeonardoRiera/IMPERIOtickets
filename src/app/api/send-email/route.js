@@ -30,7 +30,7 @@ const runTransactionWithRetry = async (operationFn, session, maxRetries = 5) => 
         await new Promise((res) => setTimeout(res, 100 * (attempt + 1))); // espera creciente
       } else {
         await session.abortTransaction();
-        throw error; // si es otro error, no lo reintentamos
+        throw error;
       }
     }
   }
@@ -45,21 +45,22 @@ export async function POST(req) {
   await connectDB();
   const session = await mongoose.startSession();
 
+  let mailAttachments = [];
+  let shouldSendEmail = false;
+  
   try {
     await runTransactionWithRetry(async (session) => {
-      // Verificar si la compra ya fue procesada
       const existingTicket = await TicketSchema.findOne({ 
         payment_id,
         status: 'active'
       }).session(session);
-
+  
       if (existingTicket) {
         console.log('Ya existía el ticket');
         return;
       }
-
+  
       // Crear PDFs
-      const mailAttachments = [];
       for (let i = 0; i < quantity; i++) {
         const qrBase64 = await QRCode.toDataURL(nanoid(), { scale: 8 });
         const pdfBase64 = await generatePDFWithQR(qrBase64);
@@ -69,24 +70,27 @@ export async function POST(req) {
           encoding: "base64",
         });
       }
-
+  
       const newTicket = new TicketSchema({
         payment_id,
         email,
         count: quantity,
         status: 'active'
       });
-
+  
       await newTicket.save({ session });
-
+  
       await EntryCounter.findOneAndUpdate(
         {},
         { $inc: { count: quantity } },
         { upsert: true, new: true, session }
       );
-
-      await session.commitTransaction();
-
+  
+      shouldSendEmail = true; // ⚠️ Habilitamos el envío fuera del scope de la transacción
+  
+    }, session);
+  
+    if (shouldSendEmail) {
       const transporter = nodemailer.createTransport({
         service: "Gmail",
         auth: { 
@@ -94,45 +98,18 @@ export async function POST(req) {
           pass: process.env.EMAIL_PASS 
         },
       });
-
+  
       await transporter.sendMail({
         from: '"Imperio Tickets" <imperiotickets@gmail.com>',
         to: email,
         subject: "Entradas adjuntas",
         text: "Aquí están tus entradas.",
-        html:`<!DOCTYPE html>
-                <html lang="es">
-                <head>
-                  <meta charset="UTF-8">
-                  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                  <title>Tu Entrada</title>
-                  </head>
-                  <body style="margin:0; padding:0; background-color:#ffffff; font-family:Arial, sans-serif; color:#000;">
-                    <div style="max-width:600px; margin:auto; padding:20px; border:1px solid #ddd;">
-                      <div style="text-align:center; margin-bottom:20px;">
-                        <img src="https://i.postimg.cc/C586Cw8g/Portada-Mail.png" alt="Logo de Imperio Tickets" style="max-width:600px; margin:auto">
-                      </div>
-                      <h1 style="color:#ffffff; text-align:center; background-color:#000; padding:10px 0; border-radius:15px;">
-                        ¡Gracias por tu compra!</h1>
-
-                      <p style="margin:20px 0;">Ya podés disfrutar de tu entrada digital para el evento. A continuación, te compartimos los datos importantes:</p>
-
-                      
-                      <p style="margin-bottom:15px;">⚠️ <strong>IMPORTANTE:</strong> TU ENTRADA ES UN QR CON UN ID ÚNICO y te será requerido en el lugar de acceso al evento. El mismo será escaneado para habilitarte el ingreso.</p>
-
-                      <p style="margin-bottom:30px;">Una vez recibido el mail con tu entrada, ES TU RESPONSABILIDAD EVITAR DUPLICADOS ya que sólo se habilitará a la primer persona que ingrese con cada QR.</p>
-
-
-                      <div style="margin-top:30px; font-size:12px; color:#666; text-align:center;">
-                        Si tenés dudas, escribinos a <a href="mailto:imperiotickets@gmail.com">imperiotickets@gmail.com</a><br>
-                        ¡Nos vemos en el evento!
-                      </div>
-                    </div>
-                  </body>
-                  </html>`,
+        html: `<html>...el contenido de antes...</html>`,
         attachments: mailAttachments,
       });
-    }, session);
+  
+      console.log('Mail enviadaso');
+    }
   } catch (error) {
     console.error("❌ Error:", error);
     return new Response(null, { status: 200 });
