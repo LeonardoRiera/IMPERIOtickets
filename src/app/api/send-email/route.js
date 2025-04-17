@@ -1,8 +1,6 @@
 import mongoose from 'mongoose';
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import QRCode from 'qrcode';
-import fs from 'fs';
-import path from 'path';
 import nodemailer from 'nodemailer';
 import { nanoid } from 'nanoid';
 
@@ -10,114 +8,92 @@ import { nanoid } from 'nanoid';
 import TicketSchema from '../../models/Ticket';
 import EntryCounter from '../../models/Count';
 
-
 const connectDB = async () => {
   if (mongoose.connections[0].readyState) return;
   await mongoose.connect(process.env.API_URL_MONGODB);
 };
 
-const runTransactionWithRetry = async (operationFn, session, maxRetries = 5) => {
-  for (let attempt = 0; attempt < maxRetries; attempt++) {
-    try {
-      session.startTransaction();
-      await operationFn(session);
-      await session.commitTransaction();
-      return;
-    } catch (error) {
-      if (error.codeName === 'WriteConflict') {
-        await session.abortTransaction();
-        console.warn(`⚠️ WriteConflict, reintentando (${attempt + 1}/${maxRetries})...`);
-        await new Promise((res) => setTimeout(res, 100 * (attempt + 1))); // espera creciente
-      } else {
-        await session.abortTransaction();
-        throw error;
-      }
-    }
-  }
-  throw new Error("🚨 Máximo número de reintentos alcanzado");
-};
-
-
 export async function POST(req) {
-  const response = await req.json();
-  const { email, count: quantity, ticketId: payment_id } = response.external_reference;
+  const { external_reference } = await req.json();
+  const { email, count: quantity, ticketId: payment_id } = external_reference;
 
   await connectDB();
   const session = await mongoose.startSession();
 
+  // Preparamos aquí, fuera de la transacción, el array de attachments
   let mailAttachments = [];
   let shouldSendEmail = false;
-  
+
   try {
-    await runTransactionWithRetry(async (session) => {
-      const existingTicket = await TicketSchema.findOne({ 
-        payment_id,
-        status: 'active'
-      }).session(session);
-  
-      if (existingTicket) {
-        console.log('Ya existía el ticket');
-        return;
-      }
-  
-      // Crear PDFs
+    // withTransaction hace start/commit/abort+retries por ti
+    await session.withTransaction(async () => {
+      // 1) Evitar duplicados
+      const existing = await TicketSchema
+        .findOne({ payment_id, status: 'active' })
+        .session(session);
+      if (existing) return;
+
+      // 2) Generar PDFs (QRs)
       for (let i = 0; i < quantity; i++) {
         const qrBase64 = await QRCode.toDataURL(nanoid(), { scale: 8 });
         const pdfBase64 = await generatePDFWithQR(qrBase64);
         mailAttachments.push({
           filename: `entrada_${payment_id}_${i + 1}.pdf`,
           content: pdfBase64,
-          encoding: "base64",
+          encoding: 'base64',
         });
       }
-  
-      const newTicket = new TicketSchema({
+
+      // 3) Grabar ticket
+      await new TicketSchema({
         payment_id,
         email,
         count: quantity,
-        status: 'active'
-      });
-  
-      await newTicket.save({ session });
-  
+        status: 'active',
+      }).save({ session });
+
+      // 4) Actualizar contador
       await EntryCounter.findOneAndUpdate(
         {},
         { $inc: { count: quantity } },
         { upsert: true, new: true, session }
       );
-  
-      shouldSendEmail = true; // ⚠️ Habilitamos el envío fuera del scope de la transacción
-  
-    }, session);
-  
+
+      // 5) Si llegamos acá, todo salió ok: marcamos para enviar mail
+      shouldSendEmail = true;
+    });
+
+    // 🚀 Commit exitoso. Ahora, fuera de la transacción, enviamos el mail:
     if (shouldSendEmail) {
       const transporter = nodemailer.createTransport({
-        service: "Gmail",
-        auth: { 
-          user: process.env.EMAIL_USER, 
-          pass: process.env.EMAIL_PASS 
+        service: 'Gmail',
+        auth: {
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS,
         },
       });
-  
+
       await transporter.sendMail({
         from: '"Imperio Tickets" <imperiotickets@gmail.com>',
         to: email,
-        subject: "Entradas adjuntas",
-        text: "Aquí están tus entradas.",
-        html: `<html>...el contenido de antes...</html>`,
+        subject: 'Entradas adjuntas',
+        text: 'Aquí están tus entradas.',
+        html: `<!-- tu HTML aquí -->`,
         attachments: mailAttachments,
       });
-  
-      console.log('Mail enviadaso');
+      console.log('📧 Mail enviado correctamente');
     }
-  } catch (error) {
-    console.error("❌ Error:", error);
+
     return new Response(null, { status: 200 });
+
+  } catch (error) {
+    console.error('❌ Error en transacción o envío de mail:', error);
+    // Si la transacción falló, withTransaction ya hizo abortTransaction.
+    // Si el mail falló, la BD ya está comprometida, dependerá de ti reintentar o alertar.
+    return new Response(null, { status: 500 });
   } finally {
     session.endSession();
   }
-
-  return new Response(null, { status: 200 });
 }
 
 // Función para generar el PDF con el QR
