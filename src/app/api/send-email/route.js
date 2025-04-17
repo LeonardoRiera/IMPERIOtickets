@@ -78,7 +78,36 @@ export async function POST(req) {
         to: email,
         subject: 'Entradas adjuntas',
         text: 'Aquí están tus entradas.',
-        html: `<!-- tu HTML aquí -->`,
+        html:`<!DOCTYPE html>
+        <html lang="es">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Tu Entrada</title>
+          </head>
+          <body style="margin:0; padding:0; background-color:#ffffff; font-family:Arial, sans-serif; color:#000;">
+            <div style="max-width:600px; margin:auto; padding:20px; border:1px solid #ddd;">
+              <div style="text-align:center; margin-bottom:20px;">
+                <img src="https://i.postimg.cc/C586Cw8g/Portada-Mail.png" alt="Logo de Imperio Tickets" style="max-width:600px; margin:auto">
+              </div>
+              <h1 style="color:#ffffff; text-align:center; background-color:#000; padding:10px 0; border-radius:15px;">
+                ¡Gracias por tu compra!</h1>
+
+              <p style="margin:20px 0;">Ya podés disfrutar de tu entrada digital para el evento. A continuación, te compartimos los datos importantes:</p>
+
+              
+              <p style="margin-bottom:15px;">⚠️ <strong>IMPORTANTE:</strong> TU ENTRADA ES UN QR CON UN ID ÚNICO y te será requerido en el lugar de acceso al evento. El mismo será escaneado para habilitarte el ingreso.</p>
+
+              <p style="margin-bottom:30px;">Una vez recibido el mail con tu entrada, ES TU RESPONSABILIDAD EVITAR DUPLICADOS ya que sólo se habilitará a la primer persona que ingrese con cada QR.</p>
+
+
+              <div style="margin-top:30px; font-size:12px; color:#666; text-align:center;">
+                Si tenés dudas, escribinos a <a href="mailto:imperiotickets@gmail.com">imperiotickets@gmail.com</a><br>
+                ¡Nos vemos en el evento!
+              </div>
+            </div>
+          </body>
+          </html>`,
         attachments: mailAttachments,
       });
       console.log('📧 Mail enviado correctamente');
