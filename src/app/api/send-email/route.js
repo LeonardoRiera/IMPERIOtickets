@@ -140,7 +140,7 @@ const generatePDFWithQR = async (qrBase64) => {
 
   // === Imágenes (banners y logo) ===
   const bannerTop = path.join(process.cwd(), "public", "assets", "entradaSuperior.png" )
-  const bannerBottom = path.join(process.cwd(), "public", "assets", "entradainferior.png" )
+  const bannerBottom = path.join(process.cwd(), "public", "assets", "entradaInferior.png" )
 
 
   // Pasar todo a pdf
