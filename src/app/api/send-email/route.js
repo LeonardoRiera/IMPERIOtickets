@@ -36,7 +36,7 @@ export async function POST(req) {
         return;
       }
 
-      // Crear PDFs (todos con el mismo QR pero diferentes nombres si querés)
+      // Crear PDFs
       const mailAttachments = [];
       for (let i = 0; i < quantity; i++) {
         const qrBase64 = await QRCode.toDataURL(nanoid(), { scale: 8 });
