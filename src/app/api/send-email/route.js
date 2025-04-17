@@ -21,60 +21,64 @@ export async function POST(req) {
   const { email, count: quantity, ticketId: payment_id } = response.external_reference;
 
   await connectDB();
-
   const session = await mongoose.startSession();
-  session.startTransaction();
 
   try {
-    // Verificar si la compra ya fue procesada
-    const existingTicket = await TicketSchema.findOne({ 
-      payment_id,
-      status: 'active'
-    }).session(session);
+    await runTransactionWithRetry(async (session) => {
+      // Verificar si la compra ya fue procesada
+      const existingTicket = await TicketSchema.findOne({ 
+        payment_id,
+        status: 'active'
+      }).session(session);
 
-    if (existingTicket) {
-      await session.abortTransaction();
-      console.log('Ya existía el ticket')
-      return new Response(null, { status: 200 });
-    }
+      if (existingTicket) {
+        console.log('Ya existía el ticket');
+        return;
+      }
 
-    // Crear PDFs (todos con el mismo QR pero diferentes nombres si querés)
-    const mailAttachments = [];
-    for (let i = 0; i < quantity; i++) {
-      const qrBase64 = await QRCode.toDataURL(nanoid(), { scale: 8 });
-      const pdfBase64 = await generatePDFWithQR(qrBase64);
-      mailAttachments.push({
-        filename: `entrada_${payment_id}_${i + 1}.pdf`,
-        content: pdfBase64,
-        encoding: "base64",
+      // Crear PDFs (todos con el mismo QR pero diferentes nombres si querés)
+      const mailAttachments = [];
+      for (let i = 0; i < quantity; i++) {
+        const qrBase64 = await QRCode.toDataURL(nanoid(), { scale: 8 });
+        const pdfBase64 = await generatePDFWithQR(qrBase64);
+        mailAttachments.push({
+          filename: `entrada_${payment_id}_${i + 1}.pdf`,
+          content: pdfBase64,
+          encoding: "base64",
+        });
+      }
+
+      const newTicket = new TicketSchema({
+        payment_id,
+        email,
+        count: quantity,
+        status: 'active'
       });
-    }
 
-    // Crear un único documento para la compra
-    const newTicket = new TicketSchema({
-      payment_id,
-      email,
-      count: quantity,
-      status: 'active'
-    });
+      await newTicket.save({ session });
 
-    await newTicket.save({ session });
+      await EntryCounter.findOneAndUpdate(
+        {},
+        { $inc: { count: quantity } },
+        { upsert: true, new: true, session }
+      );
 
-    // Enviar email con todas las entradas
-    const transporter = nodemailer.createTransport({
-      service: "Gmail",
-      auth: { 
-        user: process.env.EMAIL_USER, 
-        pass: process.env.EMAIL_PASS 
-      },
-    });
+      await session.commitTransaction();
 
-    await transporter.sendMail({
-      from: '"Imperio Tickets" <imperiotickets@gmail.com>',
-      to: email,
-      subject: "Entradas adjuntas",
-      text: "Aquí están tus entradas.", // Versión en texto plano para clientes que no soportan HTML
-      html: `<!DOCTYPE html>
+      const transporter = nodemailer.createTransport({
+        service: "Gmail",
+        auth: { 
+          user: process.env.EMAIL_USER, 
+          pass: process.env.EMAIL_PASS 
+        },
+      });
+
+      await transporter.sendMail({
+        from: '"Imperio Tickets" <imperiotickets@gmail.com>',
+        to: email,
+        subject: "Entradas adjuntas",
+        text: "Aquí están tus entradas.",
+        html:`<!DOCTYPE html>
                 <html lang="es">
                 <head>
                   <meta charset="UTF-8">
@@ -104,23 +108,12 @@ export async function POST(req) {
                     </div>
                   </body>
                   </html>`,
-      attachments: mailAttachments,
-    });
-
-    // Actualizar contador global de entradas
-    await EntryCounter.findOneAndUpdate(
-      {},
-      { $inc: { count: quantity } },
-      { upsert: true, new: true, session }
-    );
-
-    await session.commitTransaction();
-    console.log("Entradas generadas y email enviado!");
-    
+        attachments: mailAttachments,
+      });
+    }, session);
   } catch (error) {
-    await session.abortTransaction();
-    console.error("Error:", error);
-    return new Response(null, { status: 500 });
+    console.error("❌ Error:", error);
+    return new Response(null, { status: 200 });
   } finally {
     session.endSession();
   }
