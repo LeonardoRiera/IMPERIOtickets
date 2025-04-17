@@ -16,6 +16,28 @@ const connectDB = async () => {
   await mongoose.connect(process.env.API_URL_MONGODB);
 };
 
+const runTransactionWithRetry = async (operationFn, session, maxRetries = 5) => {
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    try {
+      session.startTransaction();
+      await operationFn(session);
+      await session.commitTransaction();
+      return;
+    } catch (error) {
+      if (error.codeName === 'WriteConflict') {
+        await session.abortTransaction();
+        console.warn(`⚠️ WriteConflict, reintentando (${attempt + 1}/${maxRetries})...`);
+        await new Promise((res) => setTimeout(res, 100 * (attempt + 1))); // espera creciente
+      } else {
+        await session.abortTransaction();
+        throw error; // si es otro error, no lo reintentamos
+      }
+    }
+  }
+  throw new Error("🚨 Máximo número de reintentos alcanzado");
+};
+
+
 export async function POST(req) {
   const response = await req.json();
   const { email, count: quantity, ticketId: payment_id } = response.external_reference;
