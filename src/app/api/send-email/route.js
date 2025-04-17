@@ -1,12 +1,15 @@
 import mongoose from 'mongoose';
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import QRCode from 'qrcode';
-import { nanoid } from 'nanoid';
 import fs from 'fs';
 import path from 'path';
 import nodemailer from 'nodemailer';
+import { nanoid } from 'nanoid';
 
+// DB imports
 import TicketSchema from '../../models/Ticket';
+import EntryCounter from '../../models/Count';
+
 
 const connectDB = async () => {
   if (mongoose.connections[0].readyState) return;
@@ -31,15 +34,14 @@ export async function POST(req) {
 
     if (existingTicket) {
       await session.abortTransaction();
+      console.log('Ya existía el ticket')
       return new Response(null, { status: 200 });
     }
-
-    // Generar UN SOLO QR con el ticketId (payment_id)
-    const qrBase64 = await QRCode.toDataURL(payment_id, { scale: 8 });
 
     // Crear PDFs (todos con el mismo QR pero diferentes nombres si querés)
     const mailAttachments = [];
     for (let i = 0; i < quantity; i++) {
+      const qrBase64 = await QRCode.toDataURL(nanoid(), { scale: 8 });
       const pdfBase64 = await generatePDFWithQR(qrBase64);
       mailAttachments.push({
         filename: `entrada_${payment_id}_${i + 1}.pdf`,
@@ -105,6 +107,13 @@ export async function POST(req) {
       attachments: mailAttachments,
     });
 
+    // Actualizar contador global de entradas
+    await EntryCounter.findOneAndUpdate(
+      {},
+      { $inc: { count: quantity } },
+      { upsert: true, new: true, session }
+    );
+
     await session.commitTransaction();
     console.log("Entradas generadas y email enviado!");
     
@@ -119,112 +128,134 @@ export async function POST(req) {
   return new Response(null, { status: 200 });
 }
 
-  // Función para generar el PDF con el QR
-  
-  const generatePDFWithQR = async (qrBase64) => {
-    const pdfDoc = await PDFDocument.create();
-    const page = pdfDoc.addPage([60, 150]);
-  
-    const font = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
-    const qrImage = await pdfDoc.embedPng(qrBase64);
-  
-    // === Logo (posición exacta como en el PDF) ===
-    const imagePath = path.join(process.cwd(), "public", "assets", "imagologoTickets.png");
-    const logoImage = await pdfDoc.embedPng(fs.readFileSync(imagePath));
+// Función para generar el PDF con el QR
+const generatePDFWithQR = async (qrBase64) => {
+  const pdfDoc = await PDFDocument.create()
+  const page = pdfDoc.addPage([200, 315])
 
-    // Rectangulo
-    page.drawRectangle({
-      x: 0,
-      y: 140,
-      width: 138,
-      height: 10,
-      borderWidth: .5,
-      borderColor: rgb(1,1,1),
-      color: rgb(0, 0, 0),
-    })
+  const { width, height } = page.getSize()
 
-    page.drawImage(logoImage, {
-      x: 10,
-      y: 142,
-      width: 40,
-      height: 6,
-    });
-  
-    // === Texto principal (formato exacto) ===
-    page.drawText("¡LLEGÓ LA ENTRADA PARA TU EVENTO!", { // Texto en una línea
-      x: 10,
-      y: 135, // Posición exacta
-      size: 2,
-      font,
-      color: rgb(0, 0, 0),
-    });
+  const font = await pdfDoc.embedFont(StandardFonts.HelveticaBold)
+  const qrImage = await pdfDoc.embedPng(qrBase64)
 
-    // === QR (posición exacta como en el PDF) ===
-    page.drawImage(qrImage, {
-      x: 18,
-      y: 106,
-      width: 22,
-      height: 22,
-    });
-
-    
-    // Rectangulo pero del medio guache
-    page.drawRectangle({
-      x: 0,
-      y: 95,
-      width: 150,
-      height: 8,
-      borderWidth: 5,
-      color: rgb(0, 0, 0),
-    })
-
-  
-    // === Detalles del evento (texto y posiciones exactas) ===
-    page.drawText("FECHA : 3 DE MAYO", { x: 20, y: 101, size: 2, font, color: rgb(1, 1, 1) });
-    page.drawText("HORA : 21 HS", { x: 23, y: 98, size: 2, font, color: rgb(1, 1, 1) });
-    page.drawText("LUGAR : GALPÓN BLANCO", { x: 16, y: 95, size: 2, font, color: rgb(1, 1, 1)}); // "CALPON" como en el PDF
-  
-      
-    // === Bloque "IMPORTANTE" (saltos de línea y orden exactos) ===
-    page.drawText("IMPORTANTE", { x: 23, y: 89, size: 2, font, color: rgb(0, 0, 0) });
+  // === Imágenes (banners y logo) ===
+  const bannerTop = path.join(process.cwd(), "public", "assets", "entradaSuperior.png" )
+  const bannerBottom = path.join(process.cwd(), "public", "assets", "entradainferior.png" )
 
 
-    // === Web (posición exacta) ===
-    page.drawText("www.imperiotickets.com", {
-      x: 4,
-      y: 3,
-      size: 3.5,
-      font,
-      color: rgb(0, 0, 0),
-    });
+  // Pasar todo a pdf
+  const bannerTopPdf = await pdfDoc.embedPng(fs.readFileSync(bannerTop))
+  const bannerBottomPdf = await pdfDoc.embedPng(fs.readFileSync(bannerBottom))
+
+  // Escalado de banner top
+  const bannerTopDims = bannerTopPdf.scale(1)
+  const bannerTopScale = width / bannerTopDims.width
+  const bannerTopHeight = bannerTopDims.height * bannerTopScale
+
+  // Escalado del banner bottom
+  const bannerBottomDims = bannerBottomPdf.scale(1)
+  const bannerBottomScale = width / bannerBottomDims.width
+  const bannerBottomHeight = bannerBottomDims.height * bannerBottomScale
+
+  // Banners
+  page.drawImage(bannerTopPdf, {
+    x: 0,
+    y: height - bannerTopHeight,
+    width: width,
+    height: bannerTopHeight,
+  })
+
+  page.drawImage(bannerBottomPdf, {
+    x: 0,
+    y: 0,
+    width: width,
+    height: bannerBottomHeight,
+  })
+
+  // === Texto principal ===
+  const mainText = "¡LLEGÓ LA ENTRADA PARA TU EVENTO!";
+  const mainTextSize = 7;
+  const mainTextWidth = font.widthOfTextAtSize(mainText, mainTextSize);
+  const textY = height - bannerTopHeight - 12;
+
+  // Lo pegamos comoun campión
+  page.drawText(mainText, {
+    x: (width - mainTextWidth) / 2,
+    y: textY,
+    size: mainTextSize,
+    font,
+    color: rgb(0, 0, 0),
+  });
+
+  // === QR ===
+  const qrSize = 80;
+  const qrY = textY - qrSize - 10;
+  page.drawImage(qrImage, {
+    x: (width - qrSize) / 2,
+    y: qrY,
+    width: qrSize,
+    height: qrSize,
+  });
+
+  // === Rectángulo de detalles ===
+  const rectHeight = 46;
+  const rectY = qrY - rectHeight - 10;
+  page.drawRectangle({
+    x: 0,
+    y: rectY,
+    width,
+    height: rectHeight,
+    color: rgb(0, 0, 0),
+  });
 
 
-  
-    const importantLines = [
-      "TU ENTRADA ES UN QR CON UN",
-      "ID ÚNICO Y TE SERÁ REQUERIDO",
-      "EN EL LUGAR DE ACCESO DEL",
-      "EVENTO",
-      "", // Espacio exacto
-      "EL MISMO SERÁ ESCANEADO",
-      "PARA HABILITARTE EL INGRESO",
-      "", // Espacio exacto
-      "UNA VEZ RECIBIDO EL MAIL CON",
-      "TU ENTRADA ES TU RESPONSABILIDAD",
-      "EVITAR DUPLICADOS",
-      "", // Espacio exacto
-      "SOLO SE HABILITARÁ A LA",
-      "PRIMERA PERSONA QUE INGRESE",
-      "CON ESTE QR",
-    ];
-  
-    let y = 77; // Posición inicial exacta
-    importantLines.forEach((line) => {
-      page.drawText(line, { x: 4, y, size: 2, font, color: rgb(0, 0, 0) });
-      y -= 4; // Espaciado exacto entre líneas
-    });
-  
-    const pdfBytes = await pdfDoc.save();
-    return Buffer.from(pdfBytes).toString("base64");
-  };
+  // === Detalles del evento ===
+  const detailSize = 6;
+
+  const fechaText = "FECHA : 3 DE MAYO";
+  const horaText = "HORA : 21 HS";
+  const lugarText = "LUGAR : GALPÓN BLANCO";
+
+  const fechaWidth = font.widthOfTextAtSize(fechaText, detailSize);
+  const horaWidth = font.widthOfTextAtSize(horaText, detailSize);
+  const lugarWidth = font.widthOfTextAtSize(lugarText, detailSize);
+
+  page.drawText(fechaText, {
+    x: (width - fechaWidth) / 2,
+    y: rectY + rectHeight - 11,
+    size: detailSize,
+    font,
+    color: rgb(1, 1, 1),
+  });
+
+  page.drawText(horaText, {
+    x: (width - horaWidth) / 2,
+    y: rectY + rectHeight - 22,
+    size: detailSize,
+    font,
+    color: rgb(1, 1, 1),
+  });
+
+  page.drawText(lugarText, {
+    x: (width - lugarWidth) / 2,
+    y: rectY + rectHeight - 33,
+    size: detailSize,
+    font,
+    color: rgb(1, 1, 1),
+  });
+
+
+  // === Web (posición exacta) ===
+  page.drawText("www.imperiotickets.com", {
+    x: 4,
+    y: 3,
+    size: 3.5,
+    font,
+    color: rgb(0, 0, 0),
+  });
+
+
+  const pdfBytes = await pdfDoc.save();
+  return Buffer.from(pdfBytes).toString("base64");
+};
   
