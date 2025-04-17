@@ -138,7 +138,7 @@ const generatePDFWithQR = async (qrBase64) => {
   const qrImage = await pdfDoc.embedPng(qrBase64)
 
   // === Imágenes (banners y logo) ===
-  const bannerTop = path. path.join(process.cwd(), "public", "assets", "entradaSuperior.png" )
+  const bannerTop = path.join(process.cwd(), "public", "assets", "entradaSuperior.png" )
   const bannerBottom = path.join(process.cwd(), "public", "assets", "entradaInferior.png" )
 
 
