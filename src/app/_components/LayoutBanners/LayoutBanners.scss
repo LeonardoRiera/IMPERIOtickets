@@ -9,10 +9,11 @@
     justify-content: flex-end;
     position: relative;
     height: 35vmax;
-    width: 20vmax;
+
+    width: 30vmax;
 
     img {
-      width: 20vmax;
+      width: 30vmax;
       height: 100%;
       // margin: 4vmax 2vmax 4vmax 0;
       object-fit: contain; 
@@ -36,9 +37,10 @@
     font-family: "Bebas Neue";
 
     h1 {
-      font-size: 4vmax;
-      font-family: "Bebas Neue", system-ui;
+      font-size: 3.5vmax;
       line-height: 1;
+      letter-spacing: 3px;
+      color: white;
     }
 
     .tickets {
@@ -48,8 +50,9 @@
     
     h2 {
       color: #F0E541;
-      font-family: "Bebas Neue", system-ui;
+
       font-size: 2.5vmax;
+      letter-spacing: 3px;
     }
   }
 
@@ -77,12 +80,12 @@
       .textos {
         flex-direction: column;
         align-items: center;
-        margin-top: 2vmax;
 
         h1 { 
           line-height: 1;
           text-align: center;
-          margin-bottom: 2vmax;
+          margin-bottom: 0.5vmax;
+
         }
       }
     }

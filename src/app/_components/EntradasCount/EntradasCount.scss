@@ -3,18 +3,25 @@
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
-  gap: 1.5vmax;
+
+
+  gap: 2vmax;
+
   width: 15vmax;
   margin-bottom: 2vmax;
 
   button {
-    padding: 0.3vmax 1vmax 0.7vmax 1vmax;
+
+   
+    width: 3vmax;
+    height: 3vmax;
+
     background-color:#FE7247 ;
     border-radius: 5px;
     color: rgb(0, 0, 0);
     border: none;
     align-self: center;
-    margin: 2vmax;
+
     font-size: 1.5vmax;
     cursor: pointer;
 
@@ -38,29 +45,17 @@
 
 @media screen and (max-width:500px) {
 
-    
-    .ButtonContador {
-        padding: 0.4vmax 2.3vmax 1vmax 2.3vmax;
-        background-color:#FE7247 ;
-        border-radius: 5px;
-        color: rgb(0, 0, 0);
-        border: none;
-        margin: 0 3vmax;
-        font-weight: bold;
-        font-size: 3vmax;
+
+  .Controls {  
+    gap: 3vmax;
+    width: 20vmax;
+
+    button {  
+      width: 4vmax;
+      height: 4vmax; 
+      font-size: 1.8vmax;  
     }
 
-    .ButtonContadorM {
-        padding: 0.4vmax 2.4vmax 1vmax 2.4vmax;
-        background-color:#FE7247 ;
-        border-radius: 5px;
-        color: rgb(0, 0, 0);
-        border: none;
-        margin: 0 3vmax;
-        font-weight: bold;
-        font-size: 3vmax;
-        
-    }
-  
-    
+  }  
+
 }

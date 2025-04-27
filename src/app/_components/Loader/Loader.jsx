@@ -8,7 +8,8 @@ const Loader = () => {
           className='loader'
           alt='loader'
           src={'/assets/isotipoEstrellas.png'}
-          width={150}
+
+          width={140}
           height={150}
         />
     </div>
