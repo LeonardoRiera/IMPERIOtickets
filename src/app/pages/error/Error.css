@@ -1,0 +1,132 @@
+.contenedorError {
+    width: 100%;
+    margin: 5vmax auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 6vmax 0 2vmax 0;
+}
+
+.number{
+    color: white;
+    font-size: 2vmax;
+    text-align: center;
+    color: gray;
+    font-family: "Bebas Neue", system-ui;
+}
+
+.tituloError{
+    color: white;
+    font-size: 1.2vmax;
+    text-align: center;
+    color: gray;
+    font-family: "Bebas Neue", system-ui;
+}
+
+.logoError {
+    width: 15%;
+}
+
+.volverAInicio {
+    text-decoration: none;
+    font-size: 1.5vmax;
+    text-align: center;
+    color: #FE7247;
+    font-family: "Bebas Neue", system-ui; 
+}
+
+.volverAInicio:hover {
+    color: #5b382e;
+    
+}
+
+
+
+
+
+/* ++++++++++++++++++++++++ media query | pantalla lg  | ++++++++++++++++++++++++++++++++++*/
+
+
+@media screen and (max-width:992px) {
+    
+    .logoError {
+        width: 20%;
+    }
+
+    .number{
+        font-size: 3vmax;
+        
+    }
+    
+    .tituloError{
+        font-size: 1.8vmax;
+    }
+
+    .volverAInicio {
+        font-size: 1.8vmax; 
+    }
+    
+}
+
+/* ++++++++++++++++++++++++ media query |  pantalla md   | ++++++++++++++++++++++++++++++++++*/
+
+@media screen and (max-width:835px) {
+    
+    .logoError {
+        width: 25%;
+    }
+
+    .number{
+        font-size: 4vmax;
+        
+    }
+    
+    .tituloError{
+        font-size: 2.8vmax;
+    }
+
+    .volverAInicio {
+        font-size: 2.8vmax; 
+    }
+    
+    
+}
+
+
+/* ++++++++++++++++++++++++ media query  | pantalla pixel 6 pro|   ++++++++++++++++++++++++++++++++++*/
+
+@media screen and (max-width:480px) {
+
+    .tituloError{
+        font-size: 2.2vmax;
+    }
+   
+}
+
+/* ++++++++++++++++++++++++ media query  | pantalla fire hd 10 |   ++++++++++++++++++++++++++++++++++*/
+
+@media screen and (max-width:469px) {
+    .tituloError{
+        font-size: 2.5vmax;
+    }
+}
+
+/* ++++++++++++++++++++++++ media query  | pantalla movil varios |   ++++++++++++++++++++++++++++++++++*/
+
+@media screen and (max-width:431px) {
+ 
+    .logoError {
+        width: 40%;
+    }
+}
+
+
+/* ++++++++++++++++++++++++ media query  | pantalla xxsm |   ++++++++++++++++++++++++++++++++++*/
+
+@media screen and (max-width:321px) {
+    .contenedorError {
+        margin: 10vmax auto;
+        
+    }
+}

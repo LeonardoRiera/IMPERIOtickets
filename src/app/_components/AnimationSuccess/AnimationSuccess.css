@@ -1,0 +1,107 @@
+.animation-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+}
+
+/*  Animación inicial */
+.circle-container {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: rgb(17, 18, 18);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s ease-out;
+}
+
+.character {
+  width: 120px;
+  height: 120px;
+  background: url('../../assets/logoblancoSinFondo1.png') no-repeat center;
+  background-size: contain;
+  position: absolute;
+  transform: rotate(-20deg);
+}
+
+/*  Animación de desaparición */
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Nueva animación con check */
+.success-circle {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  background: green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+/* 🔹 Animación de aparición */
+.fade-in {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.checkmark {
+  width: 250px;
+  height: 250px;
+  background: url('../../assets/check.webp') no-repeat center;
+  background-size: cover;
+}
+
+
+
+.star {
+  position: absolute;
+  top: -20px;
+  width: 10px;
+  height: 8px;
+  background: linear-gradient(45deg, #ff0, #ff4500, #ff1493, #00ffcc);
+  border-radius: 50%;
+  opacity: 0.8;
+}
+
+@keyframes falling {
+  from {
+    top: -20px;
+  }
+  to {
+    top: 100%;
+  }
+}
+
+
+
+/* / ++++++++++++++++++++++++ media query | pantalla ipad pro |   ++++++++++++++++++++++++++++++++++/ */
+
+
+
+@media screen and (max-width:581px) {
+
+  .success-circle {
+    width: 70%;
+    height: 70%;
+    
+  }
+
+  .checkmark {
+    width: 230px;
+    height: 230px;
+    
+  }
+  
+}

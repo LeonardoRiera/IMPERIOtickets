@@ -1,0 +1,44 @@
+{
+  "name": "imperio-tickets",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-brands-svg-icons": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "@mercadopago/sdk-react": "^1.0.0",
+    "buffer": "^6.0.3",
+    "dotenv": "^16.4.7",
+    "eslintrc": "^1.0.5",
+    "firebase": "^11.4.0",
+    "fs": "^0.0.1-security",
+    "mercadopago": "^2.3.0",
+    "mongoose": "^8.12.2",
+    "nanoid": "^5.1.4",
+    "next": "15.2.1",
+    "nodemailer": "^6.10.0",
+    "path": "^0.12.7",
+    "pdf-lib": "^1.17.1",
+    "qrcode": "^1.5.4",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-hook-form": "^7.54.2",
+    "react-qr-barcode-scanner": "^2.0.1",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.20.0",
+    "eslint": "^9.22.0",
+    "eslint-config-next": "^15.2.1",
+    "eslint-plugin-react": "^7.37.4",
+    "sass": "^1.85.1"
+  }
+}

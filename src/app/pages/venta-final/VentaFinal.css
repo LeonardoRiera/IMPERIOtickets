@@ -1,0 +1,293 @@
+
+
+.factura {
+    margin-top: 7vmax;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 42vmax;
+    text-align: center;
+}
+
+.finalTitulo {
+    color: #F9D853;
+    font-size: 2.8vmax;
+    font-family: "Bebas Neue", system-ui; 
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 1vmax;
+    padding: 0 5vmax;
+}
+
+
+
+.botonComprarEntrada2 {
+    margin-top: 0.5vmax;
+    background-color: #fc5623;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    width:20vmax;
+    font-size: 1.3vmax;
+}
+
+.botonComprarEntrada2:hover {
+    background-color: #FE7247;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    width:20vmax;
+}
+
+.dataFinal {
+    color: #ffffff;
+    font-size: 1.6vmax;
+    font-family: "Bebas Neue", system-ui; 
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin-bottom: 1.3vmax;
+}
+
+.dataFinalSubT {
+    color: #ffffff;
+    font-size: 1.6vmax;
+    font-family: "Bebas Neue", system-ui; 
+    font-weight: 500;
+    letter-spacing: 2px;
+
+}
+
+.dataFinalMail {
+    font-size: 1.5vmax;
+    margin-bottom: 1vmax;
+    color: #F9D853;
+}
+
+.dataFinalTotal {
+    color: rgb(0, 0, 0);
+    padding: 0.5vmax 1.5vmax;
+    background-color: #ffffff;
+    margin-top: 1vmax;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.8vmax;
+    font-family: "Bebas Neue", system-ui;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-bottom: 1vmax;
+
+}
+
+.dataFinalInfo {
+    
+    font-size: 1vmax;
+    margin-bottom: 1vmax;
+}
+
+
+
+
+/* ++++++++++++++++++++++++ media query |  pantalla gigante |   ++++++++++++++++++++++++++++++++++*/
+
+@media screen and (max-width:2220px) {
+    
+    
+}
+
+
+/* ++++++++++++++++++++++++ media query | pantalla extra extra lg  |   ++++++++++++++++++++++++++++++++++*/
+
+
+
+@media screen and (max-width:1400px) {
+    
+    
+}
+
+
+
+/* ++++++++++++++++++++++++ media query | pantalla extra lg   |  ++++++++++++++++++++++++++++++++++*/
+
+
+@media screen and (max-width:1200px) {
+   
+    .factura {
+        margin-top: 10vmax;
+        height: 45vmax;
+    }   
+    
+    .botonComprarEntrada2 {
+        margin-top: 1.5vmax;
+        font-size: 1.8vmax;
+    }
+
+    .dataFinalTotal {
+        margin-top: 2vmax;
+        font-size: 2.2vmax;
+        margin-bottom: 3vmax;
+       
+    
+    }
+    
+}
+
+
+
+/* ++++++++++++++++++++++++ media query | pantalla lg  | ++++++++++++++++++++++++++++++++++*/
+
+
+@media screen and (max-width:992px) {
+    
+    .factura {
+        margin-top: 10vmax;
+        height: 50vmax;
+    }   
+    
+    .botonComprarEntrada2 {
+        margin-top: 1.5vmax;
+        font-size: 1.8vmax;
+    }
+
+    .dataFinalTotal {
+        padding: 1vmax 2vmax;
+        margin-top: 2vmax;
+        font-size: 2.2vmax;
+        margin-bottom: 3vmax;
+    
+    }
+
+    .dataFinalSubT {
+        font-size: 1.8vmax;
+    }
+
+    .dataFinalMail {
+        font-size: 2vmax;
+        margin-bottom: 2vmax;
+        
+    }
+
+    .dataFinal {
+        font-size: 2vmax;
+        margin-bottom: 1.3vmax;
+        padding:  0 1vmax;
+    }
+    
+    .dataFinalInfo {
+    
+        font-size: 1.4vmax;
+        margin-bottom: 1vmax;
+        padding: 0 8vmax;
+    }
+    
+    
+}
+
+/* ++++++++++++++++++++++++ media query |  pantalla movile  | ++++++++++++++++++++++++++++++++++*/
+
+@media screen and (max-width:850px) {
+
+    .factura {
+        margin-top: 9vmax;
+    }  
+    
+    .dataFinalInfo {
+    
+        font-size: 1.2vmax;
+        margin-bottom: 1vmax;
+        padding: 0 8vmax;
+    }
+
+    .dataFinalTotal {
+        padding: 0.8vmax 1.8vmax;
+        margin-top: 2vmax;
+        font-size: 1.8vmax;
+        margin-bottom: 3vmax;
+    
+    }
+
+ 
+    
+
+}
+
+
+
+
+
+/* ++++++++++++++++++++++++ media query |  pantalla md   | ++++++++++++++++++++++++++++++++++*/
+
+
+
+@media screen and (max-width:768px) {
+
+    
+    .factura {
+        margin-top: 12vmax;
+        height: 52vmax;
+    }  
+   
+
+}
+
+
+
+
+/* ++++++++++++++++++++++++ media query |  pantalla sm   | ++++++++++++++++++++++++++++++++++*/
+
+@media screen and (max-width:601px) {
+    
+    .factura {
+        margin-top: 10vmax;
+        height: 58vmax;
+    }   
+
+}
+
+/* ++++++++++++++++++++++++ media query  | pantalla movile varios |   ++++++++++++++++++++++++++++++++++*/
+
+@media screen and (max-width:500px) {
+
+    .factura {
+        margin-top: 10vmax;
+        height: 56vmax;
+    }   
+
+
+    
+
+    
+}
+
+/* ++++++++++++++++++++++++ media query  | pantalla movile varios |   ++++++++++++++++++++++++++++++++++*/
+
+@media screen and (max-width:481px) {
+
+}
+   
+
+
+
+/* ++++++++++++++++++++++++ media query  | pantalla movile varios |   ++++++++++++++++++++++++++++++++++*/
+
+@media screen and (max-width:400px) {
+  
+    
+}
+
+
+/* ++++++++++++++++++++++++ media query  | pantalla xxsm |   ++++++++++++++++++++++++++++++++++*/
+
+@media screen and (max-width:321px) {
+
+    
+   
+}
+

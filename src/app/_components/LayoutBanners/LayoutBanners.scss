@@ -1,0 +1,91 @@
+.layout-banner {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  .image {
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    height: 35vmax;
+    width: 30vmax;
+
+    img {
+      width: 30vmax;
+      height: 100%;
+      // margin: 4vmax 2vmax 4vmax 0;
+      object-fit: contain; 
+      opacity: 0;
+      position: absolute; 
+      transition: opacity 1.2s ease-in-out;
+    }
+
+    img.active {
+      opacity: 1;
+    }  
+    
+  }
+
+  .textos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    // margin-top: 8vmax;
+    font-family: "Bebas Neue";
+
+    h1 {
+      font-size: 3.5vmax;
+      line-height: 1;
+      letter-spacing: 3px;
+      color: white;
+    }
+
+    .tickets {
+      color: #FE7247;
+      font-size: 6vmax;
+    }
+    
+    h2 {
+      color: #F0E541;
+      font-size: 2.5vmax;
+      letter-spacing: 3px;
+    }
+  }
+
+}
+
+
+@media screen and (max-width:560px) {
+
+    .layout-banner {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+     
+      .image {
+        height: 40vmax;
+        width: 38vmax;
+
+        img {
+          width: 38vmax;
+          margin: 0;
+        }
+      }
+      
+      .textos {
+        flex-direction: column;
+        align-items: center;
+        
+
+        h1 { 
+          line-height: 1;
+          text-align: center;
+          margin-bottom: 0.5vmax;
+        }
+      }
+    }
+
+}

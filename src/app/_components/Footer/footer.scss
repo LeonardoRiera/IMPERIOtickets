@@ -1,0 +1,168 @@
+.footer-container {
+  background-color: rgb(0, 0, 0);
+  border-top: 1px solid rgba(255, 217, 0, 0.347); 
+  box-shadow: 0 1px 15px rgba(255, 217, 0, 0.177); 
+  
+  .contenedor-footer-principal {
+    width: 100%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    min-height: 23vmax;
+
+    .contacto-redes-footer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: start;
+      gap: 1.5vmax;
+
+      
+      .logo-palabra-footer {
+        width: 24vmax;
+        height: auto;
+        justify-content: center;
+        padding-bottom: 1vmax;
+      }
+      
+      .contacto-footer h4{
+        padding-bottom: 1vmax;
+        font-size:1vmax;
+        color: #ffffff;
+        font-family: 'Poppins';
+        font-weight: 300;
+      }
+
+      .contacto-footer a {
+        text-decoration: none;
+        color: #ffffff;
+        font-size: 1.3vmax;
+        font-family: 'Clash Grotesk', sans-serif;
+      }
+
+      .contacto-footer a:hover {
+        text-decoration: none;
+        color: rgb(238, 118, 63);
+      }
+
+      .social-icons {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1.8vmax;
+      }
+        
+      .social-icons a {
+        margin-bottom: 10px;
+        font-size: 2.3vmax;
+        color: #F9D853;
+        text-decoration: none;
+      }
+        
+      .social-icons a:hover {
+        color: rgb(238, 118, 63);
+      }
+
+    }
+
+    .enlaces-footer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: start;
+      gap: 1vmax;
+    }
+  }
+
+  .col-central-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  
+    .planeta-footer {
+      width: 40%; 
+      height: auto;
+      transform: rotate(35deg);
+      margin-right: 6vmax;
+    }
+    
+  }
+  
+
+  @media all and (max-width:990px) {
+
+    .contenedor-footer-principal {
+      flex-direction: column;
+      justify-content: center;
+
+      .contacto-redes-footer {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+
+        .contacto-footer {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+
+          h4{
+            font-size: 2vmax;
+            text-align: center;
+          }
+
+          a {
+            font-size: 2vmax;
+            text-align: center;
+          }
+        }
+      }
+
+      .col-central-footer {
+        order: 3;
+        margin-top: 3vmax;
+        .planeta-footer {
+          width: 25%; 
+          margin-right: 0;
+          
+          
+        }
+        
+      }
+      
+
+      .enlaces-footer {
+        margin-top: 1rem;
+        align-items: center;
+
+        .link-footer {
+          font-size: 1rem;
+        }
+      }
+    }
+
+  }
+
+}
+
+.link-footer {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.2vmax;
+  font-family: 'Poppins' ;
+}
+
+.link-footer:hover {
+  color: rgb(238, 118, 63);
+}
+
+.icons {
+  font-size: 0.5vmax;
+  margin-right: 0.5vmax;
+}
+
+
