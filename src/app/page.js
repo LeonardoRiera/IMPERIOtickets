@@ -33,7 +33,7 @@ export default async function Home() {
                 {prod.lugar}
               </p>
       
-              <Link href={`/pages/card-detail/${prod.id}`} className={styles.buyButton}>Adquirir Entrada</Link>
+              <Link href={`/pages/card-detail/${prod.id}`} className={styles.buyButton}>Entrada en Puerta</Link>
             </div>
           </div>
           </div>
