@@ -108,6 +108,10 @@
     font-size: 1.5vmax;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     z-index: 99999;
+    
+    /* deshabilitar boton */
+    pointer-events: none;
+    cursor: default;
 
     &:hover {
       background-color: #F0E541;
