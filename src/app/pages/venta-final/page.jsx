@@ -32,7 +32,7 @@ const ParamsComponent = () => {
 
 const VentaFinal = () => {
     // EFECTO AUXILIAR
-    useEffect(() => {
+    React.useEffect(() => {
       window.location.href = "/";
     }, []);
   return (
