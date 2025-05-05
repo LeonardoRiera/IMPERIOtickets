@@ -27,6 +27,12 @@ export default function CardDetail () {
   } = useForm();
 
 
+  // EFECTO AUXILIAR
+  useEffect(() => {
+    window.location.href = "/";
+  }, []);
+
+
   // Effects  
   useEffect(() => {
     fetchProducto();

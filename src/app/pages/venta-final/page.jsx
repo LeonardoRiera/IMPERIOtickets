@@ -31,6 +31,10 @@ const ParamsComponent = () => {
 };
 
 const VentaFinal = () => {
+    // EFECTO AUXILIAR
+    useEffect(() => {
+      window.location.href = "/";
+    }, []);
   return (
     <Suspense fallback={<div>Cargando Venta Final...</div>}>
       <ParamsComponent />
