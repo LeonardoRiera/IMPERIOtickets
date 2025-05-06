@@ -28,8 +28,10 @@ const LayoutBanners = () => {
             key={index}
             src={src}
             alt={`Imagen ${index + 1}`}
-            width={300}  // Puedes ajustar el tamaño
-            height={400} // Ajusta según necesidad
+
+            width={300}  
+            height={400} 
+
             className={index === currentIndex ? "active" : ""}
           />
         ))}
