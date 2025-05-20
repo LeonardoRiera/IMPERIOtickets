@@ -103,31 +103,56 @@ export default function CardDetail () {
 
       <div className='rowDetail'>
 
-      <div className='descripcionContainer'>
+
+        <div className='descripcionContainer'>
 
 
-        <h3 className='subtitleDetail'>Cuantas Entradas Querés?</h3>
+          <h3 className='subtitleDetail'>Cuantas Entradas Querés?</h3>
 
-        <div className='precioCountDiv'>
+          <div className='precioCountDiv'>
 
-          <EntradasCount count={count} increment={increment} decrement={decrement} />
+            <EntradasCount count={count} increment={increment} decrement={decrement} />
 
-          <p className='detallesCount'>Precio por Entrada: .................................. $6000</p>
-          <p className='detallesCount'>Cargo del servicio: .................................. $720</p>
+            <p className='detallesCount'>Precio por Entrada: .................................. $6000</p>
+            <p className='detallesCount'>Cargo del servicio: .................................. $720</p>
+
+          </div>
+
+          <p className='detallesCountTotal'>Total: ${total.toFixed(2)}</p>
 
         </div>
 
-        <p className='detallesCountTotal'>Total: ${total.toFixed(2)}</p>
-
-      </div>
 
       </div>
 
       {/* Form Section */}
       <div className='emailFormContainer'>
-        <h3 className='correoTitulo'>Ingresa el Correo Electrónico <br />donde quieres recibir tus entradas:</h3>
 
         <form className='formContainer'>
+
+          {/* Campo para el nombre */}
+          <div className='formGroup'>
+            <label>Ingresa tu Nombre:</label>
+
+            <input
+              {...register("nombre", {
+                required: "El nombre es obligatorio",
+                minLength: {
+                  value: 2,
+                  message: "Debe tener al menos 2 caracteres"
+                }
+              })}
+              className='input'
+              type="text"
+              placeholder="Ingresa tu Nombre"
+              required
+            />
+            {errors.nombre && <p>{errors.nombre.message}</p>}
+          </div>
+
+          <h3 className='correoTitulo'>Ahora Ingresa el Correo Electrónico donde quieres recibir tus entradas:</h3>
+
+
           {/* Campo para el primer correo */}
           <div className='formGroup'>
             <label >Ingresa tu Email:</label>
@@ -137,7 +162,9 @@ export default function CardDetail () {
                 required: "El email es obligatorio",
                 pattern: {
                   value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,5}$/,
-                  message: "Email inválido",
+
+                  message: "Email Iqnválido",
+
                 },
               })}
               className='input'

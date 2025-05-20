@@ -75,6 +75,24 @@
     }
   }
 
+  .col-central-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  
+    .planeta-footer {
+      width: 40%; 
+      height: auto;
+      transform: rotate(35deg);
+      margin-right: 6vmax;
+    }
+    
+  }
+  
+
+
   @media all and (max-width:990px) {
 
     .contenedor-footer-principal {
@@ -104,6 +122,19 @@
           }
         }
       }
+
+      .col-central-footer {
+        order: 3;
+        margin-top: 3vmax;
+        .planeta-footer {
+          width: 25%; 
+          margin-right: 0;
+          
+          
+        }
+        
+      }
+      
 
       .enlaces-footer {
         margin-top: 1rem;
@@ -135,16 +166,6 @@
   margin-right: 0.5vmax;
 }
 
-.col-central-footer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
 
-.planeta-footer {
-  width: 40%; 
-  height: auto;
-  transform: rotate(35deg);
-}
+
+

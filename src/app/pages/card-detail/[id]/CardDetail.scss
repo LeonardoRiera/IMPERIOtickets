@@ -13,8 +13,8 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
-    border-radius: 10px;
+
+    
 
     .fotoContainer {
       width: 50%;
@@ -49,8 +49,10 @@
 
       .detailTexto {
         color: #ffffff;
-        font-size: 1.2vmax;
+        font-size: 1.3vmax;
         font-weight: bold;
+        line-height: 1.4;
+
       }
     }
   }
@@ -113,9 +115,15 @@
     align-items: center;
     align-items: center;
     gap: 1vmax;
+    margin-bottom: 3vmax;
 
     .correoTitulo {
       text-align: center;
+      color: white;
+      margin: 1.5vmax 1vmax;
+      font-size: 1.2vmax;
+      font-weight: 300;
+
     }
     
     .formContainer {
@@ -262,39 +270,40 @@
 @media screen and (max-width:992px) {
     
     .infoDetail {
-        /* background-color: #ffffff; */
-        height:26vmax;
-        width:45%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: start;
+      height:26vmax;
+      width:45%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: start;
     }
     
     .introDetail {   
-        font-size:2vmax;   
+      font-size:2vmax;   
     }
     
    
     .icon {
-        font-size: 1.8vmax;     
+      font-size: 1.8vmax;     
     }
     
     .detailTexto {  
-        font-size: 1.4vmax;  
+      font-size: 1.4vmax;  
     }
     
     .bannercito {
-        width: 85%;
-        height:35vmax;   
+
+      width: 85%;
+      height:35vmax; 
     }
 
     .imageBannercito {
-        width: 90%;    
+      width: 90%;    
     }
    
     .tituloDetail {    
-        font-size:4vmax;
+      font-size:4vmax;
+
     }
     
     
@@ -304,24 +313,26 @@
 @media screen and (max-width:850px) {
 
     .bannercito {
-        width: 85%;
-        height:35vmax;   
+
+      width: 85%;
+      height:35vmax;   
     }
 
     .introDetail {   
-        font-size:1.7vmax;   
+      font-size:1.7vmax;   
     }
 
     .tituloDetail {   
-        font-size:3.7vmax;   
+      font-size:3.7vmax;   
     }
     
     .detailTexto {  
-        font-size: 1.1vmax;  
+      font-size: 1.1vmax;  
     }
 
     .imageBannercito {
-        width: 93%;    
+      width: 93%;    
+
     }
 
  
@@ -329,33 +340,98 @@
 
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:769px) {
+  .DetailContainer{
 
-   
-    .tituloDetail {   
-        font-size:3.6vmax;   
+    .bannercito {
+      
+      width: 100%;
+      height:auto;
+      flex-direction: column;
+      margin-bottom: 3vmax;
+      margin-top: -7vmax;
+      gap: 2vmax;
+
+
+      .fotoContainer {
+        width:80%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+  
+        .imageBannercito {
+          width: 80%;
+        }
+      }
+
+      .infoDetail {
+        margin-top: -10vmax;
+        width: 80%;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+       
+
+        .tituloDetail {
+          font-size: 5vmax;
+          margin-bottom: 2vmax;
+        }
+
+        .detailTexto { 
+          font-size: 2vmax;  
+          margin-bottom: 1vmax;  
+        }
+      }
     }
 
-    .detailTexto {  
-        font-size: 1.1vmax;
-        margin-bottom: 1vmax;  
+    .rowDetail {
+      .descripcionContainer {
+        .detallesCount {
+          font-size: 2vmax;
+        }
+        .detallesCountTotal {
+          font-size: 3vmax;
+        }
+      }
+    }
+  }
+
+  .emailFormContainer{
+
+    .formContainer {
+
+      .correoTitulo {
+        font-size: 2vmax;
+        margin: 2.5vmax 2vmax;
+      }
+    
+
     }
 
     
-.botonComprarEntrada {
+  }
+  
+ .input {
+  margin: 1vmax 0;
+ }
+  
+  
+  .botonComprarEntrada {
     width:26vmax;
-}
+  }
 
-.botonComprarEntrada:hover {
+  .botonComprarEntrada:hover {
     width:26vmax;
-}
+  }
 
 
 
 
-/* boton no habilitado */
 
-.buttonDisabled {
+
+  /* boton no habilitado */
+
+  .buttonDisabled {
     margin-top: 3vmax;
     background-color: gray;
     color: white;
@@ -365,15 +441,33 @@
     border-radius: 5px;
     text-align: center;
     width:24vmax;
-}
+
+  }
+
+  .importante2 {
+    font-size: 1.6vmax;
+  }
+  
+
 
 }
 
 
-@media screen and (max-width:601px) {
-    .importante2 {
-        font-size: 1.5vmax;
+
+@media screen and (max-width:600px) {
+  .DetailContainer{
+    .bannercito {
+      margin-top: -14vmax;
+
+      .infoDetail {
+        margin-top: -15vmax;
+      } 
     }
+
+    
+  } 
+   
+
     
 }
 
@@ -381,89 +475,95 @@
 
 @media screen and (max-width:500px) {
 
+
+  .DetailContainer{
+   
     .bannercito {
-        background-color: rgb(0, 0, 0);
-       /* border: #ff78ed solid 4px; */
-        width: 150%;
-        height:70vmax;
-       
-        flex-direction:column;
-      
-        gap: 4vmax;
-        text-align: center;
-    }
+      margin-top: -16.5vmax;
 
-    .introDetail {   
-        font-size:2vmax;   
-    }
+      .fotoContainer {
+        width: 90%;
+  
+        .imageBannercito {
+          width: 95%;
+        }
+      }
 
-    .tituloDetail {   
-        font-size:4.5vmax;   
-    }
-    
-    .detailTexto {  
-        font-size: 1.8vmax;  
-    }
+      .infoDetail {
+        height: auto;
+      } 
 
-    .detallesCount {
-        font-size:1.6vmax;  
-    }
-
-    
-    .importante {
-        font-size:1.5vmax;
-       
-    }
-
-    
-    .importante2 {
-        font-size: 1.5vmax;
       
     }
-
-
-    .infoDetail {
-        margin-top: 3vmax;
-        height:33vmax;
+    
+    .rowDetail {
+      .descripcionContainer {
+        .detallesCount {
+          font-size: 1.5vmax;
+        }
+       
+      }
     }
+    
+  } 
+
+  
+    
+  .importante {
+    font-size:1.5vmax;
+       
+  }
+
+    
+  .importante2 {
+    font-size: 1.5vmax;
+      
+  }
+
+
+  .infoDetail {
+    margin-top: 3vmax;
+    height:33vmax;
+  }
+
 
 
     
     .input {
-        width:35vmax; 
-        height: 6vmax;
-        border-radius: 5px;
-        border: none;
-        outline: none;
-        font-size: 2.5vmax;
+      width:35vmax; 
+      height: 6vmax;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      font-size: 2.5vmax;
+
         
 
     }
 
     .correoTitulo {
-        text-align: center;
-        font-size: 2.6vmax;
+      text-align: center;
+      font-size: 2.6vmax;
+
     }
    
 }
 
 
-@media screen and (max-width:490px) {
 
-    .imageBannercito {
-        height: 200px!important;
-    }
+@media screen and (max-width:400px) {
+
+  .DetailContainer{
     .bannercito {
-        background-color: rgb(0, 0, 0);
-       /* border: #ff78ed solid 4px; */
-        width: 150%;
-        height:75vmax;
-       
-        flex-direction:column;
-      
-        gap: 4vmax;
-        text-align: center;
-        margin-top: 3vmax;
+      margin-top: -20vmax;
+
+      .infoDetail {
+        margin-top: -22vmax;
+      } 
     }
+
+    
+  } 
+
     
 }

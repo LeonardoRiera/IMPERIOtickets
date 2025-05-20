@@ -1,6 +1,8 @@
 #header {
   width: 100%;
-  height: 91px;
+
+  height: 85px;
+
   position: fixed;
   top: 0;
   z-index: 9999999;
@@ -10,8 +12,10 @@
     top: 0; 
     left: 0; 
     width: 100%;
-    height: 91px;
-    max-height: 91px;
+
+    height: 85px;
+    max-height: 85px;
+
     z-index: 1000;
     background-color: rgb(0, 0, 0);
     border-bottom: 1px solid rgba(255, 217, 0, 0.33); 
@@ -33,11 +37,13 @@
         justify-content: flex-start;
     
         .logoCompleto {
-          width: 48%;
+
+          width: 40%;
           height: 3%;   
 
           &:hover {
-            width: 50%;
+            width: 45%;
+
             transition: width ease-in-out .2s;
           }
         }
@@ -81,6 +87,8 @@
   
         .logoCompleto {
           z-index: 1001;
+          width: 45%;
+
         }
   
         svg {
@@ -117,8 +125,10 @@
             transition: opacity ease-in 0.2s, height ease-in 0.2s;
 
             li>a {
-              margin-top: 3rem;
-              font-size: 2rem;
+
+              margin-top: 2rem;
+              font-size: 1.5rem;
+
 
               &:active {
                 color: #FE7247;
