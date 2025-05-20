@@ -4,6 +4,8 @@ import React from 'react'
 import styles from './AccesoProd.module.css'
 import Image from 'next/image'
 
+import LoginForm from '@/app/_components/login/Login'
+
 const AccesoProductores = () => {
   return (
     <div className={styles.accesoProdContainer}>
@@ -29,27 +31,7 @@ const AccesoProductores = () => {
             />
           </div>
 
-          <div className="col col-xs-12 bg-white p-5 rounded-end">
-            <h2 className={`fw-bold text-center py-3 ${styles.formularioTitulo}`}>
-              Imperio Tickets - Ingreso Panel Administrativo
-            </h2>
-
-            <form className={styles.form}>
-              <div className="mb-2">
-                <label htmlFor="email" className="form-label">Correo Electrónico</label>
-                <input type="email" className="form-control" name="email" />
-              </div>
-
-              <div className="mb-2">
-                <label htmlFor="password" className="form-label">Password</label>
-                <input type="password" className="form-control" name="password" />
-              </div>
-
-              <div className="d-grid">
-                <button type="submit" className="btn btn-dark">Iniciar Sesión</button>
-              </div>
-            </form>
-          </div>
+          < LoginForm />
         </div>
       </div>
     </div>
