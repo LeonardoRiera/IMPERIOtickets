@@ -25,7 +25,7 @@ export default function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate>
+    <form className="containerForm" onSubmit={handleSubmit(onSubmit)} noValidate>
       <h4 className="loginTitle">
         Ingresa Tu <span className="loginColor">Mail</span> y{" "}
         <span className="loginColor">Contraseña</span> para Empezar!

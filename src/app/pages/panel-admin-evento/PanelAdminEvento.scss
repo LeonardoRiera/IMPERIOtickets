@@ -1,0 +1,80 @@
+.adminContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2vmax 1vmax;
+  gap: 3vmax;
+  color: rgb(255, 255, 255);
+  text-align: center;
+
+  .textTitulo {
+    font-size: 3vmax;
+    padding: 0 1vmax;
+  }
+
+  .datosContainer {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    gap: 3vmax;
+    color: rgb(0, 0, 0);
+
+    .cardEvento {
+
+      background: #fff87d;
+      padding: 3vmax;
+      border-radius: 10px;
+      margin-top: 1vmax;
+      border: 8px solid #fff52e;
+
+      .textEvento {
+        font-size: 3vmax;
+        margin-bottom: 1vmax;
+        font-family: "Bebas Neue";
+        letter-spacing: 1px;
+      }
+
+      .textAdmin {
+      font-size: 2.5vmax;
+      font-family: "Bebas Neue";
+      }
+
+      span {
+        padding: 0.1vmax 0.6vmax;
+        background-color: #FE7247;
+        border-radius: 2px;
+      }
+
+      .totalVentas {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2vmax;
+        margin-bottom: 3vmax;
+      }
+
+      .totalVentasHoy {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2vmax;
+      }
+    
+    }
+
+  }
+
+  @media screen and (max-width:600px) {
+
+    .datosContainer {
+      width: 80%;
+    }
+  }
+  
+
+  
+
+
+}
+
+
+
