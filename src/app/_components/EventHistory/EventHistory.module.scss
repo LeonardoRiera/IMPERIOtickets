@@ -31,7 +31,7 @@
   position: absolute;
   bottom: 20%;
   right: 12%;
-  background-color: #f01b23;
+  background-color: #ff5825;
   color: white;
   border: none;
   padding: 8px 14px;
@@ -43,16 +43,24 @@
   font-family: "Bebas Neue", system-ui;
   font-size: 1.5vmax;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  z-index: 99999;
+  z-index: 9999;
 
   &:hover {
     background-color: #F0E541;
     color: #f01b23;
   }
   
-  &:active {
-    background-color: #eb830d;
-    color: #f01b23;
+  
+}
+
+
+
+
+
+@media (max-width: 1280px) {
+  .buyButton2 {
+    right: 13%;
+
   }
 }
 
@@ -86,16 +94,7 @@
     bottom: 16%;
     right: 25%;
     width: 50%;
-    padding: .5rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    text-decoration: none;
-    font-family: "Bebas Neue", system-ui;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    color: white;
-    border: none;
-    background-color: #f01b23;
+    padding: 0.5rem;
   }
 }
 

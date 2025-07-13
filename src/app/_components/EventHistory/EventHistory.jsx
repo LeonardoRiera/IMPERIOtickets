@@ -1,8 +1,17 @@
 "use client";
 import Image from "next/image";
 import styles from "./EventHistory.module.scss";
+import { toast } from "react-hot-toast";
 
 export default function EventHistory({desktopImage, mobileImage}) {
+
+  const handleClick = () => {
+    toast.dismiss();
+    toast("Este evento ya finalizó.", {
+      icon: "⏳",
+      duration: 3000,
+    });
+  };
   return (
     <div className={styles.eventHistory}>
 
@@ -24,7 +33,10 @@ export default function EventHistory({desktopImage, mobileImage}) {
         className={`${styles.backgroundImage} ${styles.mobile}`}
       />
 
-      <button className={styles.buyButton2}>Evento Finalizado</button>
+      
+
+      <button className={styles.buyButton2} onClick={handleClick}>Evento Finalizado</button>
+      
 
     </div>
   );
