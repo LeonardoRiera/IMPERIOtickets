@@ -1,0 +1,101 @@
+/* components/EventHistory.module.scss */
+
+.eventHistory {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  padding: 2rem 8rem 2rem 8rem;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.backgroundImage {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+.desktop {
+  display: block;
+}
+
+.mobile {
+  display: none;
+}
+
+/* Estilos del botón */
+.buyButton2 {
+  position: absolute;
+  bottom: 20%;
+  right: 12%;
+  background-color: #f01b23;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 17%;
+  text-decoration: none;
+  font-family: "Bebas Neue", system-ui;
+  font-size: 1.5vmax;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  z-index: 99999;
+
+  &:hover {
+    background-color: #F0E541;
+    color: #f01b23;
+  }
+  
+  &:active {
+    background-color: #eb830d;
+    color: #f01b23;
+  }
+}
+
+
+@media (max-width: 900px) {
+
+  .eventHistory {
+   padding: 2rem;  
+  }
+
+  .buyButton2 {
+    bottom: 22%;
+    right: 9%;
+
+  }
+
+}
+
+
+@media (max-width: 768px) {
+  
+  .desktop {
+    display: none;
+  }
+
+  .mobile {
+    display: block;
+  }
+
+  .buyButton2 {
+    bottom: 16%;
+    right: 25%;
+    width: 50%;
+    padding: .5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    font-family: "Bebas Neue", system-ui;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    color: white;
+    border: none;
+    background-color: #f01b23;
+  }
+}
+

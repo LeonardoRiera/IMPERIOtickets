@@ -1,0 +1,29 @@
+
+.ContStyle {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+
+.eventTitle{
+ color: #F0E541;
+ font-family: "Bebas Neue", system-ui;
+ font-size: 6vmax;
+ letter-spacing: 3px;
+}
+
+
+
+@media (max-width: 900px) {
+  .eventTitle{
+    font-size: 5vmax;
+    padding: 0 1vmax;
+    text-align: center;
+   
+  }
+}

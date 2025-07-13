@@ -52,7 +52,6 @@ export default function RootLayout({ children }) {
         <main>
           <Header />
           {children}
-          {/* posiblememnte el componente historial iria acá */}
           <Footer />
         </main>
       </body>
