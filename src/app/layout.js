@@ -63,7 +63,7 @@ export default function RootLayout({ children }) {
                 zIndex: 99999,         
                 color: "#000",                   
                 fontFamily: '"Bebas Neue", sans-serif',
-                fontSize: "1.1rem",
+                fontSize: "1.2rem",
                 borderRadius: "5px",
                 padding: "10px 16px",
                 boxShadow: "0 4px 10px rgba(0, 0, 0, 0.25)",

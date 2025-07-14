@@ -8,13 +8,12 @@ const HistoryContainer = () => {
     <div className={styles.ContStyle}>
       <h2 className={styles.eventTitle}>Eventos Anteriores</h2>
       < EventHistory
-        desktopImage="/tiembGr.webp"
-        mobileImage="/tiembCH.webp"
-      />
-
-      < EventHistory
         desktopImage="/boheGr.webp"
         mobileImage="/boheCH.webp"
+      />
+      < EventHistory
+        desktopImage="/tiembGr.webp"
+        mobileImage="/tiembCH.webp"
       />
     </div>
   )

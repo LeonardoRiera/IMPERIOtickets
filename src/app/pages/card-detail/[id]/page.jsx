@@ -206,7 +206,7 @@ export default function CardDetail () {
           </Link>
 
 
-          <p className='importante2'>Una vez confirmado el email se activará el botón de pagar.</p>
+          <p className='importante2'>Una vez confirmado el email se activará el botón de comprar.</p>
 
         </form>
 
