@@ -95,24 +95,6 @@
 
 
 
-/* ++++++++++++++++++++++++ media query |  pantalla gigante |   ++++++++++++++++++++++++++++++++++*/
-
-@media screen and (max-width:2220px) {
-    
-    
-}
-
-
-/* ++++++++++++++++++++++++ media query | pantalla extra extra lg  |   ++++++++++++++++++++++++++++++++++*/
-
-
-
-@media screen and (max-width:1400px) {
-    
-    
-}
-
-
 
 /* ++++++++++++++++++++++++ media query | pantalla extra lg   |  ++++++++++++++++++++++++++++++++++*/
 
@@ -264,30 +246,5 @@
     
 
     
-}
-
-/* ++++++++++++++++++++++++ media query  | pantalla movile varios |   ++++++++++++++++++++++++++++++++++*/
-
-@media screen and (max-width:481px) {
-
-}
-   
-
-
-
-/* ++++++++++++++++++++++++ media query  | pantalla movile varios |   ++++++++++++++++++++++++++++++++++*/
-
-@media screen and (max-width:400px) {
-  
-    
-}
-
-
-/* ++++++++++++++++++++++++ media query  | pantalla xxsm |   ++++++++++++++++++++++++++++++++++*/
-
-@media screen and (max-width:321px) {
-
-    
-   
 }
 

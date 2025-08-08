@@ -157,7 +157,7 @@ export default function CardDetail () {
                 pattern: {
                   value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,5}$/,
 
-                  message: "Email Iqnválido",
+                  message: "Email Inválido",
 
                 },
               })}
@@ -203,10 +203,10 @@ export default function CardDetail () {
               aria-disabled={isButtonDisabled}
             >
               Comprar Entrada
-            </Link>
+          </Link>
 
 
-          <p className='importante2'>Una vez confirmado el email se activará el botón de pagar.</p>
+          <p className='importante2'>Una vez confirmado el email se activará el botón de comprar.</p>
 
         </form>
 
